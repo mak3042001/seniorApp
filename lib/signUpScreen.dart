@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:senior/contactScreen.dart';
 import 'package:senior/loginScreen.dart';
 import 'package:senior/static.dart';
 import 'package:senior/styles/IconBroken.dart';
@@ -141,11 +142,11 @@ class SignUpScreen extends StatelessWidget {
                             text: 'SIGNUP',
                             colorButton: defaultColor,
                             function: () {
-                              // Navigator.pushAndRemoveUntil(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => HomeApp()),
-                              //     (route) => false);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const ContactsScreen()),
+                                  (route) => false);
                             }),
                       ),
                     ],

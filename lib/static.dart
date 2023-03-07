@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:senior/styles/colors.dart';
 
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+}
 Widget textFieldStatic({
   required String title,
   required IconData iconUse,
@@ -77,10 +81,40 @@ Widget staticButton(
 }
 
 Widget defaultFormField({
-  TextEditingController? controller,
+  required TextEditingController controller,
   required TextInputType type,
   required String text,
   required IconData prefix,
+  IconData? suffix,
+  ValueChanged? onChange,
+  GestureTapCallback? onTap,
+  ValueChanged? onSubmit,
+  bool isPassword = false,
+  VoidCallback? suffixpressed,
+}) =>
+    TextFormField(
+      enableInteractiveSelection: false,
+      focusNode: AlwaysDisabledFocusNode(),
+      controller: controller,
+      onChanged: onChange,
+      onFieldSubmitted: onSubmit,
+      onTap: onTap,
+      keyboardType: type,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        hintText: text,
+        prefixIcon: Icon(prefix),
+        suffixIcon: suffix != null
+            ? IconButton(onPressed: suffixpressed, icon: Icon(suffix))
+            : null,
+        border: const OutlineInputBorder(),
+      ),
+    );
+Widget awesomeDialogFormField({
+  required TextEditingController controller,
+  required TextInputType type,
+  required String text,
+  IconData? prefix,
   IconData? suffix,
   ValueChanged? onChange,
   GestureTapCallback? onTap,
@@ -101,6 +135,5 @@ Widget defaultFormField({
         suffixIcon: suffix != null
             ? IconButton(onPressed: suffixpressed, icon: Icon(suffix))
             : null,
-        border: OutlineInputBorder(),
       ),
     );

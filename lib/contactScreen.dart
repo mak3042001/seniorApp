@@ -36,35 +36,16 @@ class ContactsScreen extends StatelessWidget {
   }
 }
 
-Widget matrialList (BuildContext context ,){
+Widget matrialList (BuildContext context){
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: SizedBox(
       height: 70,
-      // child: ListTile(
-      //   onTap: (){
-      //     // Navigator.push(context, MaterialPageRoute(builder: (context) => ));
-      //   },
-      //
-      //   title: Text(
-      //     "text",
-      //     style: const TextStyle(
-      //         fontSize: 25,
-      //         fontWeight: FontWeight.bold
-      //     ),
-      //   ),
-      //   leading: CircleAvatar(
-      //     radius: 30,
-      //     backgroundImage: AssetImage(
-      //       "assets/first.jpg",
-      //     ),
-      //   ),
-      // ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CircleAvatar(
-            backgroundImage: AssetImage("assets/first.jpg"),
+            backgroundImage: AssetImage("assets/no_user.png"),
             radius: 35,
           ),
           const SizedBox(
