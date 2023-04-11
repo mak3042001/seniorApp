@@ -164,34 +164,34 @@ class ProfileScreen extends StatelessWidget {
                         prefix: IconBroken.Lock,
                         suffix: IconBroken.Edit,
                         suffixpressed: () {
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.info,
-                            animType: AnimType.rightSlide,
-                            title: 'Rest Password',
-                            body: Column(
-                              children: [
-                                awesomeDialogFormField(
-                                  controller: currentPasswordController,
-                                  type: TextInputType.text,
-                                  text: "Current Password",
-                                ),
-                                awesomeDialogFormField(
-                                  controller: newPasswordController,
-                                  type: TextInputType.text,
-                                  text: "New Password",
-                                ),
-                                awesomeDialogFormField(
-                                  controller: confirmNewPasswordController,
-                                  type: TextInputType.text,
-                                  text: "Confirm New Password",
-                                ),
-                              ],
-                            ),
-                            btnOkText: "UPDATE PASSWORD",
-                            btnCancelOnPress: () {},
-                            btnOkOnPress: () {},
-                          ).show();
+                          // AwesomeDialog(
+                          //   context: context,
+                          //   dialogType: DialogType.info,
+                          //   animType: AnimType.rightSlide,
+                          //   title: 'Rest Password',
+                          //   body: Column(
+                          //     children: [
+                          //       awesomeDialogFormField(
+                          //         controller: currentPasswordController,
+                          //         type: TextInputType.text,
+                          //         text: "Current Password",
+                          //       ),
+                          //       awesomeDialogFormField(
+                          //         controller: newPasswordController,
+                          //         type: TextInputType.text,
+                          //         text: "New Password",
+                          //       ),
+                          //       awesomeDialogFormField(
+                          //         controller: confirmNewPasswordController,
+                          //         type: TextInputType.text,
+                          //         text: "Confirm New Password",
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   btnOkText: "UPDATE PASSWORD",
+                          //   btnCancelOnPress: () {},
+                          //   btnOkOnPress: () {},
+                          // ).show();
                         }),
                   ],
                 ),
@@ -203,53 +203,53 @@ class ProfileScreen extends StatelessWidget {
                 width: 250,
                 child: InkWell(
                   onTap: () {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.info,
-                      animType: AnimType.rightSlide,
-                      title: 'Edit Profile',
-                      body: Column(
-                        children: [
-                          awesomeDialogFormField(
-                            prefix: IconBroken.Profile,
-                            controller: userNameController,
-                            type: TextInputType.text,
-                            text: "UserName",
-                          ),
-                          awesomeDialogFormField(
-                            prefix: IconBroken.Calendar,
-                            controller: dateController,
-                            type: TextInputType.datetime,
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                              ).then((value) {
-                                dateController.text = DateFormat.yMMMd().format(value!);
-                              });
-                            },
-                            text: "Birthday",
-                          ),
-                          awesomeDialogFormField(
-                            prefix: IconBroken.Call,
-                            controller: phoneController,
-                            type: TextInputType.text,
-                            text: "Phone Number",
-                          ),
-                          awesomeDialogFormField(
-                            prefix: IconBroken.Message,
-                            controller: mailController,
-                            type: TextInputType.text,
-                            text: "E-mail",
-                          ),
-                        ],
-                      ),
-                      btnOkText: "EDIT PROFILE",
-                      btnCancelOnPress: () {},
-                      btnOkOnPress: () {},
-                    ).show();
+                    // AwesomeDialog(
+                    //   context: context,
+                    //   dialogType: DialogType.info,
+                    //   animType: AnimType.rightSlide,
+                    //   title: 'Edit Profile',
+                    //   body: Column(
+                    //     children: [
+                    //       awesomeDialogFormField(
+                    //         prefix: IconBroken.Profile,
+                    //         controller: userNameController,
+                    //         type: TextInputType.text,
+                    //         text: "UserName",
+                    //       ),
+                    //       awesomeDialogFormField(
+                    //         prefix: IconBroken.Calendar,
+                    //         controller: dateController,
+                    //         type: TextInputType.datetime,
+                    //         onTap: () {
+                    //           showDatePicker(
+                    //             context: context,
+                    //             initialDate: DateTime.now(),
+                    //             firstDate: DateTime.now(),
+                    //             lastDate: DateTime(2100),
+                    //           ).then((value) {
+                    //             dateController.text = DateFormat.yMMMd().format(value!);
+                    //           });
+                    //         },
+                    //         text: "Birthday",
+                    //       ),
+                    //       awesomeDialogFormField(
+                    //         prefix: IconBroken.Call,
+                    //         controller: phoneController,
+                    //         type: TextInputType.text,
+                    //         text: "Phone Number",
+                    //       ),
+                    //       awesomeDialogFormField(
+                    //         prefix: IconBroken.Message,
+                    //         controller: mailController,
+                    //         type: TextInputType.text,
+                    //         text: "E-mail",
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   btnOkText: "EDIT PROFILE",
+                    //   btnCancelOnPress: () {},
+                    //   btnOkOnPress: () {},
+                    // ).show();
                   },
                   child: Container(
                     decoration: BoxDecoration(

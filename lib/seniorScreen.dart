@@ -16,59 +16,59 @@ class SeniorScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.noHeader,
-            animType: AnimType.rightSlide,
-            title: 'Edit Profile',
-            body: Column(
-              children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage(
-                    "assets/no_user.png",
-                  ),
-                  radius: 50.0,
-                ),
-                awesomeDialogFormField(
-                  prefix: IconBroken.Profile,
-                  controller: userNameController,
-                  type: TextInputType.text,
-                  text: "UserName",
-                ),
-                awesomeDialogFormField(
-                  prefix: IconBroken.Calendar,
-                  controller: dateController,
-                  type: TextInputType.datetime,
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                    ).then((value) {
-                      dateController.text = DateFormat.yMMMd().format(value!);
-                    });
-                  },
-                  text: "Birthday",
-                ),
-                awesomeDialogFormField(
-                  prefix: IconBroken.Call,
-                  controller: phoneController,
-                  type: TextInputType.text,
-                  text: "Phone Number",
-                ),
-                awesomeDialogFormField(
-                  prefix: IconBroken.Message,
-                  controller: mailController,
-                  type: TextInputType.text,
-                  text: "E-mail",
-                ),
-              ],
-            ),
-            btnOkText: "SUBMIT",
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {},
-          ).show();
+          // AwesomeDialog(
+          //   context: context,
+          //   dialogType: DialogType.noHeader,
+          //   animType: AnimType.rightSlide,
+          //   title: 'Edit Profile',
+          //   body: Column(
+          //     children: [
+          //       const CircleAvatar(
+          //         backgroundImage: AssetImage(
+          //           "assets/no_user.png",
+          //         ),
+          //         radius: 50.0,
+          //       ),
+          //       awesomeDialogFormField(
+          //         prefix: IconBroken.Profile,
+          //         controller: userNameController,
+          //         type: TextInputType.text,
+          //         text: "UserName",
+          //       ),
+          //       awesomeDialogFormField(
+          //         prefix: IconBroken.Calendar,
+          //         controller: dateController,
+          //         type: TextInputType.datetime,
+          //         onTap: () {
+          //           showDatePicker(
+          //             context: context,
+          //             initialDate: DateTime.now(),
+          //             firstDate: DateTime.now(),
+          //             lastDate: DateTime(2100),
+          //           ).then((value) {
+          //             dateController.text = DateFormat.yMMMd().format(value!);
+          //           });
+          //         },
+          //         text: "Birthday",
+          //       ),
+          //       awesomeDialogFormField(
+          //         prefix: IconBroken.Call,
+          //         controller: phoneController,
+          //         type: TextInputType.text,
+          //         text: "Phone Number",
+          //       ),
+          //       awesomeDialogFormField(
+          //         prefix: IconBroken.Message,
+          //         controller: mailController,
+          //         type: TextInputType.text,
+          //         text: "E-mail",
+          //       ),
+          //     ],
+          //   ),
+          //   btnOkText: "SUBMIT",
+          //   btnCancelOnPress: () {},
+          //   btnOkOnPress: () {},
+          // ).show();
         },
         child: const Icon(IconBroken.Add_User),
       ),

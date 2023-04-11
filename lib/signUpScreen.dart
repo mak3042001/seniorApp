@@ -7,7 +7,6 @@ import 'package:senior/styles/IconBroken.dart';
 import 'package:senior/styles/colors.dart';
 
 class SignUpScreen extends StatelessWidget {
-
   TextEditingController dateController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -79,40 +78,34 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: userNameController,
-                          title: 'User Name',
-                          iconUse: IconBroken.User,
-                          isPassword: false,
-                          isEmail: true,
-                          isPhone: false,
-                          isProfile: false),
+                        type: TextInputType.name,
+                        text: 'User Name',
+                        prefix: IconBroken.User,
+                      ),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: passwordController,
-                          title: 'Password',
-                          iconUse: IconBroken.Lock,
-                          isPassword: true,
-                          isEmail: false,
-                          isPhone: false,
-                          isProfile: false),
+                        type: TextInputType.text,
+                        prefix: IconBroken.Lock,
+                        text: 'password',
+                      ),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: phoneController,
-                          title: 'Phone',
-                          iconUse: IconBroken.Call,
-                          isPassword: false,
-                          isEmail: false,
-                          isPhone: true,
-                          isProfile: false),
+                        type: TextInputType.phone,
+                        text: 'Phone',
+                        prefix: IconBroken.Call,
+                      ),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: dateController,
                         onTap: () {
                           showDatePicker(
@@ -120,18 +113,16 @@ class SignUpScreen extends StatelessWidget {
                             initialDate: DateTime.now(),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(2100),
-                          ).then((value)
-                          {
-                            dateController.text = DateFormat.yMMMd().format(value!);
-                          }
-                          );
+                          ).then((value) {
+                            dateController.text =
+                                DateFormat.yMMMd().format(value!);
+                          });
                         },
-                        title: dateController.text != null ? 'Birthdate':dateController.text,
-                        iconUse: IconBroken.Calendar,
-                        isPassword: false,
-                        isEmail: false,
-                        isPhone: true,
-                        isProfile: false,
+                        type: TextInputType.none,
+                        text: dateController.text != null
+                            ? 'Birthdate'
+                            : dateController.text,
+                        prefix: IconBroken.Calendar,
                       ),
                       const SizedBox(
                         height: 25.0,
@@ -145,7 +136,8 @@ class SignUpScreen extends StatelessWidget {
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const ContactsScreen()),
+                                      builder: (context) =>
+                                          const ContactsScreen()),
                                   (route) => false);
                             }),
                       ),

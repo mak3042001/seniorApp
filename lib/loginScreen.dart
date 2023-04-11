@@ -75,25 +75,24 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 40.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: userNameController,
-                          title: 'User Name',
-                          iconUse: IconBroken.User,
-                          isPassword: false,
-                          isEmail: true,
-                          isPhone: false,
-                          isProfile: false),
+                        isPassword: false,
+                        type: TextInputType.name,
+                        text: 'User Name',
+                        prefix: IconBroken.User,
+                      ),
                       const SizedBox(
                         height: 50.0,
                       ),
-                      textFieldStatic(
+                      defaultFormField(
                         controller: passwordController,
-                          title: 'Password',
-                          iconUse: IconBroken.Lock,
-                          isPassword: true,
-                          isEmail: false,
-                          isPhone: false,
-                          isProfile: false),
+                        isPassword: true,
+                        type: TextInputType.text,
+                        text: 'Password',
+                        prefix: IconBroken.Lock,
+                        suffix: IconBroken.Password,
+                      ),
                       const SizedBox(
                         height: 40.0,
                       ),
@@ -103,7 +102,12 @@ class LoginScreen extends StatelessWidget {
                             text: 'LOGIN',
                             colorButton: defaultColor,
                             function: () {
-                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ContactsScreen()),(route) => false,);
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ContactsScreen()),
+                                (route) => false,
+                              );
                             }),
                       ),
                     ],
