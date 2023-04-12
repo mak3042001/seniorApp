@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+
+DateTime selectedDate = DateTime.now();
+
 class AlwaysDisabledFocusNode extends FocusNode {
+
+  bool hasFocusBool;
+  AlwaysDisabledFocusNode(this.hasFocusBool);
+
   @override
-  bool get hasFocus => false;
+  bool get hasFocus => hasFocusBool;
 }
 
 Widget staticButton({
@@ -39,10 +46,15 @@ Widget defaultFormField({
   ValueChanged? onSubmit,
   bool isPassword = false,
   VoidCallback? suffixpressed,
+  FormFieldValidator? validator,
+  bool enableInteractiveSelection = true,
+  bool hasFocusBool = true,
+
 }) =>
     TextFormField(
-      // enableInteractiveSelection: false,
-      // focusNode: AlwaysDisabledFocusNode(),
+      validator: validator,
+      enableInteractiveSelection: enableInteractiveSelection,
+      focusNode: AlwaysDisabledFocusNode(hasFocusBool),
       controller: controller,
       onChanged: onChange,
       onFieldSubmitted: onSubmit,
