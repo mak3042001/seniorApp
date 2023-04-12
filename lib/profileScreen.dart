@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:senior/seniorScreen.dart';
 import 'package:senior/static.dart';
 import 'styles/IconBroken.dart';
 
@@ -55,33 +54,34 @@ class ProfileScreen extends StatelessWidget {
                           const SizedBox(
                             width: 295.0,
                           ),
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> SeniorScreen()));
-                                  },
-                                  icon: const Icon(
-                                    IconBroken.Profile,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "Senior",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(color: Colors.white),
-                              ),
-                            ],
-                          ),
+                          // Column(
+                          //   children: [
+                          //     Align(
+                          //       alignment: Alignment.topRight,
+                          //       child: IconButton(
+                          //         onPressed: () {
+                          //           Navigator.push(
+                          //               context,
+                          //               MaterialPageRoute(
+                          //                   builder: (context) =>
+                          //                       SeniorScreen()));
+                          //         },
+                          //         icon: const Icon(
+                          //           IconBroken.Profile,
+                          //           color: Colors.white,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       "Senior",
+                          //       style: Theme.of(context)
+                          //           .textTheme
+                          //           .bodySmall!
+                          //           .copyWith(color: Colors.white),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
-                      ),
-                      const SizedBox(
-                        height: 5.0,
                       ),
                       const Text(
                         "Name",
@@ -115,6 +115,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     defaultFormField(
+                      enableInteractiveSelection: false,
+                      hasFocusBool: false,
                       onTap: null,
                       controller: userNameController,
                       type: TextInputType.none,
@@ -125,6 +127,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 10.0,
                     ),
                     defaultFormField(
+                      enableInteractiveSelection: false,
+                      hasFocusBool: false,
                       controller: dateController,
                       type: TextInputType.none,
                       onTap: null,
@@ -137,6 +141,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 10.0,
                     ),
                     defaultFormField(
+                      enableInteractiveSelection: false,
+                      hasFocusBool: false,
                       controller: phoneController,
                       onTap: null,
                       type: TextInputType.none,
@@ -147,6 +153,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 10.0,
                     ),
                     defaultFormField(
+                      enableInteractiveSelection: false,
+                      hasFocusBool: false,
                       controller: mailController,
                       onTap: null,
                       type: TextInputType.none,
@@ -157,6 +165,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 10.0,
                     ),
                     defaultFormField(
+                        enableInteractiveSelection: false,
+                        hasFocusBool: false,
                         controller: passwordController,
                         onTap: null,
                         type: TextInputType.none,
@@ -164,92 +174,118 @@ class ProfileScreen extends StatelessWidget {
                         prefix: IconBroken.Lock,
                         suffix: IconBroken.Edit,
                         suffixpressed: () {
-                          // AwesomeDialog(
-                          //   context: context,
-                          //   dialogType: DialogType.info,
-                          //   animType: AnimType.rightSlide,
-                          //   title: 'Rest Password',
-                          //   body: Column(
-                          //     children: [
-                          //       awesomeDialogFormField(
-                          //         controller: currentPasswordController,
-                          //         type: TextInputType.text,
-                          //         text: "Current Password",
-                          //       ),
-                          //       awesomeDialogFormField(
-                          //         controller: newPasswordController,
-                          //         type: TextInputType.text,
-                          //         text: "New Password",
-                          //       ),
-                          //       awesomeDialogFormField(
-                          //         controller: confirmNewPasswordController,
-                          //         type: TextInputType.text,
-                          //         text: "Confirm New Password",
-                          //       ),
-                          //     ],
-                          //   ),
-                          //   btnOkText: "UPDATE PASSWORD",
-                          //   btnCancelOnPress: () {},
-                          //   btnOkOnPress: () {},
-                          // ).show();
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.info,
+                            animType: AnimType.rightSlide,
+                            title: 'Rest Password',
+                            body: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                defaultFormField(
+                                  controller: currentPasswordController,
+                                  type: TextInputType.text,
+                                  text: "Current Password",
+                                  prefix: IconBroken.Password,
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                defaultFormField(
+                                  controller: newPasswordController,
+                                  type: TextInputType.text,
+                                  text: "New Password",
+                                  prefix: IconBroken.Password,
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                defaultFormField(
+                                  controller: confirmNewPasswordController,
+                                  type: TextInputType.text,
+                                  text: "Confirm New Password",
+                                  prefix: IconBroken.Password,
+                                ),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                              ],
+                            ),
+                            btnOkText: "UPDATE PASSWORD",
+                            btnCancelOnPress: () {},
+                            btnOkOnPress: () {},
+                          ).show();
                         }),
                   ],
                 ),
               ),
               const SizedBox(
-                height: 50.0,
+                height: 20.0,
               ),
               SizedBox(
                 width: 250,
                 child: InkWell(
                   onTap: () {
-                    // AwesomeDialog(
-                    //   context: context,
-                    //   dialogType: DialogType.info,
-                    //   animType: AnimType.rightSlide,
-                    //   title: 'Edit Profile',
-                    //   body: Column(
-                    //     children: [
-                    //       awesomeDialogFormField(
-                    //         prefix: IconBroken.Profile,
-                    //         controller: userNameController,
-                    //         type: TextInputType.text,
-                    //         text: "UserName",
-                    //       ),
-                    //       awesomeDialogFormField(
-                    //         prefix: IconBroken.Calendar,
-                    //         controller: dateController,
-                    //         type: TextInputType.datetime,
-                    //         onTap: () {
-                    //           showDatePicker(
-                    //             context: context,
-                    //             initialDate: DateTime.now(),
-                    //             firstDate: DateTime.now(),
-                    //             lastDate: DateTime(2100),
-                    //           ).then((value) {
-                    //             dateController.text = DateFormat.yMMMd().format(value!);
-                    //           });
-                    //         },
-                    //         text: "Birthday",
-                    //       ),
-                    //       awesomeDialogFormField(
-                    //         prefix: IconBroken.Call,
-                    //         controller: phoneController,
-                    //         type: TextInputType.text,
-                    //         text: "Phone Number",
-                    //       ),
-                    //       awesomeDialogFormField(
-                    //         prefix: IconBroken.Message,
-                    //         controller: mailController,
-                    //         type: TextInputType.text,
-                    //         text: "E-mail",
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   btnOkText: "EDIT PROFILE",
-                    //   btnCancelOnPress: () {},
-                    //   btnOkOnPress: () {},
-                    // ).show();
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.info,
+                      animType: AnimType.rightSlide,
+                      title: 'Edit Profile',
+                      body: Column(
+                        children: [
+                          defaultFormField(
+                            prefix: IconBroken.Profile,
+                            controller: userNameController,
+                            type: TextInputType.text,
+                            text: "UserName",
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          defaultFormField(
+                            prefix: IconBroken.Calendar,
+                            controller: dateController,
+                            type: TextInputType.datetime,
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: selectedDate,
+                                firstDate: DateTime(1900),
+                                lastDate: selectedDate,
+                              ).then((value) {
+                                dateController.text =
+                                    DateFormat.yMMMd().format(value!);
+                              });
+                            },
+                            text: "Birthday",
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          defaultFormField(
+                            prefix: IconBroken.Call,
+                            controller: phoneController,
+                            type: TextInputType.text,
+                            text: "Phone Number",
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          defaultFormField(
+                            prefix: IconBroken.Message,
+                            controller: mailController,
+                            type: TextInputType.text,
+                            text: "E-mail",
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                        ],
+                      ),
+                      btnOkText: "EDIT PROFILE",
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {},
+                    ).show();
                   },
                   child: Container(
                     decoration: BoxDecoration(

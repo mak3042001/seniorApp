@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior/HomeApp.dart';
 import 'package:senior/contactScreen.dart';
 import 'package:senior/signUpScreen.dart';
 import 'package:senior/static.dart';
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ContactsScreen()),
+                                        builder: (context) => HomeApp()),
                                         (route) => false,
                                   );
                                 }

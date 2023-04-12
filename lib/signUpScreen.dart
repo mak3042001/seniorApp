@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:senior/HomeApp.dart';
 import 'package:senior/contactScreen.dart';
 import 'package:senior/loginScreen.dart';
 import 'package:senior/static.dart';
@@ -184,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                          const ContactsScreen()),
+                                           HomeApp()),
                                           (route) => false);
                                 }
                               }),
