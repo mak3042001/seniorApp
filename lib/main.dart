@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior/Sca.dart';
 import 'package:senior/loginScreen.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: const Scad(title: 'Scad',),
     );
   }
 }
