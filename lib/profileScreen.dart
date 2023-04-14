@@ -6,6 +6,7 @@ import 'styles/IconBroken.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
+  DateTime selectedDate = DateTime.now();
   ProfileScreen({Key? key}) : super(key: key);
   TextEditingController userNameController = TextEditingController();
   TextEditingController dateController = TextEditingController();

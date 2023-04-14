@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-DateTime selectedDate = DateTime.now();
+
 
 class AlwaysDisabledFocusNode extends FocusNode {
 
@@ -73,4 +73,7 @@ Widget defaultFormField({
         ),
       ),
     );
+
+
+
 

@@ -1,17 +1,24 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:senior/static.dart';
+import 'package:senior/styles/IconBroken.dart';
 
-class Scad extends StatefulWidget {
-  Scad({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class Schedules extends StatefulWidget {
+  const Schedules({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _ScadState createState() => _ScadState();
+  _SchedulesState createState() => _SchedulesState();
 }
 
-class _ScadState extends State<Scad> {
+class _SchedulesState extends State<Schedules> {
   DateTime _selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
+  final TextEditingController _taskTitleController = TextEditingController();
+  final TextEditingController _taskTimeController = TextEditingController();
+  final TextEditingController _taskDataController = TextEditingController();
 
   final List<Map<String, dynamic>> _scheduleList = [
     {
@@ -36,75 +43,223 @@ class _ScadState extends State<Scad> {
     },
   ];
 
-  void _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: _selectedDate,
-        firstDate: DateTime(2021),
-        lastDate: DateTime(2100));
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
+
+  void _incrementDate() {
+    setState(() {
+      _selectedDate = _selectedDate.add(const Duration(days: 1));
+    });
+  }
+
+  void _decrementDate() {
+    setState(() {
+      _selectedDate = _selectedDate.subtract(const Duration(days: 1));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat.yMd();
+    final formattedDate = dateFormat.format(_selectedDate);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16.0),
-          Center(
-            child: GestureDetector(
-              onTap: () => _selectDate(context),
-              child: Column(
-                children: [
-                  Text(
-                    DateFormat.yMMMMd().format(_selectedDate),
-                    style:
-                        const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    'Tap to change date',
-                    style: TextStyle(color: Colors.grey[600]),
-                  ),
-                ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xff3647EC), Color(0xff1E2983)]),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(100.0),
+                    bottomRight: Radius.circular(100.0),
+                  )),
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              IconBroken.Arrow___Left_2,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 295.0,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            IconBroken.Arrow___Left_2,
+                            color: Colors.white,
+                            size: 30.0,
+                          ),
+                          onPressed: _decrementDate,
+                        ),
+                        SizedBox(
+                          width: 170.0,
+                          child: TextFormField(
+                            enableInteractiveSelection: false,
+                            focusNode: AlwaysDisabledFocusNode(false),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(10.0),
+                              labelText: 'Date',
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            controller: TextEditingController(
+                              text: formattedDate,
+                            ),
+                            onTap: () async {
+                              final initialDate = _selectedDate;
+                              final newDate = await showDatePicker(
+                                context: context,
+                                initialDate: initialDate,
+                                firstDate: DateTime(initialDate.year - 1),
+                                lastDate: DateTime(initialDate.year + 1),
+                              );
+                              if (newDate != null) {
+                                setState(() {
+                                  _selectedDate = DateTime(
+                                    newDate.year,
+                                    newDate.month,
+                                    newDate.day,
+                                    // newTime.hour,
+                                    // newTime.minute,
+                                  );
+                                });
+                              }
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            IconBroken.Arrow___Right_2,
+                            color: Colors.white,
+                            size: 30.0,
+                          ),
+                          onPressed: _incrementDate,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 16.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _scheduleList.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (_scheduleList[index]['date'].day != _selectedDate.day ||
-                    _scheduleList[index]['date'].month != _selectedDate.month ||
-                    _scheduleList[index]['date'].year != _selectedDate.year) {
-                  return const SizedBox.shrink();
-                }
-                return ListTile(
-                  title: Text(_scheduleList[index]['title']),
-                  subtitle: Text(_scheduleList[index]['time']),
-                  onTap: () {
-                    // navigate to schedule details page
-                  },
-                );
-              },
+            const SizedBox(height: 16.0),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _scheduleList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (_scheduleList[index]['date'].day != _selectedDate.day ||
+                      _scheduleList[index]['date'].month !=
+                          _selectedDate.month ||
+                      _scheduleList[index]['date'].year != _selectedDate.year) {
+                    return const SizedBox.shrink();
+                  }
+                  return ListTile(
+                    title: Text(_scheduleList[index]['title']),
+                    subtitle: Text(_scheduleList[index]['time']),
+                    onTap: () {
+                      // navigate to schedule details page
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // navigate to add schedule page
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.question,
+            animType: AnimType.bottomSlide,
+            title: 'Edit Profile',
+            body: Column(
+                    children: [
+                      defaultFormField(
+                        controller: _taskTitleController,
+                        type: TextInputType.name,
+                        text: 'Task Title',
+                        prefix: IconBroken.Ticket,
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      defaultFormField(
+                        controller: _taskTimeController,
+                        type: TextInputType.name,
+                        text: 'Task Time',
+                        prefix: IconBroken.Time_Circle,
+                        enableInteractiveSelection: false,
+                        hasFocusBool: false,
+                        onTap: () {
+                          showTimePicker(
+                            context: context,
+                            initialTime: selectedTime,
+                          ).then((value) {
+                              _taskTimeController.text = value!.format(context);
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      defaultFormField(
+                        controller: _taskDataController,
+                        type: TextInputType.name,
+                        text: 'Task Data',
+                        prefix: IconBroken.Calendar,
+                        enableInteractiveSelection: false,
+                        hasFocusBool: false,
+                        onTap: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: _selectedDate,
+                            firstDate: _selectedDate,
+                            lastDate: DateTime(_selectedDate.year + 5),
+                          ).then((value) {
+                            _taskDataController.text =
+                                DateFormat.yMMMd().format(value!);
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+            btnCancelOnPress: () {},
+            btnOkOnPress: () {},
+          ).show();
         },
-        tooltip: 'Add Schedule',
+        tooltip: 'Add Task',
         child: const Icon(Icons.add),
       ),
     );

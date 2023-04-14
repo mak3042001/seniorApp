@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Scad(title: 'Scad',),
+      home: const Schedules(),
     );
   }
 }

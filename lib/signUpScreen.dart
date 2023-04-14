@@ -16,6 +16,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  DateTime selectedDate = DateTime.now();
+
   TextEditingController dateController = TextEditingController();
 
   TextEditingController userNameController = TextEditingController();
