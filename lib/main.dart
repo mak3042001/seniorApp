@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senior/Sca.dart';
-import 'package:senior/loginScreen.dart';
+import 'package:senior/HomeApp.dart';
+import 'package:senior/PatientSwipeCard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Schedules(),
+      home: MedicalHistoryPage(),
     );
   }
 }

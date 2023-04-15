@@ -24,12 +24,12 @@ class _SchedulesState extends State<Schedules> {
     {
       'title': 'Meeting with Client',
       'time': '10:00 AM - 11:00 AM',
-      'date': DateTime.now(),
+      'date': DateTime(2022,4,30),
     },
     {
       'title': 'Design Review',
       'time': '11:30 AM - 12:30 PM',
-      'date': DateTime.now(),
+      'date': DateTime(2023,2,1),
     },
     {
       'title': 'Lunch Break',
