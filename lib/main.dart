@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior/HomeApp.dart';
 import 'package:senior/PatientSwipeCard.dart';
+import 'package:senior/Sca.dart';
 import 'package:senior/booking.dart';
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: AppointmentBookingScreen(),
+      home: MedicalHistoryPage(),
     );
   }
 }
