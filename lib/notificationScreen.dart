@@ -13,9 +13,9 @@ class NotificationScreen extends StatelessWidget {
         backgroundColor: const Color(0xff283DAA),
         title: InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>ContactsScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>const ContactsScreen()));
           },
-            child: Text("Contacts" , style: TextStyle(color: Colors.grey),)),
+            child: const Text("Contacts" , style: TextStyle(color: Colors.grey),)),
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(IconBroken.Notification,

@@ -1,6 +1,22 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:senior/static.dart';
+import 'package:senior/styles/IconBroken.dart';
 
-class MedicalHistoryPage extends StatelessWidget {
+class MedicalHistoryPage extends StatefulWidget {
+  const MedicalHistoryPage({super.key});
+
+  @override
+  _MedicalHistoryPageState createState() => _MedicalHistoryPageState();
+}
+
+class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
+  final DateTime _selectedDate = DateTime.now();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController noteController = TextEditingController();
+
   final List<MedicalCondition> conditions = [
     MedicalCondition(
       name: 'Hypertension',
@@ -18,8 +34,6 @@ class MedicalHistoryPage extends StatelessWidget {
       notes: 'Prescribed medication: Metformin',
     ),
   ];
-
-  MedicalHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +127,70 @@ class MedicalHistoryPage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.question,
+            animType: AnimType.bottomSlide,
+            title: 'Edit Profile',
+            body: Column(
+              children: [
+                defaultFormField(
+                  controller: nameController,
+                  type: TextInputType.name,
+                  text: 'Name',
+                  prefix: IconBroken.Ticket,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                defaultFormField(
+                  controller: dateController,
+                  type: TextInputType.name,
+                  text: 'Data',
+                  prefix: IconBroken.Calendar,
+                  enableInteractiveSelection: false,
+                  hasFocusBool: false,
+                  onTap: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate,
+                      firstDate: DateTime(_selectedDate.year - 5),
+                      lastDate: DateTime(_selectedDate.year + 5),
+                    ).then((value) {
+                      dateController.text =
+                          DateFormat.yMMMd().format(value!);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                defaultFormField(
+                  controller: noteController,
+                  type: TextInputType.name,
+                  text: 'Note',
+                  prefix: IconBroken.Ticket,
+                ),
+              ],
+            ),
+            btnCancelOnPress: () {},
+            btnOkOnPress: () {
+              setState(() {
+                conditions.add(MedicalCondition(
+                  name: nameController.text,
+                  date: dateController.text,
+                  notes: noteController.text,
+                ));
+              });
+            },
+          ).show();
+
+        },
+        backgroundColor: Colors.blue[900],
+        child: const Icon(IconBroken.Plus),
+      ),
     );
   }
 }
@@ -122,9 +200,5 @@ class MedicalCondition {
   final String date;
   final String notes;
 
-  MedicalCondition({
-    required this.name,
-    required this.date,
-    required this.notes,
-  });
+  MedicalCondition({required this.name,required this.date,required this.notes});
 }

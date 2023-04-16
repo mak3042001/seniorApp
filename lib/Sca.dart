@@ -260,7 +260,7 @@ class _SchedulesState extends State<Schedules> {
           ).show();
         },
         tooltip: 'Add Task',
-        child: const Icon(Icons.add),
+        child: const Icon(IconBroken.Plus),
       ),
     );
   }
