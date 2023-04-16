@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:senior/styles/IconBroken.dart';
 
 class AppointmentBookingScreen extends StatefulWidget {
   const AppointmentBookingScreen({Key? key}) : super(key: key);
@@ -11,6 +13,28 @@ class AppointmentBookingScreen extends StatefulWidget {
 class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
   late String _selectedDoctor;
   late String _selectedTimeSlot;
+  late DateTime _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDoctor = _doctors.first;
+    _selectedDate = DateTime.now();
+    _selectedTimeSlot = _timeSlots.first;
+  }
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+    );
+    if (selectedDate != null) {
+      setState(() {
+        _selectedDate = selectedDate;
+      });
+    }
+  }
 
   final List<String> _doctors = [
     'Dr. John Doe',
@@ -33,15 +57,10 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     '3:30 PM - 4:00 PM',
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedDoctor = _doctors.first;
-    _selectedTimeSlot = _timeSlots.first;
-  }
 
   @override
   Widget build(BuildContext context) {
+    final DateFormat dateFormat = DateFormat('EEEE, MMMM d, yyyy');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Book an Appointment'),
@@ -72,6 +91,25 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   child: Text(value),
                 );
               }).toList(),
+            ),
+            const SizedBox(height: 32.0),
+            const Text(
+              'Select Date',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            InkWell(
+              onTap: () => _selectDate(context),
+              child: Row(
+                children: [
+                  const Icon(IconBroken.Calendar),
+                  const SizedBox(width: 8.0),
+                  Text(dateFormat.format(_selectedDate)),
+                ],
+              ),
             ),
             const SizedBox(height: 32.0),
             const Text(
