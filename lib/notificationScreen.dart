@@ -17,13 +17,21 @@ class NotificationScreen extends StatelessWidget {
           },
             child: const Text("Contacts" , style: TextStyle(color: Colors.grey),)),
         leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(IconBroken.Notification,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(IconBroken.Arrow___Left_2,
             color: Colors.white,
           ),
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(IconBroken.Notification,
+              color: Colors.white,
+            ),
+          ),
           IconButton(
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));

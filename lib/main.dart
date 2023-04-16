@@ -3,6 +3,7 @@ import 'package:senior/HomeApp.dart';
 import 'package:senior/PatientSwipeCard.dart';
 import 'package:senior/Sca.dart';
 import 'package:senior/booking.dart';
+import 'package:senior/medications.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const String baseImageAssets = "assets/images";
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Senior Care',
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MedicalHistoryPage(),
+      home: HomeApp(),
     );
   }
 }

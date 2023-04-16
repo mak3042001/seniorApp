@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior/contactScreen.dart';
 import 'package:senior/profileScreen.dart';
 import 'package:senior/styles/IconBroken.dart';
 
@@ -25,6 +26,13 @@ class HomeApp extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff283DAA),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ContactsScreen()));
+            },
+            icon: const Icon(IconBroken.Chat),
+          ),
           title: const Text(
             "Care",
             style: TextStyle(
@@ -79,12 +87,12 @@ class HomeApp extends StatelessWidget {
                   ),
                   radius: 40,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),

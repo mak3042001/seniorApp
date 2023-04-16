@@ -14,14 +14,22 @@ class ContactsScreen extends StatelessWidget {
         title: const Text("Contacts"),
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> const NotificationScreen()));
+            Navigator.pop(context);
           },
-          icon: const Icon(IconBroken.Notification,
-            color: Colors.grey,
+          icon: const Icon(IconBroken.Arrow___Left_2,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> const NotificationScreen()));
+            },
+            icon: const Icon(IconBroken.Notification,
+              color: Colors.grey,
+            ),
+          ),
           IconButton(
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));

@@ -22,6 +22,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     _selectedDate = DateTime.now();
     _selectedTimeSlot = _timeSlots.first;
   }
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -57,13 +58,14 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     '3:30 PM - 4:00 PM',
   ];
 
-
   @override
   Widget build(BuildContext context) {
     final DateFormat dateFormat = DateFormat('EEEE, MMMM d, yyyy');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Book an Appointment'),
+        centerTitle: true,
+        backgroundColor: Colors.blue[900],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
@@ -135,7 +137,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _selectedTimeSlot == timeSlot
-                        ? Colors.blue
+                        ? Colors.blue[900]
                         : Colors.grey[300],
                   ),
                   child: Text(
@@ -148,10 +150,18 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
             const SizedBox(height: 32.0),
             Center(
               child: ElevatedButton(
+                style:  ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[900]!),
+                ),
                 onPressed: () {
                   // Add your logic for booking the appointment here
                 },
-                child: const Text('Book Appointment'),
+                child: const Text(
+                  'Book Appointment',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
               ),
             ),
           ],
