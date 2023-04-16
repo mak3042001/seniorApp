@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:senior/static.dart';
 import 'package:senior/styles/IconBroken.dart';
 
-class MedicalHistoryPage extends StatefulWidget {
-  const MedicalHistoryPage({super.key});
+class History extends StatefulWidget {
+  const History({super.key});
 
   @override
-  _MedicalHistoryPageState createState() => _MedicalHistoryPageState();
+  _HistoryState createState() => _HistoryState();
 }
 
-class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
+class _HistoryState extends State<History> {
   final DateTime _selectedDate = DateTime.now();
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -40,6 +40,15 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            IconBroken.Arrow___Left_2,
+            color: Colors.white,
+          ),
+        ),
         title: const Text('Medical History'),
         centerTitle: true,
         backgroundColor: Colors.blue[900],
@@ -141,17 +150,16 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
                   type: TextInputType.name,
                   text: 'Name',
                   prefix: IconBroken.Ticket,
+                  isPassword: false,
                 ),
                 const SizedBox(
                   height: 10.0,
                 ),
-                defaultFormField(
+                defaultDisableFormField(
                   controller: dateController,
                   type: TextInputType.name,
                   text: 'Data',
                   prefix: IconBroken.Calendar,
-                  enableInteractiveSelection: false,
-                  hasFocusBool: false,
                   onTap: () {
                     showDatePicker(
                       context: context,
@@ -159,10 +167,11 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
                       firstDate: DateTime(_selectedDate.year - 5),
                       lastDate: DateTime(_selectedDate.year + 5),
                     ).then((value) {
-                      dateController.text =
-                          DateFormat.yMMMd().format(value!);
+                      dateController.text = DateFormat.yMMMd().format(value!);
                     });
                   },
+                  enableInteractiveSelection: false,
+                  hasFocusBool: false,
                 ),
                 const SizedBox(
                   height: 10.0,
@@ -172,6 +181,7 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
                   type: TextInputType.name,
                   text: 'Note',
                   prefix: IconBroken.Ticket,
+                  isPassword: false,
                 ),
               ],
             ),
@@ -186,7 +196,6 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
               });
             },
           ).show();
-
         },
         backgroundColor: Colors.blue[900],
         child: const Icon(IconBroken.Plus),
@@ -200,5 +209,6 @@ class MedicalCondition {
   final String date;
   final String notes;
 
-  MedicalCondition({required this.name,required this.date,required this.notes});
+  MedicalCondition(
+      {required this.name, required this.date, required this.notes});
 }

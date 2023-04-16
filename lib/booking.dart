@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/styles/IconBroken.dart';
 
-class AppointmentBookingScreen extends StatefulWidget {
-  const AppointmentBookingScreen({Key? key}) : super(key: key);
+class Booking extends StatefulWidget {
+  const Booking({Key? key}) : super(key: key);
 
   @override
-  _AppointmentBookingScreenState createState() =>
-      _AppointmentBookingScreenState();
+  _BookingState createState() =>
+      _BookingState();
 }
 
-class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
+class _BookingState extends State<Booking> {
   late String _selectedDoctor;
   late String _selectedTimeSlot;
   late DateTime _selectedDate;
@@ -63,6 +63,15 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     final DateFormat dateFormat = DateFormat('EEEE, MMMM d, yyyy');
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            IconBroken.Arrow___Left_2,
+            color: Colors.white,
+          ),
+        ),
         title: const Text('Book an Appointment'),
         centerTitle: true,
         backgroundColor: Colors.blue[900],

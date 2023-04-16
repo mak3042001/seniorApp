@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.18.0
   awesome_dialog: ^3.0.2
   local_auth: ^2.1.6
+  flutter_zoom_drawer: ^3.0.4+1
 
 
 dev_dependencies:

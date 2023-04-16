@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:senior/HomeApp.dart';
-import 'package:senior/contactScreen.dart';
 import 'package:senior/signUpScreen.dart';
 import 'package:senior/static.dart';
 import 'package:senior/styles/IconBroken.dart';
@@ -55,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignUpScreen()),
+                                builder: (context) => const SignUpScreen()),
                           );
                         },
                         child: const Text(
@@ -75,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: Image.asset(
-                        'assets/app_img.jpeg.jpg',
+                        'assets/images/app_img.jpeg.jpg',
                         fit: BoxFit.cover,
                         height: 180.0,
                       ),
@@ -91,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         defaultFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your email';
                             } else if (!value.contains('@')) {
                               return 'Please enter a valid email';
@@ -109,18 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         defaultFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your password';
                             }
                             return null; // Return null if the input is valid
                           },
                           controller: passwordController,
                           isPassword: isPassword ? true : false ,
-                          type: TextInputType.text,
+                          type: TextInputType.name,
                           text: 'Password',
                           prefix: IconBroken.Lock,
                           suffix: isPassword ? Icons.visibility : Icons.visibility_off,
-                          suffixpressed: (){
+                          suffixPressed: (){
                             setState(() {
                               isPassword = !isPassword;
                             });

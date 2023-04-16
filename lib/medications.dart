@@ -3,20 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:senior/static.dart';
 import 'package:senior/styles/IconBroken.dart';
 
-class MedicationsPage extends StatelessWidget {
+class Medications extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _dosageController = TextEditingController();
   final TextEditingController _frequencyController = TextEditingController();
-  MedicationsPage({super.key});
+
+  Medications({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            IconBroken.Arrow___Left_2,
+            color: Colors.white,
+          ),
+        ),
         title: const Text('Medications'),
         centerTitle: true,
         backgroundColor: Colors.blue[900],
-
       ),
       body: Column(
         children: [
@@ -49,8 +58,9 @@ class MedicationsPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            style:  ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[900]!),
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.blue[900]!),
             ),
             child: const Text('Add Medication'),
             onPressed: () {
@@ -66,6 +76,7 @@ class MedicationsPage extends StatelessWidget {
                       type: TextInputType.name,
                       text: 'Name',
                       prefix: IconBroken.Tick_Square,
+                      isPassword: false,
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -75,6 +86,7 @@ class MedicationsPage extends StatelessWidget {
                       type: TextInputType.name,
                       text: 'Dosage',
                       prefix: IconBroken.Filter_2,
+                      isPassword: false,
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -84,12 +96,14 @@ class MedicationsPage extends StatelessWidget {
                       type: TextInputType.name,
                       text: 'Frequency',
                       prefix: IconBroken.Calendar,
+                      isPassword: false,
                     ),
                   ],
                 ),
                 btnCancelOnPress: () {},
                 btnOkOnPress: () {},
-              ).show();            },
+              ).show();
+            },
           ),
           const SizedBox(height: 16),
         ],
@@ -120,7 +134,10 @@ class MedicationTile extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      subtitle: Text('$dosage - $frequency' , style: const TextStyle(fontSize: 18.0),),
+      subtitle: Text(
+        '$dosage - $frequency',
+        style: const TextStyle(fontSize: 18.0),
+      ),
     );
   }
 }

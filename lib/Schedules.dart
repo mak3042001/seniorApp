@@ -184,8 +184,11 @@ class _SchedulesState extends State<Schedules> {
                     return const SizedBox.shrink();
                   }
                   return ListTile(
-                    title: Text(_scheduleList[index]['title']),
-                    subtitle: Text(_scheduleList[index]['time']),
+                    title: Text(_scheduleList[index]['title'] , style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    subtitle: Text(_scheduleList[index]['time'] , style: const TextStyle(fontSize: 18.0),),
                     onTap: () {
                       // navigate to schedule details page
                     },
@@ -197,6 +200,7 @@ class _SchedulesState extends State<Schedules> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue[900],
         onPressed: () {
           AwesomeDialog(
             context: context,
@@ -209,12 +213,12 @@ class _SchedulesState extends State<Schedules> {
                         controller: _taskTitleController,
                         type: TextInputType.name,
                         text: 'Task Title',
-                        prefix: IconBroken.Ticket,
+                        prefix: IconBroken.Ticket, isPassword: false,
                       ),
                       const SizedBox(
                         height: 10.0,
                       ),
-                      defaultFormField(
+                      defaultDisableFormField(
                         controller: _taskTimeController,
                         type: TextInputType.name,
                         text: 'Task Time',
@@ -234,7 +238,7 @@ class _SchedulesState extends State<Schedules> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      defaultFormField(
+                      defaultDisableFormField(
                         controller: _taskDataController,
                         type: TextInputType.name,
                         text: 'Task Data',
@@ -260,7 +264,7 @@ class _SchedulesState extends State<Schedules> {
           ).show();
         },
         tooltip: 'Add Task',
-        child: const Icon(IconBroken.Plus),
+        child: const Icon(IconBroken.Plus ,),
       ),
     );
   }

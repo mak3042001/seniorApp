@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:senior/History.dart';
+import 'package:senior/Schedules.dart';
+import 'package:senior/booking.dart';
 import 'package:senior/contactScreen.dart';
+import 'package:senior/medications.dart';
 import 'package:senior/profileScreen.dart';
 import 'package:senior/styles/IconBroken.dart';
 
@@ -18,6 +22,15 @@ class HomeApp extends StatelessWidget {
     "$baseImageAssets/bookings.jpg",
     "$baseImageAssets/medications.jpeg",
   ];
+
+
+  List<Widget> screen = [
+    const Schedules(),
+    const History(),
+    const Booking(),
+    Medications(),
+  ];
+
 
   HomeApp({Key? key}) : super(key: key);
 
@@ -59,17 +72,17 @@ class HomeApp extends StatelessWidget {
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) =>
-                CustemCard(home[i], images[i], context),
+                CustemCard(home[i], images[i], context , screen[i]),
           ),
         ));
   }
 
   Widget CustemCard(
-      String text, String images, BuildContext context) {
+      String text, String images, BuildContext context, Widget screen) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => screen));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => screen));
       },
       child: SizedBox(
         height: 170,

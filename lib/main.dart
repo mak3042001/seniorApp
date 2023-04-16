@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senior/HomeApp.dart';
-import 'package:senior/PatientSwipeCard.dart';
-import 'package:senior/Sca.dart';
-import 'package:senior/booking.dart';
-import 'package:senior/medications.dart';
+import 'package:senior/loginScreen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomeApp(),
+      home: const LoginScreen(),
     );
   }
 }

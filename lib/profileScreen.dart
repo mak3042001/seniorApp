@@ -7,6 +7,7 @@ import 'styles/IconBroken.dart';
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
   DateTime selectedDate = DateTime.now();
+
   ProfileScreen({Key? key}) : super(key: key);
   TextEditingController userNameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -115,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   children: [
-                    defaultFormField(
+                    defaultDisableFormField(
                       enableInteractiveSelection: false,
                       hasFocusBool: false,
                       onTap: null,
@@ -127,7 +128,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    defaultFormField(
+                    defaultDisableFormField(
                       enableInteractiveSelection: false,
                       hasFocusBool: false,
                       controller: dateController,
@@ -141,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    defaultFormField(
+                    defaultDisableFormField(
                       enableInteractiveSelection: false,
                       hasFocusBool: false,
                       controller: phoneController,
@@ -153,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    defaultFormField(
+                    defaultDisableFormField(
                       enableInteractiveSelection: false,
                       hasFocusBool: false,
                       controller: mailController,
@@ -165,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    defaultFormField(
+                    defaultDisableFormField(
                         enableInteractiveSelection: false,
                         hasFocusBool: false,
                         controller: passwordController,
@@ -174,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
                         text: "Password",
                         prefix: IconBroken.Lock,
                         suffix: IconBroken.Edit,
-                        suffixpressed: () {
+                        suffixPressed: () {
                           AwesomeDialog(
                             context: context,
                             dialogType: DialogType.info,
@@ -188,6 +189,7 @@ class ProfileScreen extends StatelessWidget {
                                   type: TextInputType.text,
                                   text: "Current Password",
                                   prefix: IconBroken.Password,
+                                  isPassword: false,
                                 ),
                                 const SizedBox(
                                   height: 10.0,
@@ -197,6 +199,7 @@ class ProfileScreen extends StatelessWidget {
                                   type: TextInputType.text,
                                   text: "New Password",
                                   prefix: IconBroken.Password,
+                                  isPassword: false,
                                 ),
                                 const SizedBox(
                                   height: 10.0,
@@ -206,6 +209,7 @@ class ProfileScreen extends StatelessWidget {
                                   type: TextInputType.text,
                                   text: "Confirm New Password",
                                   prefix: IconBroken.Password,
+                                  isPassword: false,
                                 ),
                                 const SizedBox(
                                   height: 5.0,
@@ -239,6 +243,7 @@ class ProfileScreen extends StatelessWidget {
                             controller: userNameController,
                             type: TextInputType.text,
                             text: "UserName",
+                            isPassword: false,
                           ),
                           const SizedBox(
                             height: 10.0,
@@ -259,6 +264,7 @@ class ProfileScreen extends StatelessWidget {
                               });
                             },
                             text: "Birthday",
+                            isPassword: false,
                           ),
                           const SizedBox(
                             height: 10.0,
@@ -268,6 +274,7 @@ class ProfileScreen extends StatelessWidget {
                             controller: phoneController,
                             type: TextInputType.text,
                             text: "Phone Number",
+                            isPassword: false,
                           ),
                           const SizedBox(
                             height: 10.0,
@@ -277,6 +284,7 @@ class ProfileScreen extends StatelessWidget {
                             controller: mailController,
                             type: TextInputType.text,
                             text: "E-mail",
+                            isPassword: false,
                           ),
                           const SizedBox(
                             height: 5.0,

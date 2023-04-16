@@ -8,7 +8,6 @@ import 'package:senior/styles/IconBroken.dart';
 import 'package:senior/styles/colors.dart';
 
 class SignUpScreen extends StatefulWidget {
-
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -50,8 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: 150.0,
                         child: OutlinedButton(
                           style: ButtonStyle(
-                            shape:
-                                MaterialStateProperty.all(RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                     side: const BorderSide(
                                       color: Colors.black,
@@ -87,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),
                             child: Image.asset(
-                              'assets/app_img.jpeg.jpg',
+                              'assets/images/app_img.jpeg.jpg',
                               fit: BoxFit.cover,
                               height: 180.0,
                             ),
@@ -98,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         defaultFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your userName';
                             }
                             return null; // Return null if the input is valid
@@ -107,24 +106,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           type: TextInputType.name,
                           text: 'User Name',
                           prefix: IconBroken.User,
+                          isPassword: false,
                         ),
                         const SizedBox(
                           height: 20.0,
                         ),
                         defaultFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your password';
                             }
                             return null; // Return null if the input is valid
                           },
                           controller: passwordController,
-                          type: TextInputType.text,
+                          type: TextInputType.name,
                           prefix: IconBroken.Lock,
                           text: 'password',
                           isPassword: isPassword,
-                          suffix: isPassword ? Icons.visibility : Icons.visibility_off,
-                          suffixpressed: (){
+                          suffix: isPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          suffixPressed: () {
                             setState(() {
                               isPassword = !isPassword;
                             });
@@ -135,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         defaultFormField(
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your phone';
                             }
                             return null; // Return null if the input is valid
@@ -144,13 +146,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           type: TextInputType.phone,
                           text: 'Phone',
                           prefix: IconBroken.Call,
+                          isPassword: false,
                         ),
                         const SizedBox(
                           height: 20.0,
                         ),
-                        defaultFormField(
+                        defaultDisableFormField(
+                          enableInteractiveSelection: false,
+                          hasFocusBool: false,
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Please enter your birthdate';
                             }
                             return null; // Return null if the input is valid
@@ -186,9 +191,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                           HomeApp()),
-                                          (route) => false);
+                                          builder: (context) => HomeApp()),
+                                      (route) => false);
                                 }
                               }),
                         ),
