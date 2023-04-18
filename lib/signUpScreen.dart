@@ -98,13 +98,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         defaultFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter your userName';
+                              return 'Please enter your email';
+                            } else if (!value.contains('@')) {
+                              return 'Please enter a valid email';
                             }
                             return null; // Return null if the input is valid
                           },
                           controller: userNameController,
                           type: TextInputType.name,
-                          text: 'User Name',
+                          text: 'email',
                           prefix: IconBroken.User,
                           isPassword: false,
                         ),

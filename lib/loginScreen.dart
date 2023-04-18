@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: userNameController,
                           isPassword: false,
                           type: TextInputType.name,
-                          text: 'User Name',
+                          text: 'Email',
                           prefix: IconBroken.User,
                         ),
                         const SizedBox(
