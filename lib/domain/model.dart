@@ -1,6 +1,6 @@
 //loginModel
 class Data {
-  User user;
+  User? user;
   String token;
 
   Data(
@@ -32,7 +32,7 @@ class User {
 }
 
 class Auth {
-  Data data;
+  Data? data;
 
   Auth(
     this.data,
