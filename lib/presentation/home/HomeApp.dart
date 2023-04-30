@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:senior/History.dart';
-import 'package:senior/Schedules.dart';
-import 'package:senior/booking.dart';
-import 'package:senior/contactScreen.dart';
-import 'package:senior/medications.dart';
-import 'package:senior/profileScreen.dart';
-import 'package:senior/styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/presentation/booking/booking.dart';
+import 'package:senior/presentation/contact/contactScreen.dart';
+import 'package:senior/presentation/history/History.dart';
+import 'package:senior/presentation/medications/medications.dart';
+import 'package:senior/presentation/profile/profileScreen.dart';
+import 'package:senior/presentation/schedules/Schedules.dart';
+
 
 class HomeApp extends StatelessWidget {
   static const String baseImageAssets = "assets/images";

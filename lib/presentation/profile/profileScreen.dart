@@ -1,8 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:senior/static.dart';
-import 'styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/static.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -55,34 +55,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           const SizedBox(
                             width: 295.0,
-                          ),
-                          // Column(
-                          //   children: [
-                          //     Align(
-                          //       alignment: Alignment.topRight,
-                          //       child: IconButton(
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (context) =>
-                          //                       SeniorScreen()));
-                          //         },
-                          //         icon: const Icon(
-                          //           IconBroken.Profile,
-                          //           color: Colors.white,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       "Senior",
-                          //       style: Theme.of(context)
-                          //           .textTheme
-                          //           .bodySmall!
-                          //           .copyWith(color: Colors.white),
-                          //     ),
-                          //   ],
-                          // ),
+                          )
                         ],
                       ),
                       const Text(

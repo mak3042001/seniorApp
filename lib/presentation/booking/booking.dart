@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:senior/styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
 
 class Booking extends StatefulWidget {
   const Booking({Key? key}) : super(key: key);

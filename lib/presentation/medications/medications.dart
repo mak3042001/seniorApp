@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:senior/static.dart';
-import 'package:senior/styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/static.dart';
 
 class Medications extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();

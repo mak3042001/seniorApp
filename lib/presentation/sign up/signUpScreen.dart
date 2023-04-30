@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:senior/HomeApp.dart';
-import 'package:senior/contactScreen.dart';
-import 'package:senior/loginScreen.dart';
-import 'package:senior/static.dart';
-import 'package:senior/styles/IconBroken.dart';
-import 'package:senior/styles/colors.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/colors.dart';
+import 'package:senior/app/static.dart';
+import 'package:senior/presentation/home/HomeApp.dart';
+import 'package:senior/presentation/login/loginScreen.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -61,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()),
+                                  builder: (context) => const LoginScreen()),
                               (route) => false,
                             );
                           },

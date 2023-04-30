@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:senior/contactScreen.dart';
-import 'package:senior/profileScreen.dart';
-import 'package:senior/styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/presentation/contact/contactScreen.dart';
+import 'package:senior/presentation/profile/profileScreen.dart';
+
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);

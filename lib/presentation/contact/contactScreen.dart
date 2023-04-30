@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:senior/notificationScreen.dart';
-import 'package:senior/profileScreen.dart';
-import 'package:senior/styles/IconBroken.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/presentation/notification/notificationScreen.dart';
+import 'package:senior/presentation/profile/profileScreen.dart';
+
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({Key? key}) : super(key: key);

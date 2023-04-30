@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:senior/HomeApp.dart';
-import 'package:senior/signUpScreen.dart';
-import 'package:senior/static.dart';
-import 'package:senior/styles/IconBroken.dart';
-import 'package:senior/styles/colors.dart';
+import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/colors.dart';
+import 'package:senior/app/static.dart';
+import 'package:senior/presentation/home/HomeApp.dart';
+import 'package:senior/presentation/sign%20up/signUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
 
