@@ -40,6 +40,8 @@ dependencies:
   local_auth: ^2.1.6
   flutter_zoom_drawer: ^3.0.4+1
   flutter_launcher_icons: ^0.12.0
+  dio: ^5.1.1
+  retrofit_generator: ^6.0.0+3
 
 flutter_icons:
   android: "launcher_icon"
@@ -50,6 +52,9 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  json_serializable: ^6.6.1
+  build_runner: ^2.3.3
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
