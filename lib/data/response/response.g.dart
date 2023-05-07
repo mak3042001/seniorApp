@@ -7,12 +7,12 @@ part of 'response.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse()
-  ..status = json['status'] as int?
+  ..successful = json['successful'] as int?
   ..message = json['message'] as String?;
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
     <String, dynamic>{
-      'status': instance.status,
+      'successful': instance.successful,
       'message': instance.message,
     };
 
@@ -57,12 +57,12 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
           ? null
           : DataResponse.fromJson(json['data'] as Map<String, dynamic>),
     )
-      ..status = json['status'] as int?
+      ..successful = json['successful'] as int?
       ..message = json['message'] as String?;
 
 Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
     <String, dynamic>{
-      'status': instance.status,
+      'successful': instance.successful,
       'message': instance.message,
       'data': instance.data,
     };
