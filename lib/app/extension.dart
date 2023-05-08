@@ -19,3 +19,13 @@ extension NonNullInt on int?{
     }
   }
 }
+
+extension NonNullBool on bool?{
+  bool orEmpty(){
+    if(this == null){
+      return true;
+    }else{
+      return this!;
+    }
+  }
+}

@@ -3,6 +3,6 @@ import 'package:senior/data/network/failure.dart';
 import 'package:senior/data/network/request.dart';
 import 'package:senior/domain/model/model.dart';
 
-abstract class Response{
+abstract class Repository{
   Future<Either<Failure,Auth>> login(LoginRequest loginRequest);
 }
