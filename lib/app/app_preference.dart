@@ -1,4 +1,4 @@
-import 'package:senior/presentation/resource/language_manager.dart';
+import 'package:senior/presentation/resources/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String prefKey="prefKeyLang";

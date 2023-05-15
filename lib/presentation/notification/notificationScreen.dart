@@ -67,7 +67,6 @@ Widget matrialList (BuildContext context , int i){
       //   leading: CircleAvatar(
       //     radius: 30,
       //     backgroundImage: AssetImage(
-      //       "assets/first.jpg",
       //     ),
       //   ),
       // ),

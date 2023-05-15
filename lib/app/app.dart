@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senior/presentation/login/loginScreen.dart';
+import 'package:senior/presentation/resources/routes_manager.dart';
+import 'package:senior/presentation/resources/theme_manager.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -10,11 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Senior Care',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LoginScreen(),
+      theme: getApplicationTheme(),
+      onGenerateRoute: RouteGenerator.getRouteSetting,
+      initialRoute: Routes.splashRoute,
     );
   }
 }

@@ -75,7 +75,7 @@ Widget staticButton({
 class defaultFormField extends StatelessWidget {
   final String text;
   final TextEditingController controller;
-  final FormFieldValidator<String>? validator;
+  final String? errorText;
   final ValueChanged<String>? onChanged;
   final TextInputType type;
   final IconData prefix;
@@ -85,31 +85,32 @@ class defaultFormField extends StatelessWidget {
   bool isPassword = false;
   final VoidCallback? suffixPressed;
 
-   defaultFormField({
+  defaultFormField({
     Key? key,
     required this.text,
     required this.controller,
-    this.validator,
+    this.errorText,
     this.onChanged,
     required this.type,
     required this.prefix,
     this.suffix,
     this.onTap,
     this.onSubmit,
-    this.suffixPressed, required this.isPassword,
+    this.suffixPressed,
+    required this.isPassword,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      validator: validator,
       onChanged: onChanged,
       onFieldSubmitted: onSubmit,
       onTap: onTap,
       keyboardType: type,
       obscureText: isPassword,
       decoration: InputDecoration(
+        errorText: errorText,
         contentPadding: const EdgeInsets.all(20.0),
         labelText: text,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
@@ -137,7 +138,7 @@ class defaultDisableFormField extends StatelessWidget {
   final bool isPassword = false;
   final VoidCallback? suffixPressed;
 
-   defaultDisableFormField({
+  defaultDisableFormField({
     Key? key,
     required this.enableInteractiveSelection,
     required this.hasFocusBool,

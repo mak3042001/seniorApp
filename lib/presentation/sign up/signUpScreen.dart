@@ -4,7 +4,7 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/colors.dart';
 import 'package:senior/app/static.dart';
 import 'package:senior/presentation/home/HomeApp.dart';
-import 'package:senior/presentation/login/loginScreen.dart';
+import 'package:senior/presentation/login/login_view/loginScreen.dart';
 
 
 class SignUpScreen extends StatefulWidget {
@@ -96,14 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 20.0,
                         ),
                         defaultFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your email';
-                            } else if (!value.contains('@')) {
-                              return 'Please enter a valid email';
-                            }
-                            return null; // Return null if the input is valid
-                          },
+                          errorText: "",
                           controller: userNameController,
                           type: TextInputType.name,
                           text: 'email',
@@ -114,12 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 20.0,
                         ),
                         defaultFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            return null; // Return null if the input is valid
-                          },
+                          errorText: "",
                           controller: passwordController,
                           type: TextInputType.name,
                           prefix: IconBroken.Lock,
@@ -138,12 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 20.0,
                         ),
                         defaultFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your phone';
-                            }
-                            return null; // Return null if the input is valid
-                          },
+                          errorText: "",
                           controller: phoneController,
                           type: TextInputType.phone,
                           text: 'Phone',
