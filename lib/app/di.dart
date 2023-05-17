@@ -7,7 +7,9 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/network/dio_factory.dart';
 import 'package:senior/data/network/network_info.dart';
 import 'package:senior/domain/usecase/login_usecase.dart';
+import 'package:senior/domain/usecase/register_usecase.dart';
 import 'package:senior/presentation/login/login_view_model/login_viewModel.dart';
+import 'package:senior/presentation/sign%20up/signup_view_model/signup_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/repository/data_repository.dart';
@@ -53,5 +55,15 @@ Future<void> initLoginModule() async {
 
   //view model
   instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
+}
+
+Future<void> initRegisterModule() async {
+  if(!GetIt.I.isRegistered<RegisterUseCase>()){
+  //login usecase
+  instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+
+  //view model
+  instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
   }
 }

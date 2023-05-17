@@ -128,7 +128,7 @@ class defaultDisableFormField extends StatelessWidget {
   bool hasFocusBool = false;
   final String text;
   final TextEditingController controller;
-  final FormFieldValidator<String>? validator;
+  final String? errorText;
   final ValueChanged<String>? onChanged;
   final TextInputType type;
   final IconData prefix;
@@ -144,7 +144,7 @@ class defaultDisableFormField extends StatelessWidget {
     required this.hasFocusBool,
     required this.text,
     required this.controller,
-    this.validator,
+    this.errorText,
     this.onChanged,
     required this.type,
     required this.prefix,
@@ -160,13 +160,13 @@ class defaultDisableFormField extends StatelessWidget {
       enableInteractiveSelection: enableInteractiveSelection,
       focusNode: AlwaysDisabledFocusNode(hasFocusBool),
       controller: controller,
-      validator: validator,
       onChanged: onChanged,
       onFieldSubmitted: onSubmit,
       onTap: onTap,
       keyboardType: type,
       obscureText: isPassword,
       decoration: InputDecoration(
+        errorText: errorText,
         contentPadding: const EdgeInsets.all(20.0),
         labelText: text,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),

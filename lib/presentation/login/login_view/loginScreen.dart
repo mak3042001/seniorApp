@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         .listen((isLoggedIn) {
       if (isLoggedIn) {
         // navigate to main screen
-        SchedulerBinding.instance?.addPostFrameCallback((_) {
+        SchedulerBinding.instance?.addPostFrameCallback((_) async {
           _appPreferences.setUserLoggedIn();
           Navigator.of(context).pushReplacementNamed(Routes.home);
         });

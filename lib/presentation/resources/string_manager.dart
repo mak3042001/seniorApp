@@ -12,5 +12,18 @@ class StringManager {
   static const loading = "Loading";
   static const retryAgain = "Retry Again";
   static const ok = "Ok";
-
+  static const String usernameHint = 'Username';
+  static const String nameHint = 'Name';
+  static const String passwordHint = 'Password';
+  static const String confirmPasswordHint = 'Confirm Password';
+  static const String birthdateHint = 'Birthdate';
+  static const String phoneHint = 'Phone';
+  static const String invalidName = "please enter yor name";
+  static const String resetPassword = "Reset Password";
+  static const String success = "Success";
+  static const String userNameInvalid = "please enter yor name";
+  static const String phoneInvalid = "Phone should be at least 10 digits";
+  static const String passwordInvalid = "Password should be at least 6 chars";
+  static const String confirmPasswordInvalid = "Confirm Password should be at least 6 chars";
+  static const String birthdateInvalid = "please enter your birth date";
 }
