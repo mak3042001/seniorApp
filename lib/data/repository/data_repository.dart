@@ -10,7 +10,7 @@ import 'package:senior/domain/repository/domain_repository.dart';
 
 class DataRepository implements Repository{
 
-  final DataSource _dataSource;
+  final RemoteDataSource _dataSource;
   final NetworkInfo _networkInfo;
 
 
@@ -24,15 +24,33 @@ class DataRepository implements Repository{
         if(response.successful == true){
           return Right(response.toDomain());
         }else{
-          return Left(Failure(InternetStatusCode.failure, response.message ?? ResponseMessage.Default));
+          return Left(Failure(ApiInternalStatus.FAILURE, response.message ?? ResponseMessage.DEFAULT));
         }
       }catch(e){
         return Left(ErrorHandler.handle(e).failure);
       }
     }else{
-      return Left(DataSources.Default.getFailure());
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
 
+  }
+
+  @override
+  Future<Either<Failure, Auth>> register(RegisterRequest registerRequest) async {
+    if(await _networkInfo.connection){
+      try{
+        final response = await _dataSource.register(registerRequest);
+        if(response.successful == true){
+          return Right(response.toDomain());
+        }else{
+          return Left(Failure(ApiInternalStatus.FAILURE, response.message ?? ResponseMessage.DEFAULT));
+        }
+      }catch(e){
+        return Left(ErrorHandler.handle(e).failure);
+      }
+    }else{
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 
 }

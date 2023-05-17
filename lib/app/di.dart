@@ -39,7 +39,7 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(instance()));
 
   //data source
-  instance.registerLazySingleton<DataSource>(() => DataSourceImpl(instance()));
+  instance.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(instance()));
 
   //repository
   instance.registerLazySingleton<Repository>(() => DataRepository(instance(),instance()));

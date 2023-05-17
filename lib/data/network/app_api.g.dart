@@ -13,7 +13,7 @@ class _AppServiceClient implements AppServiceClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://test.ahmed.center/final_project/public/api/seniors';
+    baseUrl ??= 'https://test.ahmed.center/final_project/public';
   }
 
   final Dio _dio;
@@ -40,7 +40,44 @@ class _AppServiceClient implements AppServiceClient {
     )
             .compose(
               _dio.options,
-              '/login',
+              '/api/seniors/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthResponse> register(
+    String username,
+    String name,
+    String phone,
+    String birthdate,
+    String password,
+    String confirmPassword,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'username': username,
+      'name': name,
+      'phone': phone,
+      'birthdate': birthdate,
+      'password': password,
+      'confirm_password': confirmPassword,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/register',
               queryParameters: queryParameters,
               data: _data,
             )

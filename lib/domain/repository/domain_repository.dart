@@ -5,4 +5,6 @@ import 'package:senior/domain/model/model.dart';
 
 abstract class Repository{
   Future<Either<Failure,Auth>> login(LoginRequest loginRequest);
+
+  Future<Either<Failure,Auth>> register(RegisterRequest registerRequest);
 }

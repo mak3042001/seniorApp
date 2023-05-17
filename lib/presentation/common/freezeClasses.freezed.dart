@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Loginobject {
+mixin _$LoginObject {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LoginobjectCopyWith<LoginObject> get copyWith =>
+  $LoginObjectCopyWith<LoginObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoginobjectCopyWith<$Res> {
-  factory $LoginobjectCopyWith(
+abstract class $LoginObjectCopyWith<$Res> {
+  factory $LoginObjectCopyWith(
           LoginObject value, $Res Function(LoginObject) then) =
-      _$LoginobjectCopyWithImpl<$Res, LoginObject>;
+      _$LoginObjectCopyWithImpl<$Res, LoginObject>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class _$LoginobjectCopyWithImpl<$Res, $Val extends LoginObject>
-    implements $LoginobjectCopyWith<$Res> {
-  _$LoginobjectCopyWithImpl(this._value, this._then);
+class _$LoginObjectCopyWithImpl<$Res, $Val extends LoginObject>
+    implements $LoginObjectCopyWith<$Res> {
+  _$LoginObjectCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,7 +64,7 @@ class _$LoginobjectCopyWithImpl<$Res, $Val extends LoginObject>
 
 /// @nodoc
 abstract class _$$_LoginobjectCopyWith<$Res>
-    implements $LoginobjectCopyWith<$Res> {
+    implements $LoginObjectCopyWith<$Res> {
   factory _$$_LoginobjectCopyWith(
           _$_Loginobject value, $Res Function(_$_Loginobject) then) =
       __$$_LoginobjectCopyWithImpl<$Res>;
@@ -75,7 +75,7 @@ abstract class _$$_LoginobjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_LoginobjectCopyWithImpl<$Res>
-    extends _$LoginobjectCopyWithImpl<$Res, _$_Loginobject>
+    extends _$LoginObjectCopyWithImpl<$Res, _$_Loginobject>
     implements _$$_LoginobjectCopyWith<$Res> {
   __$$_LoginobjectCopyWithImpl(
       _$_Loginobject _value, $Res Function(_$_Loginobject) _then)
@@ -112,7 +112,7 @@ class _$_Loginobject implements _Loginobject {
 
   @override
   String toString() {
-    return 'Loginobject(email: $email, password: $password)';
+    return 'LoginObject(email: $email, password: $password)';
   }
 
   @override
