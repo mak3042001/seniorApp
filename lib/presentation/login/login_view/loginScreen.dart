@@ -22,7 +22,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
 
-  final AppPreference _appPreferences = instance<AppPreference>();
+  final AppPreference _appPreference = instance<AppPreference>();
 
   bool isPassword = true;
 
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
         .listen((isLoggedIn) {
       if (isLoggedIn) {
         // navigate to main screen
-        SchedulerBinding.instance?.addPostFrameCallback((_) async {
-          _appPreferences.setUserLoggedIn();
+        SchedulerBinding.instance.addPostFrameCallback((_) async {
+          _appPreference.setUserLoggedIn();
           Navigator.of(context).pushReplacementNamed(Routes.home);
         });
       }

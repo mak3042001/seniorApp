@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:senior/presentation/resources/routes_manager.dart';
 import 'package:senior/presentation/resources/theme_manager.dart';
 
+import '../presentation/resources/routes_manager.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  // named constructor
+  MyApp._internal();
 
-  // This widget is the root of your application.
+  int appState = 0;
+
+  static final MyApp _instance =
+  MyApp._internal(); // singleton or single instance
+
+  factory MyApp() => _instance; // factory
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: getApplicationTheme(),
       onGenerateRoute: RouteGenerator.getRouteSetting,
       initialRoute: Routes.splashRoute,
+      theme: getApplicationTheme(),
     );
   }
 }
