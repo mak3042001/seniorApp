@@ -1,5 +1,4 @@
 
-
 import 'package:dartz/dartz.dart';
 import 'package:senior/data/data_source/data_source.dart';
 import 'package:senior/data/mabber/mabber.dart';
@@ -14,6 +13,8 @@ class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
 
+  static String token = "";
+
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
 
   @override
@@ -25,8 +26,11 @@ class RepositoryImpl implements Repository {
         final response = await _remoteDataSource.login(loginRequest);
 
         if (response.message == "success") {
-
-          return Right(response.toDomain());
+          token = response.data!.token!;
+          print(token);
+          return Right(
+              response.toDomain(),
+          );
         } else {
 
           return Left(Failure(ApiInternalStatus.FAILURE,
