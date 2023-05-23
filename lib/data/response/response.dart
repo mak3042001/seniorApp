@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'response.g.dart';
-
+//base response
 @JsonSerializable()
 class BaseResponse {
   @JsonKey(name: "successful")
@@ -10,6 +10,7 @@ class BaseResponse {
   String? message;
 }
 
+//auth response
 @JsonSerializable()
 class DataResponse {
   @JsonKey(name: "user")
@@ -80,4 +81,107 @@ class AuthResponse extends BaseResponse {
 
   //toJson
   Map<String,dynamic> toJson() => _$AuthResponseToJson(this);
+}
+
+//schedules create
+@JsonSerializable()
+class CreateSchedulesResponse extends BaseResponse {
+
+  CreateSchedulesResponse();
+
+  //fromJson
+  factory CreateSchedulesResponse.fromJson(Map<String,dynamic> json ) => _$CreateSchedulesResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$CreateSchedulesResponseToJson(this);
+}
+
+//schedules cancel
+@JsonSerializable()
+class CancelSchedulesResponse extends BaseResponse {
+
+  CancelSchedulesResponse();
+
+  //fromJson
+  factory CancelSchedulesResponse.fromJson(Map<String,dynamic> json ) => _$CancelSchedulesResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$CancelSchedulesResponseToJson(this);
+}
+
+//schedules index
+@JsonSerializable()
+class IndexSchedulesDataResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "description")
+  String? description;
+  @JsonKey(name: "date")
+  String? date;
+  @JsonKey(name: "time")
+  String? time;
+  @JsonKey(name: "type")
+  String? type;
+  @JsonKey(name: "created_at")
+  int? createdAt;
+
+  IndexSchedulesDataResponse(
+      this.id,
+      this.title,
+      this.description,
+      this.date,
+      this.time,
+      this.type,
+      this.createdAt,
+      );
+
+  //fromJson
+  factory IndexSchedulesDataResponse.fromJson(Map<String,dynamic> json ) => _$IndexSchedulesDataResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$IndexSchedulesDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class IndexSchedulesResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  List<IndexSchedulesResponse?>? data;
+
+  IndexSchedulesResponse(
+      this.data,
+      );
+
+  //fromJson
+  factory IndexSchedulesResponse.fromJson(Map<String,dynamic> json ) => _$IndexSchedulesResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$IndexSchedulesResponseToJson(this);
+}
+
+//booking create
+@JsonSerializable()
+class CreateBookingResponse extends BaseResponse {
+
+  CreateBookingResponse();
+
+  //fromJson
+  factory CreateBookingResponse.fromJson(Map<String,dynamic> json ) => _$CreateBookingResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$CreateBookingResponseToJson(this);
+}
+
+//booking cancel
+@JsonSerializable()
+class CancelBookingResponse extends BaseResponse {
+
+  CancelBookingResponse();
+
+  //fromJson
+  factory CancelBookingResponse.fromJson(Map<String,dynamic> json ) => _$CancelBookingResponseFromJson(json);
+
+  //toJson
+  Map<String,dynamic> toJson() => _$CancelBookingResponseToJson(this);
 }
