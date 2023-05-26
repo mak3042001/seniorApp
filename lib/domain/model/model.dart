@@ -39,6 +39,10 @@ class Auth {
   );
 }
 
+class AuthLogOut {
+  AuthLogOut();
+}
+
 
 
 

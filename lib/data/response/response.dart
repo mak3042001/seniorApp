@@ -91,6 +91,19 @@ class AuthResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }
 
+//auth logOut response
+@JsonSerializable()
+class AuthLogOutResponse extends BaseResponse {
+  AuthLogOutResponse();
+
+  //fromJson
+  factory AuthLogOutResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthLogOutResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$AuthLogOutResponseToJson(this);
+}
+
 
 
 

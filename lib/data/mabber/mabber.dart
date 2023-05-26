@@ -101,3 +101,114 @@ extension IndexBookingResponseMabber on IndexBookingResponse? {
     );
   }
 }
+
+//history create mapper
+extension HistoryCreateDataResponseMapper on HistoryCreateDataResponse? {
+  HistoryCreateData toDomain() {
+    return HistoryCreateData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.title.orEmpty() ?? Constant.empty,
+      this?.description.orEmpty() ?? Constant.empty,
+      this?.userId.orEmpty() ?? Constant.zero,
+      this?.historyCategoryId.orEmpty() ?? Constant.zero,
+    );
+  }
+}
+
+extension HistoryCreateResponseMapper on HistoryCreateResponse? {
+  HistoryCreate toDomain() {
+    return HistoryCreate(
+      this?.data.toDomain(),
+    );
+  }
+}
+
+//history index mapper
+extension HistoryIndexResponseMapper on HistoryIndexResponse? {
+  HistoryIndex toDomain() {
+    return HistoryIndex(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<HistoryCreateData?>()
+          .toList(),
+    );
+  }
+}
+
+//historyCategories create mapper
+extension HistoryCategoriesCreateDataResponseMapper
+    on HistoryCategoriesCreateDataResponse? {
+  HistoryCategoriesCreateData toDomain() {
+    return HistoryCategoriesCreateData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.title.orEmpty() ?? Constant.empty,
+      this?.description.orEmpty() ?? Constant.empty,
+      this?.userId.orEmpty() ?? Constant.zero,
+    );
+  }
+}
+
+extension HistoryCategoriesCreateResponseMapper
+    on HistoryCategoriesCreateResponse? {
+  HistoryCategoriesCreate toDomain() {
+    return HistoryCategoriesCreate(
+      this?.data.toDomain(),
+    );
+  }
+}
+
+//historyCategories update mapper
+extension HistoryCategoriesUpdateResponseMapper
+    on HistoryCategoriesUpdateResponse? {
+  HistoryCategoriesUpdate toDomain() {
+    return HistoryCategoriesUpdate(
+      this?.data.toDomain(),
+    );
+  }
+}
+
+//historyCategories index mapper
+extension HistoryCategoriesIndexResponseMabber
+    on HistoryCategoriesIndexResponse? {
+  HistoryCategoriesIndex toDomain() {
+    return HistoryCategoriesIndex(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<HistoryCategoriesCreateData?>()
+          .toList(),
+    );
+  }
+}
+
+//medications create mapper
+extension MedicationsCreateDataResponseMapper
+    on MedicationsCreateDataResponse? {
+  MedicationsCreateData toDomain() {
+    return MedicationsCreateData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.userId.orEmpty() ?? Constant.zero,
+      this?.medication.orEmpty() ?? Constant.empty,
+      this?.medicationDose.orEmpty() ?? Constant.zero,
+      this?.description.orEmpty() ?? Constant.empty,
+      this?.createdAt.orEmpty() ?? Constant.empty,
+    );
+  }
+}
+
+extension MedicationsCreateResponseMapper
+on MedicationsCreateResponse? {
+  MedicationsCreate toDomain() {
+    return MedicationsCreate(
+      this?.data.toDomain(),
+    );
+  }
+}
+
+//medications index mapper
+extension MedicationsIndexResponseMapper on MedicationsIndexResponse? {
+  MedicationsIndex toDomain() {
+    return MedicationsIndex(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<MedicationsCreateData?>()
+          .toList(),
+    );
+  }
+}

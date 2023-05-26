@@ -8,13 +8,21 @@ part 'app_api.g.dart';
 @RestApi(baseUrl: Constant.baseUrl)
 abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
-
+//login
   @POST("/api/seniors/login")
   Future<AuthResponse> login(
     @Field("username") String username,
     @Field("password") String password,
   );
 
+//logout
+  @POST("/api/seniors/logout")
+  Future<AuthLogOutResponse> logOut(
+    @Field("username") String username,
+    @Field("password") String password,
+  );
+
+//register
   @POST("/api/seniors/register")
   Future<AuthResponse> register(
     @Field("username") String username,
@@ -24,4 +32,41 @@ abstract class AppServiceClient {
     @Field("password") String password,
     @Field("confirm_password") String confirmPassword,
   );
+
+//schedules create
+  @POST("/api/seniors/schedules/create")
+  Future<CreateSchedulesResponse> schedulesCreate(
+    @Field("title") String title,
+    @Field("date") String date,
+    @Field("time") String time,
+    @Field("type") String type,
+  );
+
+//schedules cancel
+  @POST("/api/seniors/schedules/cancel")
+  Future<CreateSchedulesResponse> schedulesCancel(
+    @Field("schedule_id") String scheduleId,
+  );
+
+//schedules index
+  @GET("/api/seniors/schedules")
+  Future<IndexSchedulesResponse> schedulesIndex();
+
+
+//bookings create
+  @POST("/api/seniors/bookings/create")
+  Future<CreateSchedulesResponse> bookingCreate(
+      @Field("doctor_id") String doctorId,
+      @Field("date") String date,
+      );
+
+//bookings cancel
+  @POST("/api/seniors/bookings/cancel")
+  Future<CreateSchedulesResponse> bookingCancel(
+      @Field("booking_id") String bookingId,
+      );
+//bookings index
+  @GET("/api/seniors/bookings")
+  Future<IndexSchedulesResponse> bookingsIndex();
+
 }
