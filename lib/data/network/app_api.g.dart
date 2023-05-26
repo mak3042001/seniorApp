@@ -50,6 +50,35 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
+  Future<AuthLogOutResponse> logOut(
+    String username,
+    String password,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'username': username,
+      'password': password,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthLogOutResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/logout',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthLogOutResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AuthResponse> register(
     String username,
     String name,
@@ -83,6 +112,160 @@ class _AppServiceClient implements AppServiceClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AuthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CreateSchedulesResponse> schedulesCreate(
+    String title,
+    String date,
+    String time,
+    String type,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'title': title,
+      'date': date,
+      'time': time,
+      'type': type,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CreateSchedulesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/schedules/create',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CreateSchedulesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CreateSchedulesResponse> schedulesCancel(String scheduleId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'schedule_id': scheduleId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CreateSchedulesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/schedules/cancel',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CreateSchedulesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IndexSchedulesResponse> schedulesIndex() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IndexSchedulesResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/schedules',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IndexSchedulesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CreateSchedulesResponse> bookingCreate(
+    String doctorId,
+    String date,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'doctor_id': doctorId,
+      'date': date,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CreateSchedulesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/bookings/create',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CreateSchedulesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CreateSchedulesResponse> bookingCancel(String bookingId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'booking_id': bookingId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CreateSchedulesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/bookings/cancel',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CreateSchedulesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IndexSchedulesResponse> bookingsIndex() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IndexSchedulesResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/seniors/bookings',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IndexSchedulesResponse.fromJson(_result.data!);
     return value;
   }
 

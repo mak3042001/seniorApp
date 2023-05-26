@@ -67,6 +67,17 @@ Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
       'data': instance.data,
     };
 
+AuthLogOutResponse _$AuthLogOutResponseFromJson(Map<String, dynamic> json) =>
+    AuthLogOutResponse()
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$AuthLogOutResponseToJson(AuthLogOutResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+    };
+
 CreateSchedulesResponse _$CreateSchedulesResponseFromJson(
         Map<String, dynamic> json) =>
     CreateSchedulesResponse()
