@@ -36,6 +36,20 @@ extension AuthResponseMabber on AuthResponse? {
   }
 }
 
+//schedules create mapper
+extension CreateSchedulesResponseMabber on CreateSchedulesResponse? {
+  SchedulesCreate toDomain() {
+    return SchedulesCreate();
+  }
+}
+
+//schedules cancel mapper
+extension CancelSchedulesResponseMabber on CancelSchedulesResponse? {
+  SchedulesCancel toDomain() {
+    return SchedulesCancel();
+  }
+}
+
 //schedules index mapper
 extension IndexSchedulesDataResponseMabber on IndexSchedulesDataResponse? {
   IndexSchedulesData toDomain() {
@@ -58,6 +72,20 @@ extension IndexSchedulesResponseMabber on IndexSchedulesResponse? {
           .cast<IndexSchedulesData?>()
           .toList(),
     );
+  }
+}
+
+//booking create mapper
+extension CreateBookingResponseMabber on CreateBookingResponse? {
+  CreateBooking toDomain() {
+    return CreateBooking();
+  }
+}
+
+//booking cancel mapper
+extension CancelBookingResponseMabber on CancelBookingResponse? {
+  CancelBooking toDomain() {
+    return CancelBooking();
   }
 }
 
@@ -123,6 +151,20 @@ extension HistoryCreateResponseMapper on HistoryCreateResponse? {
   }
 }
 
+//history update mapper
+extension HistoryUpdateResponseMabber on HistoryUpdateResponse? {
+  HistoryUpdate toDomain() {
+    return HistoryUpdate(this?.data.toDomain());
+  }
+}
+
+//history cancel mapper
+extension CancelHistoryResponseMabber on CancelHistoryResponse? {
+  CancelHistory toDomain() {
+    return CancelHistory();
+  }
+}
+
 //history index mapper
 extension HistoryIndexResponseMapper on HistoryIndexResponse? {
   HistoryIndex toDomain() {
@@ -166,6 +208,13 @@ extension HistoryCategoriesUpdateResponseMapper
   }
 }
 
+//historyCategories cancel mapper
+extension CancelHistoryCategoriesResponseMabber on CancelHistoryCategoriesResponse? {
+  CancelHistoryCategories toDomain() {
+    return CancelHistoryCategories();
+  }
+}
+
 //historyCategories index mapper
 extension HistoryCategoriesIndexResponseMabber
     on HistoryCategoriesIndexResponse? {
@@ -193,12 +242,25 @@ extension MedicationsCreateDataResponseMapper
   }
 }
 
-extension MedicationsCreateResponseMapper
-on MedicationsCreateResponse? {
+extension MedicationsCreateResponseMapper on MedicationsCreateResponse? {
   MedicationsCreate toDomain() {
     return MedicationsCreate(
       this?.data.toDomain(),
     );
+  }
+}
+
+//medications update mapper
+extension MedicationsUpdateResponseMabber on MedicationsUpdateResponse? {
+  MedicationsUpdate toDomain() {
+    return MedicationsUpdate();
+  }
+}
+
+//medications cancel mapper
+extension CancelMedicationsResponseMabber on CancelMedicationsResponse? {
+  CancelMedications toDomain() {
+    return CancelMedications();
   }
 }
 

@@ -1,3 +1,4 @@
+//auth request
 class LoginRequest {
   String username;
   String password;
@@ -7,6 +8,7 @@ class LoginRequest {
     this.password,
   );
 }
+
 class RegisterRequest {
   String username;
   String name;
@@ -23,4 +25,142 @@ class RegisterRequest {
     this.password,
     this.confirmPassword,
   );
+}
+
+//schedules create
+class SchedulesCreateRequest {
+  String title;
+  String date;
+  String time;
+  String type;
+
+  SchedulesCreateRequest(
+    this.title,
+    this.date,
+    this.time,
+    this.type,
+  );
+}
+
+//schedules cancel
+class SchedulesCancelRequest {
+  String scheduleId;
+
+  SchedulesCancelRequest(this.scheduleId);
+}
+
+//bookings create
+class BookingCreateRequest {
+  String doctorId;
+  String date;
+
+  BookingCreateRequest(
+    this.doctorId,
+    this.date,
+  );
+}
+
+//bookings cancel
+class BookingCancelRequest {
+  String bookingId;
+
+  BookingCancelRequest(this.bookingId);
+}
+
+//history create
+class HistoryCreateRequest {
+  String historyCategoryId;
+  String title;
+  String description;
+
+  HistoryCreateRequest(
+    this.historyCategoryId,
+    this.title,
+    this.description,
+  );
+}
+
+//history cancel
+class HistoryCancelRequest {
+  String historyId;
+
+  HistoryCancelRequest(this.historyId);
+}
+
+//history update
+class HistoryUpdateRequest {
+  String historyCategoryId;
+  String title;
+  String description;
+
+  HistoryUpdateRequest(
+    this.historyCategoryId,
+    this.title,
+    this.description,
+  );
+}
+
+
+//historyCategories create
+class HistoryCategoriesCreateRequest {
+  String title;
+  String description;
+
+  HistoryCategoriesCreateRequest(
+      this.title,
+      this.description,
+      );
+}
+
+//historyCategories cancel
+class HistoryCategoriesCancelRequest {
+  String historyCategoriesId;
+
+  HistoryCategoriesCancelRequest(this.historyCategoriesId);
+}
+
+//historyCategories update
+class HistoryCategoriesUpdateRequest {
+  String historyCategoryId;
+  String title;
+  String description;
+
+  HistoryCategoriesUpdateRequest(
+      this.historyCategoryId,
+      this.title,
+      this.description,
+      );
+}
+
+
+
+//medications create
+class MedicationsCreateRequest {
+  String medication;
+  String medicationDose;
+
+  MedicationsCreateRequest(
+      this.medication,
+      this.medicationDose,
+      );
+}
+
+//medications cancel
+class MedicationsCancelRequest {
+  String medicationId;
+
+  MedicationsCancelRequest(this.medicationId);
+}
+
+//medications update
+class MedicationsUpdateRequest {
+  String medicationId;
+  String medication;
+  String medicationDose;
+
+  MedicationsUpdateRequest(
+      this.medicationId,
+      this.medication,
+      this.medicationDose,
+      );
 }

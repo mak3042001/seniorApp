@@ -5,12 +5,31 @@ import 'package:senior/data/response/response.dart';
 abstract class RemoteDataSource {
   Future<AuthResponse> login(LoginRequest loginRequest);
   Future<AuthResponse> register(RegisterRequest registerRequest);
+  Future<CreateSchedulesResponse> schedulesCreate(SchedulesCreateRequest schedulesCreateRequest);
+  Future<CancelSchedulesResponse> schedulesCancel(SchedulesCancelRequest schedulesCancelRequest);
+  Future<IndexSchedulesResponse> schedulesIndex();
+  Future<CreateBookingResponse> bookingCreate(BookingCreateRequest bookingCreateRequest);
+  Future<CancelBookingResponse> bookingCancel(BookingCancelRequest bookingCancelRequest);
+  Future<IndexBookingResponse> bookingsIndex();
+  Future<HistoryCreateResponse> historyCreate(HistoryCreateRequest historyCreateRequest);
+  Future<CancelHistoryResponse> historyCancel(HistoryCancelRequest historyCancelRequest);
+  Future<HistoryUpdateResponse> historyUpdate(HistoryUpdateRequest historyUpdateRequest);
+  Future<HistoryIndexResponse> historyIndex();
+  Future<HistoryCategoriesCreateResponse> historyCategoriesCreate(HistoryCategoriesCreateRequest historyCategoriesCreateRequest);
+  Future<CancelHistoryCategoriesResponse> historyCategoriesCancel(HistoryCategoriesCancelRequest historyCategoriesCancelRequest);
+  Future<HistoryCategoriesUpdateResponse> historyCategoriesUpdate(HistoryCategoriesUpdateRequest historyCategoriesUpdateRequest);
+  Future<HistoryCategoriesIndexResponse> historyCategoriesIndex();
+  Future<MedicationsCreateResponse> medicationsCreate(MedicationsCreateRequest medicationsCreateRequest);
+  Future<CancelMedicationsResponse> medicationsCancel(MedicationsCancelRequest medicationsCancelRequest);
+  Future<MedicationsUpdateResponse> medicationsUpdate(MedicationsUpdateRequest medicationsUpdateRequest);
+  Future<MedicationsIndexResponse> medicationsIndex();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final AppServiceClient _appServiceClient;
 
   RemoteDataSourceImpl(this._appServiceClient);
+
 
   @override
   Future<AuthResponse> login(LoginRequest loginRequest) async {
@@ -30,5 +49,95 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       registerRequest.password,
       registerRequest.confirmPassword,
     );
+  }
+
+  @override
+  Future<CancelBookingResponse> bookingCancel(BookingCancelRequest bookingCancelRequest) async{
+    return await _appServiceClient.bookingCancel(bookingCancelRequest.bookingId);
+  }
+
+  @override
+  Future<CreateBookingResponse> bookingCreate(BookingCreateRequest bookingCreateRequest) async{
+    return await _appServiceClient.bookingCreate(bookingCreateRequest.doctorId, bookingCreateRequest.date);
+  }
+
+  @override
+  Future<IndexBookingResponse> bookingsIndex() async {
+    return await _appServiceClient.bookingsIndex();
+  }
+
+  @override
+  Future<CancelHistoryResponse> historyCancel(HistoryCancelRequest historyCancelRequest) async {
+    return await _appServiceClient.historyCancel(historyCancelRequest.historyId);
+  }
+
+  @override
+  Future<CancelHistoryCategoriesResponse> historyCategoriesCancel(HistoryCategoriesCancelRequest historyCategoriesCancelRequest) async {
+    return await _appServiceClient.historyCategoriesCancel(historyCategoriesCancelRequest.historyCategoriesId);
+  }
+
+  @override
+  Future<HistoryCategoriesCreateResponse> historyCategoriesCreate(HistoryCategoriesCreateRequest historyCategoriesCreateRequest) async {
+    return await _appServiceClient.historyCategoriesCreate(historyCategoriesCreateRequest.title, historyCategoriesCreateRequest.description);
+  }
+
+  @override
+  Future<HistoryCategoriesIndexResponse> historyCategoriesIndex() async {
+    return await _appServiceClient.historyCategoriesIndex();
+  }
+
+  @override
+  Future<HistoryCategoriesUpdateResponse> historyCategoriesUpdate(HistoryCategoriesUpdateRequest historyCategoriesUpdateRequest) async {
+    return await _appServiceClient.historyCategoriesUpdate(historyCategoriesUpdateRequest.historyCategoryId, historyCategoriesUpdateRequest.title, historyCategoriesUpdateRequest.description);
+  }
+
+  @override
+  Future<HistoryCreateResponse> historyCreate(HistoryCreateRequest historyCreateRequest) async {
+    return await _appServiceClient.historyCreate(historyCreateRequest.historyCategoryId, historyCreateRequest.title, historyCreateRequest.description);
+  }
+
+  @override
+  Future<HistoryIndexResponse> historyIndex() async {
+    return await _appServiceClient.historyIndex();
+  }
+
+  @override
+  Future<HistoryUpdateResponse> historyUpdate(HistoryUpdateRequest historyUpdateRequest) async {
+    return await _appServiceClient.historyUpdate(historyUpdateRequest.historyCategoryId, historyUpdateRequest.title, historyUpdateRequest.description);
+  }
+
+  @override
+  Future<CancelMedicationsResponse> medicationsCancel(MedicationsCancelRequest medicationsCancelRequest) async {
+    return await _appServiceClient.medicationsCancel(medicationsCancelRequest.medicationId);
+  }
+
+  @override
+  Future<MedicationsCreateResponse> medicationsCreate(MedicationsCreateRequest medicationsCreateRequest) async {
+    return await _appServiceClient.medicationsCreate(medicationsCreateRequest.medication, medicationsCreateRequest.medicationDose);
+  }
+
+  @override
+  Future<MedicationsIndexResponse> medicationsIndex() async {
+    return await _appServiceClient.medicationsIndex();
+  }
+
+  @override
+  Future<MedicationsUpdateResponse> medicationsUpdate(MedicationsUpdateRequest medicationsUpdateRequest) async {
+    return await _appServiceClient.medicationsUpdate(medicationsUpdateRequest.medicationId, medicationsUpdateRequest.medication, medicationsUpdateRequest.medicationDose);
+  }
+
+  @override
+  Future<CancelSchedulesResponse> schedulesCancel(SchedulesCancelRequest schedulesCancelRequest) async {
+    return await _appServiceClient.schedulesCancel(schedulesCancelRequest.scheduleId);
+  }
+
+  @override
+  Future<CreateSchedulesResponse> schedulesCreate(SchedulesCreateRequest schedulesCreateRequest) async {
+    return await _appServiceClient.schedulesCreate(schedulesCreateRequest.title, schedulesCreateRequest.date, schedulesCreateRequest.time, schedulesCreateRequest.type);
+  }
+
+  @override
+  Future<IndexSchedulesResponse> schedulesIndex() async {
+    return await _appServiceClient.schedulesIndex();
   }
 }

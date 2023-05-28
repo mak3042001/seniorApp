@@ -44,7 +44,7 @@ abstract class AppServiceClient {
 
 //schedules cancel
   @POST("/api/seniors/schedules/cancel")
-  Future<CreateSchedulesResponse> schedulesCancel(
+  Future<CancelSchedulesResponse> schedulesCancel(
     @Field("schedule_id") String scheduleId,
   );
 
@@ -53,20 +53,105 @@ abstract class AppServiceClient {
   Future<IndexSchedulesResponse> schedulesIndex();
 
 
+
+
+
+
 //bookings create
   @POST("/api/seniors/bookings/create")
-  Future<CreateSchedulesResponse> bookingCreate(
+  Future<CreateBookingResponse> bookingCreate(
       @Field("doctor_id") String doctorId,
       @Field("date") String date,
       );
 
 //bookings cancel
   @POST("/api/seniors/bookings/cancel")
-  Future<CreateSchedulesResponse> bookingCancel(
+  Future<CancelBookingResponse> bookingCancel(
       @Field("booking_id") String bookingId,
       );
 //bookings index
   @GET("/api/seniors/bookings")
-  Future<IndexSchedulesResponse> bookingsIndex();
+  Future<IndexBookingResponse> bookingsIndex();
+
+
+
+
+
+//history create
+  @POST("/api/seniors/history/create")
+  Future<HistoryCreateResponse> historyCreate(
+      @Field("history_category_id") String historyCategoryId,
+      @Field("title") String title,
+      @Field("description") String description,
+      );
+//history cancel
+  @POST("/api/seniors/history/delete")
+  Future<CancelHistoryResponse> historyCancel(
+      @Field("history_id") String historyId,
+      );
+
+//history update
+  @POST("/api/seniors/history/update")
+  Future<HistoryUpdateResponse> historyUpdate(
+      @Field("history_category_id") String historyCategoryId,
+      @Field("title") String title,
+      @Field("description") String description,
+      );
+//history index
+  @GET("/api/seniors/history")
+  Future<HistoryIndexResponse> historyIndex();
+
+
+
+
+//historyCategories create
+  @POST("/api/seniors/history-categories/create")
+  Future<HistoryCategoriesCreateResponse> historyCategoriesCreate(
+      @Field("title") String title,
+      @Field("description") String description,
+      );
+//historyCategories cancel
+  @POST("/api/seniors/history-categories/delete")
+  Future<CancelHistoryCategoriesResponse> historyCategoriesCancel(
+      @Field("history_category_id") String historyCategoryId,
+      );
+
+//historyCategories update
+  @POST("/api/seniors/history-categories/update")
+  Future<HistoryCategoriesUpdateResponse> historyCategoriesUpdate(
+      @Field("history_category_id") String historyCategoryId,
+      @Field("title") String title,
+      @Field("description") String description,
+      );
+//historyCategories index
+  @GET("api/seniors/history-categories")
+  Future<HistoryCategoriesIndexResponse> historyCategoriesIndex();
+
+
+
+
+//medications create
+  @POST("/api/seniors/medications/create")
+  Future<MedicationsCreateResponse> medicationsCreate(
+      @Field("medication") String medication,
+      @Field("medication_dose") String medicationDose,
+      );
+
+//medications cancel
+  @POST("/api/seniors/medications/delete")
+  Future<CancelMedicationsResponse> medicationsCancel(
+      @Field("medication_id") String medicationId,
+      );
+
+//medications update
+  @POST("/api/seniors/medications/update")
+  Future<MedicationsUpdateResponse> medicationsUpdate(
+      @Field("medication_id") String medicationId,
+      @Field("medication") String medication,
+      @Field("medication_dose") String medicationDose,
+      );
+//medications index
+  @GET("/api/seniors/medications")
+  Future<MedicationsIndexResponse> medicationsIndex();
 
 }
