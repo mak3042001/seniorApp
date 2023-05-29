@@ -282,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             lastDate: selectedDate,
                           ).then((value) {
                             _birthdateEditingController.text =
-                                DateFormat('Y-M-d').format(value!);
+                                DateFormat('yyyy-MM-dd').format(value!);
                           });
                         },
                         type: TextInputType.none,

@@ -79,9 +79,9 @@ class RegisterViewModel extends BaseViewModel
     (await _registerUseCase.execute(
       RegisterUseCaseInput(
           registerObject.username,
-          registerObject.birthdate,
-          registerObject.phone,
           registerObject.name,
+          registerObject.phone,
+          registerObject.birthdate,
           registerObject.password,
           registerObject.confirmPassword),
     ))
