@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:senior/domain/usecase/register_usecase.dart';
+import 'package:senior/domain/usecase/auth/register_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer.dart';
