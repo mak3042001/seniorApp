@@ -18,3 +18,13 @@ class RegisterObject with _$RegisterObject {
     String confirmPassword,
   ) = _RegisterObject;
 }
+
+@freezed
+class SchedulesCreateObject with _$SchedulesCreateObject {
+  factory SchedulesCreateObject(
+    String title,
+    String date,
+    String time,
+    String type,
+  ) = _SchedulesCreateObject;
+}

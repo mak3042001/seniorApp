@@ -5,7 +5,7 @@ import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
 import 'package:senior/presentation/medications/medications.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
-import 'package:senior/presentation/schedules/Schedules.dart';
+import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 
 
 class HomeApp extends StatelessWidget {

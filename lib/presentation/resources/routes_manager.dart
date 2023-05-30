@@ -9,7 +9,7 @@ import 'package:senior/presentation/medications/medications.dart';
 import 'package:senior/presentation/notification/notificationScreen.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
-import 'package:senior/presentation/schedules/Schedules.dart';
+import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 import 'package:senior/presentation/sign%20up/signup_view/signUpScreen.dart';
 import 'package:senior/presentation/splash/splash_view.dart';
 
@@ -54,6 +54,7 @@ class RouteGenerator {
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.schedules:
+        initStoreDetailsModule();
         return MaterialPageRoute(builder: (_) => const Schedules());
       default:
         return unDefinedRoute();

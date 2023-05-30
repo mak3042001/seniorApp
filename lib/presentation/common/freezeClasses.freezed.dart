@@ -369,3 +369,171 @@ abstract class _RegisterObject implements RegisterObject {
   _$$_RegisterObjectCopyWith<_$_RegisterObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$SchedulesCreateObject {
+  String get title => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError;
+  String get time => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SchedulesCreateObjectCopyWith<SchedulesCreateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SchedulesCreateObjectCopyWith<$Res> {
+  factory $SchedulesCreateObjectCopyWith(SchedulesCreateObject value,
+          $Res Function(SchedulesCreateObject) then) =
+      _$SchedulesCreateObjectCopyWithImpl<$Res, SchedulesCreateObject>;
+  @useResult
+  $Res call({String title, String date, String time, String type});
+}
+
+/// @nodoc
+class _$SchedulesCreateObjectCopyWithImpl<$Res,
+        $Val extends SchedulesCreateObject>
+    implements $SchedulesCreateObjectCopyWith<$Res> {
+  _$SchedulesCreateObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? date = null,
+    Object? time = null,
+    Object? type = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_SchedulesCreateObjectCopyWith<$Res>
+    implements $SchedulesCreateObjectCopyWith<$Res> {
+  factory _$$_SchedulesCreateObjectCopyWith(_$_SchedulesCreateObject value,
+          $Res Function(_$_SchedulesCreateObject) then) =
+      __$$_SchedulesCreateObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, String date, String time, String type});
+}
+
+/// @nodoc
+class __$$_SchedulesCreateObjectCopyWithImpl<$Res>
+    extends _$SchedulesCreateObjectCopyWithImpl<$Res, _$_SchedulesCreateObject>
+    implements _$$_SchedulesCreateObjectCopyWith<$Res> {
+  __$$_SchedulesCreateObjectCopyWithImpl(_$_SchedulesCreateObject _value,
+      $Res Function(_$_SchedulesCreateObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? date = null,
+    Object? time = null,
+    Object? type = null,
+  }) {
+    return _then(_$_SchedulesCreateObject(
+      null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SchedulesCreateObject implements _SchedulesCreateObject {
+  _$_SchedulesCreateObject(this.title, this.date, this.time, this.type);
+
+  @override
+  final String title;
+  @override
+  final String date;
+  @override
+  final String time;
+  @override
+  final String type;
+
+  @override
+  String toString() {
+    return 'SchedulesCreateObject(title: $title, date: $date, time: $time, type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SchedulesCreateObject &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, date, time, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SchedulesCreateObjectCopyWith<_$_SchedulesCreateObject> get copyWith =>
+      __$$_SchedulesCreateObjectCopyWithImpl<_$_SchedulesCreateObject>(
+          this, _$identity);
+}
+
+abstract class _SchedulesCreateObject implements SchedulesCreateObject {
+  factory _SchedulesCreateObject(final String title, final String date,
+      final String time, final String type) = _$_SchedulesCreateObject;
+
+  @override
+  String get title;
+  @override
+  String get date;
+  @override
+  String get time;
+  @override
+  String get type;
+  @override
+  @JsonKey(ignore: true)
+  _$$_SchedulesCreateObjectCopyWith<_$_SchedulesCreateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

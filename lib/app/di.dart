@@ -10,7 +10,11 @@ import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
 import 'package:senior/domain/usecase/auth/register_usecase.dart';
+import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
+import 'package:senior/domain/usecase/schedules/schedules_create_usecase.dart';
+import 'package:senior/domain/usecase/schedules/schedules_index_usecase.dart';
 import 'package:senior/presentation/login/login_view_model/login_viewModel.dart';
+import 'package:senior/presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
 import 'package:senior/presentation/sign%20up/signup_view_model/signup_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,4 +69,16 @@ initRegisterModule() {
             () => RegisterViewModel(instance()));
   }
 }
-
+//schedule
+initStoreDetailsModule() {
+  if (!GetIt.I.isRegistered<SchedulesCreateUseCase>()) {
+    instance.registerFactory<SchedulesCreateUseCase>(
+            () => SchedulesCreateUseCase(instance()));
+    instance.registerFactory<SchedulesIndexUseCase>(
+            () => SchedulesIndexUseCase(instance()));
+    instance.registerFactory<SchedulesCancelUseCase>(
+            () => SchedulesCancelUseCase(instance()));
+    instance.registerFactory<SchedulesViewModel>(
+            () => SchedulesViewModel(instance(),instance(),instance()));
+  }
+}

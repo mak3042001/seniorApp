@@ -207,7 +207,7 @@ class _SchedulesState extends State<Schedules> {
             context: context,
             dialogType: DialogType.question,
             animType: AnimType.bottomSlide,
-            title: 'Edit Profile',
+            title: 'create task',
             body: Column(
                     children: [
                       defaultFormField(
