@@ -49,6 +49,7 @@ Future<void> initAppModule() async {
           () => RepositoryImpl(instance(), instance()));
 }
 
+//auth
 initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
@@ -64,3 +65,4 @@ initRegisterModule() {
             () => RegisterViewModel(instance()));
   }
 }
+
