@@ -4,6 +4,7 @@ class Constant{
   static const String baseUrl = "https://test.ahmed.center/final_project/public";
   static String empty = "";
   static String token = RepositoryImpl.token;
+  static int id = RepositoryImpl.id;
   static int zero = 0;
   static Duration timeOut = const Duration(milliseconds: 60000);
 }

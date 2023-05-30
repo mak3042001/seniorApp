@@ -50,7 +50,9 @@ abstract class AppServiceClient {
 
 //schedules index
   @GET("/api/seniors/schedules")
-  Future<IndexSchedulesResponse> schedulesIndex();
+  Future<IndexSchedulesResponse> schedulesIndex(
+      @Query("user_id") int userId,
+      );
 
 
 

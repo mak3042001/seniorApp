@@ -1,3 +1,4 @@
+import 'package:senior/app/constant.dart';
 import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/network/request.dart';
 import 'package:senior/data/response/response.dart';
@@ -138,6 +139,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<IndexSchedulesResponse> schedulesIndex() async {
-    return await _appServiceClient.schedulesIndex();
+    return await _appServiceClient.schedulesIndex(
+        Constant.id,
+    );
   }
 }

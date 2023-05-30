@@ -14,6 +14,7 @@ class RepositoryImpl implements Repository {
   final NetworkInfo _networkInfo;
 
   static String token = "";
+  static int id = 0;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
 
@@ -27,7 +28,9 @@ class RepositoryImpl implements Repository {
 
         if (response.message == "success") {
           token = response.data!.token!;
+          id = response.data!.user!.id!;
           print(token);
+          print(id);
           return Right(
               response.toDomain(),
           );

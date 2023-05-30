@@ -172,9 +172,9 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<IndexSchedulesResponse> schedulesIndex() async {
+  Future<IndexSchedulesResponse> schedulesIndex(int userId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
