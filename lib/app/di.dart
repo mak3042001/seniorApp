@@ -1,22 +1,24 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:senior/app/app_preference.dart';
-import 'package:senior/data/data_source/data_source.dart';
 import 'package:senior/data/network/app_api.dart';
-import 'package:senior/data/network/dio_factory.dart';
-import 'package:senior/data/network/network_info.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
-import 'package:senior/domain/usecase/auth/register_usecase.dart';
-import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
-import 'package:senior/domain/usecase/schedules/schedules_create_usecase.dart';
-import 'package:senior/domain/usecase/schedules/schedules_index_usecase.dart';
-import 'package:senior/presentation/login/login_view_model/login_viewModel.dart';
-import 'package:senior/presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
-import 'package:senior/presentation/sign%20up/signup_view_model/signup_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../data/data_source/data_source.dart';
+import '../data/network/dio_factory.dart';
+import '../data/network/network_info.dart';
+import '../domain/usecase/auth/register_usecase.dart';
+import '../domain/usecase/schedules/schedules_create_usecase.dart';
+import '../domain/usecase/schedules/schedules_index_usecase.dart';
+import '../presentation/login/login_view_model/login_viewModel.dart';
+import '../presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
+import '../presentation/sign up/signup_view_model/signup_view_model.dart';
 
 final instance = GetIt.instance;
 
@@ -50,7 +52,9 @@ Future<void> initAppModule() async {
   // repository
 
   instance.registerLazySingleton<Repository>(
-          () => RepositoryImpl(instance(), instance()));
+          () => RepositoryImpl(instance(), instance(),));
+
+  initSchedulesIndexModule();
 }
 
 //auth
@@ -71,7 +75,7 @@ initRegisterModule() {
 }
 //schedule
 initSchedulesIndexModule() {
-  if (!GetIt.I.isRegistered<SchedulesCreateUseCase>()) {
+  if (!GetIt.I.isRegistered<SchedulesIndexUseCase>()) {
     instance.registerFactory<SchedulesCreateUseCase>(
             () => SchedulesCreateUseCase(instance()));
     instance.registerFactory<SchedulesIndexUseCase>(
