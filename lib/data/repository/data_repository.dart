@@ -14,6 +14,8 @@ class RepositoryImpl implements Repository {
   final NetworkInfo _networkInfo;
 
   static String token = "";
+  static int historyCategoryId = 0;
+  static String bookingDate = "";
   static int id = 0;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
@@ -134,13 +136,14 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, IndexBooking>> bookingsIndex() async {
+  Future<Either<Failure, IndexBooking>> bookingsIndex(x) async {
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API
       try {
         final response = await _remoteDataSource.bookingsIndex();
 
         if (response.successful == true) {
+          bookingDate = response.data![x]!.date!;
           // success
           // return either right
           // return data
@@ -225,6 +228,7 @@ class RepositoryImpl implements Repository {
         final response = await _remoteDataSource.historyCategoriesCreate(historyCategoriesCreateRequest);
 
         if (response.successful == true) {
+          historyCategoryId = response.data!.id!;
           // success
           // return either right
           // return data

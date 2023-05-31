@@ -54,7 +54,7 @@ class RouteGenerator {
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.schedules:
-        initStoreDetailsModule();
+        initSchedulesIndexModule();
         return MaterialPageRoute(builder: (_) => const Schedules());
       default:
         return unDefinedRoute();

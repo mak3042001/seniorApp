@@ -247,9 +247,9 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<IndexBookingResponse> bookingsIndex() async {
+  Future<IndexBookingResponse> bookingsIndex(String date) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'date': date};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -355,9 +355,11 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<HistoryIndexResponse> historyIndex() async {
+  Future<HistoryIndexResponse> historyIndex(int historyCategoryId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'history_category_id': historyCategoryId
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(

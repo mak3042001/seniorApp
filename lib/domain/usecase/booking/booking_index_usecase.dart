@@ -8,12 +8,13 @@ import 'package:senior/domain/usecase/auth/base_usecase.dart';
 class BookingIndexUseCase
     implements BaseUseCase<void, IndexBooking> {
   final Repository _repository;
+  int x;
 
-  BookingIndexUseCase(this._repository);
+  BookingIndexUseCase(this._repository , this.x);
 
   @override
   Future<Either<Failure, IndexBooking>> execute(
       void input) async {
-    return await _repository.bookingsIndex();
+    return await _repository.bookingsIndex(x);
   }
 }

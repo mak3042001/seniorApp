@@ -70,15 +70,13 @@ initRegisterModule() {
   }
 }
 //schedule
-initStoreDetailsModule() {
+initSchedulesIndexModule() {
   if (!GetIt.I.isRegistered<SchedulesCreateUseCase>()) {
     instance.registerFactory<SchedulesCreateUseCase>(
             () => SchedulesCreateUseCase(instance()));
     instance.registerFactory<SchedulesIndexUseCase>(
             () => SchedulesIndexUseCase(instance()));
-    instance.registerFactory<SchedulesCancelUseCase>(
-            () => SchedulesCancelUseCase(instance()));
     instance.registerFactory<SchedulesViewModel>(
-            () => SchedulesViewModel(instance(),instance(),instance()));
+            () => SchedulesViewModel(instance(),instance()));
   }
 }

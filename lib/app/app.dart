@@ -7,6 +7,7 @@ class MyApp extends StatefulWidget {
   // named constructor
   MyApp._internal();
 
+
   int appState = 0;
 
   static final MyApp _instance =

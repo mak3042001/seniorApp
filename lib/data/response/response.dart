@@ -144,7 +144,7 @@ class IndexSchedulesDataResponse {
   @JsonKey(name: "description")
   String? description;
   @JsonKey(name: "date")
-  String? date;
+  DateTime? date;
   @JsonKey(name: "time")
   String? time;
   @JsonKey(name: "type")

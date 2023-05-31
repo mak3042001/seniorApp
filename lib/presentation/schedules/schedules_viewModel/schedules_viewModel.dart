@@ -28,12 +28,10 @@ class SchedulesViewModel extends BaseViewModel
   var schedulesCreateObject = SchedulesCreateObject("", "", "", "");
 
   final SchedulesCreateUseCase schedulesCreateUseCase;
-  final SchedulesCancelUseCase schedulesCancelUseCase;
   final SchedulesIndexUseCase schedulesIndexUseCase;
 
   SchedulesViewModel(
     this.schedulesCreateUseCase,
-    this.schedulesCancelUseCase,
     this.schedulesIndexUseCase,
   );
 

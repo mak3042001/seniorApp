@@ -73,7 +73,9 @@ abstract class AppServiceClient {
       );
 //bookings index
   @GET("/api/seniors/bookings")
-  Future<IndexBookingResponse> bookingsIndex();
+  Future<IndexBookingResponse> bookingsIndex(
+      @Query("date") String date,
+      );
 
 
 
@@ -101,7 +103,9 @@ abstract class AppServiceClient {
       );
 //history index
   @GET("/api/seniors/history")
-  Future<HistoryIndexResponse> historyIndex();
+  Future<HistoryIndexResponse> historyIndex(
+      @Query("history_category_id") int historyCategoryId,
+      );
 
 
 
