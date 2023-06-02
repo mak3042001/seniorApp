@@ -24,7 +24,7 @@ class DioFactory {
     Map<String, String> headers = {
       contactType: applicationJson,
       accept: applicationJson,
-      authorization: Constant.token,
+      authorization: 'Bearer ${await _appPreference.getUserToken()}',
       defaultLanguage: language,
     };
 

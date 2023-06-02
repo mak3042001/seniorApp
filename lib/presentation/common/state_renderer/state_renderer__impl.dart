@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:senior/app/constant.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
-
 
 abstract class FlowState {
   StateRendererType getStateRendererType();
@@ -67,6 +65,19 @@ class EmptyState extends FlowState {
       StateRendererType.fullScreenEmptyState;
 }
 
+// success state
+class SuccessState extends FlowState {
+  String message;
+
+  SuccessState(this.message);
+
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.popupSuccess;
+}
+
 extension FlowStateExtension on FlowState {
   Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
       Function retryActionFunction) {
@@ -95,7 +106,7 @@ extension FlowStateExtension on FlowState {
             // show content ui of the screen
             return contentScreenWidget;
           } else {
-            // full screen loading state
+            // full screen error state
             return StateRenderer(
                 message: getMessage(),
                 stateRendererType: getStateRendererType(),
@@ -112,6 +123,17 @@ extension FlowStateExtension on FlowState {
       case ContentState:
         {
           dismissDialog(context);
+          return contentScreenWidget;
+        }
+      case SuccessState:
+        {
+          // i should check if we are showing loading popup to remove it before showing success popup
+          dismissDialog(context);
+
+          // show popup
+          showPopup(context, StateRendererType.popupSuccess, getMessage(),
+              title: StringManager.success);
+          // return content ui of the screen
           return contentScreenWidget;
         }
       default:
@@ -131,13 +153,15 @@ extension FlowStateExtension on FlowState {
     }
   }
 
-  showPopup(BuildContext context, StateRendererType stateRendererType,
-      String message) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
+  showPopup(
+      BuildContext context, StateRendererType stateRendererType, String message,
+      {String title = ""}) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(
             stateRendererType: stateRendererType,
             message: message,
+            title: title,
             retryActionFunction: () {})));
   }
 }

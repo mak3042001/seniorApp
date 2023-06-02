@@ -47,12 +47,12 @@ Future<void> initAppModule() async {
 
   // remote data source
   instance.registerLazySingleton<RemoteDataSource>(
-          () => RemoteDataSourceImpl(instance<AppServiceClient>()));
+          () => RemoteDataSourceImpl(instance<AppServiceClient>() , instance<AppPreference>()));
 
   // repository
 
   instance.registerLazySingleton<Repository>(
-          () => RepositoryImpl(instance(), instance(),));
+          () => RepositoryImpl(instance(), instance(),instance()));
 
   initSchedulesIndexModule();
 }

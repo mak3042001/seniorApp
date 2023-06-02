@@ -1,5 +1,6 @@
 
 import 'package:dartz/dartz.dart';
+import 'package:senior/app/app_preference.dart';
 import 'package:senior/data/data_source/data_source.dart';
 import 'package:senior/data/mabber/mabber.dart';
 import 'package:senior/data/network/error_handling.dart';
@@ -12,13 +13,14 @@ import 'package:senior/domain/repository/domain_repository.dart';
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
+  final AppPreference _appPreference;
 
   static String token = "";
   static int historyCategoryId = 0;
   static String bookingDate = "";
   static int id = 0;
 
-  RepositoryImpl(this._remoteDataSource, this._networkInfo);
+  RepositoryImpl(this._remoteDataSource, this._networkInfo, this._appPreference);
 
   @override
   Future<Either<Failure, Auth>> login(
@@ -31,6 +33,8 @@ class RepositoryImpl implements Repository {
         if (response.message == "success") {
           token = response.data!.token!;
           id = response.data!.user!.id!;
+          _appPreference.setUserToken(token);
+          _appPreference.setUserId(id);
           print(token);
           print(id);
           return Right(
@@ -144,6 +148,7 @@ class RepositoryImpl implements Repository {
 
         if (response.successful == true) {
           bookingDate = response.data![x]!.date!;
+          _appPreference.setBookingDate(bookingDate);
           // success
           // return either right
           // return data
@@ -229,6 +234,7 @@ class RepositoryImpl implements Repository {
 
         if (response.successful == true) {
           historyCategoryId = response.data!.id!;
+          _appPreference.setHistoryCategoryId(historyCategoryId);
           // success
           // return either right
           // return data

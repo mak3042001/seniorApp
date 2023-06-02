@@ -1,3 +1,4 @@
+import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/constant.dart';
 import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/network/request.dart';
@@ -28,8 +29,9 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final AppServiceClient _appServiceClient;
+  final AppPreference _appPreference;
 
-  RemoteDataSourceImpl(this._appServiceClient);
+  RemoteDataSourceImpl(this._appServiceClient, this._appPreference);
 
 
   @override
@@ -64,7 +66,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<IndexBookingResponse> bookingsIndex() async {
-    return await _appServiceClient.bookingsIndex(Constant.bookingDate);
+    return await _appServiceClient.bookingsIndex(await _appPreference.getBookingDate());
   }
 
   @override
@@ -99,7 +101,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<HistoryIndexResponse> historyIndex() async {
-    return await _appServiceClient.historyIndex(Constant.historyCategoryId);
+    return await _appServiceClient.historyIndex(await _appPreference.getHistoryCategoryId());
   }
 
   @override
@@ -140,7 +142,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<IndexSchedulesResponse> schedulesIndex() async {
     return await _appServiceClient.schedulesIndex(
-        Constant.id,
+        await _appPreference.getUserId(),
     );
   }
 }

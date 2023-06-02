@@ -12,6 +12,7 @@ class StringManager {
   static const loading = "Loading";
   static const retryAgain = "Retry Again";
   static const ok = "Ok";
+  static const cancel = "Cancel";
   static const String usernameHint = 'Username';
   static const String nameHint = 'Name';
   static const String passwordHint = 'Password';
