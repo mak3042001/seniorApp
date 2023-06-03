@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/di.dart';
+import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
@@ -26,6 +27,7 @@ class Routes {
   static const String notification = "/notification";
   static const String profile = "/profile";
   static const String schedules = "/schedules";
+  static const String aiScreen = "/ai";
 }
 
 class RouteGenerator {
@@ -56,6 +58,8 @@ class RouteGenerator {
       case Routes.schedules:
         initSchedulesIndexModule();
         return MaterialPageRoute(builder: (_) => const Schedules());
+      case Routes.aiScreen:
+        return MaterialPageRoute(builder: (_) => AiScreen(title: 'AiScreen',));
       default:
         return unDefinedRoute();
     }

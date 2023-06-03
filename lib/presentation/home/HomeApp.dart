@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
@@ -16,12 +17,14 @@ class HomeApp extends StatelessWidget {
     "History",
     "Bookings",
     "Medications",
+    "Text readable"
   ];
   List<String> images = [
     "$baseImageAssets/Schedules.png",
     "$baseImageAssets/history.jpg",
     "$baseImageAssets/bookings.jpg",
     "$baseImageAssets/medications.jpeg",
+    "$baseImageAssets/camScan.jpg",
   ];
 
 
@@ -30,6 +33,7 @@ class HomeApp extends StatelessWidget {
     const History(),
     const Booking(),
     Medications(),
+    const AiScreen(title: 'cam scan')
   ];
 
 
@@ -68,17 +72,17 @@ class HomeApp extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: GridView.builder(
-            itemCount: 4,
+            itemCount: screen.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) =>
-                CustemCard(home[i], images[i], context , screen[i]),
+                custemCard(home[i], images[i], context , screen[i]),
           ),
         ));
   }
 
-  Widget CustemCard(
+  Widget custemCard(
       String text, String images, BuildContext context, Widget screen) {
     return InkWell(
       onTap: () {
