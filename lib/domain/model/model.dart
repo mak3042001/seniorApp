@@ -43,18 +43,41 @@ class AuthLogOut {
   AuthLogOut();
 }
 
+//change image
+class ChangeImage {
+  ChangeImage();
+}
 
+//notification
+class NotificationData {
+  int id;
+  String title;
+  String content;
+  String seen;
+  String createdAt;
 
+  NotificationData(
+    this.id,
+    this.title,
+    this.content,
+    this.seen,
+    this.createdAt,
+  );
+}
+class Notification {
 
+  List<NotificationData?> data;
+
+  Notification(this.data);
+}
 
 //schedules create
-class SchedulesCreate{
+class SchedulesCreate {
   SchedulesCreate();
 }
 
 //schedules cancel
-class SchedulesCancel{
-
+class SchedulesCancel {
   SchedulesCancel();
 }
 
@@ -69,27 +92,23 @@ class IndexSchedulesData {
   int createdAt;
 
   IndexSchedulesData(
-      this.id,
-      this.title,
-      this.description,
-      this.date,
-      this.time,
-      this.type,
-      this.createdAt,
-      );
+    this.id,
+    this.title,
+    this.description,
+    this.date,
+    this.time,
+    this.type,
+    this.createdAt,
+  );
 }
 
 class IndexSchedules {
   List<IndexSchedulesData?> data;
 
   IndexSchedules(
-      this.data,
-      );
+    this.data,
+  );
 }
-
-
-
-
 
 //booking create
 class CreateBooking {
@@ -136,25 +155,22 @@ class BookingData {
   Doctor? doctor;
 
   BookingData(
-      this.id,
-      this.date,
-      this.status,
-      this.createdAt,
-      this.senior,
-      this.doctor,
-      );
+    this.id,
+    this.date,
+    this.status,
+    this.createdAt,
+    this.senior,
+    this.doctor,
+  );
 }
 
 class IndexBooking {
   List<BookingData?> data;
 
   IndexBooking(
-      this.data,
-      );
+    this.data,
+  );
 }
-
-
-
 
 //history create
 class HistoryCreateData {
@@ -165,50 +181,44 @@ class HistoryCreateData {
   int historyCategoryId;
 
   HistoryCreateData(
-      this.id,
-      this.title,
-      this.description,
-      this.userId,
-      this.historyCategoryId,
-      );
+    this.id,
+    this.title,
+    this.description,
+    this.userId,
+    this.historyCategoryId,
+  );
 }
 
 class HistoryCreate {
   HistoryCreateData? data;
 
   HistoryCreate(
-      this.data,
-      );
-
+    this.data,
+  );
 }
 
 //history update
-class HistoryUpdate  {
+class HistoryUpdate {
   HistoryCreateData? data;
 
   HistoryUpdate(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //history cancel
-class CancelHistory  {
+class CancelHistory {
   CancelHistory();
 }
 
 //history index
-class HistoryIndex  {
+class HistoryIndex {
   List<HistoryCreateData?> data;
 
   HistoryIndex(
-      this.data,
-      );
+    this.data,
+  );
 }
-
-
-
-
-
 
 //historyCategories create
 class HistoryCategoriesCreateData {
@@ -218,20 +228,19 @@ class HistoryCategoriesCreateData {
   int userId;
 
   HistoryCategoriesCreateData(
-      this.id,
-      this.title,
-      this.description,
-      this.userId,
-      );
+    this.id,
+    this.title,
+    this.description,
+    this.userId,
+  );
 }
 
 class HistoryCategoriesCreate {
   HistoryCategoriesCreateData? data;
 
   HistoryCategoriesCreate(
-      this.data,
-      );
-
+    this.data,
+  );
 }
 
 //historyCategories update
@@ -239,9 +248,8 @@ class HistoryCategoriesUpdate {
   HistoryCategoriesCreateData? data;
 
   HistoryCategoriesUpdate(
-      this.data,
-      );
-
+    this.data,
+  );
 }
 
 //historyCategories cancel
@@ -254,15 +262,9 @@ class HistoryCategoriesIndex {
   List<HistoryCategoriesCreateData?> data;
 
   HistoryCategoriesIndex(
-      this.data,
-      );
+    this.data,
+  );
 }
-
-
-
-
-
-
 
 //medications create
 class MedicationsCreateData {
@@ -274,26 +276,25 @@ class MedicationsCreateData {
   String createdAt;
 
   MedicationsCreateData(
-      this.id,
-      this.userId,
-      this.medication,
-      this.medicationDose,
-      this.description,
-      this.createdAt,
-      );
+    this.id,
+    this.userId,
+    this.medication,
+    this.medicationDose,
+    this.description,
+    this.createdAt,
+  );
 }
 
 class MedicationsCreate {
   MedicationsCreateData? data;
 
   MedicationsCreate(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //medications update
 class MedicationsUpdate {
-
   MedicationsUpdate();
 }
 
@@ -307,6 +308,6 @@ class MedicationsIndex {
   List<MedicationsCreateData?> data;
 
   MedicationsIndex(
-      this.data,
-      );
+    this.data,
+  );
 }

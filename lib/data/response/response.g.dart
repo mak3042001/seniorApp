@@ -67,6 +67,18 @@ Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
       'data': instance.data,
     };
 
+ChangeImageResponse _$ChangeImageResponseFromJson(Map<String, dynamic> json) =>
+    ChangeImageResponse()
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$ChangeImageResponseToJson(
+        ChangeImageResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+    };
+
 AuthLogOutResponse _$AuthLogOutResponseFromJson(Map<String, dynamic> json) =>
     AuthLogOutResponse()
       ..successful = json['successful'] as bool?
@@ -76,6 +88,46 @@ Map<String, dynamic> _$AuthLogOutResponseToJson(AuthLogOutResponse instance) =>
     <String, dynamic>{
       'successful': instance.successful,
       'message': instance.message,
+    };
+
+NotificationDataResponse _$NotificationDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    NotificationDataResponse(
+      json['id'] as int?,
+      json['title'] as String?,
+      json['content'] as String?,
+      json['seen'] as String?,
+      json['created_at'] as String?,
+    );
+
+Map<String, dynamic> _$NotificationDataResponseToJson(
+        NotificationDataResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'seen': instance.seen,
+      'created_at': instance.createdAt,
+    };
+
+NotificationDataIndexResponse _$NotificationDataIndexResponseFromJson(
+        Map<String, dynamic> json) =>
+    NotificationDataIndexResponse(
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : NotificationDataResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$NotificationDataIndexResponseToJson(
+        NotificationDataIndexResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
     };
 
 CreateSchedulesResponse _$CreateSchedulesResponseFromJson(

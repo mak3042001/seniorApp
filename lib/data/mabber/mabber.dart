@@ -36,6 +36,35 @@ extension AuthResponseMabber on AuthResponse? {
   }
 }
 
+//change image
+extension ChangeImageResponseMabber on ChangeImageResponse? {
+  ChangeImage toDomain() {
+    return ChangeImage();
+  }
+}
+
+//notification
+extension NotificationDataResponseMabber on NotificationDataResponse? {
+  NotificationData toDomain() {
+    return NotificationData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.title.orEmpty() ?? Constant.empty,
+      this?.content.orEmpty() ?? Constant.empty,
+      this?.seen.orEmpty() ?? Constant.empty,
+      this?.createdAt.orEmpty() ?? Constant.empty,
+    );
+  }
+}
+extension NotificationDataIndexResponseMabber on NotificationDataIndexResponse? {
+  Notification toDomain() {
+    return Notification(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<NotificationData?>()
+          .toList(),
+    );
+  }
+}
+
 //schedules create mapper
 extension CreateSchedulesResponseMabber on CreateSchedulesResponse? {
   SchedulesCreate toDomain() {
@@ -209,7 +238,8 @@ extension HistoryCategoriesUpdateResponseMapper
 }
 
 //historyCategories cancel mapper
-extension CancelHistoryCategoriesResponseMabber on CancelHistoryCategoriesResponse? {
+extension CancelHistoryCategoriesResponseMabber
+    on CancelHistoryCategoriesResponse? {
   CancelHistoryCategories toDomain() {
     return CancelHistoryCategories();
   }

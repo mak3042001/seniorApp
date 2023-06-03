@@ -33,6 +33,31 @@ abstract class AppServiceClient {
     @Field("confirm_password") String confirmPassword,
   );
 
+//show profile
+  @GET("/api/seniors/profile")
+  Future<AuthResponse> showProfile();
+
+//update profile
+  @POST("/api/seniors/profile/update")
+  Future<AuthResponse> updateProfile(
+      @Field("name") String name,
+      @Field("username") String username,
+      @Field("phone") String phone,
+      @Field("email") String email,
+      @Field("birthdate") String birthdate,
+      );
+
+//change image profile
+  @POST("/api/seniors/profile/changeImage")
+  Future<ChangeImageResponse> changeImage(
+      @Field("image") String image,
+      );
+
+//index notification
+  @GET("/api/seniors/notifications")
+  Future<NotificationDataIndexResponse> notificationIndex();
+
+
 //schedules create
   @POST("/api/seniors/schedules/create")
   Future<CreateSchedulesResponse> schedulesCreate(

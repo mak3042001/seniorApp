@@ -11,10 +11,6 @@ class BaseResponse {
   String? message;
 }
 
-
-
-
-
 //auth response
 @JsonSerializable()
 class DataResponse {
@@ -91,6 +87,18 @@ class AuthResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }
 
+@JsonSerializable()
+class ChangeImageResponse extends BaseResponse {
+  ChangeImageResponse();
+
+  //fromJson
+  factory ChangeImageResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChangeImageResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$ChangeImageResponseToJson(this);
+}
+
 //auth logOut response
 @JsonSerializable()
 class AuthLogOutResponse extends BaseResponse {
@@ -104,9 +112,51 @@ class AuthLogOutResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$AuthLogOutResponseToJson(this);
 }
 
+//notification
+@JsonSerializable()
+class NotificationDataResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "content")
+  String? content;
+  @JsonKey(name: "seen")
+  String? seen;
+  @JsonKey(name: "created_at")
+  String? createdAt;
+
+  NotificationDataResponse(
+    this.id,
+    this.title,
+    this.content,
+    this.seen,
+    this.createdAt,
+  );
+
+  //fromJson
+  factory NotificationDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$NotificationDataResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$NotificationDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class NotificationDataIndexResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  List<NotificationDataResponse?>? data;
 
 
+  NotificationDataIndexResponse(this.data);
 
+  //fromJson
+  factory NotificationDataIndexResponse.fromJson(Map<String, dynamic> json) =>
+      _$NotificationDataIndexResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$NotificationDataIndexResponseToJson(this);
+}
 
 //schedules create
 @JsonSerializable()
@@ -187,11 +237,6 @@ class IndexSchedulesResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$IndexSchedulesResponseToJson(this);
 }
 
-
-
-
-
-
 //booking create
 @JsonSerializable()
 class CreateBookingResponse extends BaseResponse {
@@ -242,7 +287,6 @@ class DoctorResponse {
   @JsonKey(name: "week_days")
   String? weekDays;
 
-
   DoctorResponse(
       this.id,
       this.username,
@@ -254,7 +298,6 @@ class DoctorResponse {
       this.address,
       this.medicineCategory,
       this.weekDays);
-
 
   //fromJson
   factory DoctorResponse.fromJson(Map<String, dynamic> json) =>
@@ -312,11 +355,6 @@ class IndexBookingResponse extends BaseResponse {
   //toJson
   Map<String, dynamic> toJson() => _$IndexBookingResponseToJson(this);
 }
-
-
-
-
-
 
 //history create
 @JsonSerializable()
@@ -413,11 +451,6 @@ class HistoryIndexResponse extends BaseResponse {
   //toJson
   Map<String, dynamic> toJson() => _$HistoryIndexResponseToJson(this);
 }
-
-
-
-
-
 
 //historyCategories create
 @JsonSerializable()
@@ -517,12 +550,6 @@ class HistoryCategoriesIndexResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$HistoryCategoriesIndexResponseToJson(this);
 }
 
-
-
-
-
-
-
 //medications create
 @JsonSerializable()
 class MedicationsCreateDataResponse {
@@ -576,7 +603,6 @@ class MedicationsCreateResponse extends BaseResponse {
 //medications update
 @JsonSerializable()
 class MedicationsUpdateResponse extends BaseResponse {
-
   MedicationsUpdateResponse();
 
   //fromJson

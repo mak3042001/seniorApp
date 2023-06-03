@@ -8,6 +8,15 @@ abstract class Repository{
 
   Future<Either<Failure,Auth>> register(RegisterRequest registerRequest);
 
+  Future<Either<Failure,Auth>> updateProfile(UpdateProfileRequest updateProfileRequest);
+
+  Future<Either<Failure,ChangeImage>> changeImage(
+      ChangeImageRequest changeImageRequest);
+
+  Future<Either<Failure,Auth>> profileIndex();
+
+  Future<Either<Failure,Notification>> notificationIndex();
+
   Future<Either<Failure,SchedulesCreate>> schedulesCreate(SchedulesCreateRequest schedulesCreateRequest);
   Future<Either<Failure,SchedulesCancel>> schedulesCancel(SchedulesCancelRequest schedulesCancelRequest);
   Future<Either<Failure,IndexSchedules>> schedulesIndex();

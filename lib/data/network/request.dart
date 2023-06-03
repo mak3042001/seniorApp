@@ -27,6 +27,30 @@ class RegisterRequest {
   );
 }
 
+//profile update
+class UpdateProfileRequest {
+  String name;
+  String username;
+  String phone;
+  String email;
+  String birthdate;
+
+  UpdateProfileRequest(
+    this.name,
+    this.username,
+    this.phone,
+    this.email,
+    this.birthdate,
+  );
+}
+
+//change image
+class ChangeImageRequest {
+  String image;
+
+  ChangeImageRequest(this.image);
+}
+
 //schedules create
 class SchedulesCreateRequest {
   String title;
@@ -100,16 +124,15 @@ class HistoryUpdateRequest {
   );
 }
 
-
 //historyCategories create
 class HistoryCategoriesCreateRequest {
   String title;
   String description;
 
   HistoryCategoriesCreateRequest(
-      this.title,
-      this.description,
-      );
+    this.title,
+    this.description,
+  );
 }
 
 //historyCategories cancel
@@ -126,13 +149,11 @@ class HistoryCategoriesUpdateRequest {
   String description;
 
   HistoryCategoriesUpdateRequest(
-      this.historyCategoryId,
-      this.title,
-      this.description,
-      );
+    this.historyCategoryId,
+    this.title,
+    this.description,
+  );
 }
-
-
 
 //medications create
 class MedicationsCreateRequest {
@@ -140,9 +161,9 @@ class MedicationsCreateRequest {
   String medicationDose;
 
   MedicationsCreateRequest(
-      this.medication,
-      this.medicationDose,
-      );
+    this.medication,
+    this.medicationDose,
+  );
 }
 
 //medications cancel
@@ -159,8 +180,8 @@ class MedicationsUpdateRequest {
   String medicationDose;
 
   MedicationsUpdateRequest(
-      this.medicationId,
-      this.medication,
-      this.medicationDose,
-      );
+    this.medicationId,
+    this.medication,
+    this.medicationDose,
+  );
 }
