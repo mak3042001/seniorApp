@@ -64,11 +64,11 @@ class NotificationData {
     this.createdAt,
   );
 }
-class Notification {
+class NotificationIndex {
 
   List<NotificationData?> data;
 
-  Notification(this.data);
+  NotificationIndex(this.data);
 }
 
 //schedules create

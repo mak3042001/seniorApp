@@ -7,7 +7,7 @@ import 'package:senior/presentation/history/History.dart';
 import 'package:senior/presentation/home/HomeApp.dart';
 import 'package:senior/presentation/login/login_view/loginScreen.dart';
 import 'package:senior/presentation/medications/medications.dart';
-import 'package:senior/presentation/notification/notificationScreen.dart';
+import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
@@ -52,7 +52,8 @@ class RouteGenerator {
       case Routes.medication:
         return MaterialPageRoute(builder: (_) =>  Medications());
       case Routes.notification:
-        return MaterialPageRoute(builder: (_) => const NotificationScreen());
+        initNotificationModule();
+        return MaterialPageRoute(builder: (_) => NotificationScreen());
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.schedules:

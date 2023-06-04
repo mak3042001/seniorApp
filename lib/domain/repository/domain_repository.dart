@@ -15,7 +15,7 @@ abstract class Repository{
 
   Future<Either<Failure,Auth>> profileIndex();
 
-  Future<Either<Failure,Notification>> notificationIndex();
+  Future<Either<Failure,NotificationIndex>> notificationIndex();
 
   Future<Either<Failure,SchedulesCreate>> schedulesCreate(SchedulesCreateRequest schedulesCreateRequest);
   Future<Either<Failure,SchedulesCancel>> schedulesCancel(SchedulesCancelRequest schedulesCancelRequest);

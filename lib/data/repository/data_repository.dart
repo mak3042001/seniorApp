@@ -620,7 +620,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, Notification>> notificationIndex() async {
+  Future<Either<Failure, NotificationIndex>> notificationIndex() async {
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API
       try {

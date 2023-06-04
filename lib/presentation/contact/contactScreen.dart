@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
-import 'package:senior/presentation/notification/notificationScreen.dart';
+import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
 
 
@@ -54,7 +54,7 @@ Widget matrialList (BuildContext context){
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CircleAvatar(
-            backgroundImage: AssetImage("assets/no_user.png"),
+            backgroundImage: AssetImage("assets/images/no_user.png"),
             radius: 35,
           ),
           const SizedBox(

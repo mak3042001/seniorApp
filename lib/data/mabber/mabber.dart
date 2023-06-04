@@ -56,8 +56,8 @@ extension NotificationDataResponseMabber on NotificationDataResponse? {
   }
 }
 extension NotificationDataIndexResponseMabber on NotificationDataIndexResponse? {
-  Notification toDomain() {
-    return Notification(
+  NotificationIndex toDomain() {
+    return NotificationIndex(
       (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
           .cast<NotificationData?>()
           .toList(),

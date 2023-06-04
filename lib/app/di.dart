@@ -14,9 +14,11 @@ import '../data/data_source/data_source.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
 import '../domain/usecase/auth/register_usecase.dart';
+import '../domain/usecase/notification/notification_usecase.dart';
 import '../domain/usecase/schedules/schedules_create_usecase.dart';
 import '../domain/usecase/schedules/schedules_index_usecase.dart';
 import '../presentation/login/login_view_model/login_viewModel.dart';
+import '../presentation/notification/notification_viewModel/notification_viewModel.dart';
 import '../presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
 import '../presentation/sign up/signup_view_model/signup_view_model.dart';
 
@@ -55,6 +57,7 @@ Future<void> initAppModule() async {
           () => RepositoryImpl(instance(), instance(),instance()));
 
   initSchedulesIndexModule();
+  initNotificationModule();
 }
 
 //auth
@@ -82,5 +85,14 @@ initSchedulesIndexModule() {
             () => SchedulesIndexUseCase(instance()));
     instance.registerFactory<SchedulesViewModel>(
             () => SchedulesViewModel(instance(),instance()));
+  }
+}
+
+initNotificationModule() {
+  if (!GetIt.I.isRegistered<NotificationUseCase>()) {
+    instance.registerFactory<NotificationUseCase>(
+            () => NotificationUseCase(instance()));
+    instance.registerFactory<NotificationViewModel>(
+            () => NotificationViewModel(instance()));
   }
 }
