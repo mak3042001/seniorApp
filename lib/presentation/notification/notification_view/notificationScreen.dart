@@ -4,12 +4,15 @@ import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/notification/notification_viewModel/notification_viewModel.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
+import 'package:senior/presentation/resources/string_manager.dart';
 
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
+import '../../resources/assets_manager.dart';
+import '../../resources/values_manager.dart';
 
 class NotificationScreen extends StatefulWidget {
-   const NotificationScreen({Key? key}) : super(key: key);
+  const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
@@ -78,18 +81,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
         stream: _viewModel.outputState,
         builder: (context, snapshot) {
           return Container(
-            child:
-            snapshot.data?.getScreenWidget(context, _getContentWidget(), () {
-              _viewModel.start();
-            }) ??
-                Container(),
+            child: (snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                            () {
+                          _viewModel.start();
+                        }) == null &&
+                    snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                            () {
+                          _viewModel.start();
+                        }) == [])
+                ? snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                    () {
+                    _viewModel.start();
+                  })
+                : const Center(
+                    child: Image(
+                    image: AssetImage(ImageAssets.noList),
+                    height: AppSize.s200,
+                    width: AppSize.s200,
+                  )),
           );
         },
       ),
     );
   }
 
-  Widget _getContentWidget(){
+  Widget _getContentWidget() {
     return StreamBuilder<NotificationIndex>(
       stream: _viewModel.outputNotification,
       builder: (context, snapshot) {
@@ -97,26 +113,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
       },
     );
   }
-  Widget _getItem(NotificationIndex? notificationIndex){
+
+  Widget _getItem(NotificationIndex? notificationIndex) {
     if (notificationIndex != null) {
-    return ListView.separated(
-      itemBuilder: (context, index) =>  StreamBuilder<NotificationIndex>(
-        stream: _viewModel.outputNotification,
-        builder: (context, snapshot) {
-          return _matrialList(context, index , snapshot.data);
-        },
-      ),
-      separatorBuilder: (context, index) => Divider(
-        color: Colors.grey[600],
-        height: 5.0,
-      ),
-      itemCount: notificationIndex!.data.length,
-    );
-  }else{
+      return ListView.separated(
+        itemBuilder: (context, index) => StreamBuilder<NotificationIndex>(
+          stream: _viewModel.outputNotification,
+          builder: (context, snapshot) {
+            return _matrialList(context, index, snapshot.data);
+          },
+        ),
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey[600],
+          height: 5.0,
+        ),
+        itemCount: notificationIndex.data.length,
+      );
+    } else {
       return Container();
     }
   }
-  Widget _matrialList(BuildContext context, int i , NotificationIndex? notification) {
+
+  Widget _matrialList(
+      BuildContext context, int i, NotificationIndex? notification) {
     if (notification != null) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
@@ -128,8 +147,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
             children: [
               Text(
                 "${notification.data[i]?.title}",
-                style:
-                Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontSize: 20),
               ),
               const SizedBox(
                 height: 5,
@@ -147,5 +168,3 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
   }
 }
-
-
