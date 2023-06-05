@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
-
 import 'package:rxdart/rxdart.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
 import 'package:senior/domain/usecase/schedules/schedules_create_usecase.dart';
 import 'package:senior/domain/usecase/schedules/schedules_index_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
@@ -14,10 +12,10 @@ import 'package:senior/presentation/common/state_renderer/state_renderer__impl.d
 class SchedulesViewModel extends BaseViewModel
     with SchedulesIndexViewModelInput, SchedulesIndexViewModelOutput {
   final _schedulesIndexStreamController = BehaviorSubject<IndexSchedules>();
-  StreamController titleStreamController = StreamController<String>.broadcast();
-  StreamController dateStreamController = StreamController<String>.broadcast();
-  StreamController timeStreamController = StreamController<String>.broadcast();
-  StreamController typeStreamController = StreamController<String>.broadcast();
+  final StreamController _titleStreamController = StreamController<String>.broadcast();
+  final StreamController _dateStreamController = StreamController<String>.broadcast();
+  final StreamController _timeStreamController = StreamController<String>.broadcast();
+  final StreamController _typeStreamController = StreamController<String>.broadcast();
 
   StreamController areAllInputsValidStreamController =
       StreamController<void>.broadcast();
@@ -59,6 +57,10 @@ class SchedulesViewModel extends BaseViewModel
   @override
   void dispose() {
     _schedulesIndexStreamController.close();
+    _titleStreamController.close();
+    _dateStreamController.close();
+    _timeStreamController.close();
+    _typeStreamController.close();
     super.dispose();
   }
 
@@ -66,89 +68,44 @@ class SchedulesViewModel extends BaseViewModel
   Sink get inputSchedulesIndex => _schedulesIndexStreamController.sink;
 
   @override
-  Stream<IndexSchedules> get outputSchedulesIndex =>
-      _schedulesIndexStreamController.stream.map((index) => index);
-
-  @override
-  addTask() async {
-    inputState.add(
-        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
-    (await schedulesCreateUseCase.execute(SchedulesCreateUseCaseInput(
-            schedulesCreateObject.title,
-            schedulesCreateObject.date,
-            schedulesCreateObject.time,
-            schedulesCreateObject.type)))
-        .fold(
-            (failure) => {
-                  // left -> failure
-                  inputState.add(ErrorState(
-                      StateRendererType.popupErrorState, failure.message))
-                }, (data) {
-      // right -> data (success)
-      // content
-      inputState.add(ContentState());
-      // navigate to main screen
-      isUserScheduleCreateSuccessfullyStreamController.add(true);
-    });
-  }
-
-  @override
   Sink get inputAreAllInputsValid => areAllInputsValidStreamController.sink;
 
   @override
-  Sink get inputDate => dateStreamController.sink;
+  Sink get inputDate => _dateStreamController.sink;
 
   @override
-  Sink get inputTime => timeStreamController.sink;
+  Sink get inputTime => _timeStreamController.sink;
 
   @override
-  Sink get inputTitle => titleStreamController.sink;
+  Sink get inputTitle => _titleStreamController.sink;
 
   @override
-  Sink get inputType => typeStreamController.sink;
+  Sink get inputType => _typeStreamController.sink;
+
+  @override
+  Stream<IndexSchedules> get outputSchedulesIndex =>
+      _schedulesIndexStreamController.stream.map((index) => index);
 
   @override
   Stream<bool> get outAreAllInputsValid =>
       areAllInputsValidStreamController.stream.map((_) => _areAllInputsValid());
 
-  bool _areAllInputsValid() {
-    return _isTitleValid(schedulesCreateObject.title) &&
-        _isDateValid(schedulesCreateObject.date) &&
-        _isTimeValid(schedulesCreateObject.time) &&
-        _isTypeValid(schedulesCreateObject.type);
-  }
-
   @override
   Stream<bool> get outIsDateValid =>
-      dateStreamController.stream.map((date) => _isDateValid(date));
-
-  bool _isDateValid(String date) {
-    return date.isNotEmpty;
-  }
+      _dateStreamController.stream.map((date) => _isDateValid(date));
 
   @override
   Stream<bool> get outIsTimeValid =>
-      timeStreamController.stream.map((time) => _isTimeValid(time));
-
-  bool _isTimeValid(String time) {
-    return time.isNotEmpty;
-  }
+      _timeStreamController.stream.map((time) => _isTimeValid(time));
 
   @override
   Stream<bool> get outIsTitleValid =>
-      titleStreamController.stream.map((title) => _isTitleValid(title));
-
-  bool _isTitleValid(String title) {
-    return title.isNotEmpty;
-  }
+      _titleStreamController.stream.map((title) => _isTitleValid(title));
 
   @override
   Stream<bool> get outIsTypeValid =>
-      typeStreamController.stream.map((type) => _isTypeValid(type));
+      _typeStreamController.stream.map((type) => _isTypeValid(type));
 
-  bool _isTypeValid(String type) {
-    return type.isNotEmpty;
-  }
 
   @override
   setDate(String date) {
@@ -177,20 +134,60 @@ class SchedulesViewModel extends BaseViewModel
     schedulesCreateObject = schedulesCreateObject.copyWith(type: type);
     inputAreAllInputsValid.add(null);
   }
+
+  @override
+  addTask() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+    (await schedulesCreateUseCase.execute(SchedulesCreateUseCaseInput(
+            schedulesCreateObject.title,
+            schedulesCreateObject.date,
+            schedulesCreateObject.time,
+            schedulesCreateObject.type)))
+        .fold(
+            (failure) => {
+                  // left -> failure
+                  inputState.add(ErrorState(
+                      StateRendererType.popupErrorState, failure.message))
+                }, (data) {
+      // right -> data (success)
+      // content
+      inputState.add(ContentState());
+      // navigate to main screen
+      isUserScheduleCreateSuccessfullyStreamController.add(true);
+    });
+  }
+
+
+
+
+  bool _isDateValid(String date) {
+    return date.isNotEmpty;
+  }
+
+  bool _isTimeValid(String time) {
+    return time.isNotEmpty;
+  }
+
+  bool _isTitleValid(String title) {
+    return title.isNotEmpty;
+  }
+
+  bool _isTypeValid(String type) {
+    return type.isNotEmpty;
+  }
+
+  bool _areAllInputsValid() {
+    return _isTitleValid(schedulesCreateObject.title) &&
+        _isDateValid(schedulesCreateObject.date) &&
+        _isTimeValid(schedulesCreateObject.time) &&
+        _isTypeValid(schedulesCreateObject.type);
+  }
+
 }
 
 abstract class SchedulesIndexViewModelInput {
   Sink get inputSchedulesIndex;
-
-  setTitle(String title);
-
-  setDate(String date);
-
-  setTime(String time);
-
-  setType(String type);
-
-  addTask();
 
   Sink get inputTitle;
 
@@ -201,6 +198,16 @@ abstract class SchedulesIndexViewModelInput {
   Sink get inputType;
 
   Sink get inputAreAllInputsValid;
+
+  setTitle(String title);
+
+  setDate(String date);
+
+  setTime(String time);
+
+  setType(String type);
+
+  addTask();
 }
 
 abstract class SchedulesIndexViewModelOutput {

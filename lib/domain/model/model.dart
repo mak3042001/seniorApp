@@ -86,7 +86,7 @@ class IndexSchedulesData {
   int id;
   String title;
   String description;
-  DateTime date;
+  String date;
   String time;
   String type;
   int createdAt;

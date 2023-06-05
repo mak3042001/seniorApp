@@ -4,12 +4,9 @@ import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/notification/notification_viewModel/notification_viewModel.dart';
 import 'package:senior/presentation/profile/profileScreen.dart';
-import 'package:senior/presentation/resources/string_manager.dart';
-
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
-import '../../resources/assets_manager.dart';
-import '../../resources/values_manager.dart';
+
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -81,24 +78,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
         stream: _viewModel.outputState,
         builder: (context, snapshot) {
           return Container(
-            child: (snapshot.data?.getScreenWidget(context, _getContentWidget(),
-                            () {
-                          _viewModel.start();
-                        }) == null &&
-                    snapshot.data?.getScreenWidget(context, _getContentWidget(),
-                            () {
-                          _viewModel.start();
-                        }) == [])
-                ? snapshot.data?.getScreenWidget(context, _getContentWidget(),
-                    () {
-                    _viewModel.start();
-                  })
-                : const Center(
-                    child: Image(
-                    image: AssetImage(ImageAssets.noList),
-                    height: AppSize.s200,
-                    width: AppSize.s200,
-                  )),
+            child:
+            snapshot.data?.getScreenWidget(context, _getContentWidget(), () {
+              _viewModel.start();
+            }) ??
+                Container(),
           );
         },
       ),
@@ -150,7 +134,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge
-                    ?.copyWith(fontSize: 20),
+                    ?.copyWith(fontSize: 30),
               ),
               const SizedBox(
                 height: 5,

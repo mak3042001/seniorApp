@@ -86,7 +86,7 @@ extension IndexSchedulesDataResponseMabber on IndexSchedulesDataResponse? {
       this?.id.orEmpty() ?? Constant.zero,
       this?.title.orEmpty() ?? Constant.empty,
       this?.description.orEmpty() ?? Constant.empty,
-      this?.date.orEmpty() ?? DateTime.now(),
+      this?.date.orEmpty() ?? Constant.empty,
       this?.time.orEmpty() ?? Constant.empty,
       this?.type.orEmpty() ?? Constant.empty,
       this?.createdAt.orEmpty() ?? Constant.zero,

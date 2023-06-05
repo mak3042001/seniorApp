@@ -20,6 +20,7 @@ class _SchedulesState extends State<Schedules> {
   final TextEditingController _taskTitleController = TextEditingController();
   final TextEditingController _taskTimeController = TextEditingController();
   final TextEditingController _taskDataController = TextEditingController();
+  final TextEditingController _taskTypeController = TextEditingController();
 
   final List<Map<String, dynamic>> _scheduleList = [
     {
@@ -59,7 +60,7 @@ class _SchedulesState extends State<Schedules> {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat.yMd();
+    final dateFormat = DateFormat('yyyy-MM-dd');
     final formattedDate = dateFormat.format(_selectedDate);
 
     return Scaffold(
@@ -120,7 +121,7 @@ class _SchedulesState extends State<Schedules> {
                             focusNode: AlwaysDisabledFocusNode(false),
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 30,
+                              fontSize: 23,
                             ),
                             decoration: const InputDecoration(
                               contentPadding: EdgeInsets.all(10.0),
@@ -230,9 +231,13 @@ class _SchedulesState extends State<Schedules> {
                     showTimePicker(
                       context: context,
                       initialTime: selectedTime,
-                    ).then((value) {
-                      _taskTimeController.text = value!.format(context);
-                    },
+                    ).then(
+                          (value) {
+                        if (value != null) {
+                          String formattedTime = "${value.hour.toString().padLeft(2, '0')}:${value.minute.toString().padLeft(2, '0')}";
+                          _taskTimeController.text = formattedTime;
+                        }
+                      },
                     );
                   },
                 ),
@@ -254,7 +259,7 @@ class _SchedulesState extends State<Schedules> {
                       lastDate: DateTime(_selectedDate.year + 5),
                     ).then((value) {
                       _taskDataController.text =
-                          DateFormat.yMMMd().format(value!);
+                          DateFormat('yyyy-MM-dd').format(value!);
                     });
                   },
                 ),
