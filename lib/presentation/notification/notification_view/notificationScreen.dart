@@ -151,4 +151,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
       return Container();
     }
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _viewModel.dispose();
+  }
 }

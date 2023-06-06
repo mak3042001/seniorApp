@@ -180,8 +180,7 @@ class SchedulesViewModel extends BaseViewModel
   bool _areAllInputsValid() {
     return _isTitleValid(schedulesCreateObject.title) &&
         _isDateValid(schedulesCreateObject.date) &&
-        _isTimeValid(schedulesCreateObject.time) &&
-        _isTypeValid(schedulesCreateObject.type);
+        _isTimeValid(schedulesCreateObject.time) ;
   }
 
 }

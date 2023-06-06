@@ -58,7 +58,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.schedules:
         initSchedulesIndexModule();
-        return MaterialPageRoute(builder: (_) => const Schedules());
+        return MaterialPageRoute(builder: (_) => const SchedulesScreen());
       case Routes.aiScreen:
         return MaterialPageRoute(builder: (_) => AiScreen(title: 'AiScreen',));
       default:

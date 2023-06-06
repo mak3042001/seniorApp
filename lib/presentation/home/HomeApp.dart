@@ -29,7 +29,7 @@ class HomeApp extends StatelessWidget {
 
 
   List<Widget> screen = [
-    const Schedules(),
+    const SchedulesScreen(),
     const History(),
     const Booking(),
     Medications(),

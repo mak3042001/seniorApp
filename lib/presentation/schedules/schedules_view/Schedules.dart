@@ -1,50 +1,65 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/static.dart';
+import 'package:senior/domain/model/model.dart';
+import 'package:senior/presentation/resources/values_manager.dart';
 
+import 'package:senior/presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
+import '../../../app/di.dart';
+import '../../common/state_renderer/state_renderer__impl.dart';
+import '../../resources/string_manager.dart';
 
-class Schedules extends StatefulWidget {
-  const Schedules({
-    Key? key,
-  }) : super(key: key);
+class SchedulesScreen extends StatefulWidget {
+  const SchedulesScreen({Key? key}) : super(key: key);
 
   @override
-  _SchedulesState createState() => _SchedulesState();
+  State<SchedulesScreen> createState() => _SchedulesScreenState();
 }
 
-class _SchedulesState extends State<Schedules> {
-  DateTime _selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+class _SchedulesScreenState extends State<SchedulesScreen> {
+  final SchedulesViewModel _viewModel = instance<SchedulesViewModel>();
+
   final TextEditingController _taskTitleController = TextEditingController();
   final TextEditingController _taskTimeController = TextEditingController();
   final TextEditingController _taskDataController = TextEditingController();
   final TextEditingController _taskTypeController = TextEditingController();
 
-  final List<Map<String, dynamic>> _scheduleList = [
-    {
-      'title': 'Meeting with Client',
-      'time': '10:00 AM - 11:00 AM',
-      'date': DateTime(2022,4,30),
-    },
-    {
-      'title': 'Design Review',
-      'time': '11:30 AM - 12:30 PM',
-      'date': DateTime(2023,2,1),
-    },
-    {
-      'title': 'Lunch Break',
-      'time': '12:30 PM - 1:30 PM',
-      'date': DateTime.now(),
-    },
-    {
-      'title': 'Presentation',
-      'time': '2:00 PM - 3:00 PM',
-      'date': DateTime.now(),
-    },
-  ];
+  final _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    bind();
+    super.initState();
+  }
+
+  bind() {
+    _viewModel.start();
+    _taskTitleController
+        .addListener(() => _viewModel.setTitle(_taskTitleController.text));
+    _taskTimeController
+        .addListener(() => _viewModel.setTime(_taskTimeController.text));
+
+    _taskDataController
+        .addListener(() => _viewModel.setDate(_taskDataController.text));
+    _taskTypeController
+        .addListener(() => _viewModel.setType(_taskTypeController.text));
+
+    _viewModel.isUserScheduleCreateSuccessfullyStreamController.stream
+        .listen((isLoggedIn) {
+      if (isLoggedIn) {
+        // navigate to main screen
+        SchedulerBinding.instance.addPostFrameCallback((_) async {
+          Navigator.of(context).pop();
+        });
+      }
+    });
+  }
+
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
 
   void _incrementDate() {
     setState(() {
@@ -62,11 +77,9 @@ class _SchedulesState extends State<Schedules> {
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('yyyy-MM-dd');
     final formattedDate = dateFormat.format(_selectedDate);
-
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
           children: [
             Container(
               decoration: const BoxDecoration(
@@ -174,104 +187,222 @@ class _SchedulesState extends State<Schedules> {
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: _scheduleList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (_scheduleList[index]['date'].day != _selectedDate.day ||
-                      _scheduleList[index]['date'].month !=
-                          _selectedDate.month ||
-                      _scheduleList[index]['date'].year != _selectedDate.year) {
-                    return const SizedBox.shrink();
-                  }
-                  return ListTile(
-                    title: Text(_scheduleList[index]['title'] , style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                    subtitle: Text(_scheduleList[index]['time'] , style: const TextStyle(fontSize: 18.0),),
-                    onTap: () {
-                      // navigate to schedule details page
-                    },
+              child: StreamBuilder<FlowState>(
+                stream: _viewModel.outputState,
+                builder: (context, snapshot) {
+                  return SafeArea(
+                    child: Container(
+                      child: snapshot.data?.getScreenWidget(
+                              context, _getContentWidget(), () {
+                            _viewModel.start();
+                          }) ??
+                          Container(),
+                    ),
                   );
                 },
               ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[900],
-        onPressed: () {
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.question,
-            animType: AnimType.bottomSlide,
-            title: 'Edit Profile',
-            body: Column(
-              children: [
-                defaultFormField(
-                  controller: _taskTitleController,
-                  type: TextInputType.name,
-                  text: 'Task Title',
-                  prefix: IconBroken.Ticket, isPassword: false,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue[900],
+          onPressed: () {
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.question,
+              animType: AnimType.bottomSlide,
+              title: 'Edit Profile',
+              body: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    StreamBuilder<bool>(
+                        stream: _viewModel.outIsTitleValid,
+                        builder: (context, snapshot) {
+                          return defaultFormField(
+                            controller: _taskTitleController,
+                            type: TextInputType.name,
+                            text: 'Task Title',
+                            prefix: IconBroken.Ticket,
+                            isPassword: false,
+                          );
+                        }),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder<bool>(
+                        stream: _viewModel.outIsTitleValid,
+                        builder: (context, snapshot) {
+                          return defaultFormField(
+                            controller: _taskTypeController,
+                            type: TextInputType.name,
+                            text: 'Task Type',
+                            prefix: IconBroken.Ticket,
+                            isPassword: false,
+                          );
+                        }),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder<bool>(
+                        stream: _viewModel.outIsTimeValid,
+                        builder: (context, snapshot) {
+                          return defaultDisableFormField(
+                            controller: _taskTimeController,
+                            type: TextInputType.name,
+                            text: 'Task Time',
+                            prefix: IconBroken.Time_Circle,
+                            enableInteractiveSelection: false,
+                            hasFocusBool: false,
+                            onTap: () {
+                              showTimePicker(
+                                context: context,
+                                initialTime: selectedTime,
+                              ).then(
+                                (value) {
+                                  if (value != null) {
+                                    String formattedTime =
+                                        "${value.hour.toString().padLeft(2, '0')}:${value.minute.toString().padLeft(2, '0')}";
+                                    _taskTimeController.text = formattedTime;
+                                  }
+                                },
+                              );
+                            },
+                          );
+                        }),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder<bool>(
+                        stream: _viewModel.outIsDateValid,
+                        builder: (context, snapshot) {
+                          return defaultDisableFormField(
+                            controller: _taskDataController,
+                            type: TextInputType.name,
+                            text: 'Task Data',
+                            prefix: IconBroken.Calendar,
+                            enableInteractiveSelection: false,
+                            hasFocusBool: false,
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: _selectedDate,
+                                firstDate: _selectedDate,
+                                lastDate: DateTime(_selectedDate.year + 5),
+                              ).then((value) {
+                                _taskDataController.text =
+                                    DateFormat('yyyy-MM-dd').format(value!);
+                              });
+                            },
+                          );
+                        }),
+                    const SizedBox(
+                      height: AppSize.s28,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: AppPadding.p28, right: AppPadding.p28),
+                      child: StreamBuilder<bool>(
+                          stream: _viewModel.outAreAllInputsValid,
+                          builder: (context, snapshot) {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: AppSize.s40,
+                              child: ElevatedButton(
+                                  onPressed: (snapshot.data ?? false)
+                                      ? () {
+                                          setState(() {
+                                            _viewModel.addTask();
+                                          });
+                                        }
+                                      : null,
+                                  child: const Text(StringManager.ok)),
+                            );
+                          }),
+                    ),
+                    const SizedBox(
+                      height: AppSize.s28,
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                defaultDisableFormField(
-                  controller: _taskTimeController,
-                  type: TextInputType.name,
-                  text: 'Task Time',
-                  prefix: IconBroken.Time_Circle,
-                  enableInteractiveSelection: false,
-                  hasFocusBool: false,
-                  onTap: () {
-                    showTimePicker(
-                      context: context,
-                      initialTime: selectedTime,
-                    ).then(
-                          (value) {
-                        if (value != null) {
-                          String formattedTime = "${value.hour.toString().padLeft(2, '0')}:${value.minute.toString().padLeft(2, '0')}";
-                          _taskTimeController.text = formattedTime;
-                        }
-                      },
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                defaultDisableFormField(
-                  controller: _taskDataController,
-                  type: TextInputType.name,
-                  text: 'Task Data',
-                  prefix: IconBroken.Calendar,
-                  enableInteractiveSelection: false,
-                  hasFocusBool: false,
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: _selectedDate,
-                      firstDate: _selectedDate,
-                      lastDate: DateTime(_selectedDate.year + 5),
-                    ).then((value) {
-                      _taskDataController.text =
-                          DateFormat('yyyy-MM-dd').format(value!);
-                    });
-                  },
-                ),
-              ],
-            ),
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {},
-          ).show();
-        },
-        tooltip: 'Add Task',
-        child: const Icon(IconBroken.Plus ,),
+              ),
+            ).show();
+          },
+          tooltip: 'Add Task',
+          child: const Icon(
+            IconBroken.Plus,
+          ),
+        ),
       ),
     );
+  }
+
+  Widget _getContentWidget() {
+    return StreamBuilder<IndexSchedules>(
+      stream: _viewModel.outputSchedulesIndex,
+      builder: (context, snapshot) {
+        return _getItem(snapshot.data);
+      },
+    );
+  }
+
+  Widget _getItem(IndexSchedules? indexSchedules) {
+    if (indexSchedules != null) {
+      return ListView.separated(
+        itemBuilder: (context, index) => StreamBuilder<IndexSchedules>(
+          stream: _viewModel.outputSchedulesIndex,
+          builder: (context, snapshot) {
+            return _matrialList(context, index, snapshot.data);
+          },
+        ),
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey[600],
+          height: 5.0,
+        ),
+        itemCount: indexSchedules.data.length,
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _matrialList(BuildContext context, int i, IndexSchedules? schedules) {
+    if (schedules != null) {
+      return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SizedBox(
+          height: 70,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${schedules.data[i]?.title}",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontSize: 30),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                "${schedules.data[i]?.time}",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _viewModel.dispose();
   }
 }
