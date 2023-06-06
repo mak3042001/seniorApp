@@ -368,7 +368,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
   }
 
   Widget _matrialList(BuildContext context, int i, IndexSchedules? schedules) {
-    if (schedules != null) {
+    if (schedules != null && schedules.data[i]!.date == "$_selectedDate") {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
