@@ -8,6 +8,11 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
+import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
+import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
+import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
+import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/data_source/data_source.dart';
@@ -58,6 +63,8 @@ Future<void> initAppModule() async {
 
   initSchedulesIndexModule();
   initNotificationModule();
+  initHistoryCategoriesModule();
+  initAppointmentModule();
 }
 
 //auth
@@ -96,3 +103,21 @@ initNotificationModule() {
             () => NotificationViewModel(instance()));
   }
 }
+
+  initHistoryCategoriesModule() {
+    if (!GetIt.I.isRegistered<HistoryCategoriesIndexUseCase>()) {
+      instance.registerFactory<HistoryCategoriesIndexUseCase>(
+              () => HistoryCategoriesIndexUseCase(instance()));
+      instance.registerFactory<HistoryCategoriesViewModel>(
+              () => HistoryCategoriesViewModel(instance()));
+    }
+  }
+
+  initAppointmentModule() {
+    if (!GetIt.I.isRegistered<BookingIndexUseCase>()) {
+      instance.registerFactory<BookingIndexUseCase>(
+              () => BookingIndexUseCase(instance(),));
+      instance.registerFactory<AppointmentViewModel>(
+              () => AppointmentViewModel(instance()));
+    }
+  }

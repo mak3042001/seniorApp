@@ -60,7 +60,8 @@ class _BookingState extends State<Booking> {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat dateFormat = DateFormat('EEEE, MMMM d, yyyy');
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+    final String selectedFinishDate = dateFormat.format(_selectedDate);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -118,7 +119,7 @@ class _BookingState extends State<Booking> {
                 children: [
                   const Icon(IconBroken.Calendar),
                   const SizedBox(width: 8.0),
-                  Text(dateFormat.format(_selectedDate)),
+                  Text(selectedFinishDate),
                 ],
               ),
             ),

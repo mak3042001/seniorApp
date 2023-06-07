@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/di.dart';
 import 'package:senior/presentation/ai_screen/ai_screen.dart';
-import 'package:senior/presentation/booking/booking.dart';
+import 'package:senior/presentation/appointment/appointment_view/appointmentScreen.dart';
+import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
+import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/home/HomeApp.dart';
 import 'package:senior/presentation/login/login_view/loginScreen.dart';
 import 'package:senior/presentation/medications/medications.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
-import 'package:senior/presentation/profile/profileScreen.dart';
+import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 import 'package:senior/presentation/sign%20up/signup_view/signUpScreen.dart';
@@ -28,6 +30,8 @@ class Routes {
   static const String profile = "/profile";
   static const String schedules = "/schedules";
   static const String aiScreen = "/ai";
+  static const String historyCategoriesScreen = "/historyCategories";
+  static const String appointmentScreen = "/appointment";
 }
 
 class RouteGenerator {
@@ -53,14 +57,20 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  Medications());
       case Routes.notification:
         initNotificationModule();
-        return MaterialPageRoute(builder: (_) => NotificationScreen());
+        return MaterialPageRoute(builder: (_) => const NotificationScreen());
+        case Routes.historyCategoriesScreen:
+          initHistoryCategoriesModule();
+        return MaterialPageRoute(builder: (_) => const HistoryCategoriesScreen());
       case Routes.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.schedules:
         initSchedulesIndexModule();
         return MaterialPageRoute(builder: (_) => const SchedulesScreen());
+        case Routes.appointmentScreen:
+          initAppointmentModule();
+        return MaterialPageRoute(builder: (_) => const AppointmentScreen());
       case Routes.aiScreen:
-        return MaterialPageRoute(builder: (_) => AiScreen(title: 'AiScreen',));
+        return MaterialPageRoute(builder: (_) => const AiScreen(title: 'AiScreen',));
       default:
         return unDefinedRoute();
     }

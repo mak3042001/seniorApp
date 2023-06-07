@@ -110,7 +110,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<IndexBookingResponse> bookingsIndex() async {
     return await _appServiceClient
-        .bookingsIndex(await _appPreference.getBookingDate());
+        .bookingsIndex();
   }
 
   @override

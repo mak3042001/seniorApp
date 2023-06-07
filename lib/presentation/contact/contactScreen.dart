@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
-import 'package:senior/presentation/profile/profileScreen.dart';
+import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 
 
 class ContactsScreen extends StatelessWidget {

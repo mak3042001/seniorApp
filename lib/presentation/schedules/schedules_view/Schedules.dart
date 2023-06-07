@@ -228,20 +228,20 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                             isPassword: false,
                           );
                         }),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    StreamBuilder<bool>(
-                        stream: _viewModel.outIsTitleValid,
-                        builder: (context, snapshot) {
-                          return defaultFormField(
-                            controller: _taskTypeController,
-                            type: TextInputType.name,
-                            text: 'Task Type',
-                            prefix: IconBroken.Ticket,
-                            isPassword: false,
-                          );
-                        }),
+                    // const SizedBox(
+                    //   height: 10.0,
+                    // ),
+                    // StreamBuilder<bool>(
+                    //     stream: _viewModel.outIsTitleValid,
+                    //     builder: (context, snapshot) {
+                    //       return defaultFormField(
+                    //         controller: _taskTypeController,
+                    //         type: TextInputType.name,
+                    //         text: 'Task Type',
+                    //         prefix: IconBroken.Category,
+                    //         isPassword: false,
+                    //       );
+                    //     }),
                     const SizedBox(
                       height: 10.0,
                     ),
@@ -313,6 +313,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                                   onPressed: (snapshot.data ?? false)
                                       ? () {
                                           setState(() {
+                                            _taskTypeController.text = "1";
                                             _viewModel.addTask();
                                           });
                                         }

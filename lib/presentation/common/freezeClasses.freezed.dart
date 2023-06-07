@@ -537,3 +537,139 @@ abstract class _SchedulesCreateObject implements SchedulesCreateObject {
   _$$_SchedulesCreateObjectCopyWith<_$_SchedulesCreateObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$BookingCreateObject {
+  String get doctorId => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BookingCreateObjectCopyWith<BookingCreateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BookingCreateObjectCopyWith<$Res> {
+  factory $BookingCreateObjectCopyWith(
+          BookingCreateObject value, $Res Function(BookingCreateObject) then) =
+      _$BookingCreateObjectCopyWithImpl<$Res, BookingCreateObject>;
+  @useResult
+  $Res call({String doctorId, String date});
+}
+
+/// @nodoc
+class _$BookingCreateObjectCopyWithImpl<$Res, $Val extends BookingCreateObject>
+    implements $BookingCreateObjectCopyWith<$Res> {
+  _$BookingCreateObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? doctorId = null,
+    Object? date = null,
+  }) {
+    return _then(_value.copyWith(
+      doctorId: null == doctorId
+          ? _value.doctorId
+          : doctorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BookingCreateObjectCopyWith<$Res>
+    implements $BookingCreateObjectCopyWith<$Res> {
+  factory _$$_BookingCreateObjectCopyWith(_$_BookingCreateObject value,
+          $Res Function(_$_BookingCreateObject) then) =
+      __$$_BookingCreateObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String doctorId, String date});
+}
+
+/// @nodoc
+class __$$_BookingCreateObjectCopyWithImpl<$Res>
+    extends _$BookingCreateObjectCopyWithImpl<$Res, _$_BookingCreateObject>
+    implements _$$_BookingCreateObjectCopyWith<$Res> {
+  __$$_BookingCreateObjectCopyWithImpl(_$_BookingCreateObject _value,
+      $Res Function(_$_BookingCreateObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? doctorId = null,
+    Object? date = null,
+  }) {
+    return _then(_$_BookingCreateObject(
+      null == doctorId
+          ? _value.doctorId
+          : doctorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_BookingCreateObject implements _BookingCreateObject {
+  _$_BookingCreateObject(this.doctorId, this.date);
+
+  @override
+  final String doctorId;
+  @override
+  final String date;
+
+  @override
+  String toString() {
+    return 'BookingCreateObject(doctorId: $doctorId, date: $date)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BookingCreateObject &&
+            (identical(other.doctorId, doctorId) ||
+                other.doctorId == doctorId) &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, doctorId, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BookingCreateObjectCopyWith<_$_BookingCreateObject> get copyWith =>
+      __$$_BookingCreateObjectCopyWithImpl<_$_BookingCreateObject>(
+          this, _$identity);
+}
+
+abstract class _BookingCreateObject implements BookingCreateObject {
+  factory _BookingCreateObject(final String doctorId, final String date) =
+      _$_BookingCreateObject;
+
+  @override
+  String get doctorId;
+  @override
+  String get date;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BookingCreateObjectCopyWith<_$_BookingCreateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

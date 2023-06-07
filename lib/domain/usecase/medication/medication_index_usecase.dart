@@ -16,3 +16,5 @@ class MedicationIndexUseCase
     return await _repository.medicationsIndex();
   }
 }
+
+

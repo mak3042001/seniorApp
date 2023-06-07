@@ -140,15 +140,13 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, IndexBooking>> bookingsIndex(x) async {
+  Future<Either<Failure, IndexBooking>> bookingsIndex() async {
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API
       try {
         final response = await _remoteDataSource.bookingsIndex();
 
         if (response.successful == true) {
-          bookingDate = response.data![x]!.date!;
-          _appPreference.setBookingDate(bookingDate);
           // success
           // return either right
           // return data

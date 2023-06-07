@@ -22,7 +22,7 @@ abstract class Repository{
   Future<Either<Failure,IndexSchedules>> schedulesIndex();
   Future<Either<Failure,CreateBooking>> bookingCreate(BookingCreateRequest bookingCreateRequest);
   Future<Either<Failure,CancelBooking>> bookingCancel(BookingCancelRequest bookingCancelRequest);
-  Future<Either<Failure,IndexBooking>> bookingsIndex(int x);
+  Future<Either<Failure,IndexBooking>> bookingsIndex();
   Future<Either<Failure,HistoryCreate>> historyCreate(HistoryCreateRequest historyCreateRequest);
   Future<Either<Failure,CancelHistory>> historyCancel(HistoryCancelRequest historyCancelRequest);
   Future<Either<Failure,HistoryUpdate>> historyUpdate(HistoryUpdateRequest historyUpdateRequest);

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/presentation/contact/contactScreen.dart';
-import 'package:senior/presentation/notification/notification_viewModel/notification_viewModel.dart';
-import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
+import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 
 
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
+class HistoryCategoriesScreen extends StatefulWidget {
+  const HistoryCategoriesScreen({Key? key}) : super(key: key);
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<HistoryCategoriesScreen> createState() => _HistoryCategoriesScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
-  final NotificationViewModel _viewModel = instance<NotificationViewModel>();
+class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
+  final HistoryCategoriesViewModel _viewModel = instance<HistoryCategoriesViewModel>();
 
   @override
   void initState() {
@@ -33,17 +31,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff283DAA),
-        title: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ContactsScreen()));
-            },
-            child: const Text(
-              "Contacts",
-              style: TextStyle(color: Colors.grey),
-            )),
+        title: const Text(
+          "History Categories",
+          style: TextStyle(color: Colors.grey),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -54,25 +45,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              IconBroken.Notification,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()));
-            },
-            icon: const Icon(
-              IconBroken.Profile,
-              color: Colors.grey,
-            ),
-          ),
-        ],
       ),
       body: StreamBuilder<FlowState>(
         stream: _viewModel.outputState,
@@ -90,19 +62,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   Widget _getContentWidget() {
-    return StreamBuilder<NotificationIndex>(
-      stream: _viewModel.outputNotification,
+    return StreamBuilder<HistoryCategoriesIndex>(
+      stream: _viewModel.outputHistoryCategories,
       builder: (context, snapshot) {
         return _getItem(snapshot.data);
       },
     );
   }
 
-  Widget _getItem(NotificationIndex? notificationIndex) {
-    if (notificationIndex != null) {
+  Widget _getItem(HistoryCategoriesIndex? historyCategoriesIndex) {
+    if (historyCategoriesIndex != null) {
       return ListView.separated(
-        itemBuilder: (context, index) => StreamBuilder<NotificationIndex>(
-          stream: _viewModel.outputNotification,
+        itemBuilder: (context, index) => StreamBuilder<HistoryCategoriesIndex>(
+          stream: _viewModel.outputHistoryCategories,
           builder: (context, snapshot) {
             return _matrialList(context, index, snapshot.data);
           },
@@ -111,7 +83,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           color: Colors.grey[600],
           height: 5.0,
         ),
-        itemCount: notificationIndex.data.length,
+        itemCount: historyCategoriesIndex.data.length,
       );
     } else {
       return Container();
@@ -119,8 +91,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   Widget _matrialList(
-      BuildContext context, int i, NotificationIndex? notification) {
-    if (notification != null) {
+      BuildContext context, int i, HistoryCategoriesIndex? history) {
+    if (history != null) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
@@ -130,7 +102,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${notification.data[i]?.title}",
+                "${history.data[i]?.title}",
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge
@@ -140,7 +112,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 height: 5,
               ),
               Text(
-                "${notification.data[i]?.content}",
+                "${history.data[i]?.description}",
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],

@@ -28,3 +28,11 @@ class SchedulesCreateObject with _$SchedulesCreateObject {
     String type,
   ) = _SchedulesCreateObject;
 }
+
+@freezed
+class BookingCreateObject with _$BookingCreateObject {
+  factory BookingCreateObject(
+    String doctorId,
+    String date,
+  ) = _BookingCreateObject;
+}

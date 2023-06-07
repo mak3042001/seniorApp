@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/presentation/ai_screen/ai_screen.dart';
-import 'package:senior/presentation/booking/booking.dart';
+import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
 import 'package:senior/presentation/medications/medications.dart';
-import 'package:senior/presentation/profile/profileScreen.dart';
+import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 
 

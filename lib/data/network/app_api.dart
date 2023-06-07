@@ -98,9 +98,7 @@ abstract class AppServiceClient {
       );
 //bookings index
   @GET("/api/seniors/bookings")
-  Future<IndexBookingResponse> bookingsIndex(
-      @Query("date") String date,
-      );
+  Future<IndexBookingResponse> bookingsIndex();
 
 
 
@@ -155,7 +153,7 @@ abstract class AppServiceClient {
       @Field("description") String description,
       );
 //historyCategories index
-  @GET("api/seniors/history-categories")
+  @GET("/api/seniors/history-categories")
   Future<HistoryCategoriesIndexResponse> historyCategoriesIndex();
 
 

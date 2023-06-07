@@ -351,9 +351,9 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<IndexBookingResponse> bookingsIndex(String date) async {
+  Future<IndexBookingResponse> bookingsIndex() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'date': date};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -581,7 +581,7 @@ class _AppServiceClient implements AppServiceClient {
     )
             .compose(
               _dio.options,
-              'api/seniors/history-categories',
+              '/api/seniors/history-categories',
               queryParameters: queryParameters,
               data: _data,
             )
