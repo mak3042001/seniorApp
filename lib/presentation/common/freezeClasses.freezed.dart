@@ -673,3 +673,244 @@ abstract class _BookingCreateObject implements BookingCreateObject {
   _$$_BookingCreateObjectCopyWith<_$_BookingCreateObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ProfileObject {
+  String get username => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  String get birthdate => throw _privateConstructorUsedError;
+  String get currentPassword => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get confirmPassword => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ProfileObjectCopyWith<ProfileObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProfileObjectCopyWith<$Res> {
+  factory $ProfileObjectCopyWith(
+          ProfileObject value, $Res Function(ProfileObject) then) =
+      _$ProfileObjectCopyWithImpl<$Res, ProfileObject>;
+  @useResult
+  $Res call(
+      {String username,
+      String name,
+      String phone,
+      String birthdate,
+      String currentPassword,
+      String password,
+      String confirmPassword});
+}
+
+/// @nodoc
+class _$ProfileObjectCopyWithImpl<$Res, $Val extends ProfileObject>
+    implements $ProfileObjectCopyWith<$Res> {
+  _$ProfileObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? birthdate = null,
+    Object? currentPassword = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+  }) {
+    return _then(_value.copyWith(
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      birthdate: null == birthdate
+          ? _value.birthdate
+          : birthdate // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentPassword: null == currentPassword
+          ? _value.currentPassword
+          : currentPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProfileObjectCopyWith<$Res>
+    implements $ProfileObjectCopyWith<$Res> {
+  factory _$$_ProfileObjectCopyWith(
+          _$_ProfileObject value, $Res Function(_$_ProfileObject) then) =
+      __$$_ProfileObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String username,
+      String name,
+      String phone,
+      String birthdate,
+      String currentPassword,
+      String password,
+      String confirmPassword});
+}
+
+/// @nodoc
+class __$$_ProfileObjectCopyWithImpl<$Res>
+    extends _$ProfileObjectCopyWithImpl<$Res, _$_ProfileObject>
+    implements _$$_ProfileObjectCopyWith<$Res> {
+  __$$_ProfileObjectCopyWithImpl(
+      _$_ProfileObject _value, $Res Function(_$_ProfileObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? birthdate = null,
+    Object? currentPassword = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+  }) {
+    return _then(_$_ProfileObject(
+      null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == birthdate
+          ? _value.birthdate
+          : birthdate // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == currentPassword
+          ? _value.currentPassword
+          : currentPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ProfileObject implements _ProfileObject {
+  _$_ProfileObject(this.username, this.name, this.phone, this.birthdate,
+      this.currentPassword, this.password, this.confirmPassword);
+
+  @override
+  final String username;
+  @override
+  final String name;
+  @override
+  final String phone;
+  @override
+  final String birthdate;
+  @override
+  final String currentPassword;
+  @override
+  final String password;
+  @override
+  final String confirmPassword;
+
+  @override
+  String toString() {
+    return 'ProfileObject(username: $username, name: $name, phone: $phone, birthdate: $birthdate, currentPassword: $currentPassword, password: $password, confirmPassword: $confirmPassword)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProfileObject &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.birthdate, birthdate) ||
+                other.birthdate == birthdate) &&
+            (identical(other.currentPassword, currentPassword) ||
+                other.currentPassword == currentPassword) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, username, name, phone, birthdate,
+      currentPassword, password, confirmPassword);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProfileObjectCopyWith<_$_ProfileObject> get copyWith =>
+      __$$_ProfileObjectCopyWithImpl<_$_ProfileObject>(this, _$identity);
+}
+
+abstract class _ProfileObject implements ProfileObject {
+  factory _ProfileObject(
+      final String username,
+      final String name,
+      final String phone,
+      final String birthdate,
+      final String currentPassword,
+      final String password,
+      final String confirmPassword) = _$_ProfileObject;
+
+  @override
+  String get username;
+  @override
+  String get name;
+  @override
+  String get phone;
+  @override
+  String get birthdate;
+  @override
+  String get currentPassword;
+  @override
+  String get password;
+  @override
+  String get confirmPassword;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProfileObjectCopyWith<_$_ProfileObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

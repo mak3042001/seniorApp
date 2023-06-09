@@ -32,14 +32,12 @@ class UpdateProfileRequest {
   String name;
   String username;
   String phone;
-  String email;
   String birthdate;
 
   UpdateProfileRequest(
     this.name,
     this.username,
     this.phone,
-    this.email,
     this.birthdate,
   );
 }

@@ -6,6 +6,8 @@ class StringManager {
   static const username = "username";
   static const password = "password";
   static const login = "login";
+  static const logout = "logout";
+  static const appointments = "Appointments";
   static const usernameError = "please enter your username";
   static const passwordError = "please enter your password";
   static const signUp = "Sign up";

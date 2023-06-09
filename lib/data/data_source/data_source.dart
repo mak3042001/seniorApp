@@ -251,7 +251,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       updateProfileRequest.name,
       updateProfileRequest.username,
       updateProfileRequest.phone,
-      updateProfileRequest.email,
       updateProfileRequest.birthdate,
     );
   }

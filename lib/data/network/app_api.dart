@@ -43,7 +43,6 @@ abstract class AppServiceClient {
       @Field("name") String name,
       @Field("username") String username,
       @Field("phone") String phone,
-      @Field("email") String email,
       @Field("birthdate") String birthdate,
       );
 

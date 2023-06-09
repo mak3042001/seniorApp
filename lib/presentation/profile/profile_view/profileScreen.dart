@@ -2,10 +2,17 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/app_preference.dart';
+import 'package:senior/app/di.dart';
 import 'package:senior/app/static.dart';
+import 'package:senior/presentation/resources/color_manager.dart';
+import 'package:senior/presentation/resources/routes_manager.dart';
+import 'package:senior/presentation/resources/string_manager.dart';
+import 'package:senior/presentation/resources/values_manager.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
+  final AppPreference _appPreference = instance<AppPreference>();
   DateTime selectedDate = DateTime.now();
 
   ProfileScreen({Key? key}) : super(key: key);
@@ -291,6 +298,26 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: SizedBox(
+                  width: AppSize.s200,
+                  height: AppSize.s40,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
+                    ),
+                      onPressed: (){
+                        _appPreference.setUserLoggedOut();
+                        Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                      },
+                      child: const Text(StringManager.logout),),
                 ),
               ),
             ],

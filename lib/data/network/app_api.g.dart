@@ -143,7 +143,6 @@ class _AppServiceClient implements AppServiceClient {
     String name,
     String username,
     String phone,
-    String email,
     String birthdate,
   ) async {
     const _extra = <String, dynamic>{};
@@ -153,7 +152,6 @@ class _AppServiceClient implements AppServiceClient {
       'name': name,
       'username': username,
       'phone': phone,
-      'email': email,
       'birthdate': birthdate,
     };
     final _result = await _dio

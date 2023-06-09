@@ -36,3 +36,16 @@ class BookingCreateObject with _$BookingCreateObject {
     String date,
   ) = _BookingCreateObject;
 }
+
+@freezed
+class ProfileObject with _$ProfileObject {
+  factory ProfileObject(
+      String username,
+      String name,
+      String phone,
+      String birthdate,
+      String currentPassword,
+      String password,
+      String confirmPassword,
+      ) = _ProfileObject;
+}

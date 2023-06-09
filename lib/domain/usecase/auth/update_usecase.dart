@@ -16,7 +16,6 @@ class UpdateUseCase implements BaseUseCase<UpdateUseCaseInput, Auth> {
       input.name,
       input.username,
       input.phone,
-      input.email,
       input.birthdate,
     ));
   }
@@ -26,14 +25,12 @@ class UpdateUseCaseInput {
   String name;
   String username;
   String phone;
-  String email;
   String birthdate;
 
   UpdateUseCaseInput(
     this.name,
     this.username,
     this.phone,
-    this.email,
     this.birthdate,
   );
 }

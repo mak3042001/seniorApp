@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/presentation/resources/color_manager.dart';
+import 'package:senior/presentation/resources/routes_manager.dart';
+import 'package:senior/presentation/resources/string_manager.dart';
+import 'package:senior/presentation/resources/values_manager.dart';
 
 class Booking extends StatefulWidget {
   const Booking({Key? key}) : super(key: key);
@@ -171,6 +175,27 @@ class _BookingState extends State<Booking> {
                   style: TextStyle(
                     fontSize: 20.0,
                   ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: SizedBox(
+                  width: AppSize.s200,
+                  height: AppSize.s40,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
+                    ),
+                    onPressed: (){
+                      Navigator.pushReplacementNamed(context, Routes.appointmentScreen);
+                    },
+                    child: const Text(StringManager.appointments),),
                 ),
               ),
             ),
