@@ -29,6 +29,7 @@ class SchedulesCreateObject with _$SchedulesCreateObject {
   ) = _SchedulesCreateObject;
 }
 
+
 @freezed
 class BookingCreateObject with _$BookingCreateObject {
   factory BookingCreateObject(
@@ -48,4 +49,9 @@ class ProfileObject with _$ProfileObject {
       String password,
       String confirmPassword,
       ) = _ProfileObject;
+}
+
+@freezed
+class HistoryCategoriesObject with _$HistoryCategoriesObject {
+  factory HistoryCategoriesObject(String title, String description) = _HistoryCategoriesObject;
 }

@@ -914,3 +914,143 @@ abstract class _ProfileObject implements ProfileObject {
   _$$_ProfileObjectCopyWith<_$_ProfileObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$HistoryCategoriesObject {
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HistoryCategoriesObjectCopyWith<HistoryCategoriesObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HistoryCategoriesObjectCopyWith<$Res> {
+  factory $HistoryCategoriesObjectCopyWith(HistoryCategoriesObject value,
+          $Res Function(HistoryCategoriesObject) then) =
+      _$HistoryCategoriesObjectCopyWithImpl<$Res, HistoryCategoriesObject>;
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class _$HistoryCategoriesObjectCopyWithImpl<$Res,
+        $Val extends HistoryCategoriesObject>
+    implements $HistoryCategoriesObjectCopyWith<$Res> {
+  _$HistoryCategoriesObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_HistoryCategoriesObjectCopyWith<$Res>
+    implements $HistoryCategoriesObjectCopyWith<$Res> {
+  factory _$$_HistoryCategoriesObjectCopyWith(_$_HistoryCategoriesObject value,
+          $Res Function(_$_HistoryCategoriesObject) then) =
+      __$$_HistoryCategoriesObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class __$$_HistoryCategoriesObjectCopyWithImpl<$Res>
+    extends _$HistoryCategoriesObjectCopyWithImpl<$Res,
+        _$_HistoryCategoriesObject>
+    implements _$$_HistoryCategoriesObjectCopyWith<$Res> {
+  __$$_HistoryCategoriesObjectCopyWithImpl(_$_HistoryCategoriesObject _value,
+      $Res Function(_$_HistoryCategoriesObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_$_HistoryCategoriesObject(
+      null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HistoryCategoriesObject implements _HistoryCategoriesObject {
+  _$_HistoryCategoriesObject(this.title, this.description);
+
+  @override
+  final String title;
+  @override
+  final String description;
+
+  @override
+  String toString() {
+    return 'HistoryCategoriesObject(title: $title, description: $description)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HistoryCategoriesObject &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HistoryCategoriesObjectCopyWith<_$_HistoryCategoriesObject>
+      get copyWith =>
+          __$$_HistoryCategoriesObjectCopyWithImpl<_$_HistoryCategoriesObject>(
+              this, _$identity);
+}
+
+abstract class _HistoryCategoriesObject implements HistoryCategoriesObject {
+  factory _HistoryCategoriesObject(
+          final String title, final String description) =
+      _$_HistoryCategoriesObject;
+
+  @override
+  String get title;
+  @override
+  String get description;
+  @override
+  @JsonKey(ignore: true)
+  _$$_HistoryCategoriesObjectCopyWith<_$_HistoryCategoriesObject>
+      get copyWith => throw _privateConstructorUsedError;
+}

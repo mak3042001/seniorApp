@@ -48,6 +48,7 @@ class RouteGenerator {
       case Routes.home:
         return MaterialPageRoute(builder: (_) => HomeApp());
       case Routes.booking:
+        initBookingModule();
         return MaterialPageRoute(builder: (_) => const Booking());
       case Routes.contact:
         return MaterialPageRoute(builder: (_) => const ContactsScreen());

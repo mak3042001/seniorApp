@@ -24,11 +24,9 @@ class ContactsScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const NotificationScreen()));
-            },
-            icon: const Icon(IconBroken.Notification,
-              color: Colors.grey,
+            onPressed: () {},
+            icon: const Icon(Icons.refresh,
+              color: Colors.white,
             ),
           ),
           IconButton(

@@ -33,17 +33,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff283DAA),
-        title: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ContactsScreen()));
-            },
-            child: const Text(
-              "Contacts",
-              style: TextStyle(color: Colors.grey),
-            )),
+        title: const Text(
+          "Notification",
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -56,9 +49,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              (){_viewModel.start();}.call();
+            },
             icon: const Icon(
-              IconBroken.Notification,
+              Icons.refresh,
               color: Colors.white,
             ),
           ),

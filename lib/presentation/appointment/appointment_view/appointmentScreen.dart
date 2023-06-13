@@ -101,7 +101,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${indexBooking.data[i]?.doctor}",
+                "${indexBooking.data[i]?.doctor?.name}",
                 style: Theme
                     .of(context)
                     .textTheme

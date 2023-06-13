@@ -230,10 +230,7 @@ class RepositoryImpl implements Repository {
       try {
         final response = await _remoteDataSource.historyCategoriesCreate(historyCategoriesCreateRequest);
 
-        if (response.successful == true) {
-          historyCategoryId = response.data!.id!;
-          _appPreference.setHistoryCategoryId(historyCategoryId);
-          // success
+        if (response.successful == true) {// success
           // return either right
           // return data
           return Right(response.toDomain());

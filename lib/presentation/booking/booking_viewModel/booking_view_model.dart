@@ -1,4 +1,5 @@
 
+
 import 'dart:async';
 
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
@@ -8,8 +9,8 @@ import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
 
-class BookingViewModel extends BaseViewModel
-    with BookingViewModelInputs, BookingViewModelOutputs {
+class BookingModel extends BaseViewModel
+    with BookingModelInputs, BookingModelOutputs {
   final StreamController _doctorStreamController =
   StreamController<String>.broadcast();
   final StreamController _dateStreamController =
@@ -18,13 +19,13 @@ class BookingViewModel extends BaseViewModel
   final StreamController _areAllInputsValidStreamController =
   StreamController<void>.broadcast();
 
-  StreamController isUserLoggedInSuccessfullyStreamController =
+  StreamController isUserBookingSuccessfullyStreamController =
   StreamController<bool>();
 
   var bookingObject = BookingCreateObject("", "");
   final BookingCreateUseCase _bookingCreateUseCase;
 
-  BookingViewModel(this._bookingCreateUseCase);
+  BookingModel(this._bookingCreateUseCase);
 
   // inputs
   @override
@@ -33,12 +34,11 @@ class BookingViewModel extends BaseViewModel
     _doctorStreamController.close();
     _dateStreamController.close();
     _areAllInputsValidStreamController.close();
-    isUserLoggedInSuccessfullyStreamController.close();
+    isUserBookingSuccessfullyStreamController.close();
   }
 
   @override
   void start() {
-    // view model should tell view please show content state
     inputState.add(ContentState());
   }
 
@@ -81,7 +81,7 @@ class BookingViewModel extends BaseViewModel
       // content
       inputState.add(ContentState());
       // navigate to main screen
-      isUserLoggedInSuccessfullyStreamController.add(true);
+      isUserBookingSuccessfullyStreamController.add(true);
     });
   }
 
@@ -113,7 +113,7 @@ class BookingViewModel extends BaseViewModel
   }
 }
 
-abstract class BookingViewModelInputs {
+abstract class BookingModelInputs {
   setDoctor(String doctor);
 
   setDate(String date);
@@ -127,7 +127,7 @@ abstract class BookingViewModelInputs {
   Sink get inputAreAllInputsValid;
 }
 
-abstract class BookingViewModelOutputs {
+abstract class BookingModelOutputs {
   Stream<bool> get outIsDoctorValid;
 
   Stream<bool> get outIsDateValid;

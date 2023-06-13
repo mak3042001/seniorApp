@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -8,13 +6,14 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
+import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
-import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
+import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/data_source/data_source.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
@@ -65,6 +64,7 @@ Future<void> initAppModule() async {
   initNotificationModule();
   initHistoryCategoriesModule();
   initAppointmentModule();
+  initBookingModule();
 }
 
 //auth
@@ -108,8 +108,10 @@ initNotificationModule() {
     if (!GetIt.I.isRegistered<HistoryCategoriesIndexUseCase>()) {
       instance.registerFactory<HistoryCategoriesIndexUseCase>(
               () => HistoryCategoriesIndexUseCase(instance()));
+      instance.registerFactory<HistoryCategoriesCreateUseCase>(
+              () => HistoryCategoriesCreateUseCase(instance()));
       instance.registerFactory<HistoryCategoriesViewModel>(
-              () => HistoryCategoriesViewModel(instance()));
+              () => HistoryCategoriesViewModel(instance(),instance()));
     }
   }
 
@@ -119,5 +121,14 @@ initNotificationModule() {
               () => BookingIndexUseCase(instance(),));
       instance.registerFactory<AppointmentViewModel>(
               () => AppointmentViewModel(instance()));
+    }
+  }
+
+  initBookingModule() {
+    if (!GetIt.I.isRegistered<BookingCreateUseCase>()) {
+      instance.registerFactory<BookingCreateUseCase>(
+              () => BookingCreateUseCase(instance(),));
+      instance.registerFactory<BookingModel>(
+              () => BookingModel(instance(),));
     }
   }

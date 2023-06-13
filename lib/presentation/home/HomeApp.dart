@@ -4,7 +4,9 @@ import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history/History.dart';
+import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/medications/medications.dart';
+import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 
@@ -17,7 +19,8 @@ class HomeApp extends StatelessWidget {
     "History",
     "Bookings",
     "Medications",
-    "Text readable"
+    "Text readable",
+    "Chat",
   ];
   List<String> images = [
     "$baseImageAssets/Schedules.png",
@@ -25,15 +28,17 @@ class HomeApp extends StatelessWidget {
     "$baseImageAssets/bookings.jpg",
     "$baseImageAssets/medications.jpeg",
     "$baseImageAssets/camScan.jpg",
+    "$baseImageAssets/chat.jpeg",
   ];
 
 
   List<Widget> screen = [
     const SchedulesScreen(),
-    const History(),
+    const HistoryCategoriesScreen(),
     const Booking(),
     Medications(),
-    const AiScreen(title: 'cam scan')
+    const AiScreen(title: 'cam scan'),
+    const ContactsScreen(),
   ];
 
 
@@ -47,9 +52,9 @@ class HomeApp extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ContactsScreen()));
+                  MaterialPageRoute(builder: (context) => const NotificationScreen()));
             },
-            icon: const Icon(IconBroken.Chat),
+            icon: const Icon(IconBroken.Notification),
           ),
           title: const Text(
             "Care",
