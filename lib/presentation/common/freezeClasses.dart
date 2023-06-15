@@ -55,3 +55,7 @@ class ProfileObject with _$ProfileObject {
 class HistoryCategoriesObject with _$HistoryCategoriesObject {
   factory HistoryCategoriesObject(String title, String description) = _HistoryCategoriesObject;
 }
+@freezed
+class HistoryObject with _$HistoryObject {
+  factory HistoryObject(String title, String description) = _HistoryObject;
+}

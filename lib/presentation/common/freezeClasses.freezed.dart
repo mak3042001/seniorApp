@@ -1054,3 +1054,138 @@ abstract class _HistoryCategoriesObject implements HistoryCategoriesObject {
   _$$_HistoryCategoriesObjectCopyWith<_$_HistoryCategoriesObject>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$HistoryObject {
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HistoryObjectCopyWith<HistoryObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HistoryObjectCopyWith<$Res> {
+  factory $HistoryObjectCopyWith(
+          HistoryObject value, $Res Function(HistoryObject) then) =
+      _$HistoryObjectCopyWithImpl<$Res, HistoryObject>;
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class _$HistoryObjectCopyWithImpl<$Res, $Val extends HistoryObject>
+    implements $HistoryObjectCopyWith<$Res> {
+  _$HistoryObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_HistoryObjectCopyWith<$Res>
+    implements $HistoryObjectCopyWith<$Res> {
+  factory _$$_HistoryObjectCopyWith(
+          _$_HistoryObject value, $Res Function(_$_HistoryObject) then) =
+      __$$_HistoryObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class __$$_HistoryObjectCopyWithImpl<$Res>
+    extends _$HistoryObjectCopyWithImpl<$Res, _$_HistoryObject>
+    implements _$$_HistoryObjectCopyWith<$Res> {
+  __$$_HistoryObjectCopyWithImpl(
+      _$_HistoryObject _value, $Res Function(_$_HistoryObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_$_HistoryObject(
+      null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HistoryObject implements _HistoryObject {
+  _$_HistoryObject(this.title, this.description);
+
+  @override
+  final String title;
+  @override
+  final String description;
+
+  @override
+  String toString() {
+    return 'HistoryObject(title: $title, description: $description)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HistoryObject &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HistoryObjectCopyWith<_$_HistoryObject> get copyWith =>
+      __$$_HistoryObjectCopyWithImpl<_$_HistoryObject>(this, _$identity);
+}
+
+abstract class _HistoryObject implements HistoryObject {
+  factory _HistoryObject(final String title, final String description) =
+      _$_HistoryObject;
+
+  @override
+  String get title;
+  @override
+  String get description;
+  @override
+  @JsonKey(ignore: true)
+  _$$_HistoryObjectCopyWith<_$_HistoryObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

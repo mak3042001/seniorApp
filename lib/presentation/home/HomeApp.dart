@@ -3,7 +3,6 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
-import 'package:senior/presentation/history/History.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/medications/medications.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';

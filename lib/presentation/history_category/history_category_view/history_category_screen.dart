@@ -225,25 +225,34 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
               _appPreference.setHistoryCategoryId(history.data[i]?.id);
               Navigator.pushNamed(context, Routes.history);
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${history.data[i]?.title}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontSize: 30),
+            child: Card(
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${history.data[i]?.title}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(fontSize: 30),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "${history.data[i]?.description}",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "${history.data[i]?.description}",
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+              ),
             ),
           ),
         ),
