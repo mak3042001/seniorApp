@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
-import 'dart:math';
-
 import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
 
 import '../../../app/di.dart';
@@ -69,7 +66,6 @@ class _MedicationCodeViewState extends State<MedicationCodeView> {
 
 
   Widget _getItem(MedicationsCodeIndex? medicationsCodeIndex) {
-    if (medicationsCodeIndex != null) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -80,21 +76,20 @@ class _MedicationCodeViewState extends State<MedicationCodeView> {
             ),
             const SizedBox(height: 16),
             Text(
-              medicationsCodeIndex.data,
+              medicationsCodeIndex != null ? medicationsCodeIndex.data : "null" ,
               style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: (){
-                _viewModel.get();
+                setState(() {
+                  _viewModel.get();
+                });
               },
               child: const Text('Generate Code'),
             ),
           ],
         ),
       );
-    } else {
-      return Container();
-    }
   }
 }
