@@ -304,3 +304,31 @@ extension MedicationsIndexResponseMapper on MedicationsIndexResponse? {
     );
   }
 }
+
+//medications code create mapper
+extension MedicationsCodeCreateDataResponseMapper
+on MedicationsCodeCreateDataResponse? {
+  MedicationsCodeCreateData toDomain() {
+    return MedicationsCodeCreateData(
+      this?.data.orEmpty() ?? Constant.zero,
+    );
+  }
+}
+
+extension MedicationsCodeCreateResponseMapper on MedicationsCodeCreateResponse? {
+  MedicationsCodeCreate toDomain() {
+    return MedicationsCodeCreate(
+      this?.data.toDomain(),
+    );
+  }
+}
+
+//medications code index mapper
+extension MedicationsCodeIndexDataResponseMapper
+on MedicationsCodeIndexResponse? {
+  MedicationsCodeIndex toDomain() {
+    return MedicationsCodeIndex(
+      this?.data.orEmpty() ?? Constant.empty,
+    );
+  }
+}

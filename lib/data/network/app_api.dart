@@ -182,4 +182,14 @@ abstract class AppServiceClient {
   @GET("/api/seniors/medications")
   Future<MedicationsIndexResponse> medicationsIndex();
 
+
+//medications code create
+  @POST("/api/seniors/medications-code/create")
+  Future<MedicationsCodeCreateResponse> medicationsCodeCreate();
+
+//medications code index
+  @GET("/api/seniors/medications-code/last")
+  Future<MedicationsCodeIndexResponse> medicationsCodeIndex();
 }
+
+

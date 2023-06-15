@@ -10,9 +10,12 @@ import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
+import 'package:senior/domain/usecase/medication_code/medication_code_create_usecase.dart';
+import 'package:senior/domain/usecase/medication_code/medication_code_index_usecase.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
+import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/data_source/data_source.dart';
 import '../data/network/dio_factory.dart';
@@ -65,6 +68,7 @@ Future<void> initAppModule() async {
   initHistoryCategoriesModule();
   initAppointmentModule();
   initBookingModule();
+  initCodeModule();
 }
 
 //auth
@@ -132,3 +136,14 @@ initNotificationModule() {
               () => BookingModel(instance(),));
     }
   }
+
+initCodeModule() {
+  if (!GetIt.I.isRegistered<MedicationsCodeIndexUseCase>()) {
+    instance.registerFactory<MedicationsCodeIndexUseCase>(
+            () => MedicationsCodeIndexUseCase(instance(),));
+    instance.registerFactory<MedicationsCodeCreateUseCase>(
+            () => MedicationsCodeCreateUseCase(instance(),));
+    instance.registerFactory<MedicationsCodeViewModel>(
+            () => MedicationsCodeViewModel(instance(),instance()));
+  }
+}

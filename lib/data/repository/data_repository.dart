@@ -653,4 +653,60 @@ class RepositoryImpl implements Repository {
     // TODO: implement updateProfile
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, MedicationsCodeCreate>> medicationsCodeCreate() async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet, its safe to call API
+      try {
+        final response = await _remoteDataSource.medicationsCodeCreate();
+
+        if (response.successful == true) {
+          // success
+          // return either right
+          // return data
+          return Right(response.toDomain());
+        } else {
+          // failure --return business error
+          // return either left
+          return Left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // return internet connection error
+      // return either left
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, MedicationsCodeIndex>> medicationsCodeIndex() async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet, its safe to call API
+      try {
+        final response = await _remoteDataSource.medicationsCodeIndex();
+
+        if (response.successful == true) {
+          // success
+          // return either right
+          // return data
+          return Right(response.toDomain());
+        } else {
+          // failure --return business error
+          // return either left
+          return Left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // return internet connection error
+      // return either left
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

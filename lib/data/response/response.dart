@@ -19,10 +19,8 @@ class DataResponse {
   @JsonKey(name: "token")
   String? token;
 
-  DataResponse(
-    this.user,
-    this.token,
-  );
+  DataResponse(this.user,
+      this.token,);
 
   //fromJson
   factory DataResponse.fromJson(Map<String, dynamic> json) =>
@@ -51,16 +49,14 @@ class UserResponse {
   @JsonKey(name: "image")
   String? image;
 
-  UserResponse(
-    this.id,
-    this.username,
-    this.name,
-    this.email,
-    this.phone,
-    this.birthdate,
-    this.age,
-    this.image,
-  );
+  UserResponse(this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,);
 
   //fromJson
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
@@ -75,9 +71,7 @@ class AuthResponse extends BaseResponse {
   @JsonKey(name: "data")
   DataResponse? data;
 
-  AuthResponse(
-    this.data,
-  );
+  AuthResponse(this.data,);
 
   //fromJson
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>
@@ -126,13 +120,11 @@ class NotificationDataResponse {
   @JsonKey(name: "created_at")
   String? createdAt;
 
-  NotificationDataResponse(
-    this.id,
-    this.title,
-    this.content,
-    this.seen,
-    this.createdAt,
-  );
+  NotificationDataResponse(this.id,
+      this.title,
+      this.content,
+      this.seen,
+      this.createdAt,);
 
   //fromJson
   factory NotificationDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -202,15 +194,13 @@ class IndexSchedulesDataResponse {
   @JsonKey(name: "created_at")
   int? createdAt;
 
-  IndexSchedulesDataResponse(
-    this.id,
-    this.title,
-    this.description,
-    this.date,
-    this.time,
-    this.type,
-    this.createdAt,
-  );
+  IndexSchedulesDataResponse(this.id,
+      this.title,
+      this.description,
+      this.date,
+      this.time,
+      this.type,
+      this.createdAt,);
 
   //fromJson
   factory IndexSchedulesDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -225,9 +215,7 @@ class IndexSchedulesResponse extends BaseResponse {
   @JsonKey(name: "data")
   List<IndexSchedulesDataResponse?>? data;
 
-  IndexSchedulesResponse(
-    this.data,
-  );
+  IndexSchedulesResponse(this.data,);
 
   //fromJson
   factory IndexSchedulesResponse.fromJson(Map<String, dynamic> json) =>
@@ -287,8 +275,7 @@ class DoctorResponse {
   @JsonKey(name: "week_days")
   String? weekDays;
 
-  DoctorResponse(
-      this.id,
+  DoctorResponse(this.id,
       this.username,
       this.name,
       this.email,
@@ -322,14 +309,12 @@ class BookingDataResponse {
   @JsonKey(name: "doctor")
   DoctorResponse? doctor;
 
-  BookingDataResponse(
-    this.id,
-    this.date,
-    this.status,
-    this.createdAt,
-    this.senior,
-    this.doctor,
-  );
+  BookingDataResponse(this.id,
+      this.date,
+      this.status,
+      this.createdAt,
+      this.senior,
+      this.doctor,);
 
   //fromJson
   factory BookingDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -344,9 +329,7 @@ class IndexBookingResponse extends BaseResponse {
   @JsonKey(name: "data")
   List<BookingDataResponse?>? data;
 
-  IndexBookingResponse(
-    this.data,
-  );
+  IndexBookingResponse(this.data,);
 
   //fromJson
   factory IndexBookingResponse.fromJson(Map<String, dynamic> json) =>
@@ -370,13 +353,11 @@ class HistoryCreateDataResponse {
   @JsonKey(name: "history_category_id")
   int? historyCategoryId;
 
-  HistoryCreateDataResponse(
-    this.id,
-    this.title,
-    this.description,
-    this.userId,
-    this.historyCategoryId,
-  );
+  HistoryCreateDataResponse(this.id,
+      this.title,
+      this.description,
+      this.userId,
+      this.historyCategoryId,);
 
   //fromJson
   factory HistoryCreateDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -391,9 +372,7 @@ class HistoryCreateResponse extends BaseResponse {
   @JsonKey(name: "data")
   HistoryCreateDataResponse? data;
 
-  HistoryCreateResponse(
-    this.data,
-  );
+  HistoryCreateResponse(this.data,);
 
   //fromJson
   factory HistoryCreateResponse.fromJson(Map<String, dynamic> json) =>
@@ -409,9 +388,7 @@ class HistoryUpdateResponse extends BaseResponse {
   @JsonKey(name: "data")
   HistoryCreateDataResponse? data;
 
-  HistoryUpdateResponse(
-    this.data,
-  );
+  HistoryUpdateResponse(this.data,);
 
   //fromJson
   factory HistoryUpdateResponse.fromJson(Map<String, dynamic> json) =>
@@ -440,9 +417,7 @@ class HistoryIndexResponse extends BaseResponse {
   @JsonKey(name: "data")
   List<HistoryCreateDataResponse?>? data;
 
-  HistoryIndexResponse(
-    this.data,
-  );
+  HistoryIndexResponse(this.data,);
 
   //fromJson
   factory HistoryIndexResponse.fromJson(Map<String, dynamic> json) =>
@@ -464,16 +439,14 @@ class HistoryCategoriesCreateDataResponse {
   @JsonKey(name: "user_id")
   int? userId;
 
-  HistoryCategoriesCreateDataResponse(
-    this.id,
-    this.title,
-    this.description,
-    this.userId,
-  );
+  HistoryCategoriesCreateDataResponse(this.id,
+      this.title,
+      this.description,
+      this.userId,);
 
   //fromJson
   factory HistoryCategoriesCreateDataResponse.fromJson(
-          Map<String, dynamic> json) =>
+      Map<String, dynamic> json) =>
       _$HistoryCategoriesCreateDataResponseFromJson(json);
 
   //toJson
@@ -486,9 +459,7 @@ class HistoryCategoriesCreateResponse extends BaseResponse {
   @JsonKey(name: "data")
   HistoryCategoriesCreateDataResponse? data;
 
-  HistoryCategoriesCreateResponse(
-    this.data,
-  );
+  HistoryCategoriesCreateResponse(this.data,);
 
   //fromJson
   factory HistoryCategoriesCreateResponse.fromJson(Map<String, dynamic> json) =>
@@ -505,9 +476,7 @@ class HistoryCategoriesUpdateResponse extends BaseResponse {
   @JsonKey(name: "data")
   HistoryCategoriesCreateDataResponse? data;
 
-  HistoryCategoriesUpdateResponse(
-    this.data,
-  );
+  HistoryCategoriesUpdateResponse(this.data,);
 
   //fromJson
   factory HistoryCategoriesUpdateResponse.fromJson(Map<String, dynamic> json) =>
@@ -538,9 +507,7 @@ class HistoryCategoriesIndexResponse extends BaseResponse {
   @JsonKey(name: "data")
   List<HistoryCategoriesCreateDataResponse?>? data;
 
-  HistoryCategoriesIndexResponse(
-    this.data,
-  );
+  HistoryCategoriesIndexResponse(this.data,);
 
   //fromJson
   factory HistoryCategoriesIndexResponse.fromJson(Map<String, dynamic> json) =>
@@ -566,14 +533,12 @@ class MedicationsCreateDataResponse {
   @JsonKey(name: "created_at")
   String? createdAt;
 
-  MedicationsCreateDataResponse(
-    this.id,
-    this.userId,
-    this.medication,
-    this.medicationDose,
-    this.description,
-    this.createdAt,
-  );
+  MedicationsCreateDataResponse(this.id,
+      this.userId,
+      this.medication,
+      this.medicationDose,
+      this.description,
+      this.createdAt,);
 
   //fromJson
   factory MedicationsCreateDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -588,9 +553,7 @@ class MedicationsCreateResponse extends BaseResponse {
   @JsonKey(name: "data")
   MedicationsCreateDataResponse? data;
 
-  MedicationsCreateResponse(
-    this.data,
-  );
+  MedicationsCreateResponse(this.data,);
 
   //fromJson
   factory MedicationsCreateResponse.fromJson(Map<String, dynamic> json) =>
@@ -632,9 +595,7 @@ class MedicationsIndexResponse extends BaseResponse {
   @JsonKey(name: "data")
   List<MedicationsCreateDataResponse?>? data;
 
-  MedicationsIndexResponse(
-    this.data,
-  );
+  MedicationsIndexResponse(this.data,);
 
   //fromJson
   factory MedicationsIndexResponse.fromJson(Map<String, dynamic> json) =>
@@ -642,4 +603,52 @@ class MedicationsIndexResponse extends BaseResponse {
 
   //toJson
   Map<String, dynamic> toJson() => _$MedicationsIndexResponseToJson(this);
+}
+
+
+//medications code create
+@JsonSerializable()
+class MedicationsCodeCreateDataResponse {
+  @JsonKey(name: "data")
+  int? data;
+
+
+  MedicationsCodeCreateDataResponse(this.data);
+  //fromJson
+  factory MedicationsCodeCreateDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$MedicationsCodeCreateDataResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$MedicationsCodeCreateDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class MedicationsCodeCreateResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  MedicationsCodeCreateDataResponse? data;
+
+  MedicationsCodeCreateResponse(this.data,);
+
+  //fromJson
+  factory MedicationsCodeCreateResponse.fromJson(Map<String, dynamic> json) =>
+      _$MedicationsCodeCreateResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$MedicationsCodeCreateResponseToJson(this);
+}
+
+//medications code index
+@JsonSerializable()
+class MedicationsCodeIndexResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  String? data;
+
+  MedicationsCodeIndexResponse(this.data,);
+
+  //fromJson
+  factory MedicationsCodeIndexResponse.fromJson(Map<String, dynamic> json) =>
+      _$MedicationsCodeIndexResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$MedicationsCodeIndexResponseToJson(this);
 }

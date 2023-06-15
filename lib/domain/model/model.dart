@@ -311,3 +311,27 @@ class MedicationsIndex {
     this.data,
   );
 }
+
+//medications code create
+class MedicationsCodeCreateData {
+  int data;
+
+  MedicationsCodeCreateData(this.data);
+}
+
+class MedicationsCodeCreate {
+  MedicationsCodeCreateData? data;
+
+  MedicationsCodeCreate(
+      this.data,
+      );
+}
+
+//medications code index
+class MedicationsCodeIndex {
+  String data;
+
+  MedicationsCodeIndex(
+      this.data,
+      );
+}

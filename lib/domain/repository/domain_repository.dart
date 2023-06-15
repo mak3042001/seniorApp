@@ -35,4 +35,8 @@ abstract class Repository{
   Future<Either<Failure,CancelMedications>> medicationsCancel(MedicationsCancelRequest medicationsCancelRequest);
   Future<Either<Failure,MedicationsUpdate>> medicationsUpdate(MedicationsUpdateRequest medicationsUpdateRequest);
   Future<Either<Failure,MedicationsIndex>> medicationsIndex();
+  Future<Either<Failure,MedicationsCodeCreate>> medicationsCodeCreate();
+  Future<Either<Failure,MedicationsCodeIndex>> medicationsCodeIndex();
+
+
 }

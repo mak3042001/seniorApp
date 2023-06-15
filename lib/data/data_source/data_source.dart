@@ -65,6 +65,9 @@ abstract class RemoteDataSource {
       MedicationsUpdateRequest medicationsUpdateRequest);
 
   Future<MedicationsIndexResponse> medicationsIndex();
+
+  Future<MedicationsCodeCreateResponse> medicationsCodeCreate();
+  Future<MedicationsCodeIndexResponse> medicationsCodeIndex();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -253,5 +256,16 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       updateProfileRequest.phone,
       updateProfileRequest.birthdate,
     );
+  }
+
+
+  @override
+  Future<MedicationsCodeCreateResponse> medicationsCodeCreate() async {
+    return await _appServiceClient.medicationsCodeCreate();
+  }
+
+  @override
+  Future<MedicationsCodeIndexResponse> medicationsCodeIndex() async {
+    return await _appServiceClient.medicationsCodeIndex();
   }
 }

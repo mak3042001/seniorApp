@@ -567,3 +567,50 @@ Map<String, dynamic> _$MedicationsIndexResponseToJson(
       'message': instance.message,
       'data': instance.data,
     };
+
+MedicationsCodeCreateDataResponse _$MedicationsCodeCreateDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    MedicationsCodeCreateDataResponse(
+      json['data'] as int?,
+    );
+
+Map<String, dynamic> _$MedicationsCodeCreateDataResponseToJson(
+        MedicationsCodeCreateDataResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+MedicationsCodeCreateResponse _$MedicationsCodeCreateResponseFromJson(
+        Map<String, dynamic> json) =>
+    MedicationsCodeCreateResponse(
+      json['data'] == null
+          ? null
+          : MedicationsCodeCreateDataResponse.fromJson(
+              json['data'] as Map<String, dynamic>),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$MedicationsCodeCreateResponseToJson(
+        MedicationsCodeCreateResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+MedicationsCodeIndexResponse _$MedicationsCodeIndexResponseFromJson(
+        Map<String, dynamic> json) =>
+    MedicationsCodeIndexResponse(
+      json['data'] as String?,
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$MedicationsCodeIndexResponseToJson(
+        MedicationsCodeIndexResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };

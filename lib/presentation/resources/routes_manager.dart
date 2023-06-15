@@ -9,6 +9,7 @@ import 'package:senior/presentation/history_category/history_category_view/histo
 import 'package:senior/presentation/home/HomeApp.dart';
 import 'package:senior/presentation/login/login_view/loginScreen.dart';
 import 'package:senior/presentation/medications/medications.dart';
+import 'package:senior/presentation/medications_code/medication_code_view/medication_code_view.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
@@ -26,6 +27,7 @@ class Routes {
   static const String contact = "/contact";
   static const String history = "/history";
   static const String medication = "/medication";
+  static const String medicationCode = "/medicationCode";
   static const String notification = "/notification";
   static const String profile = "/profile";
   static const String schedules = "/schedules";
@@ -56,6 +58,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const History());
       case Routes.medication:
         return MaterialPageRoute(builder: (_) =>  Medications());
+        case Routes.medicationCode:
+        return MaterialPageRoute(builder: (_) =>  const MedicationCodeView());
       case Routes.notification:
         initNotificationModule();
         return MaterialPageRoute(builder: (_) => const NotificationScreen());

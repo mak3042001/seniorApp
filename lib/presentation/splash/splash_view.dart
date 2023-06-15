@@ -32,7 +32,7 @@ class _SplashViewState extends State<SplashView> {
     _appPreference.isUserLoggedIn().then((isUserLoggedIn) => {
     if (isUserLoggedIn)
     {
-    Navigator.pushReplacementNamed(context, Routes.home)
+    Navigator.pushReplacementNamed(context, Routes.medicationCode)
     }
     else
     {
