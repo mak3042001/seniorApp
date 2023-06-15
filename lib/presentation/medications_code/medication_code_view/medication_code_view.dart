@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
 import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
+import 'package:senior/presentation/resources/color_manager.dart';
 
 import '../../../app/di.dart';
 
@@ -27,7 +29,21 @@ class _MedicationCodeViewState extends State<MedicationCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Medication Code'),
+        backgroundColor: const Color(0xff283DAA),
+        title: const Text(
+          "Medication Code",
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            IconBroken.Arrow___Left_2,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -81,6 +97,9 @@ class _MedicationCodeViewState extends State<MedicationCodeView> {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(ColorManager.darkPrimary), // Set the desired color here
+              ),
               onPressed: (){
                 setState(() {
                   _viewModel.get();

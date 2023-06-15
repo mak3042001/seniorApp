@@ -21,6 +21,9 @@ class StringManager {
   static const create = "Create";
   static const cancel = "Cancel";
   static const noList = "No List";
+  static const profilePicture = "upload_profile_picture";
+  static const photoGallery = "photo_from_galley";
+  static const photoCamera = "photo_from_camera";
   static const String usernameHint = 'Username';
   static const String nameHint = 'Name';
   static const String passwordHint = 'Password';

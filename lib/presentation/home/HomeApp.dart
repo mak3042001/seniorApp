@@ -5,6 +5,7 @@ import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/medications/medications.dart';
+import 'package:senior/presentation/medications_code/medication_code_view/medication_code_view.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
@@ -20,6 +21,7 @@ class HomeApp extends StatelessWidget {
     "Medications",
     "Text readable",
     "Chat",
+    "Medication Code"
   ];
   List<String> images = [
     "$baseImageAssets/Schedules.png",
@@ -28,6 +30,7 @@ class HomeApp extends StatelessWidget {
     "$baseImageAssets/medications.jpeg",
     "$baseImageAssets/camScan.jpg",
     "$baseImageAssets/chat.jpeg",
+    "$baseImageAssets/code.jpg",
   ];
 
 
@@ -38,6 +41,7 @@ class HomeApp extends StatelessWidget {
     Medications(),
     const AiScreen(title: 'cam scan'),
     const ContactsScreen(),
+    const MedicationCodeView(),
   ];
 
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/data/network/app_api.dart';
@@ -62,6 +63,8 @@ Future<void> initAppModule() async {
 
   instance.registerLazySingleton<Repository>(
           () => RepositoryImpl(instance(), instance(),instance()));
+
+  instance.registerFactory<ImagePicker>(() => ImagePicker());
 
   initSchedulesIndexModule();
   initNotificationModule();

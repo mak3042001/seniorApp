@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ffi';
 import 'package:rxdart/subjects.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/domain/usecase/history/history_create_usecase.dart';
+import 'package:senior/domain/usecase/history/history_index_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
@@ -71,7 +73,7 @@ class HistoryViewModel extends BaseViewModel
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await historyCreateUseCase.execute(
-    HistoryCreateUseCaseInput(historyObject.title, historyObject.description)))
+    HistoryCreateUseCaseInput( ,historyObject.title, historyObject.description)))
         .fold(
     (failure) => {
     // left -> failure

@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
@@ -12,6 +13,9 @@ import 'package:senior/presentation/resources/values_manager.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
+
+  final ImagePicker _imagePicker = instance<ImagePicker>();
+
   final AppPreference _appPreference = instance<AppPreference>();
   DateTime selectedDate = DateTime.now();
 
@@ -28,8 +32,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -76,11 +80,28 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage(
-                          "assets/images/no_user.png",
+                      Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          const CircleAvatar(
+                          backgroundImage: AssetImage(
+                            "assets/images/no_user.png",
+                          ),
+                          radius: 65.0,
                         ),
-                        radius: 65.0,
+                          CircleAvatar(
+                            backgroundColor: ColorManager.white,
+                            child: IconButton(
+                              onPressed: () {
+                                _showPicker(context);
+                              },
+                              icon: const Icon(
+                                IconBroken.Edit,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -325,5 +346,45 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+              child: Wrap(
+                children: [
+                  ListTile(
+                    trailing: const Icon(Icons.arrow_forward),
+                    leading: const Icon(Icons.camera),
+                    title: Text(StringManager.photoGallery),
+                    onTap: () {
+                      _imageFromGallery();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    trailing: const Icon(Icons.arrow_forward),
+                    leading: const Icon(Icons.camera_alt_outlined),
+                    title: Text(StringManager.photoCamera),
+                    onTap: () {
+                      _imageFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              ));
+        });
+  }
+
+  _imageFromGallery() async {
+    var image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    // _viewModel.setProfilePicture(File(image?.path ?? ""));
+  }
+
+  _imageFromCamera() async {
+    var image = await _imagePicker.pickImage(source: ImageSource.camera);
+    // _viewModel.setProfilePicture(File(image?.path ?? ""));
   }
 }
