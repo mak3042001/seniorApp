@@ -104,7 +104,7 @@ class HistoryCategoriesViewModel extends BaseViewModel
     // content
     inputState.add(ContentState());
     // navigate to main screen
-    isUserHistoryCategoriesSuccessfullyStreamController.add(true);
+    // isUserHistoryCategoriesSuccessfullyStreamController.add(true);
     });
   }
 

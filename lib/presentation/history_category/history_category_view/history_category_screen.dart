@@ -129,9 +129,10 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                             child: ElevatedButton(
                                 onPressed: (snapshot.data ?? false)
                                     ? () {
-                                    _viewModel.create();
-                                    _taskTitleController.text = "";
-                                    setState(() {});
+                                    setState(() {
+                                      _viewModel.create();
+                                      _taskTitleController.text = "";
+                                    });
                                 }
                                     : null,
                                 child: const Text(StringManager.create)),
@@ -220,7 +221,21 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                           backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
                         ),
                         onPressed: (){
-                          _viewModel.cancel(history.data[i]!.id);
+                          AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.warning,
+                              animType: AnimType.rightSlide,
+                              title: StringManager.cancel,
+                              desc: 'are you sure about that',
+                              btnCancelOnPress: () {},
+                          btnOkOnPress: () {
+                            setState(() {
+                              _viewModel.cancel(history.data[i]!.id);
+                            });
+                          },
+                            btnOkText: "Yes",
+                            btnCancelText: 'No',
+                          ).show();
                         },
                         child: const Text(StringManager.cancel),),
                     ],
@@ -234,6 +249,10 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
     } else {
       return Container();
     }
+  }
+
+  reload(){
+    return (){_viewModel.start();}.call();
   }
 
   @override

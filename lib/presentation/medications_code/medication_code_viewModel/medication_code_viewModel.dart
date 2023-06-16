@@ -10,11 +10,10 @@ import '../../common/state_renderer/state_renderer.dart';
 
 class MedicationsCodeViewModel extends BaseViewModel
     with MedicationsCodeViewModelInput, MedicationsCodeViewModelOutput {
-  bool _isTrue = false;
+
   final _medicationsCodeStreamController =
       BehaviorSubject<MedicationsCodeIndex>();
-  StreamController isUserCodeSuccessfullyStreamController =
-  StreamController<bool>();
+
 
   final MedicationsCodeCreateUseCase medicationsCodeCreateUseCase;
   final MedicationsCodeIndexUseCase medicationsCodeIndexUseCase;
@@ -32,7 +31,7 @@ class MedicationsCodeViewModel extends BaseViewModel
   _loadData() async {
     inputState.add(LoadingState(
         stateRendererType: StateRendererType.fullScreenLoadingState));
-    (await medicationsCodeIndexUseCase.execute((){})).fold(
+    (await medicationsCodeIndexUseCase.execute(Void)).fold(
       (failure) {
         inputState.add(ErrorState(
             StateRendererType.fullScreenErrorState, failure.message));
@@ -47,7 +46,6 @@ class MedicationsCodeViewModel extends BaseViewModel
   @override
   void dispose() {
     _medicationsCodeStreamController.close();
-    isUserCodeSuccessfullyStreamController.close();
   }
 
   @override
@@ -65,38 +63,27 @@ class MedicationsCodeViewModel extends BaseViewModel
         LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
     (await medicationsCodeCreateUseCase.execute(Void))
         .fold(
-            (failure) => {
+            (failure){
           // left -> failure
           inputState.add(ErrorState(
-              StateRendererType.fullScreenErrorState, failure.message))
+              StateRendererType.fullScreenErrorState, failure.message));
+          (){
+            start();
+          }.call();
         }, (data) {
       // right -> data (success)
       // content
       inputState.add(ContentState());
-      // navigate to main screen
-      isUserCodeSuccessfullyStreamController.add(true);
     });
   }
 
-  @override
-  Sink get inputAreAllInputsValid => isUserCodeSuccessfullyStreamController.sink;
-
-  @override
-  Stream<bool> get outAreAllInputsValid => isUserCodeSuccessfullyStreamController.stream
-      .map((_) => _areAllInputsValid());
-
-  bool _areAllInputsValid() {
-    return true;
-  }
 }
 
 abstract class MedicationsCodeViewModelInput {
   Sink get inputMedicationsCode;
-  Sink get inputAreAllInputsValid;
   get();
 }
 
 abstract class MedicationsCodeViewModelOutput {
   Stream<MedicationsCodeIndex> get outputMedicationsCode;
-  Stream<bool> get outAreAllInputsValid;
 }

@@ -1,4 +1,3 @@
-import 'package:senior/app/app_preference.dart';
 import 'package:senior/data/repository/data_repository.dart';
 
 class Constant {

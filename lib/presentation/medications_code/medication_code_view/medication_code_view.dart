@@ -111,4 +111,8 @@ class _MedicationCodeViewState extends State<MedicationCodeView> {
         ),
       );
   }
+
+  reload(){
+    (){_viewModel.start();}.call();
+  }
 }
