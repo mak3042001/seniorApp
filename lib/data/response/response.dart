@@ -652,3 +652,6 @@ class MedicationsCodeIndexResponse extends BaseResponse {
   //toJson
   Map<String, dynamic> toJson() => _$MedicationsCodeIndexResponseToJson(this);
 }
+
+
+//doctor index

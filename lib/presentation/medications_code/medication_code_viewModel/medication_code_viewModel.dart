@@ -60,13 +60,13 @@ class MedicationsCodeViewModel extends BaseViewModel
   @override
   get()  async {
     inputState.add(
-        LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await medicationsCodeCreateUseCase.execute(Void))
         .fold(
             (failure){
           // left -> failure
           inputState.add(ErrorState(
-              StateRendererType.fullScreenErrorState, failure.message));
+              StateRendererType.popupErrorState, failure.message));
           (){
             start();
           }.call();

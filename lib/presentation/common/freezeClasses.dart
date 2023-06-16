@@ -70,3 +70,13 @@ class HistoryObject with _$HistoryObject {
 class HistoryUpdateObject with _$HistoryUpdateObject {
   factory HistoryUpdateObject(String title, String description) = _HistoryUpdateObject;
 }
+
+@freezed
+class MedicationsObject with _$MedicationsObject {
+  factory MedicationsObject(String medication, String medicationDose) = _MedicationsObject;
+}
+
+@freezed
+class MedicationsUpdateObject with _$MedicationsUpdateObject {
+  factory MedicationsUpdateObject(String medication, String medicationDose) = _MedicationsUpdateObject;
+}

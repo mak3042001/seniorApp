@@ -618,8 +618,7 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<CancelMedicationsResponse> medicationsCancel(
-      String medicationId) async {
+  Future<CancelMedicationsResponse> medicationsCancel(int medicationId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -643,7 +642,7 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<MedicationsUpdateResponse> medicationsUpdate(
-    String medicationId,
+    int medicationId,
     String medication,
     String medicationDose,
   ) async {

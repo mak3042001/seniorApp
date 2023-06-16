@@ -21,7 +21,7 @@ class MedicationCancelUseCase
 }
 
 class MedicationCancelUseCaseInput {
-  String medicationId;
+  int medicationId;
 
   MedicationCancelUseCaseInput(this.medicationId);
 }

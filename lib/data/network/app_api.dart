@@ -168,13 +168,13 @@ abstract class AppServiceClient {
 //medications cancel
   @POST("/api/seniors/medications/delete")
   Future<CancelMedicationsResponse> medicationsCancel(
-      @Field("medication_id") String medicationId,
+      @Field("medication_id") int medicationId,
       );
 
 //medications update
   @POST("/api/seniors/medications/update")
   Future<MedicationsUpdateResponse> medicationsUpdate(
-      @Field("medication_id") String medicationId,
+      @Field("medication_id") int medicationId,
       @Field("medication") String medication,
       @Field("medication_dose") String medicationDose,
       );

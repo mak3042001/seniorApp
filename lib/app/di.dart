@@ -13,11 +13,14 @@ import 'package:senior/domain/usecase/history_categories/historyCategories_cance
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_update_usecase.dart';
+import 'package:senior/domain/usecase/medication/medication_create_usecase.dart';
+import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_create_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_index_usecase.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
+import 'package:senior/presentation/medications/medication_viewModel/medication_viewModel.dart';
 import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/data_source/data_source.dart';
@@ -28,6 +31,8 @@ import '../domain/usecase/history/history_cancel_usecase.dart';
 import '../domain/usecase/history/history_create_usecase.dart';
 import '../domain/usecase/history/history_index_usecase.dart';
 import '../domain/usecase/history/history_update_usecase.dart';
+import '../domain/usecase/medication/medication_cancel_usecase.dart';
+import '../domain/usecase/medication/medication_update_usecase.dart';
 import '../domain/usecase/notification/notification_usecase.dart';
 import '../domain/usecase/schedules/schedules_create_usecase.dart';
 import '../domain/usecase/schedules/schedules_index_usecase.dart';
@@ -80,6 +85,7 @@ Future<void> initAppModule() async {
   initBookingModule();
   initCodeModule();
   initHistoryModule();
+  initMedicationsModule();
 }
 
 //auth
@@ -146,6 +152,21 @@ initHistoryModule() {
             () => HistoryUpdateUseCase(instance()));
     instance.registerFactory<HistoryViewModel>(
             () => HistoryViewModel(instance(),instance(),instance(), instance()));
+  }
+}
+
+initMedicationsModule() {
+  if (!GetIt.I.isRegistered<MedicationIndexUseCase>()) {
+    instance.registerFactory<MedicationIndexUseCase>(
+            () => MedicationIndexUseCase(instance()));
+    instance.registerFactory<MedicationCreateUseCase>(
+            () => MedicationCreateUseCase(instance()));
+    instance.registerFactory<MedicationCancelUseCase>(
+            () => MedicationCancelUseCase(instance()));
+    instance.registerFactory<MedicationUpdateUseCase>(
+            () => MedicationUpdateUseCase(instance()));
+    instance.registerFactory<MedicationsViewModel>(
+            () => MedicationsViewModel(instance(),instance(),instance(), instance()));
   }
 }
 

@@ -1470,3 +1470,282 @@ abstract class _HistoryUpdateObject implements HistoryUpdateObject {
   _$$_HistoryUpdateObjectCopyWith<_$_HistoryUpdateObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$MedicationsObject {
+  String get medication => throw _privateConstructorUsedError;
+  String get medicationDose => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $MedicationsObjectCopyWith<MedicationsObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MedicationsObjectCopyWith<$Res> {
+  factory $MedicationsObjectCopyWith(
+          MedicationsObject value, $Res Function(MedicationsObject) then) =
+      _$MedicationsObjectCopyWithImpl<$Res, MedicationsObject>;
+  @useResult
+  $Res call({String medication, String medicationDose});
+}
+
+/// @nodoc
+class _$MedicationsObjectCopyWithImpl<$Res, $Val extends MedicationsObject>
+    implements $MedicationsObjectCopyWith<$Res> {
+  _$MedicationsObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? medication = null,
+    Object? medicationDose = null,
+  }) {
+    return _then(_value.copyWith(
+      medication: null == medication
+          ? _value.medication
+          : medication // ignore: cast_nullable_to_non_nullable
+              as String,
+      medicationDose: null == medicationDose
+          ? _value.medicationDose
+          : medicationDose // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MedicationsObjectCopyWith<$Res>
+    implements $MedicationsObjectCopyWith<$Res> {
+  factory _$$_MedicationsObjectCopyWith(_$_MedicationsObject value,
+          $Res Function(_$_MedicationsObject) then) =
+      __$$_MedicationsObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String medication, String medicationDose});
+}
+
+/// @nodoc
+class __$$_MedicationsObjectCopyWithImpl<$Res>
+    extends _$MedicationsObjectCopyWithImpl<$Res, _$_MedicationsObject>
+    implements _$$_MedicationsObjectCopyWith<$Res> {
+  __$$_MedicationsObjectCopyWithImpl(
+      _$_MedicationsObject _value, $Res Function(_$_MedicationsObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? medication = null,
+    Object? medicationDose = null,
+  }) {
+    return _then(_$_MedicationsObject(
+      null == medication
+          ? _value.medication
+          : medication // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == medicationDose
+          ? _value.medicationDose
+          : medicationDose // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_MedicationsObject implements _MedicationsObject {
+  _$_MedicationsObject(this.medication, this.medicationDose);
+
+  @override
+  final String medication;
+  @override
+  final String medicationDose;
+
+  @override
+  String toString() {
+    return 'MedicationsObject(medication: $medication, medicationDose: $medicationDose)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MedicationsObject &&
+            (identical(other.medication, medication) ||
+                other.medication == medication) &&
+            (identical(other.medicationDose, medicationDose) ||
+                other.medicationDose == medicationDose));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, medication, medicationDose);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MedicationsObjectCopyWith<_$_MedicationsObject> get copyWith =>
+      __$$_MedicationsObjectCopyWithImpl<_$_MedicationsObject>(
+          this, _$identity);
+}
+
+abstract class _MedicationsObject implements MedicationsObject {
+  factory _MedicationsObject(
+          final String medication, final String medicationDose) =
+      _$_MedicationsObject;
+
+  @override
+  String get medication;
+  @override
+  String get medicationDose;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MedicationsObjectCopyWith<_$_MedicationsObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$MedicationsUpdateObject {
+  String get medication => throw _privateConstructorUsedError;
+  String get medicationDose => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $MedicationsUpdateObjectCopyWith<MedicationsUpdateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MedicationsUpdateObjectCopyWith<$Res> {
+  factory $MedicationsUpdateObjectCopyWith(MedicationsUpdateObject value,
+          $Res Function(MedicationsUpdateObject) then) =
+      _$MedicationsUpdateObjectCopyWithImpl<$Res, MedicationsUpdateObject>;
+  @useResult
+  $Res call({String medication, String medicationDose});
+}
+
+/// @nodoc
+class _$MedicationsUpdateObjectCopyWithImpl<$Res,
+        $Val extends MedicationsUpdateObject>
+    implements $MedicationsUpdateObjectCopyWith<$Res> {
+  _$MedicationsUpdateObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? medication = null,
+    Object? medicationDose = null,
+  }) {
+    return _then(_value.copyWith(
+      medication: null == medication
+          ? _value.medication
+          : medication // ignore: cast_nullable_to_non_nullable
+              as String,
+      medicationDose: null == medicationDose
+          ? _value.medicationDose
+          : medicationDose // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MedicationsUpdateObjectCopyWith<$Res>
+    implements $MedicationsUpdateObjectCopyWith<$Res> {
+  factory _$$_MedicationsUpdateObjectCopyWith(_$_MedicationsUpdateObject value,
+          $Res Function(_$_MedicationsUpdateObject) then) =
+      __$$_MedicationsUpdateObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String medication, String medicationDose});
+}
+
+/// @nodoc
+class __$$_MedicationsUpdateObjectCopyWithImpl<$Res>
+    extends _$MedicationsUpdateObjectCopyWithImpl<$Res,
+        _$_MedicationsUpdateObject>
+    implements _$$_MedicationsUpdateObjectCopyWith<$Res> {
+  __$$_MedicationsUpdateObjectCopyWithImpl(_$_MedicationsUpdateObject _value,
+      $Res Function(_$_MedicationsUpdateObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? medication = null,
+    Object? medicationDose = null,
+  }) {
+    return _then(_$_MedicationsUpdateObject(
+      null == medication
+          ? _value.medication
+          : medication // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == medicationDose
+          ? _value.medicationDose
+          : medicationDose // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_MedicationsUpdateObject implements _MedicationsUpdateObject {
+  _$_MedicationsUpdateObject(this.medication, this.medicationDose);
+
+  @override
+  final String medication;
+  @override
+  final String medicationDose;
+
+  @override
+  String toString() {
+    return 'MedicationsUpdateObject(medication: $medication, medicationDose: $medicationDose)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MedicationsUpdateObject &&
+            (identical(other.medication, medication) ||
+                other.medication == medication) &&
+            (identical(other.medicationDose, medicationDose) ||
+                other.medicationDose == medicationDose));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, medication, medicationDose);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MedicationsUpdateObjectCopyWith<_$_MedicationsUpdateObject>
+      get copyWith =>
+          __$$_MedicationsUpdateObjectCopyWithImpl<_$_MedicationsUpdateObject>(
+              this, _$identity);
+}
+
+abstract class _MedicationsUpdateObject implements MedicationsUpdateObject {
+  factory _MedicationsUpdateObject(
+          final String medication, final String medicationDose) =
+      _$_MedicationsUpdateObject;
+
+  @override
+  String get medication;
+  @override
+  String get medicationDose;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MedicationsUpdateObjectCopyWith<_$_MedicationsUpdateObject>
+      get copyWith => throw _privateConstructorUsedError;
+}

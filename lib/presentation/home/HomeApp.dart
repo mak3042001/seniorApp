@@ -4,7 +4,7 @@ import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
-import 'package:senior/presentation/medications/medications.dart';
+import 'package:senior/presentation/medications/medication_view/medications.dart';
 import 'package:senior/presentation/medications_code/medication_code_view/medication_code_view.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';

@@ -244,7 +244,7 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                             },
                             child: CircleAvatar(
                               backgroundColor: ColorManager.error,
-                              child: Icon(Icons.cancel_outlined , color: ColorManager.white,),
+                              child: Icon(IconBroken.Delete , color: ColorManager.white,),
                             ),
                           ),
                           SizedBox(

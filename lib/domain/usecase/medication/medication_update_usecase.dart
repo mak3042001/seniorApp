@@ -23,7 +23,7 @@ class MedicationUpdateUseCase
 }
 
 class MedicationUpdateUseCaseInput {
-  String medicationId;
+  int medicationId;
   String medication;
   String medicationDose;
 

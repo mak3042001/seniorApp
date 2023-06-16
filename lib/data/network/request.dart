@@ -166,14 +166,14 @@ class MedicationsCreateRequest {
 
 //medications cancel
 class MedicationsCancelRequest {
-  String medicationId;
+  int medicationId;
 
   MedicationsCancelRequest(this.medicationId);
 }
 
 //medications update
 class MedicationsUpdateRequest {
-  String medicationId;
+  int medicationId;
   String medication;
   String medicationDose;
 

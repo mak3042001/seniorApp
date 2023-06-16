@@ -17,6 +17,7 @@ class StringManager {
   static const medicationCode = "Medication Code";
   static const appointments = "Appointments";
   static const edit = "Update";
+  static const dose = " times a day";
   static const usernameError = "please enter your username";
   static const passwordError = "please enter your password";
   static const dateError = "please select date";
