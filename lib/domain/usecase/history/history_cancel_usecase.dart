@@ -21,7 +21,7 @@ class HistoryCancelUseCase
 }
 
 class HistoryCancelUseCaseInput {
-  String historyId;
+  int historyId;
 
   HistoryCancelUseCaseInput(this.historyId);
 }

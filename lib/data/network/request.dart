@@ -104,14 +104,14 @@ class HistoryCreateRequest {
 
 //history cancel
 class HistoryCancelRequest {
-  String historyId;
+  int historyId;
 
   HistoryCancelRequest(this.historyId);
 }
 
 //history update
 class HistoryUpdateRequest {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 

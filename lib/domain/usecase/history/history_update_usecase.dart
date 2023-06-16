@@ -23,7 +23,7 @@ class HistoryUpdateUseCase
 }
 
 class HistoryUpdateUseCaseInput {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 

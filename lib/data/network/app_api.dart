@@ -113,13 +113,13 @@ abstract class AppServiceClient {
 //history cancel
   @POST("/api/seniors/history/delete")
   Future<CancelHistoryResponse> historyCancel(
-      @Field("history_id") String historyId,
+      @Field("history_id") int historyId,
       );
 
 //history update
   @POST("/api/seniors/history/update")
   Future<HistoryUpdateResponse> historyUpdate(
-      @Field("history_category_id") String historyCategoryId,
+      @Field("history_id") int historyId,
       @Field("title") String title,
       @Field("description") String description,
       );

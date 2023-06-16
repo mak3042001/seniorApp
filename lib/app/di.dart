@@ -24,9 +24,14 @@ import '../data/data_source/data_source.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
 import '../domain/usecase/auth/register_usecase.dart';
+import '../domain/usecase/history/history_cancel_usecase.dart';
+import '../domain/usecase/history/history_create_usecase.dart';
+import '../domain/usecase/history/history_index_usecase.dart';
+import '../domain/usecase/history/history_update_usecase.dart';
 import '../domain/usecase/notification/notification_usecase.dart';
 import '../domain/usecase/schedules/schedules_create_usecase.dart';
 import '../domain/usecase/schedules/schedules_index_usecase.dart';
+import '../presentation/history/history_viewModel/history_viewModel.dart';
 import '../presentation/login/login_view_model/login_viewModel.dart';
 import '../presentation/notification/notification_viewModel/notification_viewModel.dart';
 import '../presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
@@ -74,6 +79,7 @@ Future<void> initAppModule() async {
   initAppointmentModule();
   initBookingModule();
   initCodeModule();
+  initHistoryModule();
 }
 
 //auth
@@ -127,6 +133,21 @@ initNotificationModule() {
               () => HistoryCategoriesViewModel(instance(),instance(),instance(), instance()));
     }
   }
+
+initHistoryModule() {
+  if (!GetIt.I.isRegistered<HistoryIndexUseCase>()) {
+    instance.registerFactory<HistoryIndexUseCase>(
+            () => HistoryIndexUseCase(instance()));
+    instance.registerFactory<HistoryCreateUseCase>(
+            () => HistoryCreateUseCase(instance()));
+    instance.registerFactory<HistoryCancelUseCase>(
+            () => HistoryCancelUseCase(instance()));
+    instance.registerFactory<HistoryUpdateUseCase>(
+            () => HistoryUpdateUseCase(instance()));
+    instance.registerFactory<HistoryViewModel>(
+            () => HistoryViewModel(instance(),instance(),instance(), instance()));
+  }
+}
 
   initAppointmentModule() {
     if (!GetIt.I.isRegistered<BookingIndexUseCase>()) {

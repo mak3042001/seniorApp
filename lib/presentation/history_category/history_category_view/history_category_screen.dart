@@ -5,7 +5,7 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/static.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/presentation/history/history_view/History.dart';
+import 'package:senior/presentation/history/history_view/history_screen.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
@@ -200,7 +200,7 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
               _appPreference.setHistoryCategoryName(history.data[i]?.title);
               _appPreference.setHistoryCategoryId(history.data[i]?.id);
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => History(history.data[i]!.title)));
+                  context, MaterialPageRoute(builder: (context) => HistoryScreen(history.data[i]!.title,history.data[i]!.id)));
             },
             child: Card(
               elevation: 4.0,

@@ -65,3 +65,8 @@ class HistoryCategoriesUpdateObject with _$HistoryCategoriesUpdateObject {
 class HistoryObject with _$HistoryObject {
   factory HistoryObject(String title, String description) = _HistoryObject;
 }
+
+@freezed
+class HistoryUpdateObject with _$HistoryUpdateObject {
+  factory HistoryUpdateObject(String title, String description) = _HistoryUpdateObject;
+}

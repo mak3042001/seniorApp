@@ -1334,3 +1334,139 @@ abstract class _HistoryObject implements HistoryObject {
   _$$_HistoryObjectCopyWith<_$_HistoryObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$HistoryUpdateObject {
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HistoryUpdateObjectCopyWith<HistoryUpdateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HistoryUpdateObjectCopyWith<$Res> {
+  factory $HistoryUpdateObjectCopyWith(
+          HistoryUpdateObject value, $Res Function(HistoryUpdateObject) then) =
+      _$HistoryUpdateObjectCopyWithImpl<$Res, HistoryUpdateObject>;
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class _$HistoryUpdateObjectCopyWithImpl<$Res, $Val extends HistoryUpdateObject>
+    implements $HistoryUpdateObjectCopyWith<$Res> {
+  _$HistoryUpdateObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_HistoryUpdateObjectCopyWith<$Res>
+    implements $HistoryUpdateObjectCopyWith<$Res> {
+  factory _$$_HistoryUpdateObjectCopyWith(_$_HistoryUpdateObject value,
+          $Res Function(_$_HistoryUpdateObject) then) =
+      __$$_HistoryUpdateObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, String description});
+}
+
+/// @nodoc
+class __$$_HistoryUpdateObjectCopyWithImpl<$Res>
+    extends _$HistoryUpdateObjectCopyWithImpl<$Res, _$_HistoryUpdateObject>
+    implements _$$_HistoryUpdateObjectCopyWith<$Res> {
+  __$$_HistoryUpdateObjectCopyWithImpl(_$_HistoryUpdateObject _value,
+      $Res Function(_$_HistoryUpdateObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+  }) {
+    return _then(_$_HistoryUpdateObject(
+      null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HistoryUpdateObject implements _HistoryUpdateObject {
+  _$_HistoryUpdateObject(this.title, this.description);
+
+  @override
+  final String title;
+  @override
+  final String description;
+
+  @override
+  String toString() {
+    return 'HistoryUpdateObject(title: $title, description: $description)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HistoryUpdateObject &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HistoryUpdateObjectCopyWith<_$_HistoryUpdateObject> get copyWith =>
+      __$$_HistoryUpdateObjectCopyWithImpl<_$_HistoryUpdateObject>(
+          this, _$identity);
+}
+
+abstract class _HistoryUpdateObject implements HistoryUpdateObject {
+  factory _HistoryUpdateObject(final String title, final String description) =
+      _$_HistoryUpdateObject;
+
+  @override
+  String get title;
+  @override
+  String get description;
+  @override
+  @JsonKey(ignore: true)
+  _$$_HistoryUpdateObjectCopyWith<_$_HistoryUpdateObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

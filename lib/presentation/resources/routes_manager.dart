@@ -4,7 +4,6 @@ import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/appointment/appointment_view/appointmentScreen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
-import 'package:senior/presentation/history/history_view/History.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/home/HomeApp.dart';
 import 'package:senior/presentation/login/login_view/loginScreen.dart';
