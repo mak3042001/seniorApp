@@ -43,9 +43,12 @@ class AuthLogOut {
   AuthLogOut();
 }
 
-//change image
+//change image & password
 class ChangeImage {
   ChangeImage();
+}
+class ChangePassword {
+  ChangePassword();
 }
 
 //notification

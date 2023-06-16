@@ -93,6 +93,18 @@ class ChangeImageResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$ChangeImageResponseToJson(this);
 }
 
+@JsonSerializable()
+class ChangePasswordResponse extends BaseResponse {
+  ChangePasswordResponse();
+
+  //fromJson
+  factory ChangePasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChangePasswordResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$ChangePasswordResponseToJson(this);
+}
+
 //auth logOut response
 @JsonSerializable()
 class AuthLogOutResponse extends BaseResponse {

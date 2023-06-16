@@ -1,4 +1,6 @@
 //auth request
+import 'dart:html';
+
 class LoginRequest {
   String username;
   String password;
@@ -47,6 +49,18 @@ class ChangeImageRequest {
   String image;
 
   ChangeImageRequest(this.image);
+}
+
+class ChangePasswordRequest {
+  String currentPassword;
+  String password;
+  String confirmPassword;
+
+  ChangePasswordRequest(
+    this.currentPassword,
+    this.password,
+    this.confirmPassword,
+  );
 }
 
 //schedules create

@@ -79,6 +79,19 @@ Map<String, dynamic> _$ChangeImageResponseToJson(
       'message': instance.message,
     };
 
+ChangePasswordResponse _$ChangePasswordResponseFromJson(
+        Map<String, dynamic> json) =>
+    ChangePasswordResponse()
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$ChangePasswordResponseToJson(
+        ChangePasswordResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+    };
+
 AuthLogOutResponse _$AuthLogOutResponseFromJson(Map<String, dynamic> json) =>
     AuthLogOutResponse()
       ..successful = json['successful'] as bool?

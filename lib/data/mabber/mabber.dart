@@ -43,6 +43,12 @@ extension ChangeImageResponseMabber on ChangeImageResponse? {
   }
 }
 
+extension ChangePasswordResponseMabber on ChangePasswordResponse? {
+  ChangePassword toDomain() {
+    return ChangePassword();
+  }
+}
+
 //notification
 extension NotificationDataResponseMabber on NotificationDataResponse? {
   NotificationData toDomain() {

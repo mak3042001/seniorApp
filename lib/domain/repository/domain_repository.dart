@@ -13,6 +13,9 @@ abstract class Repository{
   Future<Either<Failure,ChangeImage>> changeImage(
       ChangeImageRequest changeImageRequest);
 
+  Future<Either<Failure,ChangePassword>> changePassword(
+      ChangePasswordRequest changePasswordRequest);
+
   Future<Either<Failure,Auth>> profileIndex();
 
   Future<Either<Failure,NotificationIndex>> notificationIndex();

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:senior/app/constant.dart';
@@ -46,10 +48,17 @@ abstract class AppServiceClient {
       @Field("birthdate") String birthdate,
       );
 
-//change image profile
+//change image profile & password
   @POST("/api/seniors/profile/changeImage")
   Future<ChangeImageResponse> changeImage(
       @Field("image") String image,
+      );
+
+  @POST("/api/seniors/profile/changePassword")
+  Future<ChangePasswordResponse> changePassword(
+      @Field("old_password") String currentPassword,
+      @Field("password") String password,
+      @Field("confirm_password") String confirmPassword,
       );
 
 //index notification

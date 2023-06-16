@@ -1,3 +1,4 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'freezeClasses.freezed.dart';
@@ -45,10 +46,23 @@ class ProfileObject with _$ProfileObject {
       String name,
       String phone,
       String birthdate,
+      ) = _ProfileObject;
+}
+
+@freezed
+class PasswordObject with _$PasswordObject {
+  factory PasswordObject(
       String currentPassword,
       String password,
       String confirmPassword,
-      ) = _ProfileObject;
+      ) = _PasswordObject;
+}
+
+@freezed
+class ImageObject with _$ImageObject {
+  factory ImageObject(
+     String image,
+      ) = _ImageObject;
 }
 
 @freezed

@@ -13,6 +13,9 @@ abstract class RemoteDataSource {
   Future<ChangeImageResponse> changeImage(
       ChangeImageRequest changeImageRequest);
 
+  Future<ChangePasswordResponse> changePassword(
+      ChangePasswordRequest changePasswordRequest);
+
   Future<AuthResponse> profileIndex();
 
   Future<NotificationDataIndexResponse> notificationIndex();
@@ -274,6 +277,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<DoctorIndexResponse> doctorIndex() async {
     return await _appServiceClient.doctorIndex();
+  }
+
+  @override
+  Future<ChangePasswordResponse> changePassword(ChangePasswordRequest changePasswordRequest) async {
+    return await _appServiceClient.changePassword(changePasswordRequest.currentPassword, changePasswordRequest.password, changePasswordRequest.confirmPassword);
   }
 
 }

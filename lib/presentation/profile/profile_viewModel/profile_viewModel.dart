@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:rxdart/subjects.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/domain/usecase/auth/change_image_usecase.dart';
+import 'package:senior/domain/usecase/auth/change_password_usecase.dart';
 import 'package:senior/domain/usecase/auth/update_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
@@ -13,6 +16,8 @@ import 'package:senior/presentation/resources/string_manager.dart';
 class ProfileViewModel extends BaseViewModel
     with ProfileViewModelInput, ProfileViewModelOutput {
   final _profileStreamController = BehaviorSubject<Auth>();
+  final _passwordStreamController = BehaviorSubject<ChangePassword>();
+  final _imageStreamController = BehaviorSubject<ChangeImage>();
 
   StreamController userNameStreamController =
   StreamController<String>.broadcast();
@@ -26,16 +31,28 @@ class ProfileViewModel extends BaseViewModel
   StreamController<String>.broadcast();
   StreamController confirmPasswordStreamController =
   StreamController<String>.broadcast();
+  StreamController profilePictureStreamController =
+  StreamController<File>.broadcast();
   StreamController areAllInputsValidStreamController =
   StreamController<void>.broadcast();
 
   StreamController isUserProfileInSuccessfullyStreamController =
   StreamController<bool>();
 
-  final UpdateUseCase _profileUseCase;
-  var profileObject = ProfileObject("", "", "", "", "", "" , "");
+  StreamController isUserPasswordSuccessfullyStreamController =
+  StreamController<bool>();
 
-  ProfileViewModel(this._profileUseCase);
+  StreamController isUserImageSuccessfullyStreamController =
+  StreamController<bool>();
+
+  final UpdateUseCase _profileUseCase;
+  final ChangePasswordUseCase _changePasswordUseCase;
+  final ChangeImageUseCase _changeImageUseCase;
+  var profileObject = ProfileObject("", "", "", "",);
+  var passwordObject = PasswordObject("", "", "",);
+  var imageObject = ImageObject("");
+
+  ProfileViewModel(this._profileUseCase , this._changePasswordUseCase , this._changeImageUseCase);
 
   // inputs
   @override
@@ -45,6 +62,9 @@ class ProfileViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    _passwordStreamController.close();
+    _imageStreamController.close();
+    profilePictureStreamController.close();
     _profileStreamController.close();
     userNameStreamController.close();
     phoneStreamController.close();
@@ -55,8 +75,13 @@ class ProfileViewModel extends BaseViewModel
     confirmPasswordStreamController.close();
     areAllInputsValidStreamController.close();
     isUserProfileInSuccessfullyStreamController.close();
+    isUserPasswordSuccessfullyStreamController.close();
+    isUserImageSuccessfullyStreamController.close();
     super.dispose();
   }
+
+  @override
+  Sink get inputProfilePicture => profilePictureStreamController.sink;
 
   @override
   Sink get inputName => nameStreamController.sink;
@@ -157,6 +182,20 @@ class ProfileViewModel extends BaseViewModel
     validate();
   }
 
+  @override
+  setProfilePicture(File profilePicture) {
+    inputProfilePicture.add(profilePicture);
+    if (profilePicture.path.isNotEmpty) {
+      //  update register view object
+      imageObject =
+          imageObject.copyWith(image: profilePicture.path);
+    } else {
+      // reset profilePicture value in register view object
+      imageObject = imageObject.copyWith(image: "");
+    }
+    validate();
+  }
+
   // -- outputs
 
   @override
@@ -191,6 +230,10 @@ class ProfileViewModel extends BaseViewModel
   Stream<String?> get outputErrorBirthdate => outputIsBirthdateValid.map(
           (isBirthdateValid) => isBirthdateValid ? null : StringManager.birthdateInvalid);
 
+
+  @override
+  Stream<File> get outputProfilePicture =>
+      profilePictureStreamController.stream.map((file) => file);
 
 
   @override
@@ -231,10 +274,128 @@ class ProfileViewModel extends BaseViewModel
 
   @override
   Stream<Auth> get outputProfile => _profileStreamController.stream.map((profile) => profile);
+
+  @override
+  changeImage() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+
+    (await _changeImageUseCase.execute(
+      ChangeImageUseCaseInput(
+        imageObject.image,
+      ),
+    ))
+        .fold(
+            (failure) => {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
+      // right -> data (success)
+      // content
+      inputState.add(ContentState());
+      // navigate to main screen
+      isUserProfileInSuccessfullyStreamController.add(true);
+    });
+  }
+
+  @override
+  changePassword() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+
+    (await _changePasswordUseCase.execute(
+      ChangePasswordUseCaseInput(
+       passwordObject.currentPassword,
+       passwordObject.password,
+       passwordObject.confirmPassword,
+      ),
+    ))
+        .fold(
+            (failure) => {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
+      // right -> data (success)
+      // content
+      inputState.add(ContentState());
+      // navigate to main screen
+      isUserProfileInSuccessfullyStreamController.add(true);
+    });
+  }
+
+  @override
+  setConfirmPassword(String password) {
+    if (_isConfirmPasswordValid(password)) {
+      //  update profile view object
+      passwordObject = passwordObject.copyWith(confirmPassword: password);
+    } else {
+      // reset phone value in profile view object
+      passwordObject = passwordObject.copyWith(confirmPassword: "");
+    }
+    validate();
+  }
+
+  bool _isConfirmPasswordValid(String password) {
+    return password.isNotEmpty;
+  }
+
+  @override
+  setCurrentPassword(String password) {
+    if (_isCurrentPasswordValid(password)) {
+      //  update profile view object
+      passwordObject = passwordObject.copyWith(currentPassword: password);
+    } else {
+      // reset phone value in profile view object
+      passwordObject = passwordObject.copyWith(currentPassword: "");
+    }
+    validate();
+  }
+
+  bool _isCurrentPasswordValid(String password) {
+    return password.isNotEmpty;
+  }
+
+  @override
+  setPassword(String password) {
+    if (_isPasswordValid(password)) {
+      //  update profile view object
+      passwordObject = passwordObject.copyWith(password: password);
+    } else {
+      // reset phone value in profile view object
+      passwordObject = passwordObject.copyWith(password: "");
+    }
+    validate();
+  }
+
+  bool _isPasswordValid(String password) {
+    return password.isNotEmpty;
+  }
+
+  @override
+  Sink get inputAllImageInputsValid => _imageStreamController.sink;
+
+  @override
+  Sink get inputAllPasswordInputsValid => _passwordStreamController.sink;
+
+  @override
+  // TODO: implement outputAreAllImageInputsValid
+  Stream<bool> get outputAreAllImageInputsValid => throw UnimplementedError();
+
+  @override
+  // TODO: implement outputAreAllPasswordInputsValid
+  Stream<bool> get outputAreAllPasswordInputsValid => throw UnimplementedError();
 }
 
 abstract class ProfileViewModelInput {
+  Sink get inputProfilePicture;
+
+  Stream<File> get outputProfilePicture;
+
   Sink get inputProfile;
+  Sink get inputPassword;
+  Sink get inputImage;
 
   Sink get inputUserName;
 
@@ -250,7 +411,13 @@ abstract class ProfileViewModelInput {
 
   Sink get inputAllInputsValid;
 
+  Sink get inputAllPasswordInputsValid;
+
+  Sink get inputAllImageInputsValid;
+
   profile();
+  changeImage();
+  changePassword();
 
   setUserName(String userName);
 
@@ -259,10 +426,18 @@ abstract class ProfileViewModelInput {
   setBirthdate(String birthdate);
 
   setName(String name);
+
+  setProfilePicture(File profilePicture);
+
+  setCurrentPassword(String password);
+  setPassword(String password);
+  setConfirmPassword(String password);
 }
 
 abstract class ProfileViewModelOutput {
   Stream<Auth> get outputProfile;
+  Stream<ChangePassword> get outputPassword;
+  Stream<ChangeImage> get outputImage;
 
   Stream<bool> get outputIsUserNameValid;
 
@@ -281,4 +456,6 @@ abstract class ProfileViewModelOutput {
   Stream<String?> get outputErrorName;
 
   Stream<bool> get outputAreAllInputsValid;
+  Stream<bool> get outputAreAllPasswordInputsValid;
+  Stream<bool> get outputAreAllImageInputsValid;
 }
