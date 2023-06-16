@@ -373,7 +373,7 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<HistoryCreateResponse> historyCreate(
-    String historyCategoryId,
+    int historyCategoryId,
     String title,
     String description,
   ) async {
@@ -512,7 +512,7 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<CancelHistoryCategoriesResponse> historyCategoriesCancel(
-      String historyCategoryId) async {
+      int historyCategoryId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

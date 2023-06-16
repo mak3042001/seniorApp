@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'package:rxdart/subjects.dart';
+
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/domain/usecase/history_categories/historyCategories_cancel_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
@@ -13,8 +15,6 @@ class HistoryCategoriesViewModel extends BaseViewModel
     with HistoryCategoriesViewModelInput, HistoryCategoriesViewModelOutput {
   final _historyCategoriesStreamController = BehaviorSubject<HistoryCategoriesIndex>();
   final StreamController _titleStreamController =
-  StreamController<String>.broadcast();
-  final StreamController _descriptionStreamController =
   StreamController<String>.broadcast();
 
   final StreamController _areAllInputsValidStreamController =
@@ -29,7 +29,9 @@ class HistoryCategoriesViewModel extends BaseViewModel
 
   final HistoryCategoriesCreateUseCase historyCategoriesCreateUseCase;
 
-  HistoryCategoriesViewModel(this.historyCategoriesUseCase , this.historyCategoriesCreateUseCase);
+  final HistoryCategoriesCancelUseCase historyCategoriesCancelUseCase;
+
+  HistoryCategoriesViewModel(this.historyCategoriesUseCase , this.historyCategoriesCreateUseCase , this.historyCategoriesCancelUseCase);
 
   @override
   start() async {
@@ -55,7 +57,6 @@ class HistoryCategoriesViewModel extends BaseViewModel
   void dispose() {
     _historyCategoriesStreamController.close();
     _titleStreamController.close();
-    _descriptionStreamController.close();
     _areAllInputsValidStreamController.close();
     isUserHistoryCategoriesSuccessfullyStreamController.close();
   }
@@ -89,10 +90,26 @@ class HistoryCategoriesViewModel extends BaseViewModel
   }
 
   @override
-  Sink get inputAreAllInputsValid => _areAllInputsValidStreamController.sink;
+  cancel(int id) async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+    (await historyCategoriesCancelUseCase.execute(HistoryCategoriesCancelUseCaseInput(id)))
+        .fold(
+    (failure) => {
+    // left -> failure
+    inputState.add(ErrorState(
+    StateRendererType.popupErrorState, failure.message))
+    }, (data) {
+    // right -> data (success)
+    // content
+    inputState.add(ContentState());
+    // navigate to main screen
+    isUserHistoryCategoriesSuccessfullyStreamController.add(true);
+    });
+  }
 
   @override
-  Sink get inputDescription => _descriptionStreamController.sink;
+  Sink get inputAreAllInputsValid => _areAllInputsValidStreamController.sink;
 
   @override
   Sink get inputTitle => _titleStreamController.sink;
@@ -102,20 +119,11 @@ class HistoryCategoriesViewModel extends BaseViewModel
       .map((_) => _areAllInputsValid());
 
 
-  @override
-  Stream<bool> get outIsDescriptionValid => _descriptionStreamController.stream
-      .map((description) => _isDescriptionValid(description));
 
   @override
   Stream<bool> get outIsTitleValid => _titleStreamController.stream
       .map((title) => _isTitleValid(title));
 
-  @override
-  setDescription(String description) {
-    inputDescription.add(description);
-    historyCategoriesObject = historyCategoriesObject.copyWith(description: description);
-    inputAreAllInputsValid.add(null);
-  }
 
   @override
   setTitle(String title) {
@@ -125,17 +133,13 @@ class HistoryCategoriesViewModel extends BaseViewModel
   }
 
 
-  bool _isDescriptionValid(String description) {
-    return description.isNotEmpty;
-  }
 
   bool _isTitleValid(String title) {
     return title.isNotEmpty;
   }
 
   bool _areAllInputsValid() {
-    return _isDescriptionValid(historyCategoriesObject.description) &&
-        _isTitleValid(historyCategoriesObject.title);
+    return _isTitleValid(historyCategoriesObject.title);
   }
 }
 
@@ -144,13 +148,11 @@ abstract class HistoryCategoriesViewModelInput {
 
   setTitle(String title);
 
-  setDescription(String description);
-
   create();
 
-  Sink get inputTitle;
+  cancel(int id);
 
-  Sink get inputDescription;
+  Sink get inputTitle;
 
   Sink get inputAreAllInputsValid;
 }
@@ -159,8 +161,6 @@ abstract class HistoryCategoriesViewModelOutput {
   Stream<HistoryCategoriesIndex> get outputHistoryCategories;
 
   Stream<bool> get outIsTitleValid;
-
-  Stream<bool> get outIsDescriptionValid;
 
   Stream<bool> get outAreAllInputsValid;
 }

@@ -23,7 +23,7 @@ class HistoryCreateUseCase
 }
 
 class HistoryCreateUseCaseInput {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 

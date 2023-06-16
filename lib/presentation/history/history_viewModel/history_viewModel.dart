@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'package:rxdart/subjects.dart';
+import 'package:senior/app/app_preference.dart';
+import 'package:senior/app/di.dart';
 import 'package:senior/domain/model/model.dart';
 import 'package:senior/domain/usecase/history/history_create_usecase.dart';
 import 'package:senior/domain/usecase/history/history_index_usecase.dart';
@@ -69,11 +71,11 @@ class HistoryViewModel extends BaseViewModel
       _historyStreamController.stream.map((history) => history);
 
   @override
-  create() async {
+  create(int id) async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await historyCreateUseCase.execute(
-    HistoryCreateUseCaseInput( ,historyObject.title, historyObject.description)))
+    HistoryCreateUseCaseInput(id ,historyObject.title, historyObject.description)))
         .fold(
     (failure) => {
     // left -> failure
@@ -146,7 +148,7 @@ abstract class HistoryViewModelInput {
 
   setDescription(String description);
 
-  create();
+  create(int id);
 
   Sink get inputTitle;
 

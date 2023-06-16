@@ -106,7 +106,7 @@ abstract class AppServiceClient {
 //history create
   @POST("/api/seniors/history/create")
   Future<HistoryCreateResponse> historyCreate(
-      @Field("history_category_id") String historyCategoryId,
+      @Field("history_category_id") int historyCategoryId,
       @Field("title") String title,
       @Field("description") String description,
       );
@@ -141,7 +141,7 @@ abstract class AppServiceClient {
 //historyCategories cancel
   @POST("/api/seniors/history-categories/delete")
   Future<CancelHistoryCategoriesResponse> historyCategoriesCancel(
-      @Field("history_category_id") String historyCategoryId,
+      @Field("history_category_id") int historyCategoryId,
       );
 
 //historyCategories update

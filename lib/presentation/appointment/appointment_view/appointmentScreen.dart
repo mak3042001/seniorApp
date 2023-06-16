@@ -44,6 +44,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             color: Colors.white,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+                  (){_viewModel.start();}.call();
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+          ),
+        ],
         centerTitle: true,
       ),
       body: StreamBuilder<FlowState>(
@@ -70,8 +81,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     );
   }
 
-  Widget _getItem(IndexBooking? notificationIndex) {
-    if (notificationIndex != null) {
+  Widget _getItem(IndexBooking? indexBooking) {
+    if (indexBooking != null) {
       return ListView.separated(
       itemBuilder: (context, index) => StreamBuilder<IndexBooking>(
       stream: _viewModel.outputAppointment,
@@ -83,7 +94,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       color: Colors.grey[600],
       height: 5.0,
       ),
-      itemCount: notificationIndex.data.length,
+      itemCount: indexBooking.data.length,
       );
     } else {
     return Container();
@@ -106,7 +117,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     .of(context)
                     .textTheme
                     .bodyLarge
-                    ?.copyWith(fontSize: 30),
+                    ?.copyWith(fontSize: 20),
               ),
               const SizedBox(
                 height: 5,

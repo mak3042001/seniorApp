@@ -9,6 +9,7 @@ import 'package:senior/presentation/history_category/history_category_viewModel/
 import 'package:senior/presentation/resources/routes_manager.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
+import '../../resources/color_manager.dart';
 import '../../resources/string_manager.dart';
 import '../../resources/values_manager.dart';
 
@@ -22,7 +23,6 @@ class HistoryCategoriesScreen extends StatefulWidget {
 
 class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
   final TextEditingController _taskTitleController = TextEditingController();
-  final TextEditingController _taskDescriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final HistoryCategoriesViewModel _viewModel = instance<HistoryCategoriesViewModel>();
   final AppPreference _appPreference = instance<AppPreference>();
@@ -37,8 +37,6 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
     _viewModel.start();
     _taskTitleController
         .addListener(() => _viewModel.setTitle(_taskTitleController.text));
-    _taskDescriptionController
-        .addListener(() => _viewModel.setDescription(_taskDescriptionController.text));
 
     _viewModel.isUserHistoryCategoriesSuccessfullyStreamController.stream
         .listen((isCreate) {
@@ -116,34 +114,6 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                           isPassword: false,
                         );
                       }),
-                  // const SizedBox(
-                  //   height: 10.0,
-                  // ),
-                  // StreamBuilder<bool>(
-                  //     stream: _viewModel.outIsTitleValid,
-                  //     builder: (context, snapshot) {
-                  //       return defaultFormField(
-                  //         controller: _taskTypeController,
-                  //         type: TextInputType.name,
-                  //         text: 'Task Type',
-                  //         prefix: IconBroken.Category,
-                  //         isPassword: false,
-                  //       );
-                  //     }),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  StreamBuilder<bool>(
-                      stream: _viewModel.outIsDescriptionValid,
-                      builder: (context, snapshot) {
-                        return defaultFormField(
-                          controller: _taskDescriptionController,
-                          type: TextInputType.name,
-                          text: 'Description',
-                          prefix: IconBroken.Category,
-                          isPassword: false,
-                        );
-                      }),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -159,9 +129,9 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                             child: ElevatedButton(
                                 onPressed: (snapshot.data ?? false)
                                     ? () {
-                                  setState(() {
                                     _viewModel.create();
-                                  });
+                                    _taskTitleController.text = "";
+                                    setState(() {});
                                 }
                                     : null,
                                 child: const Text(StringManager.create)),
@@ -230,10 +200,10 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.only(left: 20.0 , right: 20.0 , top: 5.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "${history.data[i]?.title}",
@@ -245,10 +215,14 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        "${history.data[i]?.description}",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
+                        ),
+                        onPressed: (){
+                          _viewModel.cancel(history.data[i]!.id);
+                        },
+                        child: const Text(StringManager.cancel),),
                     ],
                   ),
                 ),

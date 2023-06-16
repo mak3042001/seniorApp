@@ -91,7 +91,7 @@ class BookingCancelRequest {
 
 //history create
 class HistoryCreateRequest {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 
@@ -135,7 +135,7 @@ class HistoryCategoriesCreateRequest {
 
 //historyCategories cancel
 class HistoryCategoriesCancelRequest {
-  String historyCategoriesId;
+  int historyCategoriesId;
 
   HistoryCategoriesCancelRequest(this.historyCategoriesId);
 }
