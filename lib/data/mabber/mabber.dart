@@ -332,3 +332,14 @@ on MedicationsCodeIndexResponse? {
     );
   }
 }
+
+//doctor index
+extension DoctorIndexResponseMapper on DoctorIndexResponse? {
+  DoctorIndex toDomain() {
+    return DoctorIndex(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<User?>()
+          .toList(),
+    );
+  }
+}

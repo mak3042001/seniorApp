@@ -37,6 +37,5 @@ abstract class Repository{
   Future<Either<Failure,MedicationsIndex>> medicationsIndex();
   Future<Either<Failure,MedicationsCodeCreate>> medicationsCodeCreate();
   Future<Either<Failure,MedicationsCodeIndex>> medicationsCodeIndex();
-
-
+  Future<Either<Failure,DoctorIndex>> doctorIndex();
 }

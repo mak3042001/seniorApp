@@ -614,3 +614,22 @@ Map<String, dynamic> _$MedicationsCodeIndexResponseToJson(
       'message': instance.message,
       'data': instance.data,
     };
+
+DoctorIndexResponse _$DoctorIndexResponseFromJson(Map<String, dynamic> json) =>
+    DoctorIndexResponse(
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : UserResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$DoctorIndexResponseToJson(
+        DoctorIndexResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };

@@ -1,9 +1,13 @@
 
 
 import 'dart:async';
+import 'dart:ffi';
 
+import 'package:rxdart/rxdart.dart';
+import 'package:senior/domain/model/model.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
+import 'package:senior/domain/usecase/doctor/doctor_index_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer.dart';
@@ -11,6 +15,8 @@ import 'package:senior/presentation/common/state_renderer/state_renderer__impl.d
 
 class BookingModel extends BaseViewModel
     with BookingModelInputs, BookingModelOutputs {
+  final _nameStreamController = BehaviorSubject<DoctorIndex>();
+
   final StreamController _doctorStreamController =
   StreamController<String>.broadcast();
   final StreamController _dateStreamController =
@@ -24,13 +30,15 @@ class BookingModel extends BaseViewModel
 
   var bookingObject = BookingCreateObject("", "");
   final BookingCreateUseCase _bookingCreateUseCase;
+  final DoctorIndexUseCase _doctorIndexUseCase;
 
-  BookingModel(this._bookingCreateUseCase);
+  BookingModel(this._bookingCreateUseCase , this._doctorIndexUseCase);
 
   // inputs
   @override
   void dispose() {
     super.dispose();
+    _nameStreamController.close();
     _doctorStreamController.close();
     _dateStreamController.close();
     _areAllInputsValidStreamController.close();
@@ -39,7 +47,21 @@ class BookingModel extends BaseViewModel
 
   @override
   void start() {
-    inputState.add(ContentState());
+    _loadData();
+  }
+  _loadData() async {
+    inputState.add(LoadingState(
+        stateRendererType: StateRendererType.fullScreenLoadingState));
+    (await _doctorIndexUseCase.execute(Void)).fold(
+          (failure) {
+        inputState.add(ErrorState(
+            StateRendererType.fullScreenErrorState, failure.message));
+      },
+          (doctor) async {
+        inputState.add(ContentState());
+        inputName.add(doctor);
+      },
+    );
   }
 
   @override
@@ -111,6 +133,12 @@ class BookingModel extends BaseViewModel
     return _isDateValid(bookingObject.date) &&
         _isDoctorValid(bookingObject.doctorId);
   }
+
+  @override
+  Sink get inputName => _nameStreamController.sink;
+
+  @override
+  Stream<DoctorIndex> get outName => _nameStreamController.stream.map((name) => name);
 }
 
 abstract class BookingModelInputs {
@@ -120,6 +148,8 @@ abstract class BookingModelInputs {
 
   booking();
 
+  Sink get inputName;
+
   Sink get inputDoctor;
 
   Sink get inputDate;
@@ -128,6 +158,8 @@ abstract class BookingModelInputs {
 }
 
 abstract class BookingModelOutputs {
+  Stream<DoctorIndex> get outName;
+
   Stream<bool> get outIsDoctorValid;
 
   Stream<bool> get outIsDateValid;

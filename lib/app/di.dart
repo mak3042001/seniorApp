@@ -7,8 +7,10 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/booking/booking_cancel_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
+import 'package:senior/domain/usecase/doctor/doctor_index_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_cancel_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
@@ -174,8 +176,10 @@ initMedicationsModule() {
     if (!GetIt.I.isRegistered<BookingIndexUseCase>()) {
       instance.registerFactory<BookingIndexUseCase>(
               () => BookingIndexUseCase(instance(),));
+      instance.registerFactory<BookingCancelUseCase>(
+              () => BookingCancelUseCase(instance(),));
       instance.registerFactory<AppointmentViewModel>(
-              () => AppointmentViewModel(instance()));
+              () => AppointmentViewModel(instance(),instance()));
     }
   }
 
@@ -183,8 +187,10 @@ initMedicationsModule() {
     if (!GetIt.I.isRegistered<BookingCreateUseCase>()) {
       instance.registerFactory<BookingCreateUseCase>(
               () => BookingCreateUseCase(instance(),));
+      instance.registerFactory<DoctorIndexUseCase>(
+              () => DoctorIndexUseCase(instance(),));
       instance.registerFactory<BookingModel>(
-              () => BookingModel(instance(),));
+              () => BookingModel(instance(),instance()));
     }
   }
 

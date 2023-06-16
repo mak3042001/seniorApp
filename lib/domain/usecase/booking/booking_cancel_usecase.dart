@@ -21,7 +21,7 @@ class BookingCancelUseCase
 }
 
 class BookingCancelUseCaseInput {
-  String bookingId;
+  int bookingId;
 
   BookingCancelUseCaseInput(this.bookingId);
 }

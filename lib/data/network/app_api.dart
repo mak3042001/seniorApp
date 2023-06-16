@@ -93,7 +93,7 @@ abstract class AppServiceClient {
 //bookings cancel
   @POST("/api/seniors/bookings/cancel")
   Future<CancelBookingResponse> bookingCancel(
-      @Field("booking_id") String bookingId,
+      @Field("booking_id") int bookingId,
       );
 //bookings index
   @GET("/api/seniors/bookings")
@@ -190,6 +190,12 @@ abstract class AppServiceClient {
 //medications code index
   @GET("/api/seniors/medications-code/last")
   Future<MedicationsCodeIndexResponse> medicationsCodeIndex();
+
+  //doctor index
+  @GET("/api/guest/doctors")
+  Future<DoctorIndexResponse> doctorIndex();
 }
+
+
 
 

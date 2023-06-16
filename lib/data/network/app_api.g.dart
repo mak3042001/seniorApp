@@ -326,7 +326,7 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<CancelBookingResponse> bookingCancel(String bookingId) async {
+  Future<CancelBookingResponse> bookingCancel(int bookingId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -737,6 +737,29 @@ class _AppServiceClient implements AppServiceClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MedicationsCodeIndexResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DoctorIndexResponse> doctorIndex() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DoctorIndexResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/guest/doctors',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DoctorIndexResponse.fromJson(_result.data!);
     return value;
   }
 

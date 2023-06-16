@@ -84,7 +84,7 @@ class BookingCreateRequest {
 
 //bookings cancel
 class BookingCancelRequest {
-  String bookingId;
+  int bookingId;
 
   BookingCancelRequest(this.bookingId);
 }

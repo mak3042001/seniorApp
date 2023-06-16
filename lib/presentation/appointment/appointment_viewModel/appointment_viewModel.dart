@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'package:rxdart/subjects.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/domain/usecase/booking/booking_cancel_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
 import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
@@ -12,8 +13,9 @@ class AppointmentViewModel extends BaseViewModel
   final _appointmentStreamController = BehaviorSubject<IndexBooking>();
 
   final BookingIndexUseCase bookingIndexUseCase;
+  final BookingCancelUseCase bookingCancelUseCase;
 
-  AppointmentViewModel(this.bookingIndexUseCase);
+  AppointmentViewModel(this.bookingIndexUseCase , this.bookingCancelUseCase);
 
   @override
   start() async {
@@ -36,6 +38,27 @@ class AppointmentViewModel extends BaseViewModel
   }
 
   @override
+  cancel(int id) async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+    (await bookingCancelUseCase.execute(BookingCancelUseCaseInput(id)))
+        .fold(
+            (failure) => {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
+      // right -> data (success)
+      // content
+      inputState.add(ContentState());
+
+          (){
+        start();
+      }.call();
+    });
+  }
+
+  @override
   void dispose() {
     _appointmentStreamController.close();
   }
@@ -50,6 +73,7 @@ class AppointmentViewModel extends BaseViewModel
 }
 
 abstract class AppointmentViewModelInput {
+  cancel(int id);
   Sink get inputAppointment;
 }
 

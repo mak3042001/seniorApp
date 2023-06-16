@@ -335,3 +335,12 @@ class MedicationsCodeIndex {
       this.data,
       );
 }
+
+//doctor index
+class DoctorIndex {
+  List<User?>? data;
+
+  DoctorIndex(
+      this.data,
+      );
+}

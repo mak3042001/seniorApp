@@ -655,3 +655,17 @@ class MedicationsCodeIndexResponse extends BaseResponse {
 
 
 //doctor index
+@JsonSerializable()
+class DoctorIndexResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  List<UserResponse?>? data;
+
+  DoctorIndexResponse(this.data,);
+
+  //fromJson
+  factory DoctorIndexResponse.fromJson(Map<String, dynamic> json) =>
+      _$DoctorIndexResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$DoctorIndexResponseToJson(this);
+}

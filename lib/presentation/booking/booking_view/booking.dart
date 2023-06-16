@@ -5,6 +5,7 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/di.dart';
 import 'package:senior/app/static.dart';
+import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
 import 'package:senior/presentation/login/login_view_model/login_viewModel.dart';
@@ -22,6 +23,8 @@ class Booking extends StatefulWidget {
 }
 
 class _BookingState extends State<Booking> {
+  int selectedIndex = -1;
+
   final BookingModel _viewModel = instance<BookingModel>();
 
   final TextEditingController _doctorController = TextEditingController();
@@ -34,15 +37,13 @@ class _BookingState extends State<Booking> {
     _viewModel.start();
     _doctorController
         .addListener(() => _viewModel.setDoctor(_doctorController.text));
-    _dateController
-        .addListener(() => _viewModel.setDate(_dateController.text));
+    _dateController.addListener(() => _viewModel.setDate(_dateController.text));
 
     _viewModel.isUserBookingSuccessfullyStreamController.stream
         .listen((isBooking) {
       if (isBooking) {
         // navigate to main screen
-        SchedulerBinding.instance.addPostFrameCallback((_) async {
-        });
+        SchedulerBinding.instance.addPostFrameCallback((_) async {});
       }
     });
   }
@@ -78,7 +79,7 @@ class _BookingState extends State<Booking> {
         stream: _viewModel.outputState,
         builder: (context, snapshot) {
           return snapshot.data
-              ?.getScreenWidget(context, _getContentWidget(), () {}) ??
+                  ?.getScreenWidget(context, _getContentWidget(), () {}) ??
               _getContentWidget();
         },
       ),
@@ -87,15 +88,16 @@ class _BookingState extends State<Booking> {
 
   Widget _getContentWidget() {
     return Container(
-      padding: const EdgeInsets.only(top: AppPadding.p40),
+      padding: const EdgeInsets.only(top: AppPadding.p8),
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 100,
+              Container(height: 400.0, child: _getContent()),
+              SizedBox(
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -133,8 +135,10 @@ class _BookingState extends State<Booking> {
                         onTap: () {
                           showDatePicker(
                             context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
+                            initialDate:
+                                DateTime.now().add(const Duration(days: 1)),
+                            firstDate:
+                                DateTime.now().add(const Duration(days: 1)),
                             lastDate: DateTime(2100),
                           ).then((value) {
                             _dateController.text =
@@ -164,10 +168,10 @@ class _BookingState extends State<Booking> {
                         child: ElevatedButton(
                             onPressed: (snapshot.data ?? false)
                                 ? () {
-                              _viewModel.booking();
-                              _dateController.text = "";
-                              _doctorController.text = "";
-                            }
+                                    _viewModel.booking();
+                                    _dateController.text = "";
+                                    _doctorController.text = "";
+                                  }
                                 : null,
                             child: const Text(StringManager.booking)),
                       );
@@ -184,12 +188,15 @@ class _BookingState extends State<Booking> {
                   height: AppSize.s40,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          ColorManager.error), // Set the desired color here
                     ),
-                    onPressed: (){
-                      Navigator.pushReplacementNamed(context, Routes.appointmentScreen);
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.appointmentScreen);
                     },
-                    child: const Text(StringManager.appointments),),
+                    child: const Text(StringManager.appointments),
+                  ),
                 ),
               ),
             ],
@@ -199,6 +206,82 @@ class _BookingState extends State<Booking> {
     );
   }
 
+  Widget _getContent() {
+    return StreamBuilder<DoctorIndex>(
+      stream: _viewModel.outName,
+      builder: (context, snapshot) {
+        return _getItem(snapshot.data);
+      },
+    );
+  }
+
+  Widget _getItem(DoctorIndex? doctorIndex) {
+    if (doctorIndex != null) {
+      return ListView.separated(
+        itemBuilder: (context, index) => StreamBuilder<DoctorIndex>(
+          stream: _viewModel.outName,
+          builder: (context, snapshot) {
+            return _matrialList(context, index, snapshot.data);
+          },
+        ),
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey[600],
+          height: 5.0,
+        ),
+        itemCount: doctorIndex.data!.length,
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _matrialList(BuildContext context, int i, DoctorIndex? doctor) {
+    if (doctor != null) {
+      return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SizedBox(
+          height: 75,
+          child: Container(
+            decoration: BoxDecoration(
+              color: selectedIndex == i
+                  ? ColorManager.primary
+                  : ColorManager.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ListTile(
+              title: Text(
+                doctor.data![i]!.name,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: selectedIndex == i
+                      ? ColorManager.white
+                      : ColorManager.black,
+                ),
+              ),
+              leading: Text(
+                "${doctor.data![i]!.id}",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: selectedIndex == i
+                      ? ColorManager.white
+                      : ColorManager.black,
+                ),
+              ),
+              textColor: ColorManager.black,
+              onTap: () {
+                setState(() {
+                  selectedIndex = i;
+                  _doctorController.text = doctor.data![i]!.id.toString();
+                });
+              },
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
 
   @override
   void dispose() {
