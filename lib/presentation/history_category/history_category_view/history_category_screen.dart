@@ -5,8 +5,8 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/static.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/presentation/history/history_view/History.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
-import 'package:senior/presentation/resources/routes_manager.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 import '../../resources/color_manager.dart';
@@ -23,6 +23,7 @@ class HistoryCategoriesScreen extends StatefulWidget {
 
 class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
   final TextEditingController _taskTitleController = TextEditingController();
+  final TextEditingController _taskTitleUpdateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final HistoryCategoriesViewModel _viewModel = instance<HistoryCategoriesViewModel>();
   final AppPreference _appPreference = instance<AppPreference>();
@@ -37,6 +38,9 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
     _viewModel.start();
     _taskTitleController
         .addListener(() => _viewModel.setTitle(_taskTitleController.text));
+
+    _taskTitleUpdateController
+        .addListener(() => _viewModel.setTitleUpdate(_taskTitleUpdateController.text));
 
     _viewModel.isUserHistoryCategoriesSuccessfullyStreamController.stream
         .listen((isCreate) {
@@ -54,7 +58,7 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xff283DAA),
         title: const Text(
-          "History Categories",
+          StringManager.information,
           style: TextStyle(color: Colors.grey),
         ),
         leading: IconButton(
@@ -190,11 +194,13 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
-          height: 70,
+          height: 100,
           child: InkWell(
             onTap: (){
+              _appPreference.setHistoryCategoryName(history.data[i]?.title);
               _appPreference.setHistoryCategoryId(history.data[i]?.id);
-              Navigator.pushNamed(context, Routes.history);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => History(history.data[i]!.title)));
             },
             child: Card(
               elevation: 4.0,
@@ -216,28 +222,96 @@ class _HistoryCategoriesScreenState extends State<HistoryCategoriesScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(ColorManager.error), // Set the desired color here
-                        ),
-                        onPressed: (){
-                          AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.warning,
-                              animType: AnimType.rightSlide,
-                              title: StringManager.cancel,
-                              desc: 'are you sure about that',
-                              btnCancelOnPress: () {},
-                          btnOkOnPress: () {
-                            setState(() {
-                              _viewModel.cancel(history.data[i]!.id);
-                            });
-                          },
-                            btnOkText: "Yes",
-                            btnCancelText: 'No',
-                          ).show();
-                        },
-                        child: const Text(StringManager.cancel),),
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                title: StringManager.cancel,
+                                desc: 'are you sure about that',
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () {
+                                  setState(() {
+                                    _viewModel.cancel(history.data[i]!.id);
+                                  });
+                                },
+                                btnOkText: "Yes",
+                                btnCancelText: 'No',
+                              ).show();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: ColorManager.error,
+                              child: Icon(Icons.cancel_outlined , color: ColorManager.white,),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          InkWell(
+                            onTap: (){
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.question,
+                                animType: AnimType.bottomSlide,
+                                title: 'Edit Profile',
+                                body: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      StreamBuilder<bool>(
+                                          stream: _viewModel.outIsTitleUpdateValid,
+                                          builder: (context, snapshot) {
+                                            return defaultFormField(
+                                              controller: _taskTitleUpdateController,
+                                              type: TextInputType.name,
+                                              text: 'Title',
+                                              prefix: IconBroken.Ticket,
+                                              isPassword: false,
+                                            );
+                                          }),
+                                      const SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: AppPadding.p28, right: AppPadding.p28),
+                                        child: StreamBuilder<bool>(
+                                            stream: _viewModel.outAreAllInputsUpdateValid,
+                                            builder: (context, snapshot) {
+                                              return SizedBox(
+                                                width: double.infinity,
+                                                height: AppSize.s40,
+                                                child: ElevatedButton(
+                                                    onPressed: (snapshot.data ?? false)
+                                                        ? () {
+                                                      setState(() {
+                                                        _viewModel.update(history.data[i]!.id);
+                                                        _taskTitleUpdateController.text = "";
+                                                      });
+                                                    }
+                                                        : null,
+                                                    child: const Text(StringManager.edit)),
+                                              );
+                                            }),
+                                      ),
+                                      const SizedBox(
+                                        height: AppSize.s28,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ).show();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: ColorManager.white,
+                              child: Icon(IconBroken.Edit_Square , color: ColorManager.black,),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

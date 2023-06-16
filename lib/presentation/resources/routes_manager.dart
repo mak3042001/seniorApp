@@ -25,7 +25,6 @@ class Routes {
   static const String home = "/home";
   static const String booking = "/booking";
   static const String contact = "/contact";
-  static const String history = "/history";
   static const String medication = "/medication";
   static const String medicationCode = "/medicationCode";
   static const String notification = "/notification";
@@ -54,8 +53,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const Booking());
       case Routes.contact:
         return MaterialPageRoute(builder: (_) => const ContactsScreen());
-      case Routes.history:
-        return MaterialPageRoute(builder: (_) => const History());
       case Routes.medication:
         return MaterialPageRoute(builder: (_) =>  Medications());
         case Routes.medicationCode:

@@ -8,6 +8,7 @@ import 'package:senior/presentation/medications/medications.dart';
 import 'package:senior/presentation/medications_code/medication_code_view/medication_code_view.dart';
 import 'package:senior/presentation/notification/notification_view/notificationScreen.dart';
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
+import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 
 
@@ -15,13 +16,13 @@ class HomeApp extends StatelessWidget {
   static const String baseImageAssets = "assets/images";
 
   List<String> home = [
-    "Schedules",
-    "History",
-    "Bookings",
-    "Medications",
-    "Text readable",
-    "Chat",
-    "Medication Code"
+    StringManager.schedules,
+    StringManager.information,
+    StringManager.booking,
+    StringManager.medications,
+    StringManager.textReader,
+    StringManager.chat,
+    StringManager.medicationCode,
   ];
   List<String> images = [
     "$baseImageAssets/Schedules.png",

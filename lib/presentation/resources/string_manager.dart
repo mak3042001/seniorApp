@@ -9,7 +9,14 @@ class StringManager {
   static const login = "login";
   static const logout = "logout";
   static const booking = "booking";
+  static const information = "information";
+  static const schedules = "Schedules";
+  static const medications = "Medications";
+  static const textReader = "Text reader";
+  static const chat = "Chat";
+  static const medicationCode = "Medication Code";
   static const appointments = "Appointments";
+  static const edit = "Update";
   static const usernameError = "please enter your username";
   static const passwordError = "please enter your password";
   static const dateError = "please select date";

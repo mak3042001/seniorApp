@@ -26,7 +26,7 @@ class HistoryCategoriesUpdateUseCase
 }
 
 class HistoryCategoriesUpdateUseCaseInput {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 

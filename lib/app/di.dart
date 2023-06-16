@@ -12,6 +12,7 @@ import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_cancel_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
+import 'package:senior/domain/usecase/history_categories/historyCategories_update_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_create_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_index_usecase.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
@@ -120,8 +121,10 @@ initNotificationModule() {
               () => HistoryCategoriesCreateUseCase(instance()));
       instance.registerFactory<HistoryCategoriesCancelUseCase>(
               () => HistoryCategoriesCancelUseCase(instance()));
+      instance.registerFactory<HistoryCategoriesUpdateUseCase>(
+              () => HistoryCategoriesUpdateUseCase(instance()));
       instance.registerFactory<HistoryCategoriesViewModel>(
-              () => HistoryCategoriesViewModel(instance(),instance(),instance()));
+              () => HistoryCategoriesViewModel(instance(),instance(),instance(), instance()));
     }
   }
 

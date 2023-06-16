@@ -147,7 +147,7 @@ abstract class AppServiceClient {
 //historyCategories update
   @POST("/api/seniors/history-categories/update")
   Future<HistoryCategoriesUpdateResponse> historyCategoriesUpdate(
-      @Field("history_category_id") String historyCategoryId,
+      @Field("history_category_id") int historyCategoryId,
       @Field("title") String title,
       @Field("description") String description,
       );

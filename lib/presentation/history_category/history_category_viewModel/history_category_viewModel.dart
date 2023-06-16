@@ -6,6 +6,7 @@ import 'package:senior/domain/model/model.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_cancel_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_create_usecase.dart';
 import 'package:senior/domain/usecase/history_categories/historyCategories_index_usecase.dart';
+import 'package:senior/domain/usecase/history_categories/historyCategories_update_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
@@ -20,10 +21,18 @@ class HistoryCategoriesViewModel extends BaseViewModel
   final StreamController _areAllInputsValidStreamController =
   StreamController<void>.broadcast();
 
+  final StreamController _titleUpdateStreamController =
+  StreamController<String>.broadcast();
+
+  final StreamController _areAllInputsUpdateValidStreamController =
+  StreamController<void>.broadcast();
+
   StreamController isUserHistoryCategoriesSuccessfullyStreamController =
   StreamController<bool>();
 
   var historyCategoriesObject = HistoryCategoriesObject("", "");
+
+  var historyCategoriesUpdateObject = HistoryCategoriesUpdateObject("", "");
 
   final HistoryCategoriesIndexUseCase historyCategoriesUseCase;
 
@@ -31,7 +40,10 @@ class HistoryCategoriesViewModel extends BaseViewModel
 
   final HistoryCategoriesCancelUseCase historyCategoriesCancelUseCase;
 
-  HistoryCategoriesViewModel(this.historyCategoriesUseCase , this.historyCategoriesCreateUseCase , this.historyCategoriesCancelUseCase);
+  final HistoryCategoriesUpdateUseCase historyCategoriesUpdateUseCase;
+
+
+  HistoryCategoriesViewModel(this.historyCategoriesUseCase , this.historyCategoriesCreateUseCase , this.historyCategoriesCancelUseCase , this.historyCategoriesUpdateUseCase);
 
   @override
   start() async {
@@ -57,7 +69,9 @@ class HistoryCategoriesViewModel extends BaseViewModel
   void dispose() {
     _historyCategoriesStreamController.close();
     _titleStreamController.close();
+    _titleUpdateStreamController.close();
     _areAllInputsValidStreamController.close();
+    _areAllInputsUpdateValidStreamController.close();
     isUserHistoryCategoriesSuccessfullyStreamController.close();
   }
 
@@ -115,27 +129,69 @@ class HistoryCategoriesViewModel extends BaseViewModel
   }
 
   @override
+  update(id) async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+    (await historyCategoriesUpdateUseCase.execute(
+        HistoryCategoriesUpdateUseCaseInput(id, historyCategoriesUpdateObject.title, historyCategoriesUpdateObject.description)))
+        .fold(
+            (failure) => {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
+      // right -> data (success)
+      // content
+      inputState.add(ContentState());
+      // navigate to main screen
+      isUserHistoryCategoriesSuccessfullyStreamController.add(true);
+
+          (){
+        start();
+      }.call();
+    });
+  }
+
+  @override
   Sink get inputAreAllInputsValid => _areAllInputsValidStreamController.sink;
+
+  @override
+  Sink get inputAreAllInputsUpdateValid => _areAllInputsUpdateValidStreamController.sink;
 
   @override
   Sink get inputTitle => _titleStreamController.sink;
 
   @override
+  Sink get inputTitleUpdate => _titleUpdateStreamController.sink;
+
+  @override
   Stream<bool> get outAreAllInputsValid => _areAllInputsValidStreamController.stream
       .map((_) => _areAllInputsValid());
 
-
+  @override
+  Stream<bool> get outAreAllInputsUpdateValid => _areAllInputsUpdateValidStreamController.stream
+      .map((_) => _areAllInputsUpdateValid());
 
   @override
   Stream<bool> get outIsTitleValid => _titleStreamController.stream
       .map((title) => _isTitleValid(title));
 
+  @override
+  Stream<bool> get outIsTitleUpdateValid => _titleUpdateStreamController.stream
+      .map((title) => _isTitleUpdateValid(title));
 
   @override
   setTitle(String title) {
     inputTitle.add(title);
     historyCategoriesObject = historyCategoriesObject.copyWith(title: title);
     inputAreAllInputsValid.add(null);
+  }
+
+  @override
+  setTitleUpdate(String title) {
+    inputTitleUpdate.add(title);
+    historyCategoriesUpdateObject = historyCategoriesUpdateObject.copyWith(title: title);
+    inputAreAllInputsUpdateValid.add(null);
   }
 
 
@@ -146,6 +202,14 @@ class HistoryCategoriesViewModel extends BaseViewModel
 
   bool _areAllInputsValid() {
     return _isTitleValid(historyCategoriesObject.title);
+  }
+
+  bool _isTitleUpdateValid(String title) {
+    return title.isNotEmpty;
+  }
+
+  bool _areAllInputsUpdateValid() {
+    return _isTitleUpdateValid(historyCategoriesUpdateObject.title);
   }
 }
 
@@ -158,9 +222,17 @@ abstract class HistoryCategoriesViewModelInput {
 
   cancel(int id);
 
+  setTitleUpdate(String title);
+
+  update(int id);
+
   Sink get inputTitle;
 
+  Sink get inputTitleUpdate;
+
   Sink get inputAreAllInputsValid;
+
+  Sink get inputAreAllInputsUpdateValid;
 }
 
 abstract class HistoryCategoriesViewModelOutput {
@@ -169,4 +241,8 @@ abstract class HistoryCategoriesViewModelOutput {
   Stream<bool> get outIsTitleValid;
 
   Stream<bool> get outAreAllInputsValid;
+
+  Stream<bool> get outIsTitleUpdateValid;
+
+  Stream<bool> get outAreAllInputsUpdateValid;
 }

@@ -142,7 +142,7 @@ class HistoryCategoriesCancelRequest {
 
 //historyCategories update
 class HistoryCategoriesUpdateRequest {
-  String historyCategoryId;
+  int historyCategoryId;
   String title;
   String description;
 

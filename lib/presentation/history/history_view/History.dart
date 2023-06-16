@@ -2,17 +2,26 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/app_preference.dart';
+import 'package:senior/app/di.dart';
 import 'package:senior/app/static.dart';
 
 
 class History extends StatefulWidget {
-  const History({super.key});
+  String title;
+
+  History(this.title, {super.key});
 
   @override
-  _HistoryState createState() => _HistoryState();
+  _HistoryState createState() => _HistoryState(title);
 }
 
 class _HistoryState extends State<History> {
+  String title;
+
+  _HistoryState(this.title);
+
+  final AppPreference _appPreference = instance<AppPreference>();
   final DateTime _selectedDate = DateTime.now();
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -50,7 +59,7 @@ class _HistoryState extends State<History> {
             color: Colors.white,
           ),
         ),
-        title: const Text('Medical History'),
+        title: Text(title),
         centerTitle: true,
         backgroundColor: Colors.blue[900],
       ),

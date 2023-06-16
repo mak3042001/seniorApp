@@ -7,6 +7,7 @@ const String PREFS_KEY_USER_Token = "PREFS_KEY_USER_Token";
 const String PREFS_KEY_Booking_Date = "PREFS_KEY_Booking_Date";
 const String PREFS_KEY_USER_Id = "PREFS_KEY_USER_Id";
 const String PREFS_KEY_HistoryCategoryId_Id = "PREFS_KEY_HistoryCategoryId_Id";
+const String PREFS_KEY_HistoryCategoryId_Name = "PREFS_KEY_HistoryCategoryId_Name";
 class AppPreference{
 
   final SharedPreferences sharedPreferences;
@@ -57,6 +58,14 @@ class AppPreference{
 
   Future<int> getHistoryCategoryId() async {
     return sharedPreferences.getInt(PREFS_KEY_HistoryCategoryId_Id) ?? 0;
+  }
+
+  Future<void> setHistoryCategoryName(historyCategoryName) async {
+    sharedPreferences.setString(PREFS_KEY_HistoryCategoryId_Name, historyCategoryName);
+  }
+
+  Future<String> getHistoryCategoryName() async {
+    return sharedPreferences.getString(PREFS_KEY_HistoryCategoryId_Name) ?? "";
   }
 
   Future<void> setBookingDate(date) async {

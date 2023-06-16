@@ -536,7 +536,7 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<HistoryCategoriesUpdateResponse> historyCategoriesUpdate(
-    String historyCategoryId,
+    int historyCategoryId,
     String title,
     String description,
   ) async {
