@@ -86,6 +86,10 @@ class HistoryCategoriesViewModel extends BaseViewModel
     inputState.add(ContentState());
     // navigate to main screen
     isUserHistoryCategoriesSuccessfullyStreamController.add(true);
+
+        (){
+      start();
+    }.call();
     });
   }
 
@@ -103,8 +107,10 @@ class HistoryCategoriesViewModel extends BaseViewModel
     // right -> data (success)
     // content
     inputState.add(ContentState());
-    // navigate to main screen
-    // isUserHistoryCategoriesSuccessfullyStreamController.add(true);
+
+    (){
+      start();
+    }.call();
     });
   }
 
