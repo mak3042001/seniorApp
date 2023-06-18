@@ -1,6 +1,4 @@
 //auth request
-import 'dart:html';
-
 class LoginRequest {
   String username;
   String password;

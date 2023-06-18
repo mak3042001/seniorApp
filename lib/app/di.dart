@@ -7,6 +7,7 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/auth/update_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_cancel_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_index_usecase.dart';
@@ -24,10 +25,13 @@ import 'package:senior/presentation/booking/booking_viewModel/booking_view_model
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import 'package:senior/presentation/medications/medication_viewModel/medication_viewModel.dart';
 import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
+import 'package:senior/presentation/profile/profile_viewModel/profile_viewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/data_source/data_source.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
+import '../domain/usecase/auth/change_image_usecase.dart';
+import '../domain/usecase/auth/change_password_usecase.dart';
 import '../domain/usecase/auth/register_usecase.dart';
 import '../domain/usecase/history/history_cancel_usecase.dart';
 import '../domain/usecase/history/history_create_usecase.dart';
@@ -88,6 +92,7 @@ Future<void> initAppModule() async {
   initCodeModule();
   initHistoryModule();
   initMedicationsModule();
+  initProfileModule();
 }
 
 //auth
@@ -202,5 +207,18 @@ initCodeModule() {
             () => MedicationsCodeCreateUseCase(instance(),));
     instance.registerFactory<MedicationsCodeViewModel>(
             () => MedicationsCodeViewModel(instance(),instance()));
+  }
+}
+
+initProfileModule() {
+  if (!GetIt.I.isRegistered<UpdateUseCase>()) {
+    instance.registerFactory<UpdateUseCase>(
+            () => UpdateUseCase(instance(),));
+    instance.registerFactory<ChangePasswordUseCase>(
+            () => ChangePasswordUseCase(instance(),));
+    instance.registerFactory<ChangeImageUseCase>(
+            () => ChangeImageUseCase(instance(),));
+    instance.registerFactory<ProfileViewModel>(
+            () => ProfileViewModel(instance(),instance(),instance()));
   }
 }

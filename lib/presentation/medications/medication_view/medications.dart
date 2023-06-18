@@ -28,7 +28,6 @@ class _MedicationsState extends State<Medications> {
   final TextEditingController _taskDoseUpdateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final MedicationsViewModel _viewModel = instance<MedicationsViewModel>();
-  final AppPreference _appPreference = instance<AppPreference>();
 
   @override
   void initState() {

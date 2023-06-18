@@ -105,15 +105,14 @@ class _BookingState extends State<Booking> {
                 child: StreamBuilder<bool>(
                     stream: _viewModel.outIsDoctorValid,
                     builder: (context, snapshot) {
-                      return defaultFormField(
+                      return defaultDisableFormField(
                           controller: _doctorController,
-                          isPassword: false,
                           type: TextInputType.number,
                           text: StringManager.doctorId,
                           prefix: IconBroken.User,
                           errorText: (snapshot.data ?? true)
                               ? null
-                              : StringManager.doctorError);
+                              : StringManager.doctorError, enableInteractiveSelection: false, hasFocusBool: false,);
                     }),
               ),
               const SizedBox(
@@ -171,6 +170,7 @@ class _BookingState extends State<Booking> {
                                     _viewModel.booking();
                                     _dateController.text = "";
                                     _doctorController.text = "";
+                                    selectedIndex = -1;
                                   }
                                 : null,
                             child: const Text(StringManager.booking)),

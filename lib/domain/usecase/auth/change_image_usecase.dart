@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dartz/dartz.dart';
 import 'package:senior/data/network/failure.dart';
 import 'package:senior/data/network/request.dart';

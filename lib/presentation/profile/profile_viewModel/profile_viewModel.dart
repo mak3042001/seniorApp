@@ -10,8 +10,6 @@ import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
-import 'package:senior/presentation/resources/string_manager.dart';
-
 
 class ProfileViewModel extends BaseViewModel
     with ProfileViewModelInput, ProfileViewModelOutput {
@@ -34,6 +32,12 @@ class ProfileViewModel extends BaseViewModel
   StreamController profilePictureStreamController =
   StreamController<File>.broadcast();
   StreamController areAllInputsValidStreamController =
+  StreamController<void>.broadcast();
+
+  StreamController areAllInputsPasswordValidStreamController =
+  StreamController<void>.broadcast();
+
+  StreamController areAllInputsImageValidStreamController =
   StreamController<void>.broadcast();
 
   StreamController isUserProfileInSuccessfullyStreamController =
@@ -203,33 +207,16 @@ class ProfileViewModel extends BaseViewModel
       .map((userName) => _isUserNameValid(userName));
 
   @override
-  Stream<String?> get outputErrorUserName => outputIsUserNameValid
-      .map((isUserName) => isUserName ? null : StringManager.userNameInvalid);
-
-  @override
   Stream<bool> get outputIsNameValid =>
       nameStreamController.stream.map((name) => _isNameValid(name));
-
-  @override
-  Stream<String?> get outputErrorName => outputIsNameValid
-      .map((isNameValid) => isNameValid ? null : StringManager.invalidName);
 
   @override
   Stream<bool> get outputIsPhoneValid =>
       phoneStreamController.stream.map((phone) => _isPhoneValid(phone));
 
   @override
-  Stream<String?> get outputErrorPhone => outputIsPhoneValid
-      .map((isPhoneValid) => isPhoneValid ? null : StringManager.phoneInvalid);
-
-  @override
   Stream<bool> get outputIsBirthdateValid => birthdateStreamController.stream
       .map((birthdate) => _isBirthdateValid(birthdate));
-
-  @override
-  Stream<String?> get outputErrorBirthdate => outputIsBirthdateValid.map(
-          (isBirthdateValid) => isBirthdateValid ? null : StringManager.birthdateInvalid);
-
 
   @override
   Stream<File> get outputProfilePicture =>
@@ -265,8 +252,24 @@ class ProfileViewModel extends BaseViewModel
         profileObject.name.isNotEmpty;
   }
 
+  bool _areAllInputsPasswordValid() {
+    return passwordObject.password.isNotEmpty && passwordObject.confirmPassword.isNotEmpty && passwordObject.currentPassword.isNotEmpty;
+  }
+
+  bool _areAllInputsImagesValid() {
+    return imageObject.image.isNotEmpty;
+  }
+
   validate() {
     inputAllInputsValid.add(null);
+  }
+
+  passwordValidate() {
+    inputAllPasswordInputsValid.add(null);
+  }
+
+  imageValidate() {
+    inputAllImageInputsValid.add(null);
   }
 
   @override
@@ -334,7 +337,7 @@ class ProfileViewModel extends BaseViewModel
       // reset phone value in profile view object
       passwordObject = passwordObject.copyWith(confirmPassword: "");
     }
-    validate();
+    passwordValidate();
   }
 
   bool _isConfirmPasswordValid(String password) {
@@ -350,7 +353,7 @@ class ProfileViewModel extends BaseViewModel
       // reset phone value in profile view object
       passwordObject = passwordObject.copyWith(currentPassword: "");
     }
-    validate();
+    passwordValidate();
   }
 
   bool _isCurrentPasswordValid(String password) {
@@ -366,7 +369,7 @@ class ProfileViewModel extends BaseViewModel
       // reset phone value in profile view object
       passwordObject = passwordObject.copyWith(password: "");
     }
-    validate();
+    passwordValidate();
   }
 
   bool _isPasswordValid(String password) {
@@ -374,24 +377,42 @@ class ProfileViewModel extends BaseViewModel
   }
 
   @override
-  Sink get inputAllImageInputsValid => _imageStreamController.sink;
+  Sink get inputAllImageInputsValid => areAllInputsImageValidStreamController.sink;
 
   @override
-  Sink get inputAllPasswordInputsValid => _passwordStreamController.sink;
+  Sink get inputAllPasswordInputsValid => areAllInputsPasswordValidStreamController.sink;
 
   @override
-  // TODO: implement outputAreAllImageInputsValid
-  Stream<bool> get outputAreAllImageInputsValid => throw UnimplementedError();
+  Sink get inputImage => _imageStreamController.sink;
 
   @override
-  // TODO: implement outputAreAllPasswordInputsValid
-  Stream<bool> get outputAreAllPasswordInputsValid => throw UnimplementedError();
+  Sink get inputNewPassword => passwordStreamController.sink;
+
+  @override
+  Stream<bool> get outputAreAllImageInputsValid => areAllInputsImageValidStreamController.stream.map((_) => _areAllInputsImagesValid());
+
+  @override
+  Stream<bool> get outputAreAllPasswordInputsValid => areAllInputsPasswordValidStreamController.stream.map((_) => _areAllInputsPasswordValid());
+
+
+  @override
+  Stream<bool> get outputIsConfirmPasswordValid => confirmPasswordStreamController.stream.map((password) => _isConfirmPasswordValid(password));
+
+  @override
+  Stream<bool> get outputIsCurrentPasswordValid => currentPasswordStreamController.stream.map((password) => _isCurrentPasswordValid(password));
+
+  @override
+  Stream<bool> get outputIsPasswordValid => passwordStreamController.stream.map((password) => _isPasswordValid(password));
+
+  @override
+  Stream<bool> get outputIsProfileImageValid => profilePictureStreamController.stream.map((file) => file);
+
+  @override
+  Stream<ChangePassword> get outputPassword => _passwordStreamController.stream.map((password) => password);
 }
 
 abstract class ProfileViewModelInput {
   Sink get inputProfilePicture;
-
-  Stream<File> get outputProfilePicture;
 
   Sink get inputProfile;
   Sink get inputPassword;
@@ -405,9 +426,11 @@ abstract class ProfileViewModelInput {
 
   Sink get inputName;
 
-  Sink get inputPassword;
+  Sink get inputNewPassword;
 
   Sink get inputConfirmPassword;
+
+  Sink get inputCurrentPassword;
 
   Sink get inputAllInputsValid;
 
@@ -437,23 +460,24 @@ abstract class ProfileViewModelInput {
 abstract class ProfileViewModelOutput {
   Stream<Auth> get outputProfile;
   Stream<ChangePassword> get outputPassword;
-  Stream<ChangeImage> get outputImage;
+
+  Stream<File> get outputProfilePicture;
 
   Stream<bool> get outputIsUserNameValid;
 
-  Stream<String?> get outputErrorUserName;
-
   Stream<bool> get outputIsPhoneValid;
-
-  Stream<String?> get outputErrorPhone;
 
   Stream<bool> get outputIsBirthdateValid;
 
-  Stream<String?> get outputErrorBirthdate;
-
   Stream<bool> get outputIsNameValid;
 
-  Stream<String?> get outputErrorName;
+  Stream<bool> get outputIsPasswordValid;
+
+  Stream<bool> get outputIsCurrentPasswordValid;
+
+  Stream<bool> get outputIsConfirmPasswordValid;
+
+  Stream<bool> get outputIsProfileImageValid;
 
   Stream<bool> get outputAreAllInputsValid;
   Stream<bool> get outputAreAllPasswordInputsValid;
