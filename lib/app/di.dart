@@ -7,6 +7,7 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/auth/profile_index_usecase.dart';
 import 'package:senior/domain/usecase/auth/update_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_cancel_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_create_usecase.dart';
@@ -211,7 +212,9 @@ initCodeModule() {
 }
 
 initProfileModule() {
-  if (!GetIt.I.isRegistered<UpdateUseCase>()) {
+  if (!GetIt.I.isRegistered<ProfileIndexUseCase>()) {
+    instance.registerFactory<ProfileIndexUseCase>(
+            () => ProfileIndexUseCase(instance(),));
     instance.registerFactory<UpdateUseCase>(
             () => UpdateUseCase(instance(),));
     instance.registerFactory<ChangePasswordUseCase>(
@@ -219,6 +222,6 @@ initProfileModule() {
     instance.registerFactory<ChangeImageUseCase>(
             () => ChangeImageUseCase(instance(),));
     instance.registerFactory<ProfileViewModel>(
-            () => ProfileViewModel(instance(),instance(),instance()));
+            () => ProfileViewModel(instance(),instance(),instance(), instance()));
   }
 }

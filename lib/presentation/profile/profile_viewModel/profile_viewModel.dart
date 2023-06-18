@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:rxdart/subjects.dart';
 import 'package:senior/domain/model/model.dart';
 import 'package:senior/domain/usecase/auth/change_image_usecase.dart';
 import 'package:senior/domain/usecase/auth/change_password_usecase.dart';
+import 'package:senior/domain/usecase/auth/profile_index_usecase.dart';
 import 'package:senior/domain/usecase/auth/update_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
@@ -52,16 +54,32 @@ class ProfileViewModel extends BaseViewModel
   final UpdateUseCase _profileUseCase;
   final ChangePasswordUseCase _changePasswordUseCase;
   final ChangeImageUseCase _changeImageUseCase;
+  final ProfileIndexUseCase profileIndexUseCase;
   var profileObject = ProfileObject("", "", "", "",);
   var passwordObject = PasswordObject("", "", "",);
   var imageObject = ImageObject("");
 
-  ProfileViewModel(this._profileUseCase , this._changePasswordUseCase , this._changeImageUseCase);
+  ProfileViewModel(this._profileUseCase , this._changePasswordUseCase , this._changeImageUseCase , this.profileIndexUseCase);
 
   // inputs
   @override
   void start() {
-    inputState.add(ContentState());
+    _loadData();
+  }
+
+  _loadData() async {
+    inputState.add(LoadingState(
+        stateRendererType: StateRendererType.fullScreenLoadingState));
+    (await profileIndexUseCase.execute(Void)).fold(
+          (failure) {
+        inputState.add(ErrorState(
+            StateRendererType.fullScreenErrorState, failure.message));
+      },
+          (profile) async {
+        inputState.add(ContentState());
+        inputProfile.add(profile);
+      },
+    );
   }
 
   @override
@@ -459,6 +477,7 @@ abstract class ProfileViewModelInput {
 
 abstract class ProfileViewModelOutput {
   Stream<Auth> get outputProfile;
+
   Stream<ChangePassword> get outputPassword;
 
   Stream<File> get outputProfilePicture;
