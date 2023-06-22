@@ -27,6 +27,7 @@ class SchedulesCreateObject with _$SchedulesCreateObject {
     String date,
     String time,
     String type,
+    String description,
   ) = _SchedulesCreateObject;
 }
 

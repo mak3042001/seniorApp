@@ -72,6 +72,7 @@ abstract class AppServiceClient {
     @Field("date") String date,
     @Field("time") String time,
     @Field("type") String type,
+    @Field("description") String description,
   );
 
 //schedules cancel

@@ -254,6 +254,7 @@ class _AppServiceClient implements AppServiceClient {
     String date,
     String time,
     String type,
+    String description,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -263,6 +264,7 @@ class _AppServiceClient implements AppServiceClient {
       'date': date,
       'time': time,
       'type': type,
+      'description': description,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CreateSchedulesResponse>(Options(

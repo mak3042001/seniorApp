@@ -67,12 +67,14 @@ class SchedulesCreateRequest {
   String date;
   String time;
   String type;
+  String description;
 
   SchedulesCreateRequest(
     this.title,
     this.date,
     this.time,
     this.type,
+    this.description,
   );
 }
 

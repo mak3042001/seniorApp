@@ -26,13 +26,16 @@ class SchedulesViewModel extends BaseViewModel
   final StreamController _typeStreamController =
       StreamController<String>.broadcast();
 
+  final StreamController _descriptionStreamController =
+  StreamController<String>.broadcast();
+
   final StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
   StreamController isUserSchedulesSuccessfullyStreamController =
       StreamController<bool>();
 
-  var schedulesObject = SchedulesCreateObject("", "", "", "");
+  var schedulesObject = SchedulesCreateObject("", "", "", "" , "");
 
   final SchedulesIndexUseCase schedulesUseCase;
 
@@ -73,6 +76,7 @@ class SchedulesViewModel extends BaseViewModel
     _dateStreamController.close();
     _timeStreamController.close();
     _typeStreamController.close();
+    _descriptionStreamController.close();
     _areAllInputsValidStreamController.close();
     isUserSchedulesSuccessfullyStreamController.close();
   }
@@ -93,7 +97,8 @@ class SchedulesViewModel extends BaseViewModel
       schedulesObject.title,
       schedulesObject.date,
       schedulesObject.time,
-      schedulesObject.type,
+      "1",
+      schedulesObject.description,
     ),))
         .fold(
             (failure) => {
@@ -150,6 +155,9 @@ class SchedulesViewModel extends BaseViewModel
   Sink get inputType => _typeStreamController.sink;
 
   @override
+  Sink get inputDescription => _descriptionStreamController.sink;
+
+  @override
   Stream<bool> get outAreAllInputsValid =>
       _areAllInputsValidStreamController.stream
           .map((_) => _areAllInputsValid());
@@ -169,6 +177,10 @@ class SchedulesViewModel extends BaseViewModel
   @override
   Stream<bool> get outIsTypeValid =>
       _typeStreamController.stream.map((type) => _isTypeValid(type));
+
+  @override
+  Stream<bool> get outIsDescriptionValid =>
+      _descriptionStreamController.stream.map((description) => _isDescriptionValid(description));
 
   @override
   setTitle(String title) {
@@ -198,6 +210,13 @@ class SchedulesViewModel extends BaseViewModel
     inputAreAllInputsValid.add(null);
   }
 
+  @override
+  setDescription(String description) {
+    inputType.add(description);
+    schedulesObject = schedulesObject.copyWith(description: description);
+    inputAreAllInputsValid.add(null);
+  }
+
   bool _isTitleValid(String title) {
     return title.isNotEmpty;
   }
@@ -212,6 +231,10 @@ class SchedulesViewModel extends BaseViewModel
 
   bool _isTypeValid(String type) {
     return type.isNotEmpty;
+  }
+
+  bool _isDescriptionValid(String description) {
+    return description.isNotEmpty;
   }
 
   bool _areAllInputsValid() {
@@ -232,6 +255,8 @@ abstract class SchedulesViewModelInput {
 
   setType(String type);
 
+  setDescription(String description);
+
   create();
 
   cancel(int id);
@@ -243,6 +268,8 @@ abstract class SchedulesViewModelInput {
   Sink get inputTime;
 
   Sink get inputType;
+
+  Sink get inputDescription;
 
   Sink get inputAreAllInputsValid;
 }
@@ -257,6 +284,8 @@ abstract class SchedulesViewModelOutput {
   Stream<bool> get outIsTimeValid;
 
   Stream<bool> get outIsTypeValid;
+
+  Stream<bool> get outIsDescriptionValid;
 
   Stream<bool> get outAreAllInputsValid;
 }

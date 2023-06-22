@@ -27,6 +27,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
   final TextEditingController _taskTimeController = TextEditingController();
   final TextEditingController _taskDataController = TextEditingController();
   final TextEditingController _taskTypeController = TextEditingController();
+  final TextEditingController _taskDescriptionController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -45,8 +46,12 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
 
     _taskDataController
         .addListener(() => _viewModel.setDate(_taskDataController.text));
+
     _taskTypeController
         .addListener(() => _viewModel.setType(_taskTypeController.text));
+
+    _taskDescriptionController
+        .addListener(() => _viewModel.setType(_taskDescriptionController.text));
 
     _viewModel.isUserSchedulesSuccessfullyStreamController.stream
         .listen((isLoggedIn) {
@@ -287,6 +292,20 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                           );
                         }),
                     const SizedBox(
+                      height: 10.0,
+                    ),
+                    StreamBuilder<bool>(
+                        stream: _viewModel.outIsTitleValid,
+                        builder: (context, snapshot) {
+                          return defaultFormField(
+                            controller: _taskDescriptionController,
+                            type: TextInputType.name,
+                            text: 'Task Description',
+                            prefix: IconBroken.Document,
+                            isPassword: false,
+                          );
+                        }),
+                    const SizedBox(
                       height: AppSize.s28,
                     ),
                     Padding(
@@ -302,8 +321,11 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                                   onPressed: (snapshot.data ?? false)
                                       ? () {
                                           setState(() {
-                                            _taskTypeController.text = "1";
                                             _viewModel.create();
+                                            _taskTitleController.text="";
+                                            _taskDataController.text="";
+                                            _taskTimeController.text="";
+                                            _taskDescriptionController.text="";
                                           });
                                         }
                                       : null,
@@ -359,7 +381,6 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
-          height: 100,
           child: Card(
             elevation: 4.0,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -380,8 +401,17 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                               .labelSmall
                               ?.copyWith(fontSize: 30),
                         ),
+                        const SizedBox(height: 5.0,),
                         Text(
-                          "${schedules.data[i]?.date}",
+                          "${schedules.data[i]?.time}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(fontSize: 30),
+                        ),
+                        const SizedBox(height: 5.0,),
+                        Text(
+                          "${schedules.data[i]?.description}",
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall

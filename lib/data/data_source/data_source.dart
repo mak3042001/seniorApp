@@ -70,6 +70,7 @@ abstract class RemoteDataSource {
   Future<MedicationsIndexResponse> medicationsIndex();
 
   Future<MedicationsCodeCreateResponse> medicationsCodeCreate();
+
   Future<MedicationsCodeIndexResponse> medicationsCodeIndex();
 
   Future<DoctorIndexResponse> doctorIndex();
@@ -117,8 +118,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<IndexBookingResponse> bookingsIndex() async {
-    return await _appServiceClient
-        .bookingsIndex();
+    return await _appServiceClient.bookingsIndex();
   }
 
   @override
@@ -221,10 +221,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<CreateSchedulesResponse> schedulesCreate(
       SchedulesCreateRequest schedulesCreateRequest) async {
     return await _appServiceClient.schedulesCreate(
-        schedulesCreateRequest.title,
-        schedulesCreateRequest.date,
-        schedulesCreateRequest.time,
-        schedulesCreateRequest.type);
+      schedulesCreateRequest.title,
+      schedulesCreateRequest.date,
+      schedulesCreateRequest.time,
+      schedulesCreateRequest.type,
+      schedulesCreateRequest.description,
+    );
   }
 
   @override
@@ -263,7 +265,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
-
   @override
   Future<MedicationsCodeCreateResponse> medicationsCodeCreate() async {
     return await _appServiceClient.medicationsCodeCreate();
@@ -280,9 +281,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<ChangePasswordResponse> changePassword(ChangePasswordRequest changePasswordRequest) async {
-    return await _appServiceClient.changePassword(changePasswordRequest.currentPassword, changePasswordRequest.password, changePasswordRequest.confirmPassword);
+  Future<ChangePasswordResponse> changePassword(
+      ChangePasswordRequest changePasswordRequest) async {
+    return await _appServiceClient.changePassword(
+        changePasswordRequest.currentPassword,
+        changePasswordRequest.password,
+        changePasswordRequest.confirmPassword);
   }
-
 }
-

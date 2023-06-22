@@ -19,6 +19,7 @@ class SchedulesCreateUseCase
       input.date,
       input.time,
       input.type,
+      input.description,
     ));
   }
 }
@@ -28,11 +29,13 @@ class SchedulesCreateUseCaseInput {
   String date;
   String time;
   String type;
+  String description;
 
   SchedulesCreateUseCaseInput(
     this.title,
     this.date,
     this.time,
     this.type,
+    this.description,
   );
 }

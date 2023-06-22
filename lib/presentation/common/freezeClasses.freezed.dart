@@ -376,6 +376,7 @@ mixin _$SchedulesCreateObject {
   String get date => throw _privateConstructorUsedError;
   String get time => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchedulesCreateObjectCopyWith<SchedulesCreateObject> get copyWith =>
@@ -388,7 +389,12 @@ abstract class $SchedulesCreateObjectCopyWith<$Res> {
           $Res Function(SchedulesCreateObject) then) =
       _$SchedulesCreateObjectCopyWithImpl<$Res, SchedulesCreateObject>;
   @useResult
-  $Res call({String title, String date, String time, String type});
+  $Res call(
+      {String title,
+      String date,
+      String time,
+      String type,
+      String description});
 }
 
 /// @nodoc
@@ -409,6 +415,7 @@ class _$SchedulesCreateObjectCopyWithImpl<$Res,
     Object? date = null,
     Object? time = null,
     Object? type = null,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -427,6 +434,10 @@ class _$SchedulesCreateObjectCopyWithImpl<$Res,
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -439,7 +450,12 @@ abstract class _$$_SchedulesCreateObjectCopyWith<$Res>
       __$$_SchedulesCreateObjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String date, String time, String type});
+  $Res call(
+      {String title,
+      String date,
+      String time,
+      String type,
+      String description});
 }
 
 /// @nodoc
@@ -457,6 +473,7 @@ class __$$_SchedulesCreateObjectCopyWithImpl<$Res>
     Object? date = null,
     Object? time = null,
     Object? type = null,
+    Object? description = null,
   }) {
     return _then(_$_SchedulesCreateObject(
       null == title
@@ -475,6 +492,10 @@ class __$$_SchedulesCreateObjectCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -482,7 +503,8 @@ class __$$_SchedulesCreateObjectCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SchedulesCreateObject implements _SchedulesCreateObject {
-  _$_SchedulesCreateObject(this.title, this.date, this.time, this.type);
+  _$_SchedulesCreateObject(
+      this.title, this.date, this.time, this.type, this.description);
 
   @override
   final String title;
@@ -492,10 +514,12 @@ class _$_SchedulesCreateObject implements _SchedulesCreateObject {
   final String time;
   @override
   final String type;
+  @override
+  final String description;
 
   @override
   String toString() {
-    return 'SchedulesCreateObject(title: $title, date: $date, time: $time, type: $type)';
+    return 'SchedulesCreateObject(title: $title, date: $date, time: $time, type: $type, description: $description)';
   }
 
   @override
@@ -506,11 +530,14 @@ class _$_SchedulesCreateObject implements _SchedulesCreateObject {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, date, time, type);
+  int get hashCode =>
+      Object.hash(runtimeType, title, date, time, type, description);
 
   @JsonKey(ignore: true)
   @override
@@ -521,8 +548,12 @@ class _$_SchedulesCreateObject implements _SchedulesCreateObject {
 }
 
 abstract class _SchedulesCreateObject implements SchedulesCreateObject {
-  factory _SchedulesCreateObject(final String title, final String date,
-      final String time, final String type) = _$_SchedulesCreateObject;
+  factory _SchedulesCreateObject(
+      final String title,
+      final String date,
+      final String time,
+      final String type,
+      final String description) = _$_SchedulesCreateObject;
 
   @override
   String get title;
@@ -532,6 +563,8 @@ abstract class _SchedulesCreateObject implements SchedulesCreateObject {
   String get time;
   @override
   String get type;
+  @override
+  String get description;
   @override
   @JsonKey(ignore: true)
   _$$_SchedulesCreateObjectCopyWith<_$_SchedulesCreateObject> get copyWith =>
