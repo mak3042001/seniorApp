@@ -4,6 +4,7 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/di.dart';
 import 'package:senior/app/static.dart';
+import 'package:senior/data/network/dio_factory.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
 import 'package:senior/presentation/login/login_view_model/login_viewModel.dart';
 import 'package:senior/presentation/resources/assets_manager.dart';
@@ -11,6 +12,8 @@ import 'package:senior/presentation/resources/color_manager.dart';
 import 'package:senior/presentation/resources/routes_manager.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/resources/values_manager.dart';
+
+import '../../../app/app.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -181,7 +184,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                               onPressed: (snapshot.data ?? false)
                                   ? () {
-                                      _viewModel.login();
+                                setState(() {
+                                  _viewModel.login();
+                                  runApp(MyApp());
+                                });
                                     }
                                   : null,
                               child: const Text(StringManager.login)),

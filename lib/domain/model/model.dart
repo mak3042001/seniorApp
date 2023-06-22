@@ -92,7 +92,7 @@ class IndexSchedulesData {
   String date;
   String time;
   String type;
-  int createdAt;
+  String createdAt;
 
   IndexSchedulesData(
     this.id,

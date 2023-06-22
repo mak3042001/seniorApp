@@ -21,7 +21,7 @@ class SchedulesCancelUseCase
 }
 
 class SchedulesCancelUseCaseInput {
-  String scheduleId;
+  int scheduleId;
 
   SchedulesCancelUseCaseInput(this.scheduleId);
 }

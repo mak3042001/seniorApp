@@ -7,6 +7,7 @@ import 'package:senior/app/static.dart';
 import 'package:senior/domain/model/model.dart';
 import 'package:senior/presentation/history/history_view/history_screen.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
+import '../../../app/app.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 import '../../resources/color_manager.dart';

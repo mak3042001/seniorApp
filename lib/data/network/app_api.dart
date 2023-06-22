@@ -77,7 +77,7 @@ abstract class AppServiceClient {
 //schedules cancel
   @POST("/api/seniors/schedules/cancel")
   Future<CancelSchedulesResponse> schedulesCancel(
-    @Field("schedule_id") String scheduleId,
+    @Field("schedule_id") int scheduleId,
   );
 
 //schedules index

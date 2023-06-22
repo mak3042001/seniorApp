@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/constant.dart';
+import 'package:senior/app/di.dart';
 
 
 const String applicationJson = "application/json";
@@ -12,19 +13,22 @@ const String authorization = "authorization";
 const String defaultLanguage = "language";
 
 class DioFactory {
-  final AppPreference _appPreference;
+  final AppPreference _appPreference = instance<AppPreference>();
 
-  DioFactory(this._appPreference);
+  DioFactory();
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
 
     String language = await _appPreference.getLanguage();
+    String token = await _appPreference.getUserToken();
+
+    print('object $token');
 
     Map<String, String> headers = {
       contactType: applicationJson,
       accept: applicationJson,
-      authorization: 'Bearer ${await _appPreference.getUserToken()}',
+      authorization: 'Bearer $token',
       defaultLanguage: language,
     };
 
@@ -48,3 +52,4 @@ class DioFactory {
     return dio;
   }
 }
+

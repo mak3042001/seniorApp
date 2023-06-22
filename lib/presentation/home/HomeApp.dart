@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/data/network/dio_factory.dart';
 import 'package:senior/presentation/ai_screen/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';
@@ -10,6 +11,8 @@ import 'package:senior/presentation/notification/notification_view/notificationS
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
+
+import '../../app/app.dart';
 
 
 class HomeApp extends StatelessWidget {
@@ -132,3 +135,4 @@ class HomeApp extends StatelessWidget {
     );
   }
 }
+

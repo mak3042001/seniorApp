@@ -14,11 +14,8 @@ class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
   final AppPreference _appPreference;
-
   static String token = "";
-  static int historyCategoryId = 0;
-  static String bookingDate = "";
-  static int id = 0;
+  static int userId = 0;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo, this._appPreference);
 
@@ -32,15 +29,15 @@ class RepositoryImpl implements Repository {
 
         if (response.message == "success") {
           token = response.data!.token!;
-          id = response.data!.user!.id!;
           _appPreference.setUserToken(token);
-          _appPreference.setUserId(id);
-          print(token);
-          print(id);
+
+          userId = response.data!.user!.id!;
+          _appPreference.setUserId(userId);
+
           return Right(
               response.toDomain(),
           );
-        } else {
+    } else {
 
           return Left(Failure(ApiInternalStatus.FAILURE,
               response.message ?? ResponseMessage.DEFAULT));
@@ -63,6 +60,8 @@ class RepositoryImpl implements Repository {
         final response = await _remoteDataSource.register(registerRequest);
 
         if (response.successful == true) {
+          token = response.data!.token!;
+          _appPreference.setUserToken(response.data!.token);
           // success
           // return either right
           // return data

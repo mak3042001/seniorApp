@@ -282,7 +282,7 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<CancelSchedulesResponse> schedulesCancel(String scheduleId) async {
+  Future<CancelSchedulesResponse> schedulesCancel(int scheduleId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

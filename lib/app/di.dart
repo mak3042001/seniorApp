@@ -21,6 +21,7 @@ import 'package:senior/domain/usecase/medication/medication_create_usecase.dart'
 import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_create_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_index_usecase.dart';
+import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
@@ -68,7 +69,7 @@ Future<void> initAppModule() async {
           () => NetworkInfoImpl(InternetConnectionChecker()));
 
   // dio factory
-  instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
+  instance.registerLazySingleton<DioFactory>(() => DioFactory());
 
   Dio dio = await instance<DioFactory>().getDio();
   //app service client
@@ -119,8 +120,10 @@ initSchedulesIndexModule() {
             () => SchedulesCreateUseCase(instance()));
     instance.registerFactory<SchedulesIndexUseCase>(
             () => SchedulesIndexUseCase(instance()));
+    instance.registerFactory<SchedulesCancelUseCase>(
+            () => SchedulesCancelUseCase(instance()));
     instance.registerFactory<SchedulesViewModel>(
-            () => SchedulesViewModel(instance(),instance()));
+            () => SchedulesViewModel(instance(),instance(),instance()));
   }
 }
 

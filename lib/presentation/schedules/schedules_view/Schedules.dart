@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/static.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/presentation/resources/color_manager.dart';
 import 'package:senior/presentation/resources/values_manager.dart';
 
 import 'package:senior/presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
@@ -47,7 +48,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
     _taskTypeController
         .addListener(() => _viewModel.setType(_taskTypeController.text));
 
-    _viewModel.isUserScheduleCreateSuccessfullyStreamController.stream
+    _viewModel.isUserSchedulesSuccessfullyStreamController.stream
         .listen((isLoggedIn) {
       if (isLoggedIn) {
         // navigate to main screen
@@ -64,12 +65,14 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
   void _incrementDate() {
     setState(() {
       _selectedDate = _selectedDate.add(const Duration(days: 1));
+      reload();
     });
   }
 
   void _decrementDate() {
     setState(() {
       _selectedDate = _selectedDate.subtract(const Duration(days: 1));
+      reload();
     });
   }
 
@@ -194,7 +197,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                   return SafeArea(
                     child: Container(
                       child: snapshot.data?.getScreenWidget(
-                              context, _getContentWidget(), () {
+                              context, _getContentWidget(formattedDate), () {
                             _viewModel.start();
                           }) ??
                           Container(),
@@ -228,20 +231,6 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                             isPassword: false,
                           );
                         }),
-                    // const SizedBox(
-                    //   height: 10.0,
-                    // ),
-                    // StreamBuilder<bool>(
-                    //     stream: _viewModel.outIsTitleValid,
-                    //     builder: (context, snapshot) {
-                    //       return defaultFormField(
-                    //         controller: _taskTypeController,
-                    //         type: TextInputType.name,
-                    //         text: 'Task Type',
-                    //         prefix: IconBroken.Category,
-                    //         isPassword: false,
-                    //       );
-                    //     }),
                     const SizedBox(
                       height: 10.0,
                     ),
@@ -287,8 +276,8 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                             onTap: () {
                               showDatePicker(
                                 context: context,
-                                initialDate: _selectedDate,
-                                firstDate: _selectedDate,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
                                 lastDate: DateTime(_selectedDate.year + 5),
                               ).then((value) {
                                 _taskDataController.text =
@@ -314,7 +303,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                                       ? () {
                                           setState(() {
                                             _taskTypeController.text = "1";
-                                            _viewModel.addTask();
+                                            _viewModel.create();
                                           });
                                         }
                                       : null,
@@ -339,66 +328,107 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
     );
   }
 
-  Widget _getContentWidget() {
+  Widget _getContentWidget(formattedDate) {
     return StreamBuilder<IndexSchedules>(
-      stream: _viewModel.outputSchedulesIndex,
+      stream: _viewModel.outputSchedules,
       builder: (context, snapshot) {
-        return _getItem(snapshot.data);
+        return _getItem(snapshot.data , formattedDate);
       },
     );
   }
 
-  Widget _getItem(IndexSchedules? indexSchedules) {
-    if (indexSchedules != null) {
-      return ListView.separated(
+  Widget _getItem(IndexSchedules? schedules , formattedDate) {
+    if (schedules != null) {
+      return ListView.builder(
         itemBuilder: (context, index) => StreamBuilder<IndexSchedules>(
-          stream: _viewModel.outputSchedulesIndex,
+          stream: _viewModel.outputSchedules,
           builder: (context, snapshot) {
-            return _matrialList(context, index, snapshot.data);
+            return _matrialList(context, index, snapshot.data , formattedDate);
           },
         ),
-        separatorBuilder: (context, index) => Divider(
-          color: Colors.grey[600],
-          height: 5.0,
-        ),
-        itemCount: indexSchedules.data.length,
+        itemCount: schedules.data.length,
       );
     } else {
       return Container();
     }
   }
 
-  Widget _matrialList(BuildContext context, int i, IndexSchedules? schedules) {
-    if (schedules != null && schedules.data[i]!.date == "$_selectedDate") {
+  Widget _matrialList(
+      BuildContext context, int i, IndexSchedules? schedules , formattedDate) {
+    if (schedules != null && "$formattedDate" == schedules.data[i]?.date) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
-          height: 70,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${schedules.data[i]?.title}",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 30),
+          height: 100,
+          child: Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0 , right: 20.0 , top: 5.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${schedules.data[i]?.title}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall
+                              ?.copyWith(fontSize: 30),
+                        ),
+                        Text(
+                          "${schedules.data[i]?.date}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(fontSize: 30),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    InkWell(
+                      onTap: (){
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.rightSlide,
+                          title: StringManager.cancel,
+                          desc: 'are you sure about that',
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () {
+                            setState(() {
+                              _viewModel.cancel(schedules.data[i]!.id);
+                            });
+                          },
+                          btnOkText: "Yes",
+                          btnCancelText: 'No',
+                        ).show();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: ColorManager.error,
+                        child: Icon(IconBroken.Delete , color: ColorManager.white,),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                "${schedules.data[i]?.time}",
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ],
+            ),
           ),
         ),
       );
     } else {
       return Container();
     }
+  }
+
+  reload(){
+    return (){_viewModel.start();}.call();
   }
 
   @override

@@ -2,6 +2,8 @@
 
 import 'dart:async';
 
+import 'package:senior/app/app_preference.dart';
+import 'package:senior/app/di.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
@@ -10,6 +12,7 @@ import 'package:senior/presentation/common/state_renderer/state_renderer__impl.d
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
+  final AppPreference _appPreference = instance<AppPreference>();
   final StreamController _userNameStreamController =
   StreamController<String>.broadcast();
   final StreamController _passwordStreamController =

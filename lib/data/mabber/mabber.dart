@@ -95,7 +95,7 @@ extension IndexSchedulesDataResponseMabber on IndexSchedulesDataResponse? {
       this?.date.orEmpty() ?? Constant.empty,
       this?.time.orEmpty() ?? Constant.empty,
       this?.type.orEmpty() ?? Constant.empty,
-      this?.createdAt.orEmpty() ?? Constant.zero,
+      this?.createdAt.orEmpty() ?? Constant.empty,
     );
   }
 }

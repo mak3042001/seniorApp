@@ -78,7 +78,7 @@ class SchedulesCreateRequest {
 
 //schedules cancel
 class SchedulesCancelRequest {
-  String scheduleId;
+  int scheduleId;
 
   SchedulesCancelRequest(this.scheduleId);
 }

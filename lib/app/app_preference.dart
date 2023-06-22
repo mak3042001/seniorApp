@@ -1,3 +1,5 @@
+import 'package:senior/app/constant.dart';
+import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/presentation/resources/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,6 +36,7 @@ class AppPreference{
 
   Future<void> setUserLoggedOut() async {
     sharedPreferences.remove(PREFS_KEY_IS_USER_LOGGED_IN);
+    sharedPreferences.remove(PREFS_KEY_USER_Token);
   }
 
   Future<void> setUserToken(token) async {
@@ -41,7 +44,7 @@ class AppPreference{
   }
 
   Future<String> getUserToken() async {
-    return sharedPreferences.getString(PREFS_KEY_USER_Token) ?? "";
+    return sharedPreferences.getString(PREFS_KEY_USER_Token) ?? RepositoryImpl.token;
   }
 
   Future<void> setUserId(id) async {

@@ -204,7 +204,7 @@ class IndexSchedulesDataResponse {
   @JsonKey(name: "type")
   String? type;
   @JsonKey(name: "created_at")
-  int? createdAt;
+  String? createdAt;
 
   IndexSchedulesDataResponse(this.id,
       this.title,

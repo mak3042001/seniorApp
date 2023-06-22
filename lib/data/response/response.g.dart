@@ -178,7 +178,7 @@ IndexSchedulesDataResponse _$IndexSchedulesDataResponseFromJson(
       json['date'] as String?,
       json['time'] as String?,
       json['type'] as String?,
-      json['created_at'] as int?,
+      json['created_at'] as String?,
     );
 
 Map<String, dynamic> _$IndexSchedulesDataResponseToJson(
