@@ -16,7 +16,7 @@ abstract class Repository{
   Future<Either<Failure,ChangePassword>> changePassword(
       ChangePasswordRequest changePasswordRequest);
 
-  Future<Either<Failure,Auth>> profileIndex();
+  Future<Either<Failure,Profile>> profileIndex();
 
   Future<Either<Failure,NotificationIndex>> notificationIndex();
 

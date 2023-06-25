@@ -3,6 +3,30 @@ import 'package:senior/app/extension.dart';
 import 'package:senior/data/response/response.dart';
 import 'package:senior/domain/model/model.dart';
 
+//profile mapper
+extension ProfileDataResponseMabber on ProfileDataResponse? {
+  ProfileData toDomain() {
+    return ProfileData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.username.orEmpty() ?? Constant.empty,
+      this?.name.orEmpty() ?? Constant.empty,
+      this?.email.orEmpty() ?? Constant.empty,
+      this?.phone.orEmpty() ?? Constant.empty,
+      this?.birthdate.orEmpty() ?? Constant.empty,
+      this?.age.orEmpty() ?? Constant.zero,
+      this?.image.orEmpty() ?? Constant.empty,
+    );
+  }
+}
+
+extension ProfileResponseMabber on ProfileResponse? {
+  Profile toDomain() {
+    return Profile(
+      this?.data.toDomain(),
+    );
+  }
+}
+
 //auth mapper
 extension DataResponseMabber on DataResponse? {
   Data toDomain() {

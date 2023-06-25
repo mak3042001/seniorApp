@@ -116,13 +116,13 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<AuthResponse> showProfile() async {
+  Future<ProfileResponse> showProfile() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AuthResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ProfileResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -134,7 +134,7 @@ class _AppServiceClient implements AppServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthResponse.fromJson(_result.data!);
+    final value = ProfileResponse.fromJson(_result.data!);
     return value;
   }
 

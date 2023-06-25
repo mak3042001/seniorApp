@@ -642,7 +642,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, Auth>> profileIndex() async {
+  Future<Either<Failure, Profile>> profileIndex() async {
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API
       try {

@@ -35,6 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   DateTime selectedDate = DateTime.now();
 
+  TextEditingController noController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+
   TextEditingController userNameController = TextEditingController();
 
   TextEditingController dateController = TextEditingController();
@@ -57,6 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bind() {
     _viewModel.start();
+    nameController
+        .addListener(() => _viewModel.setName(nameController.text));
+
     userNameController
         .addListener(() => _viewModel.setUserName(userNameController.text));
 
@@ -126,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _getContentWidget() {
-    return StreamBuilder<Auth>(
+    return StreamBuilder<Profile>(
       stream: _viewModel.outputProfile,
       builder: (context, snapshot) {
         return _getItem(snapshot.data);
@@ -134,8 +141,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _getItem(Auth? auth) {
-    if (auth != null) {
+  Widget _getItem(Profile? profile) {
+    if (profile != null) {
       return Column(
         children: [
           Container(
@@ -172,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   Text(
-                    auth.data!.user!.name,
+                    profile.data!.name,
                     style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -186,8 +193,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(
-                          auth.data!.user!.image,
+                        backgroundImage: NetworkImage(
+                          profile.data!.image,
                         ),
                         radius: 65.0,
                       ),
@@ -223,9 +230,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   enableInteractiveSelection: false,
                   hasFocusBool: false,
                   onTap: null,
-                  controller: userNameController,
+                  controller: noController,
                   type: TextInputType.none,
-                  text: auth.data!.user!.username,
+                  text: profile.data!.username,
                   prefix: IconBroken.Profile,
                 ),
                 const SizedBox(
@@ -234,11 +241,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 defaultDisableFormField(
                   enableInteractiveSelection: false,
                   hasFocusBool: false,
-                  controller: dateController,
+                  controller: noController,
                   type: TextInputType.none,
                   onTap: null,
                   text: dateController.text != null
-                      ? auth.data!.user!.birthdate
+                      ? profile.data!.birthdate
                       : dateController.text,
                   prefix: IconBroken.Calendar,
                 ),
@@ -248,10 +255,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 defaultDisableFormField(
                   enableInteractiveSelection: false,
                   hasFocusBool: false,
-                  controller: phoneController,
+                  controller: noController,
                   onTap: null,
                   type: TextInputType.none,
-                  text: auth.data!.user!.phone,
+                  text: profile.data!.phone,
                   prefix: IconBroken.Call,
                 ),
                 const SizedBox(
@@ -331,12 +338,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           onPressed: (snapshot.data ?? false)
                                               ? () {
                                                   _viewModel.changePassword();
+                                                  currentPasswordController.text = "";
+                                                  newPasswordController.text = "";
+                                                  confirmNewPasswordController.text = "";
                                                 }
                                               : null,
                                           child: const Text(
                                               StringManager.updatePassword)),
                                     );
                                   }),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
                             ),
                           ],
                         ),
@@ -360,10 +373,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   body: Column(
                     children: [
                       StreamBuilder<bool>(
-                          stream: _viewModel.outputIsUserNameValid,
+                          stream: _viewModel.outputIsNameValid,
                           builder: (context, snapshot) {
                             return defaultFormField(
                               prefix: IconBroken.Profile,
+                              controller: nameController,
+                              type: TextInputType.text,
+                              text: StringManager.nameHint,
+                              isPassword: false,
+                            );
+                          }),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      StreamBuilder<bool>(
+                          stream: _viewModel.outputIsUserNameValid,
+                          builder: (context, snapshot) {
+                            return defaultFormField(
+                              prefix: IconBroken.User,
                               controller: userNameController,
                               type: TextInputType.text,
                               text: StringManager.username,
@@ -426,12 +453,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onPressed: (snapshot.data ?? false)
                                         ? () {
                                       _viewModel.profile();
+                                      newPasswordController.text = "";
+                                      userNameController.text = "";
+                                      dateController.text = "";
+                                      phoneController.text = "";
                                     }
                                         : null,
                                     child: const Text(
                                         StringManager.updateProfile)),
                               );
                             }),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
                       ),
                     ],
                   ),

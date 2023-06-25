@@ -16,6 +16,47 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
       'message': instance.message,
     };
 
+ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
+    ProfileDataResponse(
+      json['id'] as int?,
+      json['username'] as String?,
+      json['name'] as String?,
+      json['email'] as String?,
+      json['phone'] as String?,
+      json['birthdate'] as String?,
+      json['age'] as int?,
+      json['image'] as String?,
+    );
+
+Map<String, dynamic> _$ProfileDataResponseToJson(
+        ProfileDataResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'username': instance.username,
+      'name': instance.name,
+      'email': instance.email,
+      'phone': instance.phone,
+      'birthdate': instance.birthdate,
+      'age': instance.age,
+      'image': instance.image,
+    };
+
+ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
+    ProfileResponse(
+      json['data'] == null
+          ? null
+          : ProfileDataResponse.fromJson(json['data'] as Map<String, dynamic>),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
 DataResponse _$DataResponseFromJson(Map<String, dynamic> json) => DataResponse(
       json['user'] == null
           ? null

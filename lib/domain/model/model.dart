@@ -1,3 +1,34 @@
+//profile
+class ProfileData {
+  int id;
+  String username;
+  String name;
+  String email;
+  String phone;
+  String birthdate;
+  int age;
+  String image;
+
+  ProfileData(
+      this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,
+      );
+}
+
+class Profile {
+  ProfileData? data;
+
+  Profile(
+      this.data,
+      );
+}
+
 //auth model
 class Data {
   User? user;

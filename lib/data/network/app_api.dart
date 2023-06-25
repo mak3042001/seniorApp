@@ -36,7 +36,7 @@ abstract class AppServiceClient {
 
 //show profile
   @GET("/api/seniors/profile")
-  Future<AuthResponse> showProfile();
+  Future<ProfileResponse> showProfile();
 
 //update profile
   @POST("/api/seniors/profile/update")

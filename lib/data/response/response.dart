@@ -11,6 +11,58 @@ class BaseResponse {
   String? message;
 }
 
+//profile
+@JsonSerializable()
+class ProfileDataResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "username")
+  String? username;
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "email")
+  String? email;
+  @JsonKey(name: "phone")
+  String? phone;
+  @JsonKey(name: "birthdate")
+  String? birthdate;
+  @JsonKey(name: "age")
+  int? age;
+  @JsonKey(name: "image")
+  String? image;
+
+  ProfileDataResponse(this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,);
+
+  //fromJson
+  factory ProfileDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProfileDataResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$ProfileDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class ProfileResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  ProfileDataResponse? data;
+
+  ProfileResponse(this.data,);
+
+  //fromJson
+  factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProfileResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
+}
+
 //auth response
 @JsonSerializable()
 class DataResponse {
