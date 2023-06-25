@@ -28,6 +28,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool isVisible = true;
+
   final ProfileViewModel _viewModel = instance<ProfileViewModel>();
   final ImagePicker _imagePicker = instance<ImagePicker>();
 
@@ -73,17 +75,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     phoneController
         .addListener(() => _viewModel.setPhone(phoneController.text));
 
-    passwordController
-        .addListener(() => _viewModel.setPassword(passwordController.text));
 
     currentPasswordController.addListener(
-        () => _viewModel.setPassword(currentPasswordController.text));
+        () => _viewModel.setCurrentPassword(currentPasswordController.text));
 
     newPasswordController
         .addListener(() => _viewModel.setPassword(newPasswordController.text));
 
     confirmNewPasswordController.addListener(
-        () => _viewModel.setPassword(confirmNewPasswordController.text));
+        () => _viewModel.setConfirmPassword(confirmNewPasswordController.text));
 
     _viewModel.isUserProfileInSuccessfullyStreamController.stream
         .listen((isCreate) {
@@ -318,7 +318,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     type: TextInputType.text,
                                     text: StringManager.confirmPasswordHint,
                                     prefix: IconBroken.Password,
-                                    isPassword: false,
+                                    isPassword: isVisible,
+                                    suffix: IconBroken.Lock,
+                                    suffixPressed: (){
+                                      setState(() {
+                                        isVisible = !isVisible;
+                                      });
+
+                                    },
                                   );
                                 }),
                             const SizedBox(
@@ -415,7 +422,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   lastDate: selectedDate,
                                 ).then((value) {
                                   dateController.text =
-                                      DateFormat.yMMMd().format(value!);
+                                      DateFormat('yyyy-MM-dd').format(value!);
                                 });
                               },
                               text: StringManager.birthdateHint,
@@ -431,7 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             return defaultFormField(
                               prefix: IconBroken.Call,
                               controller: phoneController,
-                              type: TextInputType.text,
+                              type: TextInputType.number,
                               text: StringManager.phoneHint,
                               isPassword: false,
                             );
@@ -453,7 +460,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onPressed: (snapshot.data ?? false)
                                         ? () {
                                       _viewModel.profile();
-                                      newPasswordController.text = "";
+                                      nameController.text = "";
                                       userNameController.text = "";
                                       dateController.text = "";
                                       phoneController.text = "";
@@ -557,10 +564,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   _imageFromGallery() async {
     var image = await _imagePicker.pickImage(source: ImageSource.gallery);
     _viewModel.setProfilePicture(File(image?.path ?? ""));
+    _viewModel.changeImage();
   }
 
   _imageFromCamera() async {
     var image = await _imagePicker.pickImage(source: ImageSource.camera);
     _viewModel.setProfilePicture(File(image?.path ?? ""));
+    _viewModel.changeImage();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _viewModel.dispose();
   }
 }

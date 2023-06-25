@@ -106,6 +106,8 @@ class ProfileViewModel extends BaseViewModel
     passwordStreamController.close();
     confirmPasswordStreamController.close();
     areAllInputsValidStreamController.close();
+    areAllInputsPasswordValidStreamController.close();
+    areAllInputsImageValidStreamController.close();
     isUserProfileInSuccessfullyStreamController.close();
     isUserPasswordSuccessfullyStreamController.close();
     isUserImageSuccessfullyStreamController.close();
@@ -143,88 +145,59 @@ class ProfileViewModel extends BaseViewModel
   profile() async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
-
     (await _profileUseCase.execute(
-      UpdateUseCaseInput(
-        profileObject.username,
-        profileObject.name,
-        profileObject.phone,
-        profileObject.birthdate,
-      ),
-    ))
+        UpdateUseCaseInput(profileObject.name, profileObject.username , profileObject.phone , profileObject.birthdate)))
         .fold(
             (failure) => {
-                  // left -> failure
-                  inputState.add(ErrorState(
-                      StateRendererType.popupErrorState, failure.message))
-                }, (data) {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
       // right -> data (success)
       // content
       inputState.add(ContentState());
       // navigate to main screen
       isUserProfileInSuccessfullyStreamController.add(true);
+
+          (){
+        start();
+      }.call();
     });
   }
 
   @override
   setUserName(String userName) {
-    if (_isUserNameValid(userName)) {
-      //  update profile view object
-      profileObject = profileObject.copyWith(username: userName);
-    } else {
-      // reset username value in profile view object
-      profileObject = profileObject.copyWith(username: "");
-    }
-    validate();
+    inputUserName.add(userName);
+    profileObject = profileObject.copyWith(username: userName);
+    inputAllInputsValid.add(null);
   }
 
   @override
   setBirthdate(String birthdate) {
-    if (_isBirthdateValid(birthdate)) {
-      //  update profile view object
-      profileObject = profileObject.copyWith(birthdate: birthdate);
-    } else {
-      // reset code value in profile view object
-      profileObject = profileObject.copyWith(birthdate: "");
-    }
-    validate();
+    inputBirthdate.add(birthdate);
+    profileObject = profileObject.copyWith(birthdate: birthdate);
+    inputAllInputsValid.add(null);
   }
 
   @override
   setName(String name) {
-    if (_isNameValid(name)) {
-      //  update profile view object
-      profileObject = profileObject.copyWith(name: name);
-    } else {
-      // reset name value in profile view object
-      profileObject = profileObject.copyWith(name: "");
-    }
-    validate();
+    inputName.add(name);
+    profileObject = profileObject.copyWith(name: name);
+    inputAllInputsValid.add(null);
   }
 
   @override
   setPhone(String phone) {
-    if (_isPhoneValid(phone)) {
-      //  update profile view object
-      profileObject = profileObject.copyWith(phone: phone);
-    } else {
-      // reset phone value in profile view object
-      profileObject = profileObject.copyWith(phone: "");
-    }
-    validate();
+    inputPhone.add(phone);
+    profileObject = profileObject.copyWith(phone: phone);
+    inputAllInputsValid.add(null);
   }
 
   @override
   setProfilePicture(File profilePicture) {
-    inputProfilePicture.add(profilePicture);
-    if (profilePicture.path.isNotEmpty) {
-      //  update register view object
-      imageObject = imageObject.copyWith(image: profilePicture.path);
-    } else {
-      // reset profilePicture value in register view object
-      imageObject = imageObject.copyWith(image: "");
-    }
-    validate();
+    inputImage.add(profilePicture);
+    imageObject = imageObject.copyWith(image: profilePicture.path);
+    inputAllImageInputsValid.add(null);
   }
 
   // -- outputs
@@ -264,7 +237,7 @@ class ProfileViewModel extends BaseViewModel
   }
 
   bool _isPhoneValid(String phone) {
-    return phone.length >= 10;
+    return phone.isNotEmpty;
   }
 
   bool _isBirthdateValid(String birthdate) {
@@ -288,17 +261,6 @@ class ProfileViewModel extends BaseViewModel
     return imageObject.image.isNotEmpty;
   }
 
-  validate() {
-    inputAllInputsValid.add(null);
-  }
-
-  passwordValidate() {
-    inputAllPasswordInputsValid.add(null);
-  }
-
-  imageValidate() {
-    inputAllImageInputsValid.add(null);
-  }
 
   @override
   Sink get inputProfile => _profileStreamController.sink;
@@ -311,23 +273,23 @@ class ProfileViewModel extends BaseViewModel
   changeImage() async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
-
     (await _changeImageUseCase.execute(
-      ChangeImageUseCaseInput(
-        imageObject.image,
-      ),
-    ))
+        ChangeImageUseCaseInput(imageObject.image,)))
         .fold(
             (failure) => {
-                  // left -> failure
-                  inputState.add(ErrorState(
-                      StateRendererType.popupErrorState, failure.message))
-                }, (data) {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
       // right -> data (success)
       // content
       inputState.add(ContentState());
       // navigate to main screen
       isUserImageSuccessfullyStreamController.add(true);
+
+          (){
+        start();
+      }.call();
     });
   }
 
@@ -335,38 +297,30 @@ class ProfileViewModel extends BaseViewModel
   changePassword() async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
-
     (await _changePasswordUseCase.execute(
-      ChangePasswordUseCaseInput(
-        passwordObject.currentPassword,
-        passwordObject.password,
-        passwordObject.confirmPassword,
-      ),
-    ))
+        ChangePasswordUseCaseInput(passwordObject.currentPassword, passwordObject.password , passwordObject.confirmPassword)))
         .fold(
             (failure) => {
-                  // left -> failure
-                  inputState.add(ErrorState(
-                      StateRendererType.popupErrorState, failure.message))
-                }, (data) {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.popupErrorState, failure.message))
+        }, (data) {
       // right -> data (success)
       // content
       inputState.add(ContentState());
       // navigate to main screen
       isUserPasswordSuccessfullyStreamController.add(true);
+          (){
+        start();
+      }.call();
     });
   }
 
   @override
   setConfirmPassword(String password) {
-    if (_isConfirmPasswordValid(password)) {
-      //  update profile view object
-      passwordObject = passwordObject.copyWith(confirmPassword: password);
-    } else {
-      // reset phone value in profile view object
-      passwordObject = passwordObject.copyWith(confirmPassword: "");
-    }
-    passwordValidate();
+    inputConfirmPassword.add(password);
+    passwordObject = passwordObject.copyWith(confirmPassword: password);
+    inputAllPasswordInputsValid.add(null);
   }
 
   bool _isConfirmPasswordValid(String password) {
@@ -375,14 +329,9 @@ class ProfileViewModel extends BaseViewModel
 
   @override
   setCurrentPassword(String password) {
-    if (_isCurrentPasswordValid(password)) {
-      //  update profile view object
-      passwordObject = passwordObject.copyWith(currentPassword: password);
-    } else {
-      // reset phone value in profile view object
-      passwordObject = passwordObject.copyWith(currentPassword: "");
-    }
-    passwordValidate();
+    inputCurrentPassword.add(password);
+    passwordObject = passwordObject.copyWith(currentPassword: password);
+    inputAllPasswordInputsValid.add(null);
   }
 
   bool _isCurrentPasswordValid(String password) {
@@ -391,14 +340,9 @@ class ProfileViewModel extends BaseViewModel
 
   @override
   setPassword(String password) {
-    if (_isPasswordValid(password)) {
-      //  update profile view object
-      passwordObject = passwordObject.copyWith(password: password);
-    } else {
-      // reset phone value in profile view object
-      passwordObject = passwordObject.copyWith(password: "");
-    }
-    passwordValidate();
+    inputPassword.add(password);
+    passwordObject = passwordObject.copyWith(password: password);
+    inputAllPasswordInputsValid.add(null);
   }
 
   bool _isPasswordValid(String password) {

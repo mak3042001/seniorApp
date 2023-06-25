@@ -15,8 +15,8 @@ class UpdateUseCase implements BaseUseCase<UpdateUseCaseInput, Auth> {
     return await _repository.updateProfile(UpdateProfileRequest(
       input.name,
       input.username,
-      input.phone,
       input.birthdate,
+      input.phone,
     ));
   }
 }
@@ -24,13 +24,14 @@ class UpdateUseCase implements BaseUseCase<UpdateUseCaseInput, Auth> {
 class UpdateUseCaseInput {
   String name;
   String username;
-  String phone;
   String birthdate;
+  String phone;
+
 
   UpdateUseCaseInput(
     this.name,
     this.username,
-    this.phone,
     this.birthdate,
+    this.phone,
   );
 }
