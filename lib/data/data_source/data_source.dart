@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/network/request.dart';
@@ -236,11 +239,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
+  Dio dio = Dio();
   @override
   Future<ChangeImageResponse> changeImage(
       ChangeImageRequest changeImageRequest) async {
+    File file = File(changeImageRequest.image);
+    String fileName = file.path.split('/').last;
+    print("hello image  $fileName");
     return await _appServiceClient.changeImage(
-      changeImageRequest.image,
+        File(fileName),
     );
   }
 

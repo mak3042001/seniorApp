@@ -17,7 +17,7 @@ class ProfileViewModel extends BaseViewModel
     with ProfileViewModelInput, ProfileViewModelOutput {
   final _profileStreamController = BehaviorSubject<Profile>();
   final _passwordStreamController = BehaviorSubject<ChangePassword>();
-  final _imageStreamController = BehaviorSubject<ChangeImage>();
+  final _imageStreamController = BehaviorSubject<File>();
 
   StreamController userNameStreamController =
       StreamController<String>.broadcast();

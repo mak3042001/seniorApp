@@ -52,6 +52,7 @@ dependencies:
   rxdart: ^0.27.7
   image_picker: ^0.8.4+1
   flutter_scalable_ocr: ^2.0.0
+  firebase_core: ^2.14.0
 
 
 flutter_icons:

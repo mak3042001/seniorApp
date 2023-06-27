@@ -172,11 +172,18 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<ChangeImageResponse> changeImage(String image) async {
+  Future<ChangeImageResponse> changeImage(File image) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'image': image};
+    final _data = FormData();
+    _data.files.add(MapEntry(
+      'image',
+      MultipartFile.fromFileSync(
+        image.path,
+        filename: 'image',
+      ),
+    ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ChangeImageResponse>(Options(
       method: 'POST',

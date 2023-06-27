@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:senior/app/constant.dart';
@@ -50,7 +52,7 @@ abstract class AppServiceClient {
 //change image profile & password
   @POST("/api/seniors/profile/changeImage")
   Future<ChangeImageResponse> changeImage(
-      @Field("image") String image,
+      @Part(fileName: "image") File image,
       );
 
   @POST("/api/seniors/profile/changePassword")
