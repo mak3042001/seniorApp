@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/presentation/contact/contactScreen.dart';
-import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 import '../user_viewModel/user_viewModel.dart';
@@ -16,6 +14,8 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String item = "";
   final UserViewModel _viewModel = instance<UserViewModel>();
 
   @override
@@ -34,7 +34,7 @@ class _UserScreenState extends State<UserScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xff283DAA),
         title: const Text(
-          "User",
+          "Chat",
           style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
@@ -85,18 +85,38 @@ class _UserScreenState extends State<UserScreen> {
 
   Widget _getItem(UserUser? user) {
     if (user != null) {
-      return ListView.separated(
-        itemBuilder: (context, index) => StreamBuilder<UserUser>(
-          stream: _viewModel.outputUser,
-          builder: (context, snapshot) {
-            return _matrialList(context, index, snapshot.data);
-          },
-        ),
-        separatorBuilder: (context, index) => Divider(
-          color: Colors.grey[600],
-          height: 5.0,
-        ),
-        itemCount: user.data!.length,
+      return Column(
+        children: [
+          const SizedBox(
+            height: 10.0,
+          ),
+          TextField(
+            controller: _searchController,
+            onChanged: (value){
+              setState(() {
+                item = value;
+              });
+            },
+            decoration: const InputDecoration(
+              labelText: 'Search',
+              prefixIcon: Icon(Icons.search),
+            ),
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) => StreamBuilder<UserUser>(
+                stream: _viewModel.outputUser,
+                builder: (context, snapshot) {
+                  return _matrialList(context, index, snapshot.data);
+                },
+              ),
+              itemCount: user.data!.length,
+            ),
+          ),
+        ],
       );
     } else {
       return Container();
@@ -105,7 +125,7 @@ class _UserScreenState extends State<UserScreen> {
 
   Widget _matrialList(
       BuildContext context, int i, UserUser? user) {
-    if (user != null) {
+    if (user != null && user.data![i]!.name.contains(item)) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
@@ -115,14 +135,14 @@ class _UserScreenState extends State<UserScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
                CircleAvatar(
-                backgroundImage: NetworkImage("${user.data?[i]?.image}"),
+                backgroundImage: NetworkImage(user.data![i]!.image),
                 radius: 35,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(
-                "${user.data?[i]?.name}",
+                user.data![i]!.name,
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge
