@@ -13,7 +13,7 @@ abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 
 //message
-  @GET("/api/guest/users")
+  @GET("/api/guest/massages")
   Future<MessageUseResponse> message(
       @Query("user_id") int userId,
       );

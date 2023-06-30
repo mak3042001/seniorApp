@@ -3,19 +3,21 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
-import '../user_viewModel/user_viewModel.dart';
+import '../../resources/routes_manager.dart';
+import '../message_viewModel/message_viewModel.dart';
 
-class UserScreen extends StatefulWidget {
-  const UserScreen({Key? key}) : super(key: key);
+
+class MessageScreen extends StatefulWidget {
+  const MessageScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserScreen> createState() => _UserScreenState();
+  State<MessageScreen> createState() => _MessageScreenState();
 }
 
-class _UserScreenState extends State<UserScreen> {
+class _MessageScreenState extends State<MessageScreen> {
   final TextEditingController _searchController = TextEditingController();
   String item = "";
-  final UserViewModel _viewModel = instance<UserViewModel>();
+  final MessageViewModel _viewModel = instance<MessageViewModel>();
 
   @override
   void initState() {
@@ -49,9 +51,7 @@ class _UserScreenState extends State<UserScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              () {
-                _viewModel.start();
-              }.call();
+              (){_viewModel.start();}.call();
             },
             icon: const Icon(
               Icons.refresh,
@@ -64,27 +64,35 @@ class _UserScreenState extends State<UserScreen> {
         stream: _viewModel.outputState,
         builder: (context, snapshot) {
           return Container(
-            child: snapshot.data?.getScreenWidget(context, _getContentWidget(),
-                    () {
-                  _viewModel.start();
-                }) ??
+            child:
+            snapshot.data?.getScreenWidget(context, _getContentWidget(), () {
+              _viewModel.start();
+            }) ??
                 Container(),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pushNamed(context, Routes.userScreen);
+        },
+        child: const Icon(
+          IconBroken.Message,
+        ),
       ),
     );
   }
 
   Widget _getContentWidget() {
-    return StreamBuilder<UserUser>(
-      stream: _viewModel.outputUser,
+    return StreamBuilder<Message>(
+      stream: _viewModel.outputMessage,
       builder: (context, snapshot) {
         return _getItem(snapshot.data);
       },
     );
   }
 
-  Widget _getItem(UserUser? user) {
+  Widget _getItem(Message? user) {
     if (user != null) {
       return Column(
         children: [
@@ -93,7 +101,7 @@ class _UserScreenState extends State<UserScreen> {
           ),
           TextField(
             controller: _searchController,
-            onChanged: (value) {
+            onChanged: (value){
               setState(() {
                 item = value;
               });
@@ -108,8 +116,8 @@ class _UserScreenState extends State<UserScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemBuilder: (context, index) => StreamBuilder<UserUser>(
-                stream: _viewModel.outputUser,
+              itemBuilder: (context, index) => StreamBuilder<Message>(
+                stream: _viewModel.outputMessage,
                 builder: (context, snapshot) {
                   return _matrialList(context, index, snapshot.data);
                 },
@@ -124,50 +132,54 @@ class _UserScreenState extends State<UserScreen> {
     }
   }
 
-  Widget _matrialList(BuildContext context, int i, UserUser? user) {
+  Widget _matrialList(
+      BuildContext context, int i, Message? user) {
     if (user != null && user.data![i]!.name.contains(item)) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
           ),
           child: SizedBox(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user.data![i]!.image),
-                  radius: 35,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      user.data![i]!.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(fontSize: 30),
-                    ),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-                    Text(
-                      user.data![i]!.username,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontSize: 20),
-                    ),
-                  ],
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                   CircleAvatar(
+                    backgroundImage: NetworkImage(user.data![i]!.image),
+                    radius: 35,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.data![i]!.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge
+                            ?.copyWith(fontSize: 30),
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      Text(
+                        user.data![i]!.username,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

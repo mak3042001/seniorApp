@@ -17,6 +17,8 @@ import 'package:senior/presentation/sign%20up/signup_view/signUpScreen.dart';
 import 'package:senior/presentation/splash/splash_view.dart';
 import 'package:senior/presentation/users/user_view/userScreen.dart';
 
+import '../message/message_view/messageScreen.dart';
+
 
 class Routes {
   static const String splashRoute = "/";
@@ -34,6 +36,7 @@ class Routes {
   static const String historyCategoriesScreen = "/historyCategories";
   static const String appointmentScreen = "/appointment";
   static const String userScreen = "/user";
+  static const String messageScreen = "/message";
 }
 
 class RouteGenerator {
@@ -77,6 +80,9 @@ class RouteGenerator {
         case Routes.userScreen:
           initUserModule();
         return MaterialPageRoute(builder: (_) => const UserScreen());
+      case Routes.messageScreen:
+        initMessageModule();
+        return MaterialPageRoute(builder: (_) => const MessageScreen());
       default:
         return unDefinedRoute();
     }

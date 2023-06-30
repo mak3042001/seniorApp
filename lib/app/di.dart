@@ -34,6 +34,7 @@ import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
 import '../domain/usecase/auth/change_image_usecase.dart';
 import '../domain/usecase/auth/change_password_usecase.dart';
+import '../domain/usecase/auth/message.dart';
 import '../domain/usecase/auth/register_usecase.dart';
 import '../domain/usecase/auth/user.dart';
 import '../domain/usecase/history/history_cancel_usecase.dart';
@@ -47,6 +48,7 @@ import '../domain/usecase/schedules/schedules_create_usecase.dart';
 import '../domain/usecase/schedules/schedules_index_usecase.dart';
 import '../presentation/history/history_viewModel/history_viewModel.dart';
 import '../presentation/login/login_view_model/login_viewModel.dart';
+import '../presentation/message/message_viewModel/message_viewModel.dart';
 import '../presentation/notification/notification_viewModel/notification_viewModel.dart';
 import '../presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
 import '../presentation/sign up/signup_view_model/signup_view_model.dart';
@@ -98,6 +100,7 @@ Future<void> initAppModule() async {
   initMedicationsModule();
   initProfileModule();
   initUserModule();
+  initMessageModule();
 }
 
 //auth
@@ -145,6 +148,15 @@ initUserModule() {
             () => UserUseCase(instance()));
     instance.registerFactory<UserViewModel>(
             () => UserViewModel(instance()));
+  }
+}
+
+initMessageModule() {
+  if (!GetIt.I.isRegistered<MessageUseCase>()) {
+    instance.registerFactory<MessageUseCase>(
+            () => MessageUseCase(instance()));
+    instance.registerFactory<MessageViewModel>(
+            () => MessageViewModel(instance()));
   }
 }
 

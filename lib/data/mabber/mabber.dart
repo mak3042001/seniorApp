@@ -18,6 +18,7 @@ extension MessageDataResponseMabber on MessageDataResponse? {
       this?.age.orEmpty() ?? Constant.zero,
       this?.image.orEmpty() ?? Constant.empty,
       this?.type.orEmpty() ?? Constant.empty,
+      this?.message.orEmpty() ?? Constant.empty,
     );
   }
 }
