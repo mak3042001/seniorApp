@@ -1,3 +1,36 @@
+//user
+class UserData {
+  int id;
+  String username;
+  String name;
+  String email;
+  String phone;
+  String birthdate;
+  int age;
+  String image;
+  String type;
+
+  UserData(
+      this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,
+      this.type,
+      );
+}
+
+class UserUser {
+  List<UserData?>? data;
+
+  UserUser(
+      this.data,
+      );
+}
+
 //profile
 class ProfileData {
   int id;

@@ -3,6 +3,34 @@ import 'package:senior/app/extension.dart';
 import 'package:senior/data/response/response.dart';
 import 'package:senior/domain/model/model.dart';
 
+
+//user
+extension UserDataResponseMabber on UserDataResponse? {
+  UserData toDomain() {
+    return UserData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.username.orEmpty() ?? Constant.empty,
+      this?.name.orEmpty() ?? Constant.empty,
+      this?.email.orEmpty() ?? Constant.empty,
+      this?.phone.orEmpty() ?? Constant.empty,
+      this?.birthdate.orEmpty() ?? Constant.empty,
+      this?.age.orEmpty() ?? Constant.zero,
+      this?.image.orEmpty() ?? Constant.empty,
+      this?.type.orEmpty() ?? Constant.empty,
+    );
+  }
+}
+
+extension UserUseResponseMabber on UserUseResponse? {
+  UserUser toDomain() {
+    return UserUser(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<UserData?>()
+          .toList(),
+    );
+  }
+}
+
 //profile mapper
 extension ProfileDataResponseMabber on ProfileDataResponse? {
   ProfileData toDomain() {

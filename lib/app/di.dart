@@ -35,6 +35,7 @@ import '../data/network/network_info.dart';
 import '../domain/usecase/auth/change_image_usecase.dart';
 import '../domain/usecase/auth/change_password_usecase.dart';
 import '../domain/usecase/auth/register_usecase.dart';
+import '../domain/usecase/auth/user.dart';
 import '../domain/usecase/history/history_cancel_usecase.dart';
 import '../domain/usecase/history/history_create_usecase.dart';
 import '../domain/usecase/history/history_index_usecase.dart';
@@ -49,6 +50,7 @@ import '../presentation/login/login_view_model/login_viewModel.dart';
 import '../presentation/notification/notification_viewModel/notification_viewModel.dart';
 import '../presentation/schedules/schedules_viewModel/schedules_viewModel.dart';
 import '../presentation/sign up/signup_view_model/signup_view_model.dart';
+import '../presentation/users/user_viewModel/user_viewModel.dart';
 
 final instance = GetIt.instance;
 
@@ -95,6 +97,7 @@ Future<void> initAppModule() async {
   initHistoryModule();
   initMedicationsModule();
   initProfileModule();
+  initUserModule();
 }
 
 //auth
@@ -133,6 +136,15 @@ initNotificationModule() {
             () => NotificationUseCase(instance()));
     instance.registerFactory<NotificationViewModel>(
             () => NotificationViewModel(instance()));
+  }
+}
+
+initUserModule() {
+  if (!GetIt.I.isRegistered<UserUseCase>()) {
+    instance.registerFactory<UserUseCase>(
+            () => UserUseCase(instance()));
+    instance.registerFactory<UserViewModel>(
+            () => UserViewModel(instance()));
   }
 }
 

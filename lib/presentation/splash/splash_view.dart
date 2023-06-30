@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/di.dart';

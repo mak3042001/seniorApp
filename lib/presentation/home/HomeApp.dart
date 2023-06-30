@@ -11,6 +11,7 @@ import 'package:senior/presentation/notification/notification_view/notificationS
 import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
+import 'package:senior/presentation/users/user_view/userScreen.dart';
 
 import '../../app/app.dart';
 
@@ -44,7 +45,7 @@ class HomeApp extends StatelessWidget {
     const Booking(),
     Medications(),
     const AiScreen(title: 'cam scan'),
-    const ContactsScreen(),
+    const UserScreen(),
     const MedicationCodeView(),
   ];
 

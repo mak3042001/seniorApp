@@ -2,6 +2,63 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'response.g.dart';
 
+
+//users
+@JsonSerializable()
+class UserDataResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "username")
+  String? username;
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "email")
+  String? email;
+  @JsonKey(name: "phone")
+  String? phone;
+  @JsonKey(name: "birthdate")
+  String? birthdate;
+  @JsonKey(name: "age")
+  int? age;
+  @JsonKey(name: "image")
+  String? image;
+  @JsonKey(name: "type")
+  String? type;
+
+  UserDataResponse(this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,
+      this.type,
+      );
+
+  //fromJson
+  factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserDataResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$UserDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserUseResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  List<UserDataResponse?>? data;
+
+  UserUseResponse(this.data,);
+
+  //fromJson
+  factory UserUseResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserUseResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$UserUseResponseToJson(this);
+}
+
 //base response
 @JsonSerializable()
 class BaseResponse {

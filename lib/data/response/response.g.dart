@@ -6,6 +6,50 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+UserDataResponse _$UserDataResponseFromJson(Map<String, dynamic> json) =>
+    UserDataResponse(
+      json['id'] as int?,
+      json['username'] as String?,
+      json['name'] as String?,
+      json['email'] as String?,
+      json['phone'] as String?,
+      json['birthdate'] as String?,
+      json['age'] as int?,
+      json['image'] as String?,
+      json['type'] as String?,
+    );
+
+Map<String, dynamic> _$UserDataResponseToJson(UserDataResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'username': instance.username,
+      'name': instance.name,
+      'email': instance.email,
+      'phone': instance.phone,
+      'birthdate': instance.birthdate,
+      'age': instance.age,
+      'image': instance.image,
+      'type': instance.type,
+    };
+
+UserUseResponse _$UserUseResponseFromJson(Map<String, dynamic> json) =>
+    UserUseResponse(
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : UserDataResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$UserUseResponseToJson(UserUseResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse()
   ..successful = json['successful'] as bool?
   ..message = json['message'] as String?;
