@@ -1,3 +1,38 @@
+//message
+class MessageData {
+  int id;
+  String username;
+  String name;
+  String email;
+  String phone;
+  String birthdate;
+  int age;
+  String image;
+  String type;
+  String message;
+
+  MessageData(
+      this.id,
+      this.username,
+      this.name,
+      this.email,
+      this.phone,
+      this.birthdate,
+      this.age,
+      this.image,
+      this.type,
+      this.message,
+      );
+}
+
+class Message {
+  List<MessageData?>? data;
+
+  Message(
+      this.data,
+      );
+}
+
 //user
 class UserData {
   int id;

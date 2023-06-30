@@ -4,6 +4,34 @@ import 'package:senior/data/response/response.dart';
 import 'package:senior/domain/model/model.dart';
 
 
+
+//message
+extension MessageDataResponseMabber on MessageDataResponse? {
+  MessageData toDomain() {
+    return MessageData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.username.orEmpty() ?? Constant.empty,
+      this?.name.orEmpty() ?? Constant.empty,
+      this?.email.orEmpty() ?? Constant.empty,
+      this?.phone.orEmpty() ?? Constant.empty,
+      this?.birthdate.orEmpty() ?? Constant.empty,
+      this?.age.orEmpty() ?? Constant.zero,
+      this?.image.orEmpty() ?? Constant.empty,
+      this?.type.orEmpty() ?? Constant.empty,
+    );
+  }
+}
+
+extension MessageUseResponseMabber on MessageUseResponse? {
+  Message toDomain() {
+    return Message(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<MessageData?>()
+          .toList(),
+    );
+  }
+}
+
 //user
 extension UserDataResponseMabber on UserDataResponse? {
   UserData toDomain() {

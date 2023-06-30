@@ -6,6 +6,8 @@ import 'package:senior/data/network/request.dart';
 import 'package:senior/data/response/response.dart';
 
 abstract class RemoteDataSource {
+  Future<MessageUseResponse> message();
+  
   Future<UserUseResponse> user();
 
   Future<AuthResponse> login(LoginRequest loginRequest);
@@ -86,6 +88,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   RemoteDataSourceImpl(this._appServiceClient, this._appPreference);
 
+
+  @override
+  Future<MessageUseResponse> message() async {
+    return await _appServiceClient.message(
+      await _appPreference.getUserId(),
+    );
+  }
+  
+  
   @override
   Future<UserUseResponse> user() async {
     return await _appServiceClient.user();

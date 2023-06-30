@@ -4,6 +4,8 @@ import 'package:senior/data/network/request.dart';
 import 'package:senior/domain/model/model.dart';
 
 abstract class Repository{
+  Future<Either<Failure,Message>> message();
+
   Future<Either<Failure,UserUser>> user();
 
   Future<Either<Failure,Auth>> login(LoginRequest loginRequest);
