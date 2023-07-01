@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/di.dart';
+import 'package:senior/data/network/dio_factory.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/freezeClasses.dart';
@@ -12,6 +13,7 @@ import 'package:senior/presentation/common/state_renderer/state_renderer__impl.d
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
+  String token = "";
   final AppPreference _appPreference = instance<AppPreference>();
   final StreamController _userNameStreamController =
   StreamController<String>.broadcast();
@@ -85,6 +87,8 @@ class LoginViewModel extends BaseViewModel
       inputState.add(ContentState());
       // navigate to main screen
       isUserLoggedInSuccessfullyStreamController.add(true);
+
+      DioFactory(instance());
     });
   }
 

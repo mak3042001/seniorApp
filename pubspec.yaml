@@ -53,6 +53,7 @@ dependencies:
   image_picker: ^0.8.4+1
   flutter_scalable_ocr: ^2.0.0
   firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
 
 
 flutter_icons:

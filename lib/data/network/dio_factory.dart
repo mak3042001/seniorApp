@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/constant.dart';
-import 'package:senior/app/di.dart';
 
 
 const String applicationJson = "application/json";
@@ -13,9 +12,9 @@ const String authorization = "authorization";
 const String defaultLanguage = "language";
 
 class DioFactory {
-  final AppPreference _appPreference = instance<AppPreference>();
+  final AppPreference _appPreference;
 
-  DioFactory();
+  DioFactory(this._appPreference);
 
   Future<Dio> getDio() async {
     Dio dio = Dio();

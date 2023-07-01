@@ -32,7 +32,7 @@ class RepositoryImpl implements Repository {
           _appPreference.setUserToken(token);
 
           userId = response.data!.user!.id!;
-          _appPreference.setUserId(userId);
+          _appPreference.setUserId(response.data!.user!.id!);
 
           return Right(
               response.toDomain(),
@@ -62,6 +62,7 @@ class RepositoryImpl implements Repository {
         if (response.successful == true) {
           token = response.data!.token!;
           _appPreference.setUserToken(response.data!.token);
+          _appPreference.setUserId(response.data!.user!.id!);
           // success
           // return either right
           // return data

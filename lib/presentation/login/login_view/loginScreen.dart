@@ -186,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? () {
                                 setState(() {
                                   _viewModel.login();
-                                  runApp(MyApp());
                                 });
                                     }
                                   : null,

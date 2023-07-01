@@ -41,7 +41,7 @@ class HomeApp extends StatelessWidget {
     const SchedulesScreen(),
     const HistoryCategoriesScreen(),
     const Booking(),
-    Medications(),
+    const Medications(),
     const AiScreen(title: 'cam scan'),
     const MessageScreen(),
     const MedicationCodeView(),
@@ -74,7 +74,7 @@ class HomeApp extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
+                    MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               icon: const Icon(IconBroken.Profile),
             ),

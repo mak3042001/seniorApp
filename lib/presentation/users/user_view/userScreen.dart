@@ -3,6 +3,7 @@ import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
+import '../../resources/color_manager.dart';
 import '../user_viewModel/user_viewModel.dart';
 
 class UserScreen extends StatefulWidget {
@@ -125,53 +126,60 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Widget _matrialList(BuildContext context, int i, UserUser? user) {
-    if (user != null && user.data![i]!.name.contains(item)) {
-      return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SizedBox(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user.data![i]!.image),
-                  radius: 35,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    if (user != null) {
+      if(user.data![i]!.name.contains(item) || user.data![i]!.username.contains(item)){
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      user.data![i]!.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(fontSize: 30),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(user.data![i]!.image),
+                      radius: 35,
                     ),
                     const SizedBox(
-                      height: 5.0,
+                      width: 10,
                     ),
-                    Text(
-                      user.data![i]!.username,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontSize: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          user.data![i]!.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(fontSize: 30 , color:  ColorManager.black , fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          user.data![i]!.username,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontSize: 20 , color:  ColorManager.grey , fontWeight: FontWeight.normal),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }else{
+        return Container();
+      }
     } else {
       return Container();
     }
