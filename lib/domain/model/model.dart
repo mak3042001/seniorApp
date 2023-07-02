@@ -1,3 +1,30 @@
+//medication show
+class MedicationData {
+  int id;
+  String seniorId;
+  String medication;
+  String medicationDose;
+  String description;
+  String createdAt;
+
+  MedicationData(
+    this.id,
+    this.seniorId,
+    this.medication,
+    this.medicationDose,
+    this.description,
+    this.createdAt,
+  );
+}
+
+class Medication {
+  List<MedicationData?>? data;
+
+  Medication(
+    this.data,
+  );
+}
+
 //message
 class MessageData {
   int id;
@@ -12,25 +39,25 @@ class MessageData {
   String message;
 
   MessageData(
-      this.id,
-      this.username,
-      this.name,
-      this.email,
-      this.phone,
-      this.birthdate,
-      this.age,
-      this.image,
-      this.type,
-      this.message,
-      );
+    this.id,
+    this.username,
+    this.name,
+    this.email,
+    this.phone,
+    this.birthdate,
+    this.age,
+    this.image,
+    this.type,
+    this.message,
+  );
 }
 
 class Message {
   List<MessageData?>? data;
 
   Message(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //user
@@ -46,24 +73,24 @@ class UserData {
   String type;
 
   UserData(
-      this.id,
-      this.username,
-      this.name,
-      this.email,
-      this.phone,
-      this.birthdate,
-      this.age,
-      this.image,
-      this.type,
-      );
+    this.id,
+    this.username,
+    this.name,
+    this.email,
+    this.phone,
+    this.birthdate,
+    this.age,
+    this.image,
+    this.type,
+  );
 }
 
 class UserUser {
   List<UserData?>? data;
 
   UserUser(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //profile
@@ -78,23 +105,23 @@ class ProfileData {
   String image;
 
   ProfileData(
-      this.id,
-      this.username,
-      this.name,
-      this.email,
-      this.phone,
-      this.birthdate,
-      this.age,
-      this.image,
-      );
+    this.id,
+    this.username,
+    this.name,
+    this.email,
+    this.phone,
+    this.birthdate,
+    this.age,
+    this.image,
+  );
 }
 
 class Profile {
   ProfileData? data;
 
   Profile(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //auth model
@@ -146,6 +173,7 @@ class AuthLogOut {
 class ChangeImage {
   ChangeImage();
 }
+
 class ChangePassword {
   ChangePassword();
 }
@@ -166,8 +194,8 @@ class NotificationData {
     this.createdAt,
   );
 }
-class NotificationIndex {
 
+class NotificationIndex {
   List<NotificationData?> data;
 
   NotificationIndex(this.data);
@@ -425,8 +453,8 @@ class MedicationsCodeCreate {
   MedicationsCodeCreateData? data;
 
   MedicationsCodeCreate(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //medications code index
@@ -434,8 +462,8 @@ class MedicationsCodeIndex {
   String data;
 
   MedicationsCodeIndex(
-      this.data,
-      );
+    this.data,
+  );
 }
 
 //doctor index
@@ -443,6 +471,6 @@ class DoctorIndex {
   List<User?>? data;
 
   DoctorIndex(
-      this.data,
-      );
+    this.data,
+  );
 }

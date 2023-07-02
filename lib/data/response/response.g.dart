@@ -6,6 +6,48 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+MedicationDataResponse _$MedicationDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    MedicationDataResponse(
+      json['id'] as int?,
+      json['senior_id'] as String?,
+      json['medication'] as String?,
+      json['medication_dose'] as String?,
+      json['description'] as String?,
+      json['created_at'] as String?,
+    );
+
+Map<String, dynamic> _$MedicationDataResponseToJson(
+        MedicationDataResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'senior_id': instance.seniorId,
+      'medication': instance.medication,
+      'medication_dose': instance.medicationDose,
+      'description': instance.description,
+      'created_at': instance.createdAt,
+    };
+
+MedicationUseResponse _$MedicationUseResponseFromJson(
+        Map<String, dynamic> json) =>
+    MedicationUseResponse(
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : MedicationDataResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$MedicationUseResponseToJson(
+        MedicationUseResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
 MessageDataResponse _$MessageDataResponseFromJson(Map<String, dynamic> json) =>
     MessageDataResponse(
       json['id'] as int?,

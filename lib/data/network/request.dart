@@ -1,3 +1,12 @@
+class MedicineRequest {
+  String name;
+
+  MedicineRequest(
+      this.name,
+      );
+}
+
+
 //auth request
 class LoginRequest {
   String username;

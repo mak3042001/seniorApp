@@ -4,7 +4,29 @@ import 'package:senior/data/response/response.dart';
 import 'package:senior/domain/model/model.dart';
 
 
+//medication
+extension MedicationDataResponseMabber on MedicationDataResponse? {
+  MedicationData toDomain() {
+    return MedicationData(
+      this?.id.orEmpty() ?? Constant.zero,
+      this?.seniorId.orEmpty() ?? Constant.empty,
+      this?.medication.orEmpty() ?? Constant.empty,
+      this?.medicationDose.orEmpty() ?? Constant.empty,
+      this?.description.orEmpty() ?? Constant.empty,
+      this?.createdAt.orEmpty() ?? Constant.empty,
+    );
+  }
+}
 
+extension MedicationUseResponseMabber on MedicationUseResponse? {
+  Medication toDomain() {
+    return Medication(
+      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
+          .cast<MedicationData?>()
+          .toList(),
+    );
+  }
+}
 //message
 extension MessageDataResponseMabber on MessageDataResponse? {
   MessageData toDomain() {
