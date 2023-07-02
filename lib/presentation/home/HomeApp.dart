@@ -42,7 +42,7 @@ class HomeApp extends StatelessWidget {
     const HistoryCategoriesScreen(),
     const Booking(),
     const Medications(),
-    const AiScreen(title: 'cam scan'),
+     AiScreen(),
     const MessageScreen(),
     const MedicationCodeView(),
   ];

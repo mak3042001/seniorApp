@@ -76,7 +76,7 @@ class RouteGenerator {
           initAppointmentModule();
         return MaterialPageRoute(builder: (_) => const AppointmentScreen());
       case Routes.aiScreen:
-        return MaterialPageRoute(builder: (_) => const AiScreen(title: 'AiScreen',));
+        return MaterialPageRoute(builder: (_) =>  AiScreen());
         case Routes.userScreen:
           initUserModule();
         return MaterialPageRoute(builder: (_) => const UserScreen());

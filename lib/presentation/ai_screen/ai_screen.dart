@@ -1,80 +1,96 @@
-import 'dart:async';
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_scalable_ocr/flutter_scalable_ocr.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../resources/color_manager.dart';
 
 class AiScreen extends StatefulWidget {
-  const AiScreen({super.key, required this.title});
-
-  final String title;
+  const AiScreen({super.key});
 
   @override
-  State<AiScreen> createState() => _AiScreenState();
+  _AiScreenState createState() => _AiScreenState();
 }
 
 class _AiScreenState extends State<AiScreen> {
-  String text = "";
-  final StreamController<String> controller = StreamController<String>();
+  File? _pickedImage;
+  String? _medicineName;
 
-  void setText(value) {
-    controller.add(value);
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedImage = await ImagePicker().getImage(source: source);
+    setState(() {
+      _pickedImage = File(pickedImage!.path);
+      _medicineName = null; // Reset the medicine name
+    });
+    _extractTextFromImage();
   }
 
-  @override
-  void dispose() {
-    controller.close();
-    super.dispose();
+  Future<void> _extractTextFromImage() async {
+    final image = InputImage.fromFilePath(_pickedImage!.path);
+    final textDetector = GoogleMlKit.vision.textRecognizer();
+    final RecognizedText recognisedText = await textDetector.processImage(image);
+
+    String medicineName = '';
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        medicineName += line.text;
+      }
+    }
+
+    setState(() {
+      _medicineName = medicineName;
+    });
+
+    textDetector.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff283DAA),
+        title: const Text('Text reader'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (_pickedImage != null)
+              Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(_pickedImage!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            if (_medicineName != null)
+              Text(
+                'Medicine Name: $_medicineName',
+                style: TextStyle(fontSize: 18),
+              ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    ColorManager.primary), // Set the desired color here
+              ),
+              onPressed: () => _pickImage(ImageSource.camera),
+              child: Text('Take Photo'),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    ColorManager.primary), // Set the desired color here
+              ),
+              onPressed: () => _pickImage(ImageSource.gallery),
+              child: Text('Choose from Gallery'),
+            ),
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ScalableOCR(
-                  paintboxCustom: Paint()
-                    ..style = PaintingStyle.stroke
-                    ..strokeWidth = 4.0
-                    ..color = const Color.fromARGB(153, 102, 160, 241),
-                  boxLeftOff: 5,
-                  boxBottomOff: 2.5,
-                  boxRightOff: 5,
-                  boxTopOff: 2.5,
-                  boxHeight: MediaQuery.of(context).size.height / 3,
-                  getRawData: (value) {
-                    inspect(value);
-                  },
-                  getScannedText: (value) {
-                    setText(value);
-                  }),
-              StreamBuilder<String>(
-                stream: controller.stream,
-                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  return Result(text: snapshot.data != null ? snapshot.data! : "");
-                },
-              )
-            ],
-          ),
-        ));
-  }
-}
-
-class Result extends StatelessWidget {
-  const Result({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Readed text: $text");
+      ),
+    );
   }
 }

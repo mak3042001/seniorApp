@@ -54,7 +54,8 @@ dependencies:
   flutter_scalable_ocr: ^2.0.0
   firebase_core: ^2.14.0
   firebase_database: ^10.2.3
-
+  google_ml_kit:
+  image_cropper:
 
 flutter_icons:
   android: "launcher_icon"
