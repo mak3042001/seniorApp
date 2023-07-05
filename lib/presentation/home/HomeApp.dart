@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
-import 'package:senior/presentation/ai_screen/ai_screen.dart';
+import 'package:senior/presentation/ai_screen/ai_screen_view/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
 import 'package:senior/presentation/medications/medication_view/medications.dart';
@@ -10,12 +10,16 @@ import 'package:senior/presentation/profile/profile_view/profileScreen.dart';
 import 'package:senior/presentation/resources/string_manager.dart';
 import 'package:senior/presentation/schedules/schedules_view/Schedules.dart';
 
+import '../../app/di.dart';
 import '../message/message_view/messageScreen.dart';
 
 
 
 class HomeApp extends StatelessWidget {
   static const String baseImageAssets = "assets/images";
+
+
+   HomeApp({Key? key}) : super(key: key);
 
   List<String> home = [
     StringManager.schedules,
@@ -26,6 +30,7 @@ class HomeApp extends StatelessWidget {
     StringManager.chat,
     StringManager.medicationCode,
   ];
+
   List<String> images = [
     "$baseImageAssets/Schedules.png",
     "$baseImageAssets/history.jpg",
@@ -36,19 +41,15 @@ class HomeApp extends StatelessWidget {
     "$baseImageAssets/code.jpg",
   ];
 
-
   List<Widget> screen = [
     const SchedulesScreen(),
     const HistoryCategoriesScreen(),
     const Booking(),
     const Medications(),
-     AiScreen(),
+     const AiScreen(),
     const MessageScreen(),
     const MedicationCodeView(),
   ];
-
-
-  HomeApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

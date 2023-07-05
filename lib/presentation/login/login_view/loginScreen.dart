@@ -183,11 +183,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: AppSize.s40,
                           child: ElevatedButton(
                               onPressed: (snapshot.data ?? false)
-                                  ? () {
-                                setState(() {
+                                  ? () async {
                                   _viewModel.login();
-                                });
-                                    }
+                                  await initAppModule();
+                              }
                                   : null,
                               child: const Text(StringManager.login)),
                         );

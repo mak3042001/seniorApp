@@ -11,7 +11,7 @@ extension MedicationDataResponseMabber on MedicationDataResponse? {
       this?.id.orEmpty() ?? Constant.zero,
       this?.seniorId.orEmpty() ?? Constant.empty,
       this?.medication.orEmpty() ?? Constant.empty,
-      this?.medicationDose.orEmpty() ?? Constant.empty,
+      this?.medicationDose.orEmpty() ?? Constant.zero,
       this?.description.orEmpty() ?? Constant.empty,
       this?.createdAt.orEmpty() ?? Constant.empty,
     );
@@ -21,9 +21,7 @@ extension MedicationDataResponseMabber on MedicationDataResponse? {
 extension MedicationUseResponseMabber on MedicationUseResponse? {
   Medication toDomain() {
     return Medication(
-      (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
-          .cast<MedicationData?>()
-          .toList(),
+        this?.data.toDomain(),
     );
   }
 }

@@ -19,9 +19,11 @@ import 'package:senior/domain/usecase/history_categories/historyCategories_index
 import 'package:senior/domain/usecase/history_categories/historyCategories_update_usecase.dart';
 import 'package:senior/domain/usecase/medication/medication_create_usecase.dart';
 import 'package:senior/domain/usecase/medication/medication_index_usecase.dart';
+import 'package:senior/domain/usecase/medication/medication_show.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_create_usecase.dart';
 import 'package:senior/domain/usecase/medication_code/medication_code_index_usecase.dart';
 import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
+import 'package:senior/presentation/ai_screen/ai_screen_view_model/ai_screen_viewModel.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
@@ -101,6 +103,7 @@ Future<void> initAppModule() async {
   initProfileModule();
   initUserModule();
   initMessageModule();
+  initAiModule();
 }
 
 //auth
@@ -139,6 +142,15 @@ initNotificationModule() {
             () => NotificationUseCase(instance()));
     instance.registerFactory<NotificationViewModel>(
             () => NotificationViewModel(instance()));
+  }
+}
+
+initAiModule() {
+  if (!GetIt.I.isRegistered<MedicationUseCase>()) {
+    instance.registerFactory<MedicationUseCase>(
+            () => MedicationUseCase(instance()));
+    instance.registerFactory<AiViewModel>(
+            () => AiViewModel(instance()));
   }
 }
 

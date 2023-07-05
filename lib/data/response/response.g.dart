@@ -12,7 +12,7 @@ MedicationDataResponse _$MedicationDataResponseFromJson(
       json['id'] as int?,
       json['senior_id'] as String?,
       json['medication'] as String?,
-      json['medication_dose'] as String?,
+      json['medication_dose'] as int?,
       json['description'] as String?,
       json['created_at'] as String?,
     );
@@ -31,11 +31,10 @@ Map<String, dynamic> _$MedicationDataResponseToJson(
 MedicationUseResponse _$MedicationUseResponseFromJson(
         Map<String, dynamic> json) =>
     MedicationUseResponse(
-      (json['data'] as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : MedicationDataResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      json['data'] == null
+          ? null
+          : MedicationDataResponse.fromJson(
+              json['data'] as Map<String, dynamic>),
     )
       ..successful = json['successful'] as bool?
       ..message = json['message'] as String?;

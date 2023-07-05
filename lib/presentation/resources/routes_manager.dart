@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/di.dart';
-import 'package:senior/presentation/ai_screen/ai_screen.dart';
+import 'package:senior/presentation/ai_screen/ai_screen_view/ai_screen.dart';
 import 'package:senior/presentation/appointment/appointment_view/appointmentScreen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/contact/contactScreen.dart';

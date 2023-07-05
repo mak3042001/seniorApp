@@ -12,7 +12,7 @@ class MedicationDataResponse {
   @JsonKey(name: "medication")
   String? medication;
   @JsonKey(name: "medication_dose")
-  String? medicationDose;
+  int? medicationDose;
   @JsonKey(name: "description")
   String? description;
   @JsonKey(name: "created_at")
@@ -38,7 +38,7 @@ class MedicationDataResponse {
 @JsonSerializable()
 class MedicationUseResponse extends BaseResponse {
   @JsonKey(name: "data")
-  List<MedicationDataResponse?>? data;
+  MedicationDataResponse? data;
 
   MedicationUseResponse(
     this.data,

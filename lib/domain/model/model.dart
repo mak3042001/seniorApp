@@ -3,7 +3,7 @@ class MedicationData {
   int id;
   String seniorId;
   String medication;
-  String medicationDose;
+  int medicationDose;
   String description;
   String createdAt;
 
@@ -18,7 +18,7 @@ class MedicationData {
 }
 
 class Medication {
-  List<MedicationData?>? data;
+  MedicationData? data;
 
   Medication(
     this.data,

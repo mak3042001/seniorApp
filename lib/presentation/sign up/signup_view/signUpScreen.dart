@@ -304,8 +304,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: AppSize.s40,
                         child: ElevatedButton(
                             onPressed: (snapshot.data ?? false)
-                                ? () {
+                                ? () async {
                               _viewModel.register();
+                              await initAppModule();
                             }
                                 : null,
                             child: const Text(StringManager.signUp)),
