@@ -330,10 +330,11 @@ class _AppServiceClient implements AppServiceClient {
     String date,
     String time,
     String type,
-    String description,
+    String? description,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = {
       'title': title,
@@ -342,6 +343,7 @@ class _AppServiceClient implements AppServiceClient {
       'type': type,
       'description': description,
     };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CreateSchedulesResponse>(Options(
       method: 'POST',
@@ -701,14 +703,18 @@ class _AppServiceClient implements AppServiceClient {
   Future<MedicationsCreateResponse> medicationsCreate(
     String medication,
     String medicationDose,
+    String? description,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = {
       'medication': medication,
       'medication_dose': medicationDose,
+      'description': description,
     };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicationsCreateResponse>(Options(
       method: 'POST',
@@ -751,18 +757,22 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<MedicationsUpdateResponse> medicationsUpdate(
-    int medicationId,
-    String medication,
-    String medicationDose,
+    int? medicationId,
+    String? medication,
+    String? medicationDose,
+    String? description,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = {
       'medication_id': medicationId,
       'medication': medication,
       'medication_dose': medicationDose,
+      'description': description,
     };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicationsUpdateResponse>(Options(
       method: 'POST',

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/app/app_preference.dart';
 import 'package:senior/domain/model/model.dart';
+import 'package:senior/presentation/chat/chat_view/chat_screen.dart';
 import 'package:senior/presentation/resources/color_manager.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
@@ -16,6 +18,7 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
+  final AppPreference _appPreference = instance<AppPreference>();
   final TextEditingController _searchController = TextEditingController();
   String item = "";
   final MessageViewModel _viewModel = instance<MessageViewModel>();
@@ -139,48 +142,53 @@ class _MessageScreenState extends State<MessageScreen> {
       if(user.data![i]!.name.contains(item) || user.data![i]!.username.contains(item)){
         return Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Card(
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(user.data![i]!.image),
-                      radius: 35,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          user.data![i]!.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(fontSize: 30 , color:  ColorManager.black , fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          user.data![i]!.username,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontSize: 20 , color:  ColorManager.grey , fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                  ],
+          child: InkWell(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen(senderId: _appPreference.getUserId() as int, receiverId: user.data![i]!.id)));
+            },
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SizedBox(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(user.data![i]!.image),
+                        radius: 35,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            user.data![i]!.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(fontSize: 30 , color:  ColorManager.black , fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            user.data![i]!.username,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontSize: 20 , color:  ColorManager.grey , fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

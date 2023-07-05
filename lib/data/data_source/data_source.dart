@@ -90,7 +90,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   RemoteDataSourceImpl(this._appServiceClient, this._appPreference);
 
-
   @override
   Future<MessageUseResponse> message() async {
     return await _appServiceClient.message(
@@ -99,13 +98,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<MedicationUseResponse> medicine(MedicineRequest medicineRequest) async {
+  Future<MedicationUseResponse> medicine(
+      MedicineRequest medicineRequest) async {
     return await _appServiceClient.medicine(
       medicineRequest.name,
     );
   }
-  
-  
+
   @override
   Future<UserUseResponse> user() async {
     return await _appServiceClient.user();
@@ -221,8 +220,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<MedicationsCreateResponse> medicationsCreate(
       MedicationsCreateRequest medicationsCreateRequest) async {
     return await _appServiceClient.medicationsCreate(
-        medicationsCreateRequest.medication,
-        medicationsCreateRequest.medicationDose);
+      medicationsCreateRequest.medication,
+      medicationsCreateRequest.medicationDose,
+      medicationsCreateRequest.description,
+    );
   }
 
   @override
@@ -234,9 +235,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<MedicationsUpdateResponse> medicationsUpdate(
       MedicationsUpdateRequest medicationsUpdateRequest) async {
     return await _appServiceClient.medicationsUpdate(
-        medicationsUpdateRequest.medicationId,
-        medicationsUpdateRequest.medication,
-        medicationsUpdateRequest.medicationDose);
+      medicationsUpdateRequest.medicationId,
+      medicationsUpdateRequest.medication,
+      medicationsUpdateRequest.medicationDose,
+      medicationsUpdateRequest.description,
+    );
   }
 
   @override
@@ -272,7 +275,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     String fileName = file.path.split('/').last;
     print("hello image  $fileName");
     return await _appServiceClient.changeImage(
-        File(fileName),
+      File(fileName),
     );
   }
 

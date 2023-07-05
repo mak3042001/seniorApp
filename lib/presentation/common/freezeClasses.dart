@@ -88,10 +88,10 @@ class HistoryUpdateObject with _$HistoryUpdateObject {
 
 @freezed
 class MedicationsObject with _$MedicationsObject {
-  factory MedicationsObject(String medication, String medicationDose) = _MedicationsObject;
+  factory MedicationsObject(String medication, String medicationDose , String? description) = _MedicationsObject;
 }
 
 @freezed
 class MedicationsUpdateObject with _$MedicationsUpdateObject {
-  factory MedicationsUpdateObject(String medication, String medicationDose) = _MedicationsUpdateObject;
+  factory MedicationsUpdateObject(String? medication, String? medicationDose , String? description) = _MedicationsUpdateObject;
 }

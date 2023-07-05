@@ -29,7 +29,7 @@ class SchedulesCreateUseCaseInput {
   String date;
   String time;
   String type;
-  String description;
+  String? description;
 
   SchedulesCreateUseCaseInput(
     this.title,

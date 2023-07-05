@@ -58,7 +58,7 @@ class RouteGenerator {
       case Routes.contact:
         return MaterialPageRoute(builder: (_) => const ContactsScreen());
       case Routes.medication:
-        return MaterialPageRoute(builder: (_) =>  Medications());
+        return MaterialPageRoute(builder: (_) =>  const Medications());
         case Routes.medicationCode:
         return MaterialPageRoute(builder: (_) =>  const MedicationCodeView());
       case Routes.notification:
@@ -68,7 +68,7 @@ class RouteGenerator {
           initHistoryCategoriesModule();
         return MaterialPageRoute(builder: (_) => const HistoryCategoriesScreen());
       case Routes.profile:
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case Routes.schedules:
         initSchedulesIndexModule();
         return MaterialPageRoute(builder: (_) => const SchedulesScreen());
@@ -76,7 +76,7 @@ class RouteGenerator {
           initAppointmentModule();
         return MaterialPageRoute(builder: (_) => const AppointmentScreen());
       case Routes.aiScreen:
-        return MaterialPageRoute(builder: (_) =>  AiScreen());
+        return MaterialPageRoute(builder: (_) =>  const AiScreen());
         case Routes.userScreen:
           initUserModule();
         return MaterialPageRoute(builder: (_) => const UserScreen());

@@ -18,18 +18,21 @@ class MedicationUpdateUseCase
       input.medicationId,
       input.medication,
       input.medicationDose,
+      input.description,
     ));
   }
 }
 
 class MedicationUpdateUseCaseInput {
-  int medicationId;
-  String medication;
-  String medicationDose;
+  int? medicationId;
+  String? medication;
+  String? medicationDose;
+  String? description;
 
   MedicationUpdateUseCaseInput(
     this.medicationId,
     this.medication,
     this.medicationDose,
+    this.description,
   );
 }

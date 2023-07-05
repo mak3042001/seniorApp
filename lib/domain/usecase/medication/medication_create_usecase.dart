@@ -17,6 +17,7 @@ class MedicationCreateUseCase
     return await _repository.medicationsCreate(MedicationsCreateRequest(
       input.medication,
       input.medicationDose,
+      input.description
     ));
   }
 }
@@ -24,9 +25,11 @@ class MedicationCreateUseCase
 class MedicationCreateUseCaseInput {
   String medication;
   String medicationDose;
+  String? description;
 
   MedicationCreateUseCaseInput(
     this.medication,
     this.medicationDose,
+    this.description,
   );
 }

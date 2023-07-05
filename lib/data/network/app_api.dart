@@ -90,7 +90,7 @@ abstract class AppServiceClient {
     @Field("date") String date,
     @Field("time") String time,
     @Field("type") String type,
-    @Field("description") String description,
+    @Field("description") String? description,
   );
 
 //schedules cancel
@@ -190,6 +190,7 @@ abstract class AppServiceClient {
   Future<MedicationsCreateResponse> medicationsCreate(
       @Field("medication") String medication,
       @Field("medication_dose") String medicationDose,
+      @Field("description") String? description,
       );
 
 //medications cancel
@@ -201,9 +202,10 @@ abstract class AppServiceClient {
 //medications update
   @POST("/api/seniors/medications/update")
   Future<MedicationsUpdateResponse> medicationsUpdate(
-      @Field("medication_id") int medicationId,
-      @Field("medication") String medication,
-      @Field("medication_dose") String medicationDose,
+      @Field("medication_id") int? medicationId,
+      @Field("medication") String? medication,
+      @Field("medication_dose") String? medicationDose,
+      @Field("description") String? description,
       );
 //medications index
   @GET("/api/seniors/medications")

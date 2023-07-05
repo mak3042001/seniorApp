@@ -2,10 +2,9 @@ class MedicineRequest {
   String name;
 
   MedicineRequest(
-      this.name,
-      );
+    this.name,
+  );
 }
-
 
 //auth request
 class LoginRequest {
@@ -76,7 +75,7 @@ class SchedulesCreateRequest {
   String date;
   String time;
   String type;
-  String description;
+  String? description;
 
   SchedulesCreateRequest(
     this.title,
@@ -180,10 +179,12 @@ class HistoryCategoriesUpdateRequest {
 class MedicationsCreateRequest {
   String medication;
   String medicationDose;
+  String? description;
 
   MedicationsCreateRequest(
     this.medication,
     this.medicationDose,
+    this.description,
   );
 }
 
@@ -196,13 +197,15 @@ class MedicationsCancelRequest {
 
 //medications update
 class MedicationsUpdateRequest {
-  int medicationId;
-  String medication;
-  String medicationDose;
+  int? medicationId;
+  String? medication;
+  String? medicationDose;
+  String? description;
 
   MedicationsUpdateRequest(
     this.medicationId,
     this.medication,
     this.medicationDose,
+    this.description,
   );
 }

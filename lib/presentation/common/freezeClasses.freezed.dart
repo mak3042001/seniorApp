@@ -1707,6 +1707,7 @@ abstract class _HistoryUpdateObject implements HistoryUpdateObject {
 mixin _$MedicationsObject {
   String get medication => throw _privateConstructorUsedError;
   String get medicationDose => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MedicationsObjectCopyWith<MedicationsObject> get copyWith =>
@@ -1719,7 +1720,7 @@ abstract class $MedicationsObjectCopyWith<$Res> {
           MedicationsObject value, $Res Function(MedicationsObject) then) =
       _$MedicationsObjectCopyWithImpl<$Res, MedicationsObject>;
   @useResult
-  $Res call({String medication, String medicationDose});
+  $Res call({String medication, String medicationDose, String? description});
 }
 
 /// @nodoc
@@ -1737,6 +1738,7 @@ class _$MedicationsObjectCopyWithImpl<$Res, $Val extends MedicationsObject>
   $Res call({
     Object? medication = null,
     Object? medicationDose = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       medication: null == medication
@@ -1747,6 +1749,10 @@ class _$MedicationsObjectCopyWithImpl<$Res, $Val extends MedicationsObject>
           ? _value.medicationDose
           : medicationDose // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1759,7 +1765,7 @@ abstract class _$$_MedicationsObjectCopyWith<$Res>
       __$$_MedicationsObjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String medication, String medicationDose});
+  $Res call({String medication, String medicationDose, String? description});
 }
 
 /// @nodoc
@@ -1775,6 +1781,7 @@ class __$$_MedicationsObjectCopyWithImpl<$Res>
   $Res call({
     Object? medication = null,
     Object? medicationDose = null,
+    Object? description = freezed,
   }) {
     return _then(_$_MedicationsObject(
       null == medication
@@ -1785,6 +1792,10 @@ class __$$_MedicationsObjectCopyWithImpl<$Res>
           ? _value.medicationDose
           : medicationDose // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1792,16 +1803,18 @@ class __$$_MedicationsObjectCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MedicationsObject implements _MedicationsObject {
-  _$_MedicationsObject(this.medication, this.medicationDose);
+  _$_MedicationsObject(this.medication, this.medicationDose, this.description);
 
   @override
   final String medication;
   @override
   final String medicationDose;
+  @override
+  final String? description;
 
   @override
   String toString() {
-    return 'MedicationsObject(medication: $medication, medicationDose: $medicationDose)';
+    return 'MedicationsObject(medication: $medication, medicationDose: $medicationDose, description: $description)';
   }
 
   @override
@@ -1812,11 +1825,14 @@ class _$_MedicationsObject implements _MedicationsObject {
             (identical(other.medication, medication) ||
                 other.medication == medication) &&
             (identical(other.medicationDose, medicationDose) ||
-                other.medicationDose == medicationDose));
+                other.medicationDose == medicationDose) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, medication, medicationDose);
+  int get hashCode =>
+      Object.hash(runtimeType, medication, medicationDose, description);
 
   @JsonKey(ignore: true)
   @override
@@ -1828,13 +1844,16 @@ class _$_MedicationsObject implements _MedicationsObject {
 
 abstract class _MedicationsObject implements MedicationsObject {
   factory _MedicationsObject(
-          final String medication, final String medicationDose) =
-      _$_MedicationsObject;
+      final String medication,
+      final String medicationDose,
+      final String? description) = _$_MedicationsObject;
 
   @override
   String get medication;
   @override
   String get medicationDose;
+  @override
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$_MedicationsObjectCopyWith<_$_MedicationsObject> get copyWith =>
@@ -1843,8 +1862,9 @@ abstract class _MedicationsObject implements MedicationsObject {
 
 /// @nodoc
 mixin _$MedicationsUpdateObject {
-  String get medication => throw _privateConstructorUsedError;
-  String get medicationDose => throw _privateConstructorUsedError;
+  String? get medication => throw _privateConstructorUsedError;
+  String? get medicationDose => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MedicationsUpdateObjectCopyWith<MedicationsUpdateObject> get copyWith =>
@@ -1857,7 +1877,7 @@ abstract class $MedicationsUpdateObjectCopyWith<$Res> {
           $Res Function(MedicationsUpdateObject) then) =
       _$MedicationsUpdateObjectCopyWithImpl<$Res, MedicationsUpdateObject>;
   @useResult
-  $Res call({String medication, String medicationDose});
+  $Res call({String? medication, String? medicationDose, String? description});
 }
 
 /// @nodoc
@@ -1874,18 +1894,23 @@ class _$MedicationsUpdateObjectCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? medication = null,
-    Object? medicationDose = null,
+    Object? medication = freezed,
+    Object? medicationDose = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      medication: null == medication
+      medication: freezed == medication
           ? _value.medication
           : medication // ignore: cast_nullable_to_non_nullable
-              as String,
-      medicationDose: null == medicationDose
+              as String?,
+      medicationDose: freezed == medicationDose
           ? _value.medicationDose
           : medicationDose // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1898,7 +1923,7 @@ abstract class _$$_MedicationsUpdateObjectCopyWith<$Res>
       __$$_MedicationsUpdateObjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String medication, String medicationDose});
+  $Res call({String? medication, String? medicationDose, String? description});
 }
 
 /// @nodoc
@@ -1913,18 +1938,23 @@ class __$$_MedicationsUpdateObjectCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? medication = null,
-    Object? medicationDose = null,
+    Object? medication = freezed,
+    Object? medicationDose = freezed,
+    Object? description = freezed,
   }) {
     return _then(_$_MedicationsUpdateObject(
-      null == medication
+      freezed == medication
           ? _value.medication
           : medication // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == medicationDose
+              as String?,
+      freezed == medicationDose
           ? _value.medicationDose
           : medicationDose // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1932,16 +1962,19 @@ class __$$_MedicationsUpdateObjectCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MedicationsUpdateObject implements _MedicationsUpdateObject {
-  _$_MedicationsUpdateObject(this.medication, this.medicationDose);
+  _$_MedicationsUpdateObject(
+      this.medication, this.medicationDose, this.description);
 
   @override
-  final String medication;
+  final String? medication;
   @override
-  final String medicationDose;
+  final String? medicationDose;
+  @override
+  final String? description;
 
   @override
   String toString() {
-    return 'MedicationsUpdateObject(medication: $medication, medicationDose: $medicationDose)';
+    return 'MedicationsUpdateObject(medication: $medication, medicationDose: $medicationDose, description: $description)';
   }
 
   @override
@@ -1952,11 +1985,14 @@ class _$_MedicationsUpdateObject implements _MedicationsUpdateObject {
             (identical(other.medication, medication) ||
                 other.medication == medication) &&
             (identical(other.medicationDose, medicationDose) ||
-                other.medicationDose == medicationDose));
+                other.medicationDose == medicationDose) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, medication, medicationDose);
+  int get hashCode =>
+      Object.hash(runtimeType, medication, medicationDose, description);
 
   @JsonKey(ignore: true)
   @override
@@ -1969,13 +2005,16 @@ class _$_MedicationsUpdateObject implements _MedicationsUpdateObject {
 
 abstract class _MedicationsUpdateObject implements MedicationsUpdateObject {
   factory _MedicationsUpdateObject(
-          final String medication, final String medicationDose) =
-      _$_MedicationsUpdateObject;
+      final String? medication,
+      final String? medicationDose,
+      final String? description) = _$_MedicationsUpdateObject;
 
   @override
-  String get medication;
+  String? get medication;
   @override
-  String get medicationDose;
+  String? get medicationDose;
+  @override
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$_MedicationsUpdateObjectCopyWith<_$_MedicationsUpdateObject>

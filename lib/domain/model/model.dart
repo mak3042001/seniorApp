@@ -402,7 +402,7 @@ class MedicationsCreateData {
   int userId;
   String medication;
   int medicationDose;
-  String description;
+  String? description;
   String createdAt;
 
   MedicationsCreateData(

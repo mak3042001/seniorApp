@@ -25,7 +25,9 @@ class _MedicationsState extends State<Medications> {
   final TextEditingController _taskNameController = TextEditingController();
   final TextEditingController _taskNameUpdateController = TextEditingController();
   final TextEditingController _taskDoseController = TextEditingController();
+  final TextEditingController _taskDescriptionController = TextEditingController();
   final TextEditingController _taskDoseUpdateController = TextEditingController();
+  final TextEditingController _taskDescriptionUpdateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final MedicationsViewModel _viewModel = instance<MedicationsViewModel>();
 
@@ -43,11 +45,17 @@ class _MedicationsState extends State<Medications> {
     _taskDoseController
         .addListener(() => _viewModel.setDose(_taskDoseController.text));
 
+    _taskDescriptionController
+        .addListener(() => _viewModel.setDescription(_taskDescriptionController.text));
+
     _taskNameUpdateController
         .addListener(() => _viewModel.setNameUpdate(_taskNameUpdateController.text));
 
     _taskDoseUpdateController
         .addListener(() => _viewModel.setDoseUpdate(_taskDoseUpdateController.text));
+
+    _taskDescriptionUpdateController
+        .addListener(() => _viewModel.setDescriptionUpdate(_taskDescriptionUpdateController.text));
 
     _viewModel.isUserMedicationsSuccessfullyStreamController.stream
         .listen((isCreate) {
@@ -139,6 +147,21 @@ class _MedicationsState extends State<Medications> {
                           isPassword: false,
                         );
                       }),
+
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  StreamBuilder<bool>(
+                      stream: _viewModel.outIsDescriptionValid,
+                      builder: (context, snapshot) {
+                        return defaultFormField(
+                          controller: _taskDescriptionController,
+                          type: TextInputType.text,
+                          text: 'Description',
+                          prefix: IconBroken.Document,
+                          isPassword: false,
+                        );
+                      }),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -158,6 +181,7 @@ class _MedicationsState extends State<Medications> {
                                     _viewModel.create();
                                     _taskNameController.text = "";
                                     _taskDoseController.text = "";
+                                    _taskDescriptionController.text = "";
                                   });
                                 }
                                     : null,
@@ -255,6 +279,13 @@ class _MedicationsState extends State<Medications> {
                             ),
                           ],
                         ),
+                        Text(
+                          "${medications.data[i]?.description}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(fontSize: 20 , color: ColorManager.primary),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -321,6 +352,21 @@ class _MedicationsState extends State<Medications> {
                                             type: TextInputType.number,
                                             text: 'Dose',
                                             prefix: IconBroken.Category,
+                                            isPassword: false,
+                                          );
+                                        }),
+
+                                    const SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    StreamBuilder<bool>(
+                                        stream: _viewModel.outIsDescriptionUpdateValid,
+                                        builder: (context, snapshot) {
+                                          return defaultFormField(
+                                            controller: _taskDescriptionUpdateController,
+                                            type: TextInputType.text,
+                                            text: 'Description',
+                                            prefix: IconBroken.Document,
                                             isPassword: false,
                                           );
                                         }),

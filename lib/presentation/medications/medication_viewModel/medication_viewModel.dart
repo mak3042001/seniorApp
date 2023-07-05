@@ -21,6 +21,9 @@ class MedicationsViewModel extends BaseViewModel
   final StreamController _doseStreamController =
   StreamController<String>.broadcast();
 
+  final StreamController _descriptionStreamController =
+  StreamController<String>.broadcast();
+
   final StreamController _areAllInputsValidStreamController =
   StreamController<void>.broadcast();
 
@@ -30,15 +33,18 @@ class MedicationsViewModel extends BaseViewModel
   final StreamController _doseUpdateStreamController =
   StreamController<String>.broadcast();
 
+  final StreamController _descriptionUpdateStreamController =
+  StreamController<String>.broadcast();
+
   final StreamController _areAllInputsUpdateValidStreamController =
   StreamController<void>.broadcast();
 
   StreamController isUserMedicationsSuccessfullyStreamController =
   StreamController<bool>();
 
-  var medicationsObject = MedicationsObject("", "");
+  var medicationsObject = MedicationsObject("", "" , "");
 
-  var medicationsUpdateObject = MedicationsUpdateObject("", "");
+  var medicationsUpdateObject = MedicationsUpdateObject("", "" , "");
 
   final MedicationIndexUseCase medicationsUseCase;
 
@@ -75,7 +81,11 @@ class MedicationsViewModel extends BaseViewModel
   void dispose() {
     _medicationsStreamController.close();
     _nameStreamController.close();
+    _doseStreamController.close();
+    _descriptionStreamController.close();
     _nameUpdateStreamController.close();
+    _doseUpdateStreamController.close();
+    _descriptionUpdateStreamController.close();
     _areAllInputsValidStreamController.close();
     _areAllInputsUpdateValidStreamController.close();
     isUserMedicationsSuccessfullyStreamController.close();
@@ -94,7 +104,7 @@ class MedicationsViewModel extends BaseViewModel
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await medicationsCreateUseCase.execute(
-        MedicationCreateUseCaseInput(medicationsObject.medication, medicationsObject.medicationDose)))
+        MedicationCreateUseCaseInput(medicationsObject.medication, medicationsObject.medicationDose , medicationsObject.description)))
         .fold(
             (failure) => {
           // left -> failure
@@ -139,7 +149,7 @@ class MedicationsViewModel extends BaseViewModel
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await medicationsUpdateUseCase.execute(
-        MedicationUpdateUseCaseInput(id, medicationsUpdateObject.medication, medicationsUpdateObject.medicationDose)))
+        MedicationUpdateUseCaseInput(id, medicationsUpdateObject.medication, medicationsUpdateObject.medicationDose , medicationsUpdateObject.description)))
         .fold(
             (failure) => {
           // left -> failure
@@ -194,7 +204,7 @@ class MedicationsViewModel extends BaseViewModel
   }
 
   @override
-  setNameUpdate(String name) {
+  setNameUpdate(String? name) {
     inputNameUpdate.add(name);
     medicationsUpdateObject = medicationsUpdateObject.copyWith(medication: name);
     inputAreAllInputsUpdateValid.add(null);
@@ -210,6 +220,10 @@ class MedicationsViewModel extends BaseViewModel
     return dose.isNotEmpty;
   }
 
+  bool _isDescriptionValid(String description) {
+    return description.isNotEmpty;
+  }
+
   bool _areAllInputsValid() {
     return _isNameValid(medicationsObject.medication) && _isDoseValid(medicationsObject.medicationDose);
   }
@@ -221,23 +235,41 @@ class MedicationsViewModel extends BaseViewModel
     return dose.isNotEmpty;
   }
 
+  bool _isDescriptionUpdateValid(String description) {
+    return description.isNotEmpty;
+  }
+
   bool _areAllInputsUpdateValid() {
-    return _isNameUpdateValid(medicationsUpdateObject.medication) && _isDoseUpdateValid(medicationsUpdateObject.medicationDose);
+    return true;
   }
 
   @override
   Sink get inputDose => _doseStreamController.sink;
 
   @override
+  Sink get inputDescription => _descriptionStreamController.sink;
+
+  @override
   Sink get inputDoseUpdate => _doseUpdateStreamController.sink;
+
+  @override
+  Sink get inputDescriptionUpdate => _descriptionUpdateStreamController.sink;
 
   @override
   Stream<bool> get outIsDoseUpdateValid => _doseUpdateStreamController.stream
       .map((dose) => _isDoseUpdateValid(dose));
 
   @override
+  Stream<bool> get outIsDescriptionUpdateValid => _descriptionUpdateStreamController.stream
+      .map((description) => _isDescriptionUpdateValid(description));
+
+  @override
   Stream<bool> get outIsDoseValid => _doseStreamController.stream
       .map((dose) => _isDoseValid(dose));
+
+  @override
+  Stream<bool> get outIsDescriptionValid => _descriptionStreamController.stream
+      .map((description) => _isDescriptionValid(description));
 
   @override
   setDose(String dose) {
@@ -247,9 +279,23 @@ class MedicationsViewModel extends BaseViewModel
   }
 
   @override
-  setDoseUpdate(String dose) {
+  setDescription(String? description) {
+    inputDescription.add(description);
+    medicationsObject = medicationsObject.copyWith(description: description);
+    inputAreAllInputsValid.add(null);
+  }
+
+  @override
+  setDoseUpdate(String? dose) {
     inputDoseUpdate.add(dose);
     medicationsUpdateObject = medicationsUpdateObject.copyWith(medicationDose: dose);
+    inputAreAllInputsUpdateValid.add(null);
+  }
+
+  @override
+  setDescriptionUpdate(String? description) {
+    inputDescriptionUpdate.add(description);
+    medicationsUpdateObject = medicationsUpdateObject.copyWith(description: description);
     inputAreAllInputsUpdateValid.add(null);
   }
 }
@@ -259,21 +305,25 @@ abstract class MedicationsViewModelInput {
 
   setName(String name);
   setDose(String dose);
+  setDescription(String? description);
 
   create();
 
   cancel(int id);
 
-  setNameUpdate(String name);
-  setDoseUpdate(String dose);
+  setNameUpdate(String? name);
+  setDoseUpdate(String? dose);
+  setDescriptionUpdate(String? description);
 
   update(int id);
 
   Sink get inputName;
   Sink get inputDose;
+  Sink get inputDescription;
 
   Sink get inputNameUpdate;
   Sink get inputDoseUpdate;
+  Sink get inputDescriptionUpdate;
 
   Sink get inputAreAllInputsValid;
 
@@ -285,11 +335,13 @@ abstract class MedicationsViewModelOutput {
 
   Stream<bool> get outIsNameValid;
   Stream<bool> get outIsDoseValid;
+  Stream<bool> get outIsDescriptionValid;
 
   Stream<bool> get outAreAllInputsValid;
 
   Stream<bool> get outIsNameUpdateValid;
   Stream<bool> get outIsDoseUpdateValid;
+  Stream<bool> get outIsDescriptionUpdateValid;
 
   Stream<bool> get outAreAllInputsUpdateValid;
 }

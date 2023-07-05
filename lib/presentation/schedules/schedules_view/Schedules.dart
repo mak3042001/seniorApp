@@ -51,7 +51,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
         .addListener(() => _viewModel.setType(_taskTypeController.text));
 
     _taskDescriptionController
-        .addListener(() => _viewModel.setType(_taskDescriptionController.text));
+        .addListener(() => _viewModel.setDescription(_taskDescriptionController.text));
 
     _viewModel.isUserSchedulesSuccessfullyStreamController.stream
         .listen((isLoggedIn) {
@@ -295,7 +295,7 @@ class _SchedulesScreenState extends State<SchedulesScreen> {
                       height: 10.0,
                     ),
                     StreamBuilder<bool>(
-                        stream: _viewModel.outIsTitleValid,
+                        stream: _viewModel.outIsDescriptionValid,
                         builder: (context, snapshot) {
                           return defaultFormField(
                             controller: _taskDescriptionController,
