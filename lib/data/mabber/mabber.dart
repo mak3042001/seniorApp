@@ -44,8 +44,8 @@ extension MessageDataResponseMabber on MessageDataResponse? {
 }
 
 extension MessageUseResponseMabber on MessageUseResponse? {
-  Message toDomain() {
-    return Message(
+  MessageIndex toDomain() {
+    return MessageIndex(
       (this?.data?.map((e) => e.toDomain()) ?? const Iterable.empty())
           .cast<MessageData?>()
           .toList(),

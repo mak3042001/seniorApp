@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/presentation/chat/chat_view/chat_screen.dart';
 import 'package:senior/presentation/resources/color_manager.dart';
 import '../../../app/di.dart';
+import '../../chat/chat_view/chat_view.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 import '../../resources/routes_manager.dart';
 import '../message_viewModel/message_viewModel.dart';
@@ -88,7 +88,7 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   Widget _getContentWidget() {
-    return StreamBuilder<Message>(
+    return StreamBuilder<MessageIndex>(
       stream: _viewModel.outputMessage,
       builder: (context, snapshot) {
         return _getItem(snapshot.data);
@@ -96,7 +96,7 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  Widget _getItem(Message? user) {
+  Widget _getItem(MessageIndex? user) {
     if (user != null) {
       return Column(
         children: [
@@ -120,7 +120,7 @@ class _MessageScreenState extends State<MessageScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemBuilder: (context, index) => StreamBuilder<Message>(
+              itemBuilder: (context, index) => StreamBuilder<MessageIndex>(
                 stream: _viewModel.outputMessage,
                 builder: (context, snapshot) {
                   return _matrialList(context, index, snapshot.data);
@@ -137,14 +137,14 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   Widget _matrialList(
-      BuildContext context, int i, Message? user) {
+      BuildContext context, int i, MessageIndex? user) {
     if (user != null) {
       if(user.data![i]!.name.contains(item) || user.data![i]!.username.contains(item)){
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen(senderId: _appPreference.getUserId() as int, receiverId: user.data![i]!.id)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen(user.data![i]!.id)));
             },
             child: Card(
               elevation: 5,

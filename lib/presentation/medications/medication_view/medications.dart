@@ -389,6 +389,7 @@ class _MedicationsState extends State<Medications> {
                                                       _viewModel.update(medications.data[i]!.id);
                                                       _taskNameUpdateController.text = "";
                                                       _taskDoseUpdateController.text = "";
+                                                      _taskDescriptionUpdateController.text = "";
                                                     });
                                                   }
                                                       : null,

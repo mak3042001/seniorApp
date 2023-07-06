@@ -10,7 +10,7 @@ import '../../common/state_renderer/state_renderer.dart';
 
 class MessageViewModel extends BaseViewModel
     with MessageViewModelInput, MessageViewModelOutput {
-  final _messageStreamController = BehaviorSubject<Message>();
+  final _messageStreamController = BehaviorSubject<MessageIndex>();
 
   final MessageUseCase messageUseCase;
 
@@ -46,7 +46,7 @@ class MessageViewModel extends BaseViewModel
 
   //output
   @override
-  Stream<Message> get outputMessage =>
+  Stream<MessageIndex> get outputMessage =>
       _messageStreamController.stream.map((message) => message);
 }
 
@@ -55,5 +55,5 @@ abstract class MessageViewModelInput {
 }
 
 abstract class MessageViewModelOutput {
-  Stream<Message> get outputMessage;
+  Stream<MessageIndex> get outputMessage;
 }

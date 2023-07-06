@@ -1,3 +1,28 @@
+class Message {
+  final String message;
+  final int senderId;
+  final int id;
+
+  Message({required this.message, required this.senderId, required this.id});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      'senderId': senderId,
+      'id': id,
+    };
+  }
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      message: json['message'],
+      senderId: json['senderId'],
+      id: json['id'],
+    );
+  }
+}
+
+
 //medication show
 class MedicationData {
   int id;
@@ -52,10 +77,10 @@ class MessageData {
   );
 }
 
-class Message {
+class MessageIndex {
   List<MessageData?>? data;
 
-  Message(
+  MessageIndex(
     this.data,
   );
 }

@@ -197,7 +197,7 @@ class MedicationsCancelRequest {
 
 //medications update
 class MedicationsUpdateRequest {
-  int? medicationId;
+  int medicationId;
   String? medication;
   String? medicationDose;
   String? description;

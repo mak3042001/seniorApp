@@ -202,7 +202,7 @@ abstract class AppServiceClient {
 //medications update
   @POST("/api/seniors/medications/update")
   Future<MedicationsUpdateResponse> medicationsUpdate(
-      @Field("medication_id") int? medicationId,
+      @Field("medication_id") int medicationId,
       @Field("medication") String? medication,
       @Field("medication_dose") String? medicationDose,
       @Field("description") String? description,

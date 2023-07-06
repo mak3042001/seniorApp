@@ -6,13 +6,13 @@ import '../../repository/domain_repository.dart';
 import 'base_usecase.dart';
 
 class MessageUseCase
-    implements BaseUseCase<void, Message> {
+    implements BaseUseCase<void, MessageIndex> {
   final Repository _repository;
 
   MessageUseCase(this._repository ,);
 
   @override
-  Future<Either<Failure, Message>> execute(
+  Future<Either<Failure, MessageIndex>> execute(
       void input) async {
     return await _repository.message();
   }

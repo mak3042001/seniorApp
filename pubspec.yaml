@@ -57,6 +57,7 @@ dependencies:
   google_ml_kit:
   image_cropper:
   flutter_tts: ^3.0.0
+  firestore_ui: ^1.25.1
 
 flutter_icons:
   android: "launcher_icon"

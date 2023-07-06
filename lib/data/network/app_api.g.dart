@@ -757,7 +757,7 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<MedicationsUpdateResponse> medicationsUpdate(
-    int? medicationId,
+    int medicationId,
     String? medication,
     String? medicationDose,
     String? description,

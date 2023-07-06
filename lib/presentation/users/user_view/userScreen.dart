@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
 import 'package:senior/domain/model/model.dart';
-import 'package:senior/presentation/chat/chat_view/chat_screen.dart';
+import 'package:senior/presentation/chat/chat_view/chat_view.dart';
 import '../../../app/app_preference.dart';
 import '../../../app/di.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
@@ -135,7 +135,7 @@ class _UserScreenState extends State<UserScreen> {
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen(senderId: _appPreference.getUserId(), receiverId: user.data![i]!.id)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ChatScreen(user.data![i]!.id)));
             },
             child: Card(
               elevation: 5,

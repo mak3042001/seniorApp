@@ -24,7 +24,7 @@ class MedicationUpdateUseCase
 }
 
 class MedicationUpdateUseCaseInput {
-  int? medicationId;
+  int medicationId;
   String? medication;
   String? medicationDose;
   String? description;

@@ -59,8 +59,8 @@ class _AiScreenState extends State<AiScreen> {
   }
 
   Future<void> initTts() async {
-    await flutterTts.setLanguage('en-US');
-    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setLanguage('en-Us');
+    await flutterTts.setSpeechRate(0.2);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(1.0);
   }
@@ -174,7 +174,7 @@ class _AiScreenState extends State<AiScreen> {
             ),
             const SizedBox(height: 10.0,),
             Text(
-                "Dose : ${medication.data!.medicationDose}",
+                "Dose : ${medication.data!.medicationDose} times a day",
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -197,7 +197,7 @@ class _AiScreenState extends State<AiScreen> {
                     ColorManager.primary), // Set the desired color here
               ),
               onPressed: () {
-                _speak("Name : ${medication.data!.medication} , Dose : ${medication.data!.medicationDose} , Description : ${medication.data!.description}");
+                _speak("Name : ${medication.data!.medication} , Dose : ${medication.data!.medicationDose}  times a day , Description : ${medication.data!.description}");
               },
               child: const Row(
                 children: [

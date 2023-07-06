@@ -840,7 +840,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, Message>> message() async {
+  Future<Either<Failure, MessageIndex>> message() async {
 
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API

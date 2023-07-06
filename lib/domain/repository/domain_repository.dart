@@ -6,7 +6,7 @@ import 'package:senior/domain/model/model.dart';
 abstract class Repository{
   Future<Either<Failure,Medication>> medicine(MedicineRequest medicineRequest);
 
-  Future<Either<Failure,Message>> message();
+  Future<Either<Failure,MessageIndex>> message();
 
   Future<Either<Failure,UserUser>> user();
 
