@@ -164,7 +164,7 @@ class _UserScreenState extends State<UserScreen> {
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge
-                                ?.copyWith(fontSize: 30 , color:  ColorManager.black , fontWeight: FontWeight.bold),
+                                ?.copyWith(fontSize: 30 , color:  ColorManager.primary , fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
                             height: 5.0,

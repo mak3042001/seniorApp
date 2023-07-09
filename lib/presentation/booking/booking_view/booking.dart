@@ -186,13 +186,19 @@ class _BookingState extends State<Booking> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          ColorManager.error), // Set the desired color here
+                          const Color(0xff00AF0C)), // Set the desired color here
                     ),
                     onPressed: () {
                       Navigator.pushReplacementNamed(
                           context, Routes.appointmentScreen);
                     },
-                    child: const Text(StringManager.appointments),
+                    child: const Row(
+                      children: [
+                        Text(StringManager.appointments),
+                        Spacer(),
+                        Icon(IconBroken.Logout),
+                      ],
+                    ),
                   ),
                 ),
               ),
