@@ -185,7 +185,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: (snapshot.data ?? false)
                                   ? () async {
                                   _viewModel.login();
-                                  await initAppModule();
                               }
                                   : null,
                               child: const Text(StringManager.login)),

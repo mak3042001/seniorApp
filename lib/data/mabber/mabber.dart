@@ -3,6 +3,12 @@ import 'package:senior/app/extension.dart';
 import 'package:senior/data/response/response.dart';
 import 'package:senior/domain/model/model.dart';
 
+//message send
+extension MessageSendResponseMabber on MessageSendResponse? {
+  MessageSend toDomain() {
+    return MessageSend();
+  }
+}
 
 //medication
 extension MedicationDataResponseMabber on MedicationDataResponse? {

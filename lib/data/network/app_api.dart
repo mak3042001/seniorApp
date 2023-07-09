@@ -12,6 +12,14 @@ part 'app_api.g.dart';
 abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 
+
+//message send
+  @POST("/api/guest/massages/send")
+  Future<MessageSendResponse> messageSend(
+      @Field("from_id") int fromId,
+      @Field("to_id") int toId,
+      @Field("message") String message,
+      );
 //medicine
   @GET("/api/seniors/medications/show")
   Future<MedicationUseResponse> medicine(

@@ -4,6 +4,8 @@ import 'package:senior/data/network/request.dart';
 import 'package:senior/domain/model/model.dart';
 
 abstract class Repository{
+  Future<Either<Failure,MessageSend>> messageSend(MessageSendRequest messageSendRequest);
+
   Future<Either<Failure,Medication>> medicine(MedicineRequest medicineRequest);
 
   Future<Either<Failure,MessageIndex>> message();

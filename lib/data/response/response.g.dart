@@ -6,6 +6,18 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+MessageSendResponse _$MessageSendResponseFromJson(Map<String, dynamic> json) =>
+    MessageSendResponse()
+      ..successful = json['successful'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$MessageSendResponseToJson(
+        MessageSendResponse instance) =>
+    <String, dynamic>{
+      'successful': instance.successful,
+      'message': instance.message,
+    };
+
 MedicationDataResponse _$MedicationDataResponseFromJson(
         Map<String, dynamic> json) =>
     MedicationDataResponse(

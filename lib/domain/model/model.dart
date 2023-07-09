@@ -1,3 +1,7 @@
+class MessageSend {
+  MessageSend();
+}
+
 class Message {
   final String message;
   final int senderId;

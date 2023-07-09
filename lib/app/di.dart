@@ -7,6 +7,7 @@ import 'package:senior/data/network/app_api.dart';
 import 'package:senior/data/repository/data_repository.dart';
 import 'package:senior/domain/repository/domain_repository.dart';
 import 'package:senior/domain/usecase/auth/login_usecase.dart';
+import 'package:senior/domain/usecase/auth/messageSend.dart';
 import 'package:senior/domain/usecase/auth/profile_index_usecase.dart';
 import 'package:senior/domain/usecase/auth/update_usecase.dart';
 import 'package:senior/domain/usecase/booking/booking_cancel_usecase.dart';
@@ -26,6 +27,7 @@ import 'package:senior/domain/usecase/schedules/schedules_cancel_usecase.dart';
 import 'package:senior/presentation/ai_screen/ai_screen_view_model/ai_screen_viewModel.dart';
 import 'package:senior/presentation/appointment/appointment_viewModel/appointment_viewModel.dart';
 import 'package:senior/presentation/booking/booking_viewModel/booking_view_model.dart';
+import 'package:senior/presentation/chat/chat_view_model/chat_view_model.dart';
 import 'package:senior/presentation/history_category/history_category_viewModel/history_category_viewModel.dart';
 import 'package:senior/presentation/medications/medication_viewModel/medication_viewModel.dart';
 import 'package:senior/presentation/medications_code/medication_code_viewModel/medication_code_viewModel.dart';
@@ -104,6 +106,7 @@ Future<void> initAppModule() async {
   initUserModule();
   initMessageModule();
   initAiModule();
+  initChatModule();
 }
 
 //auth
@@ -247,6 +250,13 @@ initCodeModule() {
             () => MedicationsCodeCreateUseCase(instance(),));
     instance.registerFactory<MedicationsCodeViewModel>(
             () => MedicationsCodeViewModel(instance(),instance()));
+  }
+}
+
+initChatModule() {
+  if (!GetIt.I.isRegistered<MessageSendUseCase>()) {
+    instance.registerFactory<MessageSendUseCase>(() => MessageSendUseCase(instance()));
+    instance.registerFactory<ChatViewModel>(() => ChatViewModel(instance() , instance()));
   }
 }
 

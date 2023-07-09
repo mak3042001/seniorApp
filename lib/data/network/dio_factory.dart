@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:senior/app/app.dart';
 import 'package:senior/app/app_preference.dart';
 import 'package:senior/app/constant.dart';
 
@@ -27,7 +29,7 @@ class DioFactory {
     Map<String, String> headers = {
       contactType: applicationJson,
       accept: applicationJson,
-      authorization: 'Bearer $token',
+      authorization: 'Bearer ${await _appPreference.getUserToken()}',
       defaultLanguage: language,
     };
 

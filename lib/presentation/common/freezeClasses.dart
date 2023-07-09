@@ -3,6 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'freezeClasses.freezed.dart';
 
+
+@freezed
+class ChatObject with _$ChatObject {
+  factory ChatObject(String fromId, String toId , String message) = _Chatobject;
+
+}
+
+
 @freezed
 class LoginObject with _$LoginObject {
   factory LoginObject(String email, String password) = _Loginobject;

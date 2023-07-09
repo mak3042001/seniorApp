@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior/app/IconBroken.dart';
+import 'package:senior/data/network/dio_factory.dart';
 import 'package:senior/presentation/ai_screen/ai_screen_view/ai_screen.dart';
 import 'package:senior/presentation/booking/booking_view/booking.dart';
 import 'package:senior/presentation/history_category/history_category_view/history_category_screen.dart';
@@ -15,12 +16,17 @@ import '../message/message_view/messageScreen.dart';
 
 
 
-class HomeApp extends StatelessWidget {
+class HomeApp extends StatefulWidget {
   static const String baseImageAssets = "assets/images";
 
 
    HomeApp({Key? key}) : super(key: key);
 
+  @override
+  State<HomeApp> createState() => _HomeAppState();
+}
+
+class _HomeAppState extends State<HomeApp> {
   List<String> home = [
     StringManager.schedules,
     StringManager.information,
@@ -32,13 +38,13 @@ class HomeApp extends StatelessWidget {
   ];
 
   List<String> images = [
-    "$baseImageAssets/Schedules.png",
-    "$baseImageAssets/history.jpg",
-    "$baseImageAssets/bookings.jpg",
-    "$baseImageAssets/medications.jpeg",
-    "$baseImageAssets/camScan.jpg",
-    "$baseImageAssets/chat.jpeg",
-    "$baseImageAssets/code.jpg",
+    "${HomeApp.baseImageAssets}/Schedules.png",
+    "${HomeApp.baseImageAssets}/history.jpg",
+    "${HomeApp.baseImageAssets}/bookings.jpg",
+    "${HomeApp.baseImageAssets}/medications.jpeg",
+    "${HomeApp.baseImageAssets}/camScan.jpg",
+    "${HomeApp.baseImageAssets}/chat.jpeg",
+    "${HomeApp.baseImageAssets}/code.jpg",
   ];
 
   List<Widget> screen = [
@@ -50,6 +56,12 @@ class HomeApp extends StatelessWidget {
     const MessageScreen(),
     const MedicationCodeView(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    instance<DioFactory>().getDio();
+  }
 
   @override
   Widget build(BuildContext context) {

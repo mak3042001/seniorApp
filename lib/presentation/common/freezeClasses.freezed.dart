@@ -15,6 +15,157 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
+mixin _$ChatObject {
+  String get fromId => throw _privateConstructorUsedError;
+  String get toId => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ChatObjectCopyWith<ChatObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChatObjectCopyWith<$Res> {
+  factory $ChatObjectCopyWith(
+          ChatObject value, $Res Function(ChatObject) then) =
+      _$ChatObjectCopyWithImpl<$Res, ChatObject>;
+  @useResult
+  $Res call({String fromId, String toId, String message});
+}
+
+/// @nodoc
+class _$ChatObjectCopyWithImpl<$Res, $Val extends ChatObject>
+    implements $ChatObjectCopyWith<$Res> {
+  _$ChatObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fromId = null,
+    Object? toId = null,
+    Object? message = null,
+  }) {
+    return _then(_value.copyWith(
+      fromId: null == fromId
+          ? _value.fromId
+          : fromId // ignore: cast_nullable_to_non_nullable
+              as String,
+      toId: null == toId
+          ? _value.toId
+          : toId // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ChatobjectCopyWith<$Res>
+    implements $ChatObjectCopyWith<$Res> {
+  factory _$$_ChatobjectCopyWith(
+          _$_Chatobject value, $Res Function(_$_Chatobject) then) =
+      __$$_ChatobjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String fromId, String toId, String message});
+}
+
+/// @nodoc
+class __$$_ChatobjectCopyWithImpl<$Res>
+    extends _$ChatObjectCopyWithImpl<$Res, _$_Chatobject>
+    implements _$$_ChatobjectCopyWith<$Res> {
+  __$$_ChatobjectCopyWithImpl(
+      _$_Chatobject _value, $Res Function(_$_Chatobject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fromId = null,
+    Object? toId = null,
+    Object? message = null,
+  }) {
+    return _then(_$_Chatobject(
+      null == fromId
+          ? _value.fromId
+          : fromId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == toId
+          ? _value.toId
+          : toId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Chatobject implements _Chatobject {
+  _$_Chatobject(this.fromId, this.toId, this.message);
+
+  @override
+  final String fromId;
+  @override
+  final String toId;
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ChatObject(fromId: $fromId, toId: $toId, message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Chatobject &&
+            (identical(other.fromId, fromId) || other.fromId == fromId) &&
+            (identical(other.toId, toId) || other.toId == toId) &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fromId, toId, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChatobjectCopyWith<_$_Chatobject> get copyWith =>
+      __$$_ChatobjectCopyWithImpl<_$_Chatobject>(this, _$identity);
+}
+
+abstract class _Chatobject implements ChatObject {
+  factory _Chatobject(
+          final String fromId, final String toId, final String message) =
+      _$_Chatobject;
+
+  @override
+  String get fromId;
+  @override
+  String get toId;
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ChatobjectCopyWith<_$_Chatobject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$LoginObject {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;

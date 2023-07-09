@@ -14,7 +14,6 @@ import 'package:senior/presentation/common/state_renderer/state_renderer__impl.d
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
   String token = "";
-  final AppPreference _appPreference = instance<AppPreference>();
   final StreamController _userNameStreamController =
   StreamController<String>.broadcast();
   final StreamController _passwordStreamController =

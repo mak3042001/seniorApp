@@ -6,6 +6,8 @@ import 'package:senior/data/network/request.dart';
 import 'package:senior/data/response/response.dart';
 
 abstract class RemoteDataSource {
+  Future<MessageSendResponse> messageSend(MessageSendRequest messageSendRequest);
+
   Future<MedicationUseResponse> medicine(MedicineRequest medicineRequest);
 
   Future<MessageUseResponse> message();
@@ -89,6 +91,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   final AppPreference _appPreference;
 
   RemoteDataSourceImpl(this._appServiceClient, this._appPreference);
+
 
   @override
   Future<MessageUseResponse> message() async {
@@ -322,5 +325,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         changePasswordRequest.currentPassword,
         changePasswordRequest.password,
         changePasswordRequest.confirmPassword);
+  }
+
+  @override
+  Future<MessageSendResponse> messageSend(MessageSendRequest messageSendRequest) async {
+    return await _appServiceClient.messageSend(
+      messageSendRequest.fromId,
+      messageSendRequest.toId,
+      messageSendRequest.message,
+    );
   }
 }

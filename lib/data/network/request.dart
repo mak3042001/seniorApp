@@ -1,3 +1,15 @@
+class MessageSendRequest {
+  int fromId;
+  int toId;
+  String message;
+
+  MessageSendRequest(
+      this.fromId,
+      this.toId,
+      this.message
+      );
+}
+//medicine request
 class MedicineRequest {
   String name;
 

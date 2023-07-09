@@ -179,7 +179,7 @@ class _MessageScreenState extends State<MessageScreen> {
                             height: 5.0,
                           ),
                           Text(
-                            user.data![i]!.username,
+                            user.data![i]!.message,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium

@@ -2,6 +2,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'response.g.dart';
 
+
+//message send
+@JsonSerializable()
+class MessageSendResponse extends BaseResponse {
+  MessageSendResponse();
+
+  //fromJson
+  factory MessageSendResponse.fromJson(Map<String, dynamic> json) =>
+      _$MessageSendResponseFromJson(json);
+
+  //toJson
+  Map<String, dynamic> toJson() => _$MessageSendResponseToJson(this);
+}
 //medication show
 @JsonSerializable()
 class MedicationDataResponse {

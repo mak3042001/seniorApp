@@ -59,7 +59,7 @@ class _AiScreenState extends State<AiScreen> {
   }
 
   Future<void> initTts() async {
-    await flutterTts.setLanguage('en-Us');
+    await flutterTts.setLanguage('en-US');
     await flutterTts.setSpeechRate(0.2);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(1.0);
