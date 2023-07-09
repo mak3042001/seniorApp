@@ -192,12 +192,14 @@ class _BookingState extends State<Booking> {
                       Navigator.pushReplacementNamed(
                           context, Routes.appointmentScreen);
                     },
-                    child: const Row(
-                      children: [
-                        Text(StringManager.appointments),
-                        Spacer(),
-                        Icon(IconBroken.Logout),
-                      ],
+                    child: const Center(
+                      child: Row(
+                        children: [
+                          Text(StringManager.appointments),
+                          Spacer(),
+                          Icon(IconBroken.Login),
+                        ],
+                      ),
                     ),
                   ),
                 ),
