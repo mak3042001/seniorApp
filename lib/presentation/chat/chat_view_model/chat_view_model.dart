@@ -103,8 +103,6 @@ class ChatViewModel extends BaseViewModel
 
   @override
   send(int senderId , int receiverId , String message) async {
-    inputState.add(
-        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await _messageSendUseCase.execute(
         MessageSendUseCaseInput(senderId, receiverId , message)))
         .fold(

@@ -135,7 +135,7 @@ class _UserScreenState extends State<UserScreen> {
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ChatScreen(user.data![i]!.id)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen(user.data![i]!.image , user.data![i]!.name,user.data![i]!.id)));
             },
             child: Card(
               elevation: 5,

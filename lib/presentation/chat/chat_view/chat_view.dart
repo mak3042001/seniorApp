@@ -12,21 +12,26 @@ import '../../../app/static.dart';
 import '../../common/state_renderer/state_renderer__impl.dart';
 
 class ChatScreen extends StatefulWidget {
+  String image;
+  String name;
   int receiverId;
 
-  ChatScreen(this.receiverId, {super.key});
+
+  ChatScreen(this.image, this.name, this.receiverId, {super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState(receiverId);
+  State<ChatScreen> createState() => _ChatScreenState(receiverId , name , image);
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final ChatViewModel _viewModel = instance<ChatViewModel>();
 
   final TextEditingController _sendController = TextEditingController();
+  String image;
+  String name;
   int receiverId;
 
-  _ChatScreenState(this.receiverId);
+  _ChatScreenState(this.receiverId , this.name , this.image);
 
   final firebase = FirebaseDatabase.instance.ref('chats');
 
@@ -68,8 +73,28 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            IconBroken.Arrow___Left_2,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: const Color(0xff283DAA),
-        title: const Text('chat screen'),
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                image,
+              ),
+              // radius: 65.0,
+            ),
+            const SizedBox(width: 10.0,),
+            Text(name ,style: TextStyle(fontSize: 20),),
+          ],
+        ),
       ),
       body: StreamBuilder<FlowState>(
         stream: _viewModel.outputState,
