@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class MessageSendRequest {
   int fromId;
   int toId;
@@ -64,7 +66,7 @@ class UpdateProfileRequest {
 
 //change image
 class ChangeImageRequest {
-  String image;
+  File image;
 
   ChangeImageRequest(this.image);
 }

@@ -129,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: FirebaseAnimatedList(
               query: firebase.child('${profile.data!.id}$receiverId').child('messages'),
               itemBuilder: (context , snapshot , animation , index){
-                return snapshot.child('senderId').value == 58 ?
+                return snapshot.child('senderId').value == profile.data!.id ?
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Align(

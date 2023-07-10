@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:senior/data/network/failure.dart';
 import 'package:senior/data/network/request.dart';
@@ -23,7 +25,7 @@ class ChangeImageUseCase
 }
 
 class ChangeImageUseCaseInput {
-  String image;
+  File image;
 
   ChangeImageUseCaseInput(
     this.image,

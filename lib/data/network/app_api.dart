@@ -76,7 +76,7 @@ abstract class AppServiceClient {
 //change image profile & password
   @POST("/api/seniors/profile/changeImage")
   Future<ChangeImageResponse> changeImage(
-      @Part(fileName: "image") File image,
+      @Part(fileName: "image" , name: "image" ) File image,
       );
 
   @POST("/api/seniors/profile/changePassword")

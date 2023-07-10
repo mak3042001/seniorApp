@@ -1183,7 +1183,7 @@ abstract class _PasswordObject implements PasswordObject {
 
 /// @nodoc
 mixin _$ImageObject {
-  String get image => throw _privateConstructorUsedError;
+  File get image => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ImageObjectCopyWith<ImageObject> get copyWith =>
@@ -1196,7 +1196,7 @@ abstract class $ImageObjectCopyWith<$Res> {
           ImageObject value, $Res Function(ImageObject) then) =
       _$ImageObjectCopyWithImpl<$Res, ImageObject>;
   @useResult
-  $Res call({String image});
+  $Res call({File image});
 }
 
 /// @nodoc
@@ -1218,7 +1218,7 @@ class _$ImageObjectCopyWithImpl<$Res, $Val extends ImageObject>
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as File,
     ) as $Val);
   }
 }
@@ -1231,7 +1231,7 @@ abstract class _$$_ImageObjectCopyWith<$Res>
       __$$_ImageObjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String image});
+  $Res call({File image});
 }
 
 /// @nodoc
@@ -1251,7 +1251,7 @@ class __$$_ImageObjectCopyWithImpl<$Res>
       null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as File,
     ));
   }
 }
@@ -1262,7 +1262,7 @@ class _$_ImageObject implements _ImageObject {
   _$_ImageObject(this.image);
 
   @override
-  final String image;
+  final File image;
 
   @override
   String toString() {
@@ -1288,10 +1288,10 @@ class _$_ImageObject implements _ImageObject {
 }
 
 abstract class _ImageObject implements ImageObject {
-  factory _ImageObject(final String image) = _$_ImageObject;
+  factory _ImageObject(final File image) = _$_ImageObject;
 
   @override
-  String get image;
+  File get image;
   @override
   @JsonKey(ignore: true)
   _$$_ImageObjectCopyWith<_$_ImageObject> get copyWith =>

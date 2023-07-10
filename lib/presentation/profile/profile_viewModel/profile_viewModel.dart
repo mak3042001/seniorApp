@@ -66,7 +66,7 @@ class ProfileViewModel extends BaseViewModel
     "",
     "",
   );
-  var imageObject = ImageObject("");
+  var imageObject = ImageObject(File(""));
 
   ProfileViewModel(this._profileUseCase, this._changePasswordUseCase,
       this._changeImageUseCase, this.profileIndexUseCase);
@@ -196,7 +196,7 @@ class ProfileViewModel extends BaseViewModel
   @override
   setProfilePicture(File profilePicture) {
     inputImage.add(profilePicture);
-    imageObject = imageObject.copyWith(image: profilePicture.path);
+    imageObject = imageObject.copyWith(image: profilePicture);
     inputAllImageInputsValid.add(null);
   }
 
@@ -255,10 +255,6 @@ class ProfileViewModel extends BaseViewModel
     return _isCurrentPasswordValid(passwordObject.currentPassword) &&
         _isPasswordValid(passwordObject.password) &&
         _isConfirmPasswordValid(passwordObject.confirmPassword);
-  }
-
-  bool _areAllInputsImagesValid() {
-    return imageObject.image.isNotEmpty;
   }
 
 
@@ -364,9 +360,9 @@ class ProfileViewModel extends BaseViewModel
   Sink get inputNewPassword => passwordStreamController.sink;
 
   @override
-  Stream<bool> get outputAreAllImageInputsValid =>
+  Stream<File> get outputAreAllImageInputsValid =>
       areAllInputsImageValidStreamController.stream
-          .map((_) => _areAllInputsImagesValid());
+          .map((image) => image);
 
   @override
   Stream<bool> get outputAreAllPasswordInputsValid =>
@@ -475,5 +471,5 @@ abstract class ProfileViewModelOutput {
 
   Stream<bool> get outputAreAllPasswordInputsValid;
 
-  Stream<bool> get outputAreAllImageInputsValid;
+  Stream<File> get outputAreAllImageInputsValid;
 }

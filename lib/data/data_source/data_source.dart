@@ -274,11 +274,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ChangeImageResponse> changeImage(
       ChangeImageRequest changeImageRequest) async {
-    File file = File(changeImageRequest.image);
-    String fileName = file.path.split('/').last;
-    print("hello image  $fileName");
     return await _appServiceClient.changeImage(
-      File(fileName),
+      changeImageRequest.image,
     );
   }
 

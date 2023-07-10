@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'freezeClasses.freezed.dart';
@@ -70,7 +72,7 @@ class PasswordObject with _$PasswordObject {
 @freezed
 class ImageObject with _$ImageObject {
   factory ImageObject(
-     String image,
+     File image,
       ) = _ImageObject;
 }
 
