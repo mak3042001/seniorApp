@@ -5,6 +5,8 @@ import 'package:senior/domain/model/model.dart';
 
 import 'package:senior/presentation/base/baseViewModel.dart';
 import 'package:senior/presentation/common/state_renderer/state_renderer__impl.dart';
+import '../../../app/di.dart';
+import '../../../data/network/dio_factory.dart';
 import '../../../domain/usecase/schedules/schedules_cancel_usecase.dart';
 import '../../../domain/usecase/schedules/schedules_create_usecase.dart';
 import '../../../domain/usecase/schedules/schedules_index_usecase.dart';
